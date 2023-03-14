@@ -12,10 +12,10 @@ export default {};
 			<img src="/img/headshotMobile.png" alt="" />
 		</div>
 		<div class="links">
-			<div class="btn btn-main">
+			<router-link :to="{name:'portfolio'}" class="btn btn-main">
 				<font-awesome-icon icon="fa-solid fa-briefcase" class="icon" />
 				<span>Portfolio</span>
-			</div>
+			</router-link>
 			<div class="btn btn-second">
 				<font-awesome-icon icon="fa-brands fa-youtube" />
 				<span
@@ -34,13 +34,25 @@ export default {};
 		</div>
 
 		<div class="social-media-container">
-			<font-awesome-icon icon="fa-regular fa-envelope" size="2x" />
+			<font-awesome-icon
+				icon="fa-regular fa-envelope"
+				size="2x"
+				class="icon"
+			/>
 
-			<font-awesome-icon icon="fa-brands fa-linkedin-in" size="2x" />
+			<font-awesome-icon
+				icon="fa-brands fa-linkedin-in"
+				size="2x"
+				class="icon"
+			/>
 
-			<font-awesome-icon icon="fa-brands fa-github" size="2x" />
+			<font-awesome-icon icon="fa-brands fa-github" size="2x" class="icon" />
 
-			<font-awesome-icon icon="fa-brands fa-instagram" size="2x" />
+			<font-awesome-icon
+				icon="fa-brands fa-instagram"
+				size="2x"
+				class="icon"
+			/>
 		</div>
 	</div>
 </template>
@@ -55,7 +67,7 @@ export default {};
 	background: $background-1;
 	height: 100vh;
 	color: $white;
-	padding: 1em ;
+	padding: 1em;
 }
 .headshot-img {
 	display: flex;
@@ -71,23 +83,26 @@ export default {};
 	text-align: center;
 }
 .links {
-	width: 100%;
+	width: 70%;
 }
 .btn-main {
+	color: rgba($white, 0.9);
 	border: 1px solid $accent !important;
-	.icon {
-		color: $accent;
-	}
 }
 .btn {
 	font: $font-btn-mb;
 	display: flex;
 	align-items: center;
-	width: 100%;
-	padding: 0.2em;
+	padding: 0.3em;
 	border: 1px solid rgba($white, 0.5);
-	margin-bottom: 0.2em;
+	margin-bottom: 0.3em;
 	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+	transition: 0.3s ease-in-out;
+	&:hover {
+		color: $white;
+	}
 	span {
 		display: block;
 		width: 100%;
@@ -95,20 +110,31 @@ export default {};
 		position: relative;
 	}
 	small {
+		color: rgba($white, 0.7);
 		position: absolute;
 		bottom: -10px;
-		left: 5px;
+		left: 0px;
 		display: block;
 		font: $font-small-mb;
 	}
 }
 .btn-second {
-	color: rgba($white, 0.9);
+	color: rgba($white, 0.8);
 }
 
 .social-media-container {
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
+	color: rgba($white, 0.8);
+	cursor: pointer;
+
+	.icon {
+		transition: 0.3s ease-in-out;
+
+		&:hover {
+			color: $white;
+		}
+	}
 }
 </style>

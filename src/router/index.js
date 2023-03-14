@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingPage from "../views/landingPage.vue";
-import Portfolio from "@/components/portfolioSite.vue";
+import Portfolio from "../views/portfolioSite.vue";
 
 Vue.use(VueRouter);
 

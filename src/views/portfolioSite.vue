@@ -1,14 +1,20 @@
 <script>
-export default {};
+import NavMenueMobile from "../components/navMenueMobile.vue";
+export default {
+	components: {
+		NavMenueMobile,
+	},
+};
 </script>
 <template>
 	<div>
 		<header>
+			<NavMenueMobile />
 			<div class="hearder-container">
-				<div class="nav-menue"
-					><font-awesome-icon icon="fa-solid fa-bars" size="2x"
-				/></div>
 				<div class="logo">MARTZ</div>
+				<div class="nav-menue">
+					<font-awesome-icon icon="fa-solid fa-bars" size="2x" />
+				</div>
 			</div>
 		</header>
 		<main>
@@ -61,7 +67,7 @@ export default {};
 <style lang="scss" scoped>
 .hearder-container {
 	background: $background-1;
-	padding: 1em;
+	padding: 1em 1.5em;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
@@ -69,22 +75,23 @@ export default {};
 	height: 10vh;
 
 	.logo {
-		font: $font-reg-mb;
+		font: $font-text-mb;
 	}
 }
 
 .hero-section {
 	height: 90vh;
-	padding: 1em;
+	padding: 1em 1.5em;
 	background: $background-1;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 
 	&-headshot {
 		display: flex;
 		justify-content: center;
 		width: 12em;
+		align-self: center;
 	}
 	&-title {
 		color: $white;
@@ -97,44 +104,52 @@ export default {};
 	}
 	&-text {
 		color: $white;
-		font: $font-reg-mb;
+		font: $font-text-mb;
 		margin-bottom: 2em;
 	}
 }
 .btn {
 	position: relative;
 	font: $font-btn-mb;
-	padding: 0.3em .8em;
+	padding: 0.3em 0.8em;
 	width: 10em;
 	border: 1px solid rgba($white, 0.5);
 	border-radius: 5px;
 	cursor: pointer;
-	transition: 0.3s ease-in-out;
 	color: $white;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 0.4em;
-	transition: 0.3s ease-in-out;
+	// transition: 0.3s ease-in-out;
 	span {
 		display: block;
 	}
 	&::after {
 		content: ">>";
 		position: absolute;
-		opacity: 0;
 		top: 7px;
-		right: -7px;
-		transition: 0.5s;
+		right: 5px;
 		color: $accent;
 	}
-	&:hover {
-		padding-left: 0.5em;
-		border: 1px solid rgba($white, 0.6);
-		}
-	&:hover::after {
-		opacity: 1;
-		right: 10px;
-	}
+
+	////////////desktop view///////////
+	// &::after {
+	// 	content: ">>";
+	// 	position: absolute;
+	// 	opacity: 0;
+	// 	top: 7px;
+	// 	right: -7px;
+	// 	transition: 0.5s;
+	// 	color: $accent;
+	// }
+	// &:hover {
+	// 	padding-left: 0.5em;
+	// 	border: 1px solid rgba($white, 0.6);
+	// }
+	// &:hover::after {
+	// 	opacity: 1;
+	// 	right: 10px;
+	// }
 }
 </style>

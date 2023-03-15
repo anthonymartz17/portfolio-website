@@ -1,5 +1,10 @@
 <script>
-export default {};
+import SocialMedia from "../components/socialMedia.vue";
+export default {
+	components: {
+		SocialMedia,
+	},
+};
 </script>
 
 <template>
@@ -12,7 +17,7 @@ export default {};
 			<img src="/img/headshotMobile.png" alt="" />
 		</div>
 		<div class="links">
-			<router-link :to="{name:'portfolio'}" class="btn btn-main">
+			<router-link :to="{name: 'portfolio'}" class="btn btn-main">
 				<font-awesome-icon icon="fa-solid fa-briefcase" class="icon" />
 				<span>Portfolio</span>
 			</router-link>
@@ -32,28 +37,7 @@ export default {};
 				</span>
 			</div>
 		</div>
-
-		<div class="social-media-container">
-			<font-awesome-icon
-				icon="fa-regular fa-envelope"
-				size="2x"
-				class="icon"
-			/>
-
-			<font-awesome-icon
-				icon="fa-brands fa-linkedin-in"
-				size="2x"
-				class="icon"
-			/>
-
-			<font-awesome-icon icon="fa-brands fa-github" size="2x" class="icon" />
-
-			<font-awesome-icon
-				icon="fa-brands fa-instagram"
-				size="2x"
-				class="icon"
-			/>
-		</div>
+		<SocialMedia />
 	</div>
 </template>
 
@@ -120,21 +104,5 @@ export default {};
 }
 .btn-second {
 	color: rgba($white, 0.8);
-}
-
-.social-media-container {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	color: rgba($white, 0.8);
-	cursor: pointer;
-
-	.icon {
-		transition: 0.3s ease-in-out;
-
-		&:hover {
-			color: $white;
-		}
-	}
 }
 </style>

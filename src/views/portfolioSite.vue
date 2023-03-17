@@ -1,21 +1,15 @@
 <script>
-import NavMenueMobile from "../components/navMenueMobile.vue";
+import Header from "../components/header-section.vue";
 export default {
 	components: {
-		NavMenueMobile,
+		Header,
 	},
 };
 </script>
 <template>
 	<div>
 		<header>
-			<NavMenueMobile />
-			<div class="hearder-container">
-				<div class="logo">MARTZ</div>
-				<div class="nav-menue">
-					<font-awesome-icon icon="fa-solid fa-bars" size="2x" />
-				</div>
-			</div>
+			<Header />
 		</header>
 		<main>
 			<section>
@@ -49,7 +43,7 @@ export default {
 				<font-awesome-icon icon="fa-solid fa-handshake" />
 				<font-awesome-icon icon="fa-solid fa-hands-holding" />
 				<font-awesome-icon icon="fa-regular fa-lightbulb" />
-				
+				<font-awesome-icon icon="fa-solid fa-xmark" />
 				<font-awesome-icon icon="fa-regular fa-address-card" />
 				<font-awesome-icon icon="fa-solid fa-circle-info" />
 				<font-awesome-icon icon="fa-solid fa-house" />
@@ -65,20 +59,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.hearder-container {
-	background: $background-1;
-	padding: 1em 1.5em;
-	color: $white;
-	display: flex;
-	justify-content: space-between;
-	align-items: baseline;
-	height: 10vh;
-
-	.logo {
-		font: $font-text-mb;
-	}
-}
-
 .hero-section {
 	height: 90vh;
 	padding: 1em 1.5em;

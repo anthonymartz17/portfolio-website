@@ -19,6 +19,7 @@ import {
   faGlobe,
 	faMessage,
 	faHandsHoldingCircle,
+	faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
 	faEnvelope,
@@ -61,7 +62,8 @@ library.add(
   faVuejs,
   faGlobe,
 	faMessage,
-	faHandsHoldingCircle
+	faHandsHoldingCircle,
+	faXmark
 );
 
 /* add font awesome icon component */

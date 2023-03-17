@@ -15,15 +15,14 @@ export default {
 <template>
 	<div class="social-media-container">
 		<div v-for="media in mediaContacts" :key="media.name">
-			<font-awesome-icon :icon="media.icon" class="icon" size="2x" />
+			<font-awesome-icon :icon="media.icon" class="icon"  />
 		</div>
 	</div>
 </template>
 <style lang="scss" scoped>
 .social-media-container {
-	width: 100%;
+	width: 65%;
 	margin-bottom: 1em;
-  background: red;
 	display: flex;
 	justify-content: space-between;
 	color: rgba($white, 0.8);

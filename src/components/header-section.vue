@@ -42,14 +42,14 @@ export default {
 
 <style lang="scss" scoped>
 .header-container {
-	position: relative;
 	background: $background-1;
 	padding: 0.5em 1.5em;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
-	height: 10vh;
+	height: 7vh;
+	// border-bottom: 1px solid rgba($white, 0.1);
 
 	&-logo {
 		font: $font-text-mb;

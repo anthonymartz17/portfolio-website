@@ -17,11 +17,14 @@ export default {
 			<img src="/img/headshotMobile.png" alt="" />
 		</div>
 		<div class="links">
-			<router-link :to="{name: 'portfolio'}" class="btn btn-main">
+			<router-link :to="{name: 'portfolio'}" class="landing-btn">
 				<font-awesome-icon icon="fa-solid fa-briefcase" class="icon" />
 				<span>Portfolio</span>
+				<div class="arrow">
+					<font-awesome-icon icon="fa-solid fa-angle-right" />
+				</div>
 			</router-link>
-			<div class="btn btn-second">
+			<div class="landing-btn">
 				<font-awesome-icon icon="fa-brands fa-youtube" />
 				<span
 					>Watch
@@ -29,11 +32,11 @@ export default {
 					<small>me talk projects</small>
 				</span>
 			</div>
-			<div class="btn btn-second">
+			<div class="landing-btn">
 				<font-awesome-icon icon="fa-brands fa-blogger" />
 				<span
 					>Read
-					<small>Projects articles</small>
+					<small>projects articles</small>
 				</span>
 			</div>
 		</div>
@@ -69,40 +72,30 @@ export default {
 .links {
 	width: 70%;
 }
-.btn-main {
-	color: rgba($white, 0.9);
-	border: 1px solid $accent !important;
-}
-.btn {
-	font: $font-btn-mb;
-	display: flex;
-	align-items: center;
-	padding: 0.3em;
-	border: 1px solid rgba($white, 0.5);
-	margin-bottom: 0.3em;
-	border-radius: 5px;
-	cursor: pointer;
-	text-decoration: none;
-	transition: 0.3s ease-in-out;
-	&:hover {
-		color: $white;
-	}
+
+.landing-btn {
+	@include baseButton($white, _, 100%);
 	span {
 		display: block;
-		width: 100%;
-		margin-inline: 0.3em;
 		position: relative;
 	}
 	small {
-		color: rgba($white, 0.7);
+		color: rgba($white, 0.3);
 		position: absolute;
-		bottom: -10px;
+		bottom: -11px;
 		left: 0px;
 		display: block;
 		font: $font-small-mb;
+		min-width: 10em;
 	}
-}
-.btn-second {
-	color: rgba($white, 0.8);
+	.arrow {
+		color: $accent;
+		flex: 1;
+		text-align: right;
+	}
+	// transition: 0.3s ease-in-out;
+	// &:hover {
+	// 	color: $white;
+	// }
 }
 </style>

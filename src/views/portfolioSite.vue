@@ -1,14 +1,16 @@
 <script>
 import Header from "../components/header-section.vue";
+import Work from "../components/projects/work-section.vue";
 export default {
 	components: {
 		Header,
+		Work,
 	},
 };
 </script>
 <template>
 	<div>
-		<header>
+		<header class="header">
 			<Header />
 		</header>
 		<main>
@@ -29,12 +31,13 @@ export default {
 						>
 						<div></div>
 					</div>
-					<div class="hero-cta btn">
+					<div class="hero-section-cta">
 						<font-awesome-icon icon="fa-solid fa-hands-holding" />
 						<span>View Work</span>
 					</div>
 				</div>
 			</section>
+			<section> <Work /> </section>
 		</main>
 	</div>
 
@@ -59,9 +62,14 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.header {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
 .hero-section {
-	height: 90vh;
-	padding: 1em 1.5em;
+	height: 93vh;
+	padding: 3em 1.5em;
 	background: $background-1;
 	display: flex;
 	flex-direction: column;
@@ -87,21 +95,11 @@ export default {
 		font: $font-text-mb;
 		margin-bottom: 2em;
 	}
-}
-.btn {
+
+&-cta {
+	@include baseButton($white);
 	position: relative;
-	font: $font-btn-mb;
-	padding: 0.3em 0.8em;
-	width: 10em;
-	border: 1px solid rgba($white, 0.5);
-	border-radius: 5px;
-	cursor: pointer;
-	color: $white;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	gap: 0.4em;
-	// transition: 0.3s ease-in-out;
+	z-index: 0;
 	span {
 		display: block;
 	}
@@ -131,5 +129,6 @@ export default {
 	// 	opacity: 1;
 	// 	right: 10px;
 	// }
+	}
 }
 </style>

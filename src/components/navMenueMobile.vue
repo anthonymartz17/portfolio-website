@@ -32,7 +32,7 @@ export default {
 	<div class="nav-container">
 		<div class="nav-container-header" @click="fireToggleMobileMenue">
 			<font-awesome-icon icon="fa-solid fa-angle-left" class="nav-container-arrow" />
-			<p>back</p>
+			<p>Close</p>
 		</div>
 		<ul class="nav-container-links">
 			<li

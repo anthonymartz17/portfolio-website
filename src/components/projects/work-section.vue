@@ -1,5 +1,7 @@
 <script>
+import baseButton from "../baseButton.vue";
 export default {
+	components: {baseButton},
 	data() {
 		return {
 			title: "Work",
@@ -8,17 +10,17 @@ export default {
 				{
 					name: "Project 1",
 					desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-          img:'project1.jpeg'
+					img: "project1.jpeg",
 				},
 				{
 					name: "Project 2",
 					desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-          img:'project2.jpeg'
+					img: "project2.jpeg",
 				},
 				{
 					name: "Project 3",
 					desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-          img:'project3.jpeg'
+					img: "project3.jpeg",
 				},
 			],
 		};
@@ -30,10 +32,13 @@ export default {
 	<div class="projects-container">
 		<h2 class="projects-title sections-title-global">{{ title }}</h2>
 		<div class="projects-list">
-			<div class="projects-project" v-for="project in projects" :key="project.name">
+			<div
+				class="projects-project"
+				v-for="project in projects"
+				:key="project.name">
 				<div class="projects-project-thumb">
-          <img :src="`/img/${project.img}`" alt="">
-        </div>
+					<img :src="`/img/${project.img}`" alt="" />
+				</div>
 				<div class="projects-project-desc">
 					<h3>This is a project</h3>
 					<p
@@ -48,11 +53,27 @@ export default {
 					>
 				</div>
 			</div>
+			<div class="project-cards-container">
+				<div class="cards-youtube project-cards">
+					<h4>watch</h4>
+					<p>me discuss tech implementation in my projects</p>
+					<base-button
+						text="Watch"
+						icon="fa-brands fa-youtube"></base-button>
+				</div>
+				<div class="card-blog project-cards">
+					<h4>Read</h4>
+					<p>articles about my work and my learning from them.</p>
+					<base-button text="Watch" icon="fa-brands fa-readme">
+					</base-button>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+
 .projects-container {
 	// height: 100vh;
 	padding: 1em 1.5em;
@@ -70,19 +91,32 @@ export default {
 }
 
 .projects-project {
-  margin-bottom: 1em;
+	margin-block: 1em;
+	// box-shadow: rgba(252, 252, 252, 0.185) 0px 4px 12px;
+	box-shadow: rgba(236, 236, 236, 0.12) 0px 1px 3px,
+		rgba(230, 227, 227, 0.24) 0px 1px 2px;
 }
 
 .projects-project-thumb {
-  height: 15em;
-  margin-bottom: .5em;
+	// min-height: 8em;
+	// max-height: 10em;
+	height: 14em;
 
-  
+	img {
+		border-radius: 5px 5px 0 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 }
 
 .projects-project-desc {
+	background: rgba(255, 255, 255, 0.075);
+	padding: 0.5em;
+
 	h3 {
-		font: $font-subtitle-mb;
+		font: $font-title-mb;
+		color: rgba($white, 0.4);
 	}
 	p {
 		font: $font-thin-text-mb;
@@ -99,5 +133,21 @@ export default {
 			display: inline-block;
 		}
 	}
+	.link-cards-yt {
+		svg {
+			height: 5em;
+		}
+	}
+}
+
+.project-cards {
+	h4 {
+		font: $font-title-mb;
+	}
+	p {
+		font: $font-thin-text-mb;
+		margin-block: .5em;
+	}
+	height: 8em;
 }
 </style>

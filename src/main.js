@@ -3,7 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import "./assets/scss/reset.css";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import BaseButton from "./components/baseButton.vue"
 import {
 	faBriefcase,
 	faHandsHolding,
@@ -69,7 +70,7 @@ library.add(
 );
 
 /* add font awesome icon component */
-Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.component("font-awesome-icon", FontAwesomeIcon,BaseButton);
 
 Vue.config.productionTip = false;
 

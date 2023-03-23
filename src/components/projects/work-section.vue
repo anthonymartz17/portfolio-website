@@ -1,11 +1,12 @@
 <script>
 import baseButton from "../baseButton.vue";
+import ProjectDetail from "./project-details.vue";
 export default {
-	components: {baseButton,},
+	components: {baseButton, ProjectDetail},
 	data() {
 		return {
 			title: "Work",
-       showMore:false,
+			showMore: true,
 			projects: [
 				{
 					name: "Project 1",
@@ -25,9 +26,14 @@ export default {
 			],
 		};
 	},
-	toggleShowMore(){
-		this.showMore = !this.showMore
-	}
+	methods: {
+		toggleShowMore(e) {
+			if (e.target.id == "toggleProject") {
+				this.showMore = !this.showMore;
+			}
+			console.log(e.target.id);
+		},
+	},
 };
 </script>
 
@@ -48,7 +54,10 @@ export default {
 						>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Debitis, consequuntur?</p
 					>
-					<div class="projects-project-btn"
+					<div
+						id="toggleProject"
+						class="projects-project-btn"
+						@click="toggleShowMore($event)"
 						><font-awesome-icon
 							icon="fa-solid fa-eye"
 							class="see-more-icon" />
@@ -56,7 +65,10 @@ export default {
 					>
 				</div>
 			</div>
-	
+			<div v-if="showMore" class="project-detail">
+				<ProjectDetail @fireToggleShowMore="toggleShowMore($event)" />
+			</div>
+
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
 					<h4>watch</h4>
@@ -158,4 +170,12 @@ export default {
 	}
 }
 
+.project-detail {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 10;
+	
+}
 </style>

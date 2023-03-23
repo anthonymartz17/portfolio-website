@@ -61,10 +61,7 @@ export default {
 	justify-content: center;
 	width: 13em;
 }
-.lg-title {
-	font: $font-xl-mb;
-	color: rgba($white, 0.3);
-}
+
 .l-title {
 	font: $font-title-mb;
 	text-align: center;

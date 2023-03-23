@@ -1,11 +1,11 @@
 <script>
 import baseButton from "../baseButton.vue";
 export default {
-	components: {baseButton},
+	components: {baseButton,},
 	data() {
 		return {
 			title: "Work",
-
+       showMore:false,
 			projects: [
 				{
 					name: "Project 1",
@@ -25,6 +25,9 @@ export default {
 			],
 		};
 	},
+	toggleShowMore(){
+		this.showMore = !this.showMore
+	}
 };
 </script>
 
@@ -53,6 +56,7 @@ export default {
 					>
 				</div>
 			</div>
+	
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
 					<h4>watch</h4>
@@ -73,9 +77,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
 .projects-container {
-	// height: 100vh;
 	padding: 1em 1.5em;
 	background: $background-2;
 	display: flex;
@@ -133,21 +135,27 @@ export default {
 			display: inline-block;
 		}
 	}
-	.link-cards-yt {
-		svg {
-			height: 5em;
-		}
+	.cards-youtube {
 	}
 }
-
+.project-cards-container {
+}
 .project-cards {
+	margin-bottom: 1em;
+	padding: 0.5em;
+	&:nth-child(1) {
+		border-bottom: 1px solid $white;
+		padding-bottom: 2em;
+	}
+
 	h4 {
 		font: $font-title-mb;
+		color: rgba($white, 0.4);
 	}
 	p {
 		font: $font-thin-text-mb;
-		margin-block: .5em;
+		margin-block: 0.5em;
 	}
-	height: 8em;
 }
+
 </style>

@@ -13,6 +13,12 @@ export default {
 	methods: {
 		toggleMobileMenue() {
 			this.isMenueVisible = !this.isMenueVisible;
+			console.log(this.isMenueVisible);
+			if (this.isMenueVisible) {
+				document.body.classList.add("disableScroll");
+			} else {
+				document.body.classList.remove("disableScroll");
+			}
 		},
 	},
 };
@@ -29,12 +35,9 @@ export default {
 				size="2x"
 				@click="toggleMobileMenue" />
 		</div>
-		<div
-			v-if="isMenueVisible"
-			class="header-container-mobile-nav-modal"
-			@click="toggleMobileMenue">
+		<div class="navmenue-wrapper">
 			<NavMenueMobile
-				class="header-container-mobile-nav"
+				v-if="isMenueVisible"
 				@fireToggleMobileMenue="toggleMobileMenue" />
 		</div>
 	</div>
@@ -42,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .header-container {
+	position: relative;
 	background: $background-1;
 	padding: 0.5em 1.5em;
 	color: $white;
@@ -49,30 +53,24 @@ export default {
 	justify-content: space-between;
 	align-items: baseline;
 	height: 7vh;
-	// border-bottom: 1px solid rgba($white, 0.1);
+	border-bottom: 1px solid rgba($white, 0.1);
 
 	&-logo {
 		font: $font-text-mb;
-		z-index: 100;
 	}
 
 	.clickable {
 		pointer-events: none;
 	}
-
-	&-mobile-nav-modal {
-		position: absolute;
-		display: flex;
-		justify-content: flex-end;
-		top: 0;
-		right: 0;
-		width: 100vw;
-		background: rgba($background-1, 0.9);
-		z-index: 10;
-	}
-	&-mobile-nav {
-		z-index: 11;
-		width: 70%;
-	}
+}
+.navmenue-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 10;
+	backdrop-filter: blur(5px);
 }
 </style>

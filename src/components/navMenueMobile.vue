@@ -20,33 +20,37 @@ export default {
 			],
 		};
 	},
-	methods:{
-		fireToggleMobileMenue(){
-			this.$emit("fireToggleMobileMenue")
-		}
-	}
+	methods: {
+		fireToggleMobileMenue() {
+			this.$emit("fireToggleMobileMenue");
+		},
+	},
 };
 </script>
 
 <template>
-	<div class="nav-container">
-		<div class="nav-container-header" @click="fireToggleMobileMenue">
-			<font-awesome-icon icon="fa-solid fa-angle-left" class="nav-container-arrow" />
-			<p>Close</p>
+	<!-- <div class="menu-wrapper"> -->
+		<div class="nav-container">
+			<div class="nav-container-header" @click="fireToggleMobileMenue">
+				<font-awesome-icon
+					icon="fa-solid fa-angle-left"
+					class="nav-container-arrow" />
+				<p>Close</p>
+			</div>
+			<ul class="nav-container-links">
+				<li
+					:class="['nav-container-link', {accent: link.accent}]"
+					v-for="link in navLinks"
+					:key="link.link">
+					<font-awesome-icon :icon="link.icon" />
+					<span>{{ link.link }}</span>
+				</li>
+			</ul>
+			<div class="footer">
+				<SocialMedia />
+			</div>
 		</div>
-		<ul class="nav-container-links">
-			<li
-				:class="['nav-container-link', {accent: link.accent}]"
-				v-for="link in navLinks"
-				:key="link.link">
-				<font-awesome-icon :icon="link.icon" />
-				<span>{{ link.link }}</span>
-			</li>
-		</ul>
-		<div class="footer">
-			<SocialMedia />
-		</div>
-	</div>
+	<!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
@@ -63,6 +67,14 @@ export default {
 		color: $accent;
 	}
 }
+// .menu-wrapper {
+// 	position: absolute;
+// 	top: 0;
+// 	right: 0;
+// 	height: 100vh;
+// 	width: 100wh;
+// 	z-index: 10;
+// }
 .nav-container {
 	padding: 1em 1em;
 	display: flex;
@@ -71,17 +83,20 @@ export default {
 	gap: 2em;
 	background: $background-2;
 	height: 100vh;
+	width: 70%;
 	font: $font-text-mb;
-	border-left: 1px solid rgba($white, 0.1);
+	border-left: 1px solid rgba($white, 0.3);
+	// backdrop-filter: blur(5px);
+	
 
 	&-header {
-		flex: .5;
+		flex: 0.5;
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
 		border-bottom: 1px solid rgba($white, 0.3);
 	}
-	&-arrow{
+	&-arrow {
 		color: $accent;
 	}
 	&-links {

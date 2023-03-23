@@ -62,11 +62,11 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.header {
-	position: sticky;
-	top: 0;
-	z-index: 1;
-}
+// .header {
+// 	position: sticky;
+// 	top: 0;
+// 	z-index: 1;
+// }
 .hero-section {
 	height: 93vh;
 	padding: 3em 1.5em;

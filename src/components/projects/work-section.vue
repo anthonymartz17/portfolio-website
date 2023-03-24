@@ -6,7 +6,7 @@ export default {
 	data() {
 		return {
 			title: "Work",
-			showMore: true,
+			showMore: false,
 			projects: [
 				{
 					name: "Project 1",
@@ -31,7 +31,7 @@ export default {
 			if (e.target.id == "toggleProject") {
 				this.showMore = !this.showMore;
 			}
-			console.log(e.target.id);
+			console.log(e.currentTarget);
 		},
 	},
 };
@@ -90,11 +90,9 @@ export default {
 
 <style lang="scss" scoped>
 .projects-container {
+	min-height: 100vh;
 	padding: 1em 1.5em;
 	background: $background-2;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
 	color: $white;
 }
 .projects-title {
@@ -176,6 +174,5 @@ export default {
 	right: 0;
 	left: 0;
 	z-index: 10;
-	
 }
 </style>

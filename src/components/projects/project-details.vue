@@ -1,5 +1,7 @@
 <script>
+import baseButton from "../baseButton.vue";
 export default {
+	components: {baseButton},
 	data() {
 		return {};
 	},
@@ -40,12 +42,15 @@ export default {
 					Architecto minus voluptas illo deleniti laboriosam unde harum,
 					porro minima non. Vel quod aut velit fugit a laborum iure non
 					voluptate ullam?</p
-				>
+				><br />
 				<p
 					>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 					Architecto minus voluptas illo deleniti laboriosam unde harum,
 					porro minima non. Vel quod aut velit fugit a laborum iure non
-					voluptate ullam?</p
+					voluptate ullam? Lorem ipsum dolor sit, amet consectetur
+					adipisicing elit. Architecto minus voluptas illo deleniti
+					laboriosam unde harum, porro minima non. Vel quod aut velit fugit
+					a laborum iure non voluptate ullam?</p
 				>
 			</div>
 		</div>
@@ -59,7 +64,16 @@ export default {
 				<div class="icon">d</div>
 			</div>
 		</div>
-		<div class="project-btn"></div>
+		<div class="project-btn-container">
+			<base-button
+				class="project-btn"
+				text="Open Project"
+				icon="fa-solid fa-globe"></base-button>
+			<base-button
+				class="project-btn"
+				text="View Code"
+				icon="fa-brands fa-github"></base-button>
+		</div>
 
 		<div
 			id="toggleProject"
@@ -90,6 +104,7 @@ export default {
 		align-items: baseline;
 		border-bottom: 1px solid rgba($white, 0.3);
 		padding-bottom: 1em;
+		margin-bottom: 1.5em;
 		&-arrow {
 			color: $accent;
 		}
@@ -102,6 +117,7 @@ export default {
 .project-videos {
 	// flex: 2;
 	min-height: 50%;
+	margin-bottom: 1.5em;
 
 	.video-default {
 		min-height: 60%;
@@ -118,19 +134,46 @@ export default {
 	}
 }
 .project-about {
+	margin-bottom: 1.5em;
+	h3 {
+		font: $font-title-mb;
+		color: rgba($white, 0.3);
+	}
+	p {
+		font: $font-thin-text-mb;
+	}
 }
 .project-techs {
-	// flex: 5;
+	margin-bottom: 1.5em;
+	h3 {
+		font: $font-title-mb;
+		margin-bottom: 0.5em;
+		color: rgba($white, 0.3);
+	}
 }
 .tech-icons {
+	margin-bottom: 1.5em;
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
 	gap: 1em;
-
 }
 .icon {
+	aspect-ratio: 1/1;
 	border: 1px solid;
-	height: 10em;
-	flex: 1;
+	height: 6em;
+	width: 6em;
+}
+.project-btn-container {
+	margin-bottom: 1.5em;
+	display: grid;
+	place-items: center;
+}
+.project-btn {
+	margin-bottom: 0.5em;
+	width: 80%;
+	display: flex;
+	padding-inline: 4em;
+	gap: 0.5em;
 }
 </style>

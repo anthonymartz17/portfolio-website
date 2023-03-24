@@ -7,7 +7,9 @@ export default {
 	},
 	data() {
 		return {
+			
 			isMenueVisible: false,
+			props:["scrollPosition"]
 		};
 	},
 	methods: {
@@ -21,6 +23,7 @@ export default {
 			}
 		},
 	},
+
 };
 </script>
 
@@ -44,6 +47,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 .header-container {
 	position: relative;
 	background: $background-1;
@@ -54,6 +58,7 @@ export default {
 	align-items: baseline;
 	height: 7vh;
 	border-bottom: 1px solid rgba($white, 0.1);
+
 
 	&-logo {
 		font: $font-text-mb;

@@ -1,6 +1,6 @@
 @mixin baseButton($white, $accent: $white, $width:10em) {
 	font: $font-btn-mb;
-  padding: 0.5em 1em;
+  padding: .8em 1em;
 	color: $white;
 	border: 1px solid rgba($white, 0.5);
 	border-radius: 5px;

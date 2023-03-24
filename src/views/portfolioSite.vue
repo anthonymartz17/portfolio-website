@@ -1,17 +1,62 @@
 <script>
 import Header from "../components/header-section.vue";
 import Work from "../components/projects/work-section.vue";
+import Skills from "../components/skills-section.vue";
 export default {
+	data() {
+		return {
+			scrollPosition: 0,
+			isScrollingUp: false,
+			secctionsScrollPosition: [
+				{
+					section: "home",
+					scroll_position_start: 0,
+					scroll_position_end: 550,
+				},
+			],
+		};
+	},
 	components: {
 		Header,
 		Work,
+		Skills,
+	},
+
+	created() {
+		window.addEventListener("scroll", this.updateScrollPosition);
+	},
+	destroyed() {
+		window.removeEventListener("scroll", this.updateScrollPosition);
+	},
+	methods: {
+		scrollEvent() {
+			// this.yscroll = window.pageYOffset;
+		},
+		scrollTo(section) {
+			this.$refs[section].scrollIntoView({behavior: "smooth"});
+		},
+		updateScrollPosition() {
+			this.scrollPosition = window.pageYOffset;
+		},
+	},
+	watch: {
+		scrollPosition(a, b) {
+			if (a > b) {
+				this.isScrollingUp = false;
+			} else {
+				this.isScrollingUp = true;
+			}
+		},
 	},
 };
 </script>
 <template>
 	<div>
+		<div class="background-icon">{{ scrollPosition }}</div>
 		<header class="header">
-			<Header />
+			<Header
+				:scrollPosition="scrollPosition"
+				:class="{'fixed-header': isScrollingUp}" />
 		</header>
 		<main>
 			<section>
@@ -31,13 +76,14 @@ export default {
 						>
 						<div></div>
 					</div>
-					<div class="hero-section-cta">
+					<div class="hero-section-cta" @click="scrollTo('work')">
 						<font-awesome-icon icon="fa-solid fa-hands-holding" />
 						<span>View Work</span>
 					</div>
 				</div>
 			</section>
-			<section> <Work /> </section>
+			<section ref="work"> <Work /> </section>
+			<section> <Skills /> </section>
 		</main>
 	</div>
 
@@ -67,8 +113,22 @@ export default {
 // 	top: 0;
 // 	z-index: 1;
 // }
+.fixed-header {
+	position: fixed;
+	width: 100%;
+}
+
+.background-icon {
+	position: fixed;
+	pointer-events: none;
+	top: 150px;
+	left: 20%;
+	right: 20%;
+	font: $font-xl-mb;
+	color: rgba($white, 0.05);
+	font-size: 5em;
+}
 .hero-section {
-	height: 93vh;
 	padding: 3em 1.5em;
 	background: $background-1;
 	display: flex;
@@ -96,39 +156,39 @@ export default {
 		margin-bottom: 2em;
 	}
 
-&-cta {
-	@include baseButton($white);
-	position: relative;
-	z-index: 0;
-	span {
-		display: block;
-	}
-	&::after {
-		content: ">>";
-		position: absolute;
-		top: 7px;
-		right: 5px;
-		color: $accent;
-	}
+	&-cta {
+		@include baseButton($white);
+		position: relative;
+		z-index: 0;
+		span {
+			display: block;
+		}
+		&::after {
+			content: ">>";
+			position: absolute;
+			top: 7px;
+			right: 5px;
+			color: $accent;
+		}
 
-	////////////desktop view///////////
-	// &::after {
-	// 	content: ">>";
-	// 	position: absolute;
-	// 	opacity: 0;
-	// 	top: 7px;
-	// 	right: -7px;
-	// 	transition: 0.5s;
-	// 	color: $accent;
-	// }
-	// &:hover {
-	// 	padding-left: 0.5em;
-	// 	border: 1px solid rgba($white, 0.6);
-	// }
-	// &:hover::after {
-	// 	opacity: 1;
-	// 	right: 10px;
-	// }
+		////////////desktop view///////////
+		// &::after {
+		// 	content: ">>";
+		// 	position: absolute;
+		// 	opacity: 0;
+		// 	top: 7px;
+		// 	right: -7px;
+		// 	transition: 0.5s;
+		// 	color: $accent;
+		// }
+		// &:hover {
+		// 	padding-left: 0.5em;
+		// 	border: 1px solid rgba($white, 0.6);
+		// }
+		// &:hover::after {
+		// 	opacity: 1;
+		// 	right: 10px;
+		// }
 	}
 }
 </style>

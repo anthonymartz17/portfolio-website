@@ -79,8 +79,7 @@ export default {
 		</div>
 		<div class="skill-description-container">
 			<p>{{ skillDescription.description }}</p>
-			<p>{{ skillDescription.description }}</p>
-			<p>{{ skillDescription.description }}</p>
+		
 		</div>
 	</div>
 </template>
@@ -90,10 +89,11 @@ export default {
 	background: $accent;
 }
 .skills-container {
-	padding: 1em 1.5em;
+	padding: 1.5em;
 	background: $background-2;
 	color: $white;
 	position: relative;
+  height: 100vh;
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;
@@ -103,7 +103,7 @@ export default {
 	row-gap: 2.5em;
 }
 .skill-icon {
-	z-index: 2;
+	// z-index: 2;
 	p {
 		text-align: center;
 		font: $font-text-mb;

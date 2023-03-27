@@ -1,8 +1,19 @@
 <script>
+import Home from "../components/home.section.vue";
 import Header from "../components/header-section.vue";
 import Work from "../components/projects/work-section.vue";
 import Skills from "../components/skills-section.vue";
+import Aboutme from "../components/aboutme-section.vue";
+// import Hireme from "../components/hireme-section.vue";
 export default {
+	components: {
+		Home,
+		Header,
+		Work,
+		Skills,
+		Aboutme,
+		// Hireme,
+	},
 	data() {
 		return {
 			scrollPosition: 0,
@@ -16,11 +27,6 @@ export default {
 			],
 		};
 	},
-	components: {
-		Header,
-		Work,
-		Skills,
-	},
 
 	created() {
 		window.addEventListener("scroll", this.updateScrollPosition);
@@ -29,11 +35,8 @@ export default {
 		window.removeEventListener("scroll", this.updateScrollPosition);
 	},
 	methods: {
-		scrollEvent() {
-			// this.yscroll = window.pageYOffset;
-		},
 		scrollTo(section) {
-			this.$refs[section].scrollIntoView({behavior: "smooth"});
+			this.$refs[section].scrollIntoView({ behavior: "smooth" });
 		},
 		updateScrollPosition() {
 			this.scrollPosition = window.pageYOffset;
@@ -41,7 +44,7 @@ export default {
 	},
 	watch: {
 		scrollPosition(a, b) {
-			if (a > b) {
+			if (a > b || a == 0) {
 				this.isScrollingUp = false;
 			} else {
 				this.isScrollingUp = true;
@@ -55,35 +58,17 @@ export default {
 		<div class="background-icon">{{ scrollPosition }}</div>
 		<header class="header">
 			<Header
+			@fireScrollTo="scrollTo"
 				:scrollPosition="scrollPosition"
-				:class="{'fixed-header': isScrollingUp}" />
+				:class="{ 'fixed-header': isScrollingUp }"
+			/>
 		</header>
 		<main>
-			<section>
-				<div class="hero-section">
-					<div class="hero-section-headshot">
-						<img src="/img/headshotMobile.png" alt="" />
-					</div>
-					<div class="hero-section-text-container">
-						<h1 class="hero-section-title"
-							>Hi,<br />
-							I'm Antonio Martinez,<br /><span>Front-end </span
-							>developer</h1
-						>
-						<p class="hero-section-text"
-							>I care about the responsibilities that I'm trusted
-							with.</p
-						>
-						<div></div>
-					</div>
-					<div class="hero-section-cta" @click="scrollTo('work')">
-						<font-awesome-icon icon="fa-solid fa-hands-holding" />
-						<span>View Work</span>
-					</div>
-				</div>
-			</section>
-			<section ref="work"> <Work /> </section>
-			<section> <Skills /> </section>
+			<section ref="Home"><Home /></section>
+			<section ref="Work"><Work /></section>
+			<section ref="Skills"><Skills /></section>
+			<section ref="About"><Aboutme /></section>
+			<!-- <section> <Hireme /> </section> -->
 		</main>
 	</div>
 
@@ -127,68 +112,5 @@ export default {
 	font: $font-xl-mb;
 	color: rgba($white, 0.05);
 	font-size: 5em;
-}
-.hero-section {
-	padding: 3em 1.5em;
-	background: $background-1;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-
-	&-headshot {
-		display: flex;
-		justify-content: center;
-		width: 12em;
-		align-self: center;
-	}
-	&-title {
-		color: $white;
-		font: $font-title-mb;
-		margin-bottom: 1em;
-
-		span {
-			color: $accent;
-		}
-	}
-	&-text {
-		color: $white;
-		font: $font-text-mb;
-		margin-bottom: 2em;
-	}
-
-	&-cta {
-		@include baseButton($white);
-		position: relative;
-		z-index: 0;
-		span {
-			display: block;
-		}
-		&::after {
-			content: ">>";
-			position: absolute;
-			top: 7px;
-			right: 5px;
-			color: $accent;
-		}
-
-		////////////desktop view///////////
-		// &::after {
-		// 	content: ">>";
-		// 	position: absolute;
-		// 	opacity: 0;
-		// 	top: 7px;
-		// 	right: -7px;
-		// 	transition: 0.5s;
-		// 	color: $accent;
-		// }
-		// &:hover {
-		// 	padding-left: 0.5em;
-		// 	border: 1px solid rgba($white, 0.6);
-		// }
-		// &:hover::after {
-		// 	opacity: 1;
-		// 	right: 10px;
-		// }
-	}
 }
 </style>

@@ -7,15 +7,17 @@ export default {
 	},
 	data() {
 		return {
-			
 			isMenueVisible: false,
-			props:["scrollPosition"]
+			props: ["scrollPosition"],
 		};
 	},
 	methods: {
+		emitScrollToEvent(section){
+			this.isMenueVisible = false
+          this.$emit('fireScrollTo',section)
+		},
 		toggleMobileMenue() {
 			this.isMenueVisible = !this.isMenueVisible;
-			console.log(this.isMenueVisible);
 			if (this.isMenueVisible) {
 				document.body.classList.add("disableScroll");
 			} else {
@@ -23,42 +25,43 @@ export default {
 			}
 		},
 	},
-
 };
 </script>
 
 <template>
 	<div class="header-container">
-		<div :class="['header-container-logo', {clickable: isMenueVisible}]"
-			>MARTZ</div
-		>
+		<div :class="['header-container-logo', { clickable: isMenueVisible }]">
+			MARTZ
+		</div>
 		<div class="header-nav-menue">
 			<font-awesome-icon
 				icon="fa-solid fa-bars"
 				size="2x"
-				@click="toggleMobileMenue" />
+				@click="toggleMobileMenue"
+			/>
 		</div>
 		<div class="navmenue-wrapper">
 			<NavMenueMobile
+				@scrollToEvent="emitScrollToEvent"
 				v-if="isMenueVisible"
-				@fireToggleMobileMenue="toggleMobileMenue" />
+				@fireToggleMobileMenue="toggleMobileMenue"
+			/>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-
 .header-container {
 	position: relative;
 	background: $background-1;
-	padding: 0.5em 1.5em;
+	padding: 0.8em 1.5em;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
-	height: 7vh;
+	align-items: flex-end;
+	height: 10vh;
 	border-bottom: 1px solid rgba($white, 0.1);
-
+	z-index: 20;
 
 	&-logo {
 		font: $font-text-mb;

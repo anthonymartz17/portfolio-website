@@ -1,13 +1,18 @@
 <script>
 import baseButton from "../baseButton.vue";
 export default {
-	components: {baseButton},
-	data() {
-		return {};
-	},
+	components: { baseButton },
+	// data() {
+	// 	return {
+	// 		project: {},
+	// 	};
+	// },
+	props: ["projectClicked"],
 	methods: {
-		fireToggleShowMore(e) {
-			this.$emit("fireToggleShowMore", e);
+		fireToggleShowMore() {
+			//resets projectClicked
+			let projectClicked = {};
+			this.$emit("fireToggleShowMore", projectClicked);
 		},
 	},
 };
@@ -18,70 +23,85 @@ export default {
 		<div
 			id="toggleProject"
 			class="backToProjects"
-			@click="fireToggleShowMore($event)">
+			@click="fireToggleShowMore()"
+		>
 			<font-awesome-icon
 				icon="fa-solid fa-angle-left"
-				class="backToProjects-arrow" />
+				class="backToProjects-arrow"
+			/>
 			<p>Back to project</p>
 		</div>
 		<div class="project-title-container">
-			<h2 class="title">this is an incredible project</h2>
+			<h2 class="title">{{ projectClicked.name }}</h2>
 		</div>
 		<div class="project-videos">
-			<div class="video-default"></div>
+			<div class="video-default">
+				<img
+					:src="`/img/${projectClicked.thumbnail_main}`"
+					alt="thumbnail project 1"
+				/>
+			</div>
 			<div class="video-secondary-container">
-				<div class="video-default"></div>
-				<div class="video-default"></div>
+				<div class="video-sec">
+					<img
+						:src="`/img/${projectClicked.thumbnail_sec}`"
+						alt="thumbnail project 2"
+					/>
+				</div>
+				<div class="video-sec">
+					<img
+						:src="`/img/${projectClicked.thumbnail_third}`"
+						alt="thumbnail project 3"
+					/>
+				</div>
 			</div>
 		</div>
 		<div class="project-about">
 			<h3>About</h3>
 			<div>
-				<p
-					>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Architecto minus voluptas illo deleniti laboriosam unde harum,
-					porro minima non. Vel quod aut velit fugit a laborum iure non
-					voluptate ullam?</p
-				><br />
-				<p
-					>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Architecto minus voluptas illo deleniti laboriosam unde harum,
-					porro minima non. Vel quod aut velit fugit a laborum iure non
-					voluptate ullam? Lorem ipsum dolor sit, amet consectetur
-					adipisicing elit. Architecto minus voluptas illo deleniti
-					laboriosam unde harum, porro minima non. Vel quod aut velit fugit
-					a laborum iure non voluptate ullam?</p
-				>
+				<p>
+					{{ projectClicked.short_desc }}
+				</p>
+				<br />
+				<p>
+					{{ projectClicked.full_desc }}
+				</p>
 			</div>
 		</div>
 		<div class="project-techs">
 			<h3>Technologies</h3>
 			<div class="tech-icons">
-				<div class="icon">d</div>
-				<div class="icon">d</div>
-				<div class="icon">d</div>
-				<div class="icon">d</div>
-				<div class="icon">d</div>
+				<div
+					class="icon"
+					v-for="icon in projectClicked.technologies"
+					:key="icon"
+				>
+					{{ icon }}
+				</div>
 			</div>
 		</div>
 		<div class="project-btn-container">
 			<base-button
 				class="project-btn"
 				text="Open Project"
-				icon="fa-solid fa-globe"></base-button>
+				icon="fa-solid fa-globe"
+			></base-button>
 			<base-button
 				class="project-btn"
 				text="View Code"
-				icon="fa-brands fa-github"></base-button>
+				icon="fa-brands fa-github"
+			></base-button>
 		</div>
 
 		<div
 			id="toggleProject"
 			class="backToProjects"
-			@click="fireToggleShowMore($event)">
+			@click="fireToggleShowMore()"
+		>
 			<font-awesome-icon
 				icon="fa-solid fa-angle-left"
-				class="backToProjects-arrow" />
+				class="backToProjects-arrow"
+			/>
 			<p>Back to project</p>
 		</div>
 	</div>
@@ -116,23 +136,39 @@ export default {
 }
 .project-videos {
 	// flex: 2;
+	height: 50%;
 	min-height: 50%;
 	margin-bottom: 1.5em;
 
-	.video-default {
-		min-height: 60%;
-		flex: 1;
-		border: 1px solid;
-		height: 45%;
-		margin-bottom: 0.5em;
-	}
-	.video-secondary-container {
-		min-height: 60%;
-		display: flex;
-		gap: 0.5em;
-		height: 50%;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 }
+
+.video-default {
+	min-height: 60%;
+	flex: 1;
+	border: 1px solid;
+	height: 45%;
+	margin-bottom: 0.5em;
+	
+}
+.video-secondary-container {
+	min-height: 60%;
+	display: flex;
+	gap: 0.5em;
+	height: 50%;
+}
+.video-sec{
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover
+	}
+}
+
 .project-about {
 	margin-bottom: 1.5em;
 	h3 {

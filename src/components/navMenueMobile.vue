@@ -7,22 +7,26 @@ export default {
 	data() {
 		return {
 			navLinks: [
-				{icon: "fa-solid fa-house", link: "Home", active: true},
+				{ icon: "fa-solid fa-house", name: "Home", active: true },
 				{
 					icon: "fa-solid fa-hands-holding-circle",
-					link: "Work",
+					name: "Work",
 					active: false,
 				},
-				{icon: "fa-regular fa-lightbulb", link: "Skills"},
-				{icon: "fa-regular fa-address-card", link: "About"},
-				{icon: "fa-brands fa-blogger", link: "Blogs"},
-				{icon: "fa-solid fa-handshake", link: "Hire Me", accent: true},
+				{ icon: "fa-regular fa-lightbulb", name: "Skills" },
+				{ icon: "fa-regular fa-address-card", name: "About" },
+				{ icon: "fa-brands fa-blogger", name: "Blogs" },
+				{ icon: "fa-solid fa-handshake", name: "Hire Me", accent: true },
 			],
 		};
 	},
+	emit: ["scrollTo"],
 	methods: {
 		fireToggleMobileMenue() {
 			this.$emit("fireToggleMobileMenue");
+		},
+		emitScrollToEvent(section) {
+			this.$emit("scrollToEvent", section);
 		},
 	},
 };
@@ -30,26 +34,29 @@ export default {
 
 <template>
 	<!-- <div class="menu-wrapper"> -->
-		<div class="nav-container">
-			<div class="nav-container-header" @click="fireToggleMobileMenue">
-				<font-awesome-icon
-					icon="fa-solid fa-angle-left"
-					class="nav-container-arrow" />
-				<p>Close</p>
-			</div>
-			<ul class="nav-container-links">
-				<li
-					:class="['nav-container-link', {accent: link.accent}]"
-					v-for="link in navLinks"
-					:key="link.link">
-					<font-awesome-icon :icon="link.icon" />
-					<span>{{ link.link }}</span>
-				</li>
-			</ul>
-			<div class="footer">
-				<SocialMedia />
-			</div>
+	<div class="nav-container">
+		<div class="nav-container-header" @click="fireToggleMobileMenue">
+			<font-awesome-icon
+				icon="fa-solid fa-angle-left"
+				class="nav-container-arrow"
+			/>
+			<p>Close</p>
 		</div>
+		<ul class="nav-container-links">
+			<li
+				@click="emitScrollToEvent(link.name)"
+				:class="['nav-container-link', { accent: link.accent }]"
+				v-for="link in navLinks"
+				:key="link.name"
+			>
+				<font-awesome-icon :icon="link.icon" />
+				<span>{{ link.name }}</span>
+			</li>
+		</ul>
+		<div class="footer">
+			<SocialMedia />
+		</div>
+	</div>
 	<!-- </div> -->
 </template>
 
@@ -87,7 +94,6 @@ export default {
 	font: $font-text-mb;
 	border-left: 1px solid rgba($white, 0.3);
 	// backdrop-filter: blur(5px);
-	
 
 	&-header {
 		flex: 0.5;

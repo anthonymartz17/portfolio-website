@@ -2,36 +2,61 @@
 import baseButton from "../baseButton.vue";
 import ProjectDetail from "./project-details.vue";
 export default {
-	components: {baseButton, ProjectDetail},
+	components: { baseButton, ProjectDetail },
 	data() {
 		return {
 			title: "Work",
 			showMore: false,
+			projectClicked:{},
 			projects: [
 				{
-					name: "Project 1",
-					desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+					id: 1,
+					name: "This is project 1",
+					short_desc:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+					full_desc:
+						"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
 					img: "project1.jpeg",
+					thumbnail_main: "project1.jpeg",
+					thumbnail_sec: "project1.jpeg",
+					thumbnail_third: "project1.jpeg",
+					technologies: ["vue", "js", "html5", "css3", "sass"],
 				},
 				{
-					name: "Project 2",
-					desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+					id: 2,
+					name: "This is project 2",
+					short_desc:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+					full_desc:
+						"Project 2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
 					img: "project2.jpeg",
+					thumbnail_main: "project2.jpeg",
+					thumbnail_sec: "project2.jpeg",
+					thumbnail_third: "project2.jpeg",
+					technologies: ["vue", "js", "html5", "css3", "sass"],
 				},
 				{
-					name: "Project 3",
-					desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+					id: 3,
+					name: "This is project 3",
+					short_desc:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+					full_desc:
+						"Project 3 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
 					img: "project3.jpeg",
+					thumbnail_main: "project3.jpeg",
+					thumbnail_sec: "project3.jpeg",
+					thumbnail_third: "project3.jpeg",
+					technologies: ["vue", "js", "html5", "css3", "sass"],
 				},
 			],
 		};
 	},
 	methods: {
-		toggleShowMore(e) {
-			if (e.target.id == "toggleProject") {
+		toggleShowMore(projectClicked) {
+			// if (e.target.id == "toggleProject") {
 				this.showMore = !this.showMore;
-			}
-			console.log(e.currentTarget);
+			// }
+			this.projectClicked = projectClicked
 		},
 	},
 };
@@ -44,44 +69,41 @@ export default {
 			<div
 				class="projects-project"
 				v-for="project in projects"
-				:key="project.name">
+				:key="project.name"
+			>
 				<div class="projects-project-thumb">
 					<img :src="`/img/${project.img}`" alt="" />
 				</div>
 				<div class="projects-project-desc">
-					<h3>This is a project</h3>
-					<p
-						>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Debitis, consequuntur?</p
-					>
+					<h3>{{project.name}}</h3>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
+						consequuntur?
+					</p>
 					<div
 						id="toggleProject"
 						class="projects-project-btn"
-						@click="toggleShowMore($event)"
-						><font-awesome-icon
-							icon="fa-solid fa-eye"
-							class="see-more-icon" />
-						<span>See More</span></div
+						@click="toggleShowMore(project)"
 					>
+						<font-awesome-icon icon="fa-solid fa-eye" class="see-more-icon" />
+						<span>See More</span>
+					</div>
 				</div>
 			</div>
 			<div v-if="showMore" class="project-detail">
-				<ProjectDetail @fireToggleShowMore="toggleShowMore($event)" />
+				<ProjectDetail :projectClicked="projectClicked" @fireToggleShowMore="toggleShowMore(projectClicked)" />
 			</div>
 
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
 					<h4>watch</h4>
 					<p>me discuss tech implementation in my projects</p>
-					<base-button
-						text="Watch"
-						icon="fa-brands fa-youtube"></base-button>
+					<base-button text="Watch" icon="fa-brands fa-youtube"></base-button>
 				</div>
 				<div class="card-blog project-cards">
 					<h4>Read</h4>
 					<p>articles about my work and my learning from them.</p>
-					<base-button text="Watch" icon="fa-brands fa-readme">
-					</base-button>
+					<base-button text="Watch" icon="fa-brands fa-readme"> </base-button>
 				</div>
 			</div>
 		</div>
@@ -91,7 +113,7 @@ export default {
 <style lang="scss" scoped>
 .projects-container {
 	min-height: 100vh;
-	padding: 1em 1.5em;
+	padding: 4em 1.5em;
 	background: $background-2;
 	color: $white;
 }

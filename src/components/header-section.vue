@@ -8,28 +8,32 @@ export default {
 	data() {
 		return {
 			isMenueVisible: false,
-			props: ["scrollPosition"],
+			
 		};
 	},
+	props: ["scrollPosition"],
 	methods: {
-		emitScrollToEvent(section){
-			this.isMenueVisible = false
-          this.$emit('fireScrollTo',section)
+		emitScrollToEvent(section) {
+			this.isMenueVisible = false;
+			this.$emit("fireScrollTo", section);
 		},
 		toggleMobileMenue() {
 			this.isMenueVisible = !this.isMenueVisible;
-			if (this.isMenueVisible) {
-				document.body.classList.add("disableScroll");
-			} else {
-				document.body.classList.remove("disableScroll");
-			}
+			document.body.classList.toggle("disableScroll")
+			// if (this.isMenueVisible) {
+			// 	document.body.classList.add("disableScroll");
+			// } else {
+			// 	document.body.classList.remove("disableScroll");
+			// }
 		},
 	},
+	computed:{
+	
+	}
 };
 </script>
-
 <template>
-	<div class="header-container">
+	<div :class="['header-container',{'header-bg-2': scrollPosition >= 550 }]">
 		<div :class="['header-container-logo', { clickable: isMenueVisible }]">
 			MARTZ
 		</div>
@@ -51,16 +55,20 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.disableScroll{
+ overflow: hidden;
+}
+
 .header-container {
 	position: relative;
-	background: $background-1;
+	background: $bg-1;
 	padding: 0.8em 1.5em;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 	height: 10vh;
-	border-bottom: 1px solid rgba($white, 0.1);
+	// border-bottom: 1px solid rgba($white, 0.1);
 	z-index: 20;
 
 	&-logo {
@@ -80,5 +88,8 @@ export default {
 	left: 0;
 	z-index: 10;
 	backdrop-filter: blur(5px);
+}
+.header-bg-2 {
+	background: $bg-2;
 }
 </style>

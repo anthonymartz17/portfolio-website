@@ -1,9 +1,19 @@
 .sections-title-global{
   font: $font-title-mb;
   color: rgba($white, 0.5);
-  margin-bottom: .8em;
+  margin-bottom:2em;
+}
+.text-thin{
+  font: $font-thin-text-mb;
+  color: $white;
 }
 .lg-title {
 	font: $font-xl-mb;
 	color: rgba($white, 0.3);
+}
+.resetLink{
+text-decoration: none;
+font: $font-thin-text-mb;
+color: $white;
+
 }

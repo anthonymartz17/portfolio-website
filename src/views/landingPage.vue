@@ -17,7 +17,7 @@ export default {
 			<img src="/img/headshotMobile.png" alt="" />
 		</div>
 		<div class="links">
-			<router-link :to="{name: 'portfolio'}" class="landing-btn">
+			<router-link :to="{ name: 'portfolio' }" class="landing-btn">
 				<font-awesome-icon icon="fa-solid fa-briefcase" class="icon" />
 				<span>Portfolio</span>
 				<div class="arrow">
@@ -51,7 +51,7 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 	font-family: $font-poppins;
-	background: $background-1;
+	background: $bg-1;
 	height: 100vh;
 	color: $white;
 	padding: 1em;

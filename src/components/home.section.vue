@@ -1,6 +1,15 @@
 <script>
+import BaseButton from "./baseButton.vue";
 export default {
-
+	components: {
+		BaseButton,
+	},
+	emit: ["scrollToEvent"],
+	methods: {
+		emitScrollTo() {
+			this.$emit("scrollToEvent");
+		},
+	},
 };
 </script>
 <template>
@@ -18,17 +27,14 @@ export default {
 			</p>
 			<div></div>
 		</div>
-		<div class="hero-section-cta" @click="scrollTo('work')">
-			<font-awesome-icon icon="fa-solid fa-hands-holding" />
-			<span>View Work</span>
-		</div>
+		<BaseButton icon="fa-hands-holding" text="View work" :accent="false" @click.native="emitScrollTo"/>
 	</div>
 </template>
 
 <style lang="scss" scoped>
 .hero-section {
 	padding: 3em 1.5em;
-	background: $background-1;
+	background: $bg-1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -69,9 +75,6 @@ export default {
 			right: 5px;
 			color: $accent;
 		}
-
 	}
 }
-
-
 </style>

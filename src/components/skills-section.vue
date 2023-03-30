@@ -5,11 +5,11 @@ export default {
 			title: "Skills",
 			skillId: "vue",
 			skillsName: [
-				{id: "vue", name: "vue.js", icon: "V"},
-				{id: "js", name: "javaScript", icon: "JS"},
-				{id: "css", name: "css3", icon: "css"},
-				{id: "html", name: "html5", icon: "html"},
-				{id: "sass", name: "sass", icon: "sass"},
+				{ id: "vue", name: "vue.js", icon: "V" },
+				{ id: "js", name: "javaScript", icon: "JS" },
+				{ id: "css", name: "css3", icon: "css" },
+				{ id: "html", name: "html5", icon: "html" },
+				{ id: "sass", name: "sass", icon: "sass" },
 			],
 			skillsDescriptions: [
 				{
@@ -69,17 +69,17 @@ export default {
 				class="skill-icon"
 				v-for="icon in skillsName"
 				:key="icon.id"
-				@click="switchSkillId(icon.id)">
-				<div :class="['icon', {accent: icon.id == skillId}]">{{
-					icon.icon
-				}}</div>
+				@click="switchSkillId(icon.id)"
+			>
+				<div :class="['icon', { accent: icon.id == skillId }]">
+					{{ icon.icon }}
+				</div>
 				<p>{{ icon.name }}</p>
 				<!-- <div  v-if="icon.id == skillId">{{scrollPosition}}</div> -->
 			</div>
 		</div>
 		<div class="skill-description-container">
 			<p>{{ skillDescription.description }}</p>
-		
 		</div>
 	</div>
 </template>
@@ -90,10 +90,10 @@ export default {
 }
 .skills-container {
 	padding: 1.5em;
-	background: $background-2;
+	background: $bg-2;
 	color: $white;
 	position: relative;
-  height: 100vh;
+	height: 100vh;
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;
@@ -116,6 +116,4 @@ export default {
 	width: 6em;
 	margin-bottom: 0.5em;
 }
-
-
 </style>

@@ -39,11 +39,10 @@ export default {
 }
 .aboutme-container {
 	padding: 1.5em;
-	padding-bottom: 3em;
-	background: $background-2;
+	padding-bottom: 5em;
+	background: $bg-2;
 	color: $white;
 	position: relative;
-	height: 100vh;
 }
 .aboutme-description {
 	font: $font-thin-text-mb;

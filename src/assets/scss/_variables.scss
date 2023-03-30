@@ -1,23 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap");
 
 // colors
-$background-1: #191a19;
-$background-2: #150026;
+$bg-1: #191a19;
+$bg-2: #150026;
 $accent: #bc5f04;
 $white: #f5f5f5;
+$danger:#EA5455;
 
 // FONTS
-$font-poppins: 'Poppins', sans-serif;
-$font-xl-mb:  800 2rem   $font-poppins;
-$font-title-mb:  800 1.6rem   $font-poppins;
-$font-subtitle-mb:  600 1rem   $font-poppins;
-$font-btn-mb:  600 1rem   $font-poppins;
-$font-text-mb:  400 1rem   $font-poppins;
-$font-thin-text-mb:  200 1rem   $font-poppins;
-$font-small-mb:  200 .833rem   $font-poppins;
-
+$font-poppins: "Poppins", sans-serif;
+$font-xl-mb: 800 2rem $font-poppins;
+$font-title-mb: 800 1.6rem $font-poppins;
+$font-subtitle-mb: 600 1rem $font-poppins;
+$font-btn-mb: 600 1rem $font-poppins;
+$font-text-mb: 400 1rem $font-poppins;
+$font-thin-text-mb: 200 1rem $font-poppins;
+$font-small-mb: 200 0.833rem $font-poppins;
 
 //
-

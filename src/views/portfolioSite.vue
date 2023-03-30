@@ -4,7 +4,8 @@ import Header from "../components/header-section.vue";
 import Work from "../components/projects/work-section.vue";
 import Skills from "../components/skills-section.vue";
 import Aboutme from "../components/aboutme-section.vue";
-// import Hireme from "../components/hireme-section.vue";
+import Hireme from "../components/hireme-section.vue";
+import Footer from "../components/the-footer.vue";
 export default {
 	components: {
 		Home,
@@ -12,7 +13,8 @@ export default {
 		Work,
 		Skills,
 		Aboutme,
-		// Hireme,
+		Hireme,
+		Footer,
 	},
 	data() {
 		return {
@@ -54,22 +56,23 @@ export default {
 };
 </script>
 <template>
-	<div>
-		<div class="background-icon">{{ scrollPosition }}</div>
+	<div class="portfolio-container">
+	
 		<header class="header">
 			<Header
-			@fireScrollTo="scrollTo"
+				@fireScrollTo="scrollTo"
 				:scrollPosition="scrollPosition"
 				:class="{ 'fixed-header': isScrollingUp }"
 			/>
 		</header>
 		<main>
-			<section ref="Home"><Home /></section>
+			<section ref="Home"><Home @scrollToEvent="scrollTo('Work')" /></section>
 			<section ref="Work"><Work /></section>
 			<section ref="Skills"><Skills /></section>
 			<section ref="About"><Aboutme /></section>
-			<!-- <section> <Hireme /> </section> -->
+			<section ref="Hire Me"><Hireme /></section>
 		</main>
+		<footer><Footer /></footer>
 	</div>
 
 	<!-- <font-awesome-icon icon="fa-brands fa-youtube" />
@@ -93,11 +96,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-// .header {
-// 	position: sticky;
-// 	top: 0;
-// 	z-index: 1;
-// }
+
 .fixed-header {
 	position: fixed;
 	width: 100%;

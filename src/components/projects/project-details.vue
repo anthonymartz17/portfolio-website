@@ -1,7 +1,7 @@
 <script>
-import baseButton from "../baseButton.vue";
+import BaseButton from "../baseButton.vue";
 export default {
-	components: { baseButton },
+	components: { BaseButton },
 	// data() {
 	// 	return {
 	// 		project: {},
@@ -81,16 +81,9 @@ export default {
 			</div>
 		</div>
 		<div class="project-btn-container">
-			<base-button
-				class="project-btn"
-				text="Open Project"
-				icon="fa-solid fa-globe"
-			></base-button>
-			<base-button
-				class="project-btn"
-				text="View Code"
-				icon="fa-brands fa-github"
-			></base-button>
+			<BaseButton icon="fa-solid fa-globe" text="Open Project" :iconAccent="true"/>
+			<BaseButton icon="fa-brands fa-github" text="View Code" :iconAccent="true"/>
+		
 		</div>
 
 		<div
@@ -113,7 +106,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
-	background: $background-1;
+	background: $bg-1;
 	height: 100vh;
 	font: $font-text-mb;
 	overflow: auto;
@@ -153,7 +146,6 @@ export default {
 	border: 1px solid;
 	height: 45%;
 	margin-bottom: 0.5em;
-	
 }
 .video-secondary-container {
 	min-height: 60%;
@@ -161,11 +153,11 @@ export default {
 	gap: 0.5em;
 	height: 50%;
 }
-.video-sec{
+.video-sec {
 	img {
 		width: 100%;
 		height: 100%;
-		object-fit: cover
+		object-fit: cover;
 	}
 }
 

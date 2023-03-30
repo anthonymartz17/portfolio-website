@@ -88,7 +88,7 @@ export default {
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 2em;
-	background: $background-2;
+	background: $bg-2;
 	height: 100vh;
 	width: 70%;
 	font: $font-text-mb;

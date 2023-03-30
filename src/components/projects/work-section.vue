@@ -1,13 +1,13 @@
 <script>
-import baseButton from "../baseButton.vue";
+import BaseButton from "../baseButton.vue";
 import ProjectDetail from "./project-details.vue";
 export default {
-	components: { baseButton, ProjectDetail },
+	components: { BaseButton, ProjectDetail },
 	data() {
 		return {
 			title: "Work",
 			showMore: false,
-			projectClicked:{},
+			projectClicked: {},
 			projects: [
 				{
 					id: 1,
@@ -53,10 +53,9 @@ export default {
 	},
 	methods: {
 		toggleShowMore(projectClicked) {
-			// if (e.target.id == "toggleProject") {
-				this.showMore = !this.showMore;
-			// }
-			this.projectClicked = projectClicked
+			this.showMore = !this.showMore;
+		
+			this.projectClicked = projectClicked;
 		},
 	},
 };
@@ -75,35 +74,49 @@ export default {
 					<img :src="`/img/${project.img}`" alt="" />
 				</div>
 				<div class="projects-project-desc">
-					<h3>{{project.name}}</h3>
+					<h3>{{ project.name }}</h3>
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
 						consequuntur?
 					</p>
-					<div
+					<BaseButton
+					@click.native="toggleShowMore(project)"
+						text="See more"
+						icon="fa-solid fa-eye"
+						:iconAccent="true"
 						id="toggleProject"
-						class="projects-project-btn"
-						@click="toggleShowMore(project)"
-					>
-						<font-awesome-icon icon="fa-solid fa-eye" class="see-more-icon" />
-						<span>See More</span>
-					</div>
+					/>
 				</div>
 			</div>
 			<div v-if="showMore" class="project-detail">
-				<ProjectDetail :projectClicked="projectClicked" @fireToggleShowMore="toggleShowMore(projectClicked)" />
+				<ProjectDetail
+					:projectClicked="projectClicked"
+					@fireToggleShowMore="toggleShowMore(projectClicked)"
+				/>
 			</div>
 
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
 					<h4>watch</h4>
 					<p>me discuss tech implementation in my projects</p>
-					<base-button text="Watch" icon="fa-brands fa-youtube"></base-button>
+					<div class="card-link">
+						<a class="resetLink card-link-link" href="">@martz_code</a>
+						<font-awesome-icon
+							icon="fa-solid fa-angle-right"
+							class="angle-right"
+						/>
+					</div>
 				</div>
 				<div class="card-blog project-cards">
 					<h4>Read</h4>
 					<p>articles about my work and my learning from them.</p>
-					<base-button text="Watch" icon="fa-brands fa-readme"> </base-button>
+					<div class="card-link">
+						<a class="resetLink card-link-link" href="">Check it out</a>
+						<font-awesome-icon
+							icon="fa-solid fa-angle-right"
+							class="angle-right"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -114,7 +127,7 @@ export default {
 .projects-container {
 	min-height: 100vh;
 	padding: 4em 1.5em;
-	background: $background-2;
+	background: $bg-2;
 	color: $white;
 }
 .projects-title {
@@ -125,7 +138,7 @@ export default {
 }
 
 .projects-project {
-	margin-block: 1em;
+	margin-bottom: 1.5em;
 	// box-shadow: rgba(252, 252, 252, 0.185) 0px 4px 12px;
 	box-shadow: rgba(236, 236, 236, 0.12) 0px 1px 3px,
 		rgba(230, 227, 227, 0.24) 0px 1px 2px;
@@ -156,28 +169,16 @@ export default {
 		font: $font-thin-text-mb;
 		margin-bottom: 0.5em;
 	}
-
-	.projects-project-btn {
-		@include baseButton($white);
-
-		.see-more-icon {
-			color: $accent;
-		}
-		span {
-			display: inline-block;
-		}
-	}
-	.cards-youtube {
-	}
 }
 .project-cards-container {
+	margin-block: 6em;
 }
 .project-cards {
-	margin-bottom: 1em;
 	padding: 0.5em;
 	&:nth-child(1) {
 		border-bottom: 1px solid $white;
-		padding-bottom: 2em;
+		padding-bottom: 3em;
+		margin-bottom: 3em;
 	}
 
 	h4 {
@@ -188,6 +189,21 @@ export default {
 		font: $font-thin-text-mb;
 		margin-block: 0.5em;
 	}
+}
+.card-link {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	justify-content: flex-end;
+
+	&-link {
+		padding-bottom: 0.1em;
+		border-bottom: 1px solid $white;
+	}
+}
+.angle-right {
+	color: $accent;
+	font-size: 1.3em;
 }
 
 .project-detail {

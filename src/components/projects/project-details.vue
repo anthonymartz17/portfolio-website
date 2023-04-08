@@ -1,7 +1,8 @@
 <script>
 import BaseButton from "../baseButton.vue";
+import MartzIcon from "../icons/martz-icons.vue";
 export default {
-	components: { BaseButton },
+	components: { BaseButton, MartzIcon },
 	// data() {
 	// 	return {
 	// 		project: {},
@@ -71,19 +72,31 @@ export default {
 		<div class="project-techs">
 			<h3>Technologies</h3>
 			<div class="tech-icons">
-				<div
+				<MartzIcon
 					class="icon"
 					v-for="icon in projectClicked.technologies"
-					:key="icon"
-				>
-					{{ icon }}
-				</div>
+					:key="icon.id"
+					:icon="icon.icon"
+					color="white"
+					:size="icon.size"
+				/>
 			</div>
 		</div>
 		<div class="project-btn-container">
-			<BaseButton icon="fa-solid fa-globe" text="Open Project" :iconAccent="true"/>
-			<BaseButton icon="fa-brands fa-github" text="View Code" :iconAccent="true"/>
-		
+			<BaseButton
+				class="project-btn"
+				text="Open Project"
+				color="accent"
+				size="30"
+				icon="web"
+			/>
+			<BaseButton
+				class="project-btn"
+				text="View Code"
+				color="accent"
+				size="30"
+				icon="code"
+			/>
 		</div>
 
 		<div
@@ -182,26 +195,27 @@ export default {
 .tech-icons {
 	margin-bottom: 1.5em;
 	display: flex;
-	justify-content: center;
 	flex-wrap: wrap;
 	gap: 1em;
 }
+
 .icon {
+	display: grid;
+	place-items: center;
+	opacity: 0.8;
+	width: 25%;
 	aspect-ratio: 1/1;
-	border: 1px solid;
-	height: 6em;
-	width: 6em;
+	// border: 1px solid;
+	// height: 6em;
+	// width: 6em;
 }
 .project-btn-container {
 	margin-bottom: 1.5em;
 	display: grid;
 	place-items: center;
+	gap: 1em;
 }
 .project-btn {
-	margin-bottom: 0.5em;
 	width: 80%;
-	display: flex;
-	padding-inline: 4em;
-	gap: 0.5em;
 }
 </style>

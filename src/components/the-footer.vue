@@ -2,32 +2,6 @@
 export default {
 	data() {
 		return {
-			mediaContacts: [
-				{
-					icon: "fa-regular fa-envelope",
-					name: "E-mail",
-					url: "",
-					link_name: "antonio.fr.martinezc@hotmail.com",
-				},
-				{
-					icon: "fa-brands fa-linkedin-in",
-					name: "LinkedIn",
-					url: "",
-					link_name: "linkedin.com/in/antoniomartinez17",
-				},
-				{
-					icon: "fa-brands fa-github",
-					name: "Github",
-					url: "",
-					link_name: "@anthonymartz17",
-				},
-				{
-					icon: "fa-brands fa-instagram",
-					name: "Instagram",
-					url: "",
-					link_name: "@martz_code",
-				},
-			],
 			navLinks: [
 				{ icon: "fa-solid fa-house", name: "Home", active: true },
 				{
@@ -37,33 +11,30 @@ export default {
 				},
 				{ icon: "fa-regular fa-lightbulb", name: "Skills" },
 				{ icon: "fa-regular fa-address-card", name: "About" },
-				{ icon: "fa-brands fa-blogger", name: "Blogs" },
+				{ icon: "fa-brands fa-blogger", name: "Blogs", route: "home-blog" },
 				{ icon: "fa-solid fa-handshake", name: "Hire Me", accent: true },
 			],
 			year: new Date().getFullYear(),
 		};
 	},
+	methods: {
+		emitScrollToEvent(section) {
+			this.$emit("scrollToEvent", section);
+		},
+	},
 };
 </script>
 <template>
 	<div class="the-footer">
-    <h2 class="sections-title-global">
-			Other
-			</h2>
-		<ul class="contact-links">
-			<li v-for="media in mediaContacts" :key="media.name">
-				<a :href="media.url">
-					<font-awesome-icon :icon="media.icon" class="icon" />
-					<p>{{ media.link_name }}</p>
-				</a>
-			</li>
-		</ul>
 		<div class="bottom-links">
 			<div class="footer-nav">
 				<ul>
-					<li v-for="link in navLinks" :key="link.name">
-						{{ link.name }}
-					</li>
+					<template v-for="link in navLinks">
+						<li class="link-item"  v-if="!link.route" @click="emitScrollToEvent(link.name)" :key="link.name">
+							{{ link.name }}
+						</li>
+						<router-link class="link-item"  v-if="link.route" :to="{name: link.route}" :key="link.name">{{ link.name }}</router-link>
+					</template>
 				</ul>
 			</div>
 			<div class="copyRight">
@@ -81,29 +52,9 @@ export default {
 	padding: 1.5em;
 	padding-bottom: 3em;
 	color: $white;
-  padding-top: 7em;
+	padding-top: 7em;
 }
-.contact-links {
 
-	margin: 0;
-	padding: 0;
-	text-indent: 0;
-	list-style-type: 0;
-  margin-bottom: 6em;
-	
-	li {
-		margin-bottom: 1.5em;
-		list-style: none;
-	}
-	a {
-		text-decoration: none;
-		color: $white;
-		display: flex;
-		align-items: center;
-		gap: 1em;
-		font: $font-thin-text-mb;
-	}
-}
 .bottom-links {
 	border-top: 1px solid rgba($white, 0.3);
 	padding-block: 1em;
@@ -122,7 +73,10 @@ export default {
 	}
 	li {
 		list-style: none;
+	}
+	.link-item{
 		color: $white;
+		text-decoration: none;
 	}
 }
 .copyRight {

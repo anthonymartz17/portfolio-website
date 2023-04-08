@@ -2,11 +2,28 @@
 export default {
 	data() {
 		return {
+			receiverEmail: "antonio.fr.martinezc@hotmail.com",
 			mediaContacts: [
-				{icon: "fa-regular fa-envelope", name: "E-mail", url: ""},
-				{icon: "fa-brands fa-linkedin-in", name: "LinkedIn", url: ""},
-				{icon: "fa-brands fa-github", name: "Github", url: ""},
-				{icon: "fa-brands fa-instagram", name: "Instagram", url: ""},
+				{
+					icon: "fa-regular fa-envelope",
+					name: "E-mail",
+					url: "mailto:antonio.fr.martinezc@hotmail.com",
+				},
+				{
+					icon: "fa-brands fa-linkedin-in",
+					name: "LinkedIn",
+					url: "https://www.linkedin.com/in/antoniomartinez17/",
+				},
+				{
+					icon: "fa-brands fa-github",
+					name: "Github",
+					url: "https://github.com/anthonymartz17",
+				},
+				{
+					icon: "fa-brands fa-instagram",
+					name: "Instagram",
+					url: "https://instagram.com/martz_code?igshid=ZDdkNTZiNTM=",
+				},
 			],
 		};
 	},
@@ -15,7 +32,9 @@ export default {
 <template>
 	<div class="social-media-container">
 		<div v-for="media in mediaContacts" :key="media.name">
-			<font-awesome-icon :icon="media.icon" class="icon"  />
+			<a :href="media.url" target="blank">
+				<font-awesome-icon :icon="media.icon" class="icon" />
+			</a>
 		</div>
 	</div>
 </template>
@@ -25,7 +44,7 @@ export default {
 	margin-bottom: 1em;
 	display: flex;
 	justify-content: space-between;
-	color: rgba($white, 0.8);
+
 	cursor: pointer;
 	.icon {
 		transition: 0.3s ease-in-out;
@@ -33,6 +52,9 @@ export default {
 		&:hover {
 			color: $white;
 		}
+	}
+	a {
+		color: rgba($white, 0.8);
 	}
 }
 </style>

@@ -24,27 +24,39 @@ export default {
 					<font-awesome-icon icon="fa-solid fa-angle-right" />
 				</div>
 			</router-link>
-			<div class="landing-btn">
+
+			<a
+				class="landing-btn"
+				href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
+				target="blank"
+			>
 				<font-awesome-icon icon="fa-brands fa-youtube" />
 				<span
 					>Watch
 
 					<small>me talk projects</small>
 				</span>
-			</div>
-			<div class="landing-btn">
+			</a>
+		
+				
+	
+
+			<router-link :to="{ name: 'home-blog' }" class="landing-btn">
 				<font-awesome-icon icon="fa-brands fa-blogger" />
 				<span
 					>Read
 					<small>projects articles</small>
 				</span>
-			</div>
+			</router-link>
 		</div>
 		<SocialMedia />
 	</div>
 </template>
 
 <style lang="scss" scoped>
+.icon {
+	fill: black;
+}
 .container {
 	display: flex;
 	flex-direction: column;

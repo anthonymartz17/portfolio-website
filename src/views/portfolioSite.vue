@@ -38,7 +38,7 @@ export default {
 	},
 	methods: {
 		scrollTo(section) {
-			this.$refs[section].scrollIntoView({ behavior: "smooth" });
+			this.$refs[section].scrollIntoView({ behavior: "smooth"  });
 		},
 		updateScrollPosition() {
 			this.scrollPosition = window.pageYOffset;
@@ -66,13 +66,13 @@ export default {
 			/>
 		</header>
 		<main>
-			<section ref="Home"><Home @scrollToEvent="scrollTo('Work')" /></section>
+			<section ref="Home"><Home @scrollToEvent="scrollTo($event)" /></section>
 			<section ref="Work"><Work /></section>
 			<section ref="Skills"><Skills /></section>
 			<section ref="About"><Aboutme /></section>
 			<section ref="Hire Me"><Hireme /></section>
 		</main>
-		<footer><Footer /></footer>
+		<footer><Footer @scrollToEvent="scrollTo($event)" /></footer>
 	</div>
 
 	<!-- <font-awesome-icon icon="fa-brands fa-youtube" />

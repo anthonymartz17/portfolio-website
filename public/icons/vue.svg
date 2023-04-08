@@ -1,0 +1,4 @@
+<svg
+v-else-if="icon == 'vue'"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" :width="size" zoomAndPan="magnify" viewBox="0 0 768 767.999994" :height="1024" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="12197d79d2"><path :class="{ white: color == 'white', accent: color == 'accent' }" d="M 7 100.507812 L 761 100.507812 L 761 738.007812 L 7 738.007812 Z M 7 100.507812 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#12197d79d2)"><path 
+ :class="{ white: color == 'white', accent: color == 'accent' }" fill="#f5f5f5" d="M 7.109375 100.507812 L 383.839844 738.007812 L 760.574219 100.507812 L 470.78125 100.507812 L 383.839844 254.109375 L 296.902344 100.507812 Z M 108.535156 158.464844 L 217.832031 158.464844 L 383.839844 448.234375 L 549.851562 158.464844 L 659.144531 158.464844 L 383.839844 624.984375 Z M 108.535156 158.464844 " fill-opacity="1" fill-rule="nonzero"/></g></svg>

@@ -19,12 +19,12 @@ export default {
 		},
 		toggleMobileMenue() {
 			this.isMenueVisible = !this.isMenueVisible;
-			document.body.classList.toggle("disableScroll")
-			// if (this.isMenueVisible) {
-			// 	document.body.classList.add("disableScroll");
-			// } else {
-			// 	document.body.classList.remove("disableScroll");
-			// }
+			// document.body.classList.toggle("disableScroll")
+			if (this.isMenueVisible) {
+				document.documentElement.classList.add("disableScroll");
+			} else {
+				document.documentElement.classList.remove("disableScroll");
+			}
 		},
 	},
 	computed:{
@@ -56,7 +56,8 @@ export default {
 
 <style lang="scss" scoped>
 .disableScroll{
- overflow: hidden;
+ overflow: hidden !important;
+ position: fixed !important;
 }
 
 .header-container {

@@ -1,14 +1,18 @@
 <script>
+import MartzIcon from "../components/icons/martz-icons.vue";
 export default {
+	component: {
+		MartzIcon,
+	},
 	data() {
 		return {
 			title: "Skills",
 			skillId: "vue",
 			skillsName: [
 				{ id: "vue", name: "vue.js", icon: "V" },
-				{ id: "js", name: "javaScript", icon: "JS" },
-				{ id: "css", name: "css3", icon: "css" },
-				{ id: "html", name: "html5", icon: "html" },
+				{ id: "javascript", name: "javaScript", icon: "JS" },
+				{ id: "css3", name: "css3", icon: "css" },
+				{ id: "html5", name: "html5", icon: "html" },
 				{ id: "sass", name: "sass", icon: "sass" },
 			],
 			skillsDescriptions: [
@@ -66,13 +70,14 @@ export default {
 		<h2 class="sections-title-global">{{ title }}</h2>
 		<div class="skills-icons-container">
 			<div
-				class="skill-icon"
-				v-for="icon in skillsName"
-				:key="icon.id"
-				@click="switchSkillId(icon.id)"
+			class="skill-icon"
+			v-for="icon in skillsName"
+			:key="icon.id"
+			@click="switchSkillId(icon.id)"
 			>
-				<div :class="['icon', { accent: icon.id == skillId }]">
-					{{ icon.icon }}
+			<MartzIcon :icon="icon.id" color="white" size="70" :class="{ accent: icon.id == skillId }"/>
+			
+			<div :class="['icon', ]">
 				</div>
 				<p>{{ icon.name }}</p>
 				<!-- <div  v-if="icon.id == skillId">{{scrollPosition}}</div> -->

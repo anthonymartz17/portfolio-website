@@ -7,7 +7,7 @@ export default {
 	emit: ["scrollToEvent"],
 	methods: {
 		emitScrollTo() {
-			this.$emit("scrollToEvent");
+			this.$emit("scrollToEvent", "Work");
 		},
 	},
 };
@@ -27,7 +27,13 @@ export default {
 			</p>
 			<div></div>
 		</div>
-		<BaseButton icon="fa-hands-holding" text="View work" :accent="false" @click.native="emitScrollTo"/>
+		<BaseButton
+			icon="mywork"
+			text="View work"
+			color="accent"
+			size="30"
+			@click.native="emitScrollTo"
+		/>
 	</div>
 </template>
 

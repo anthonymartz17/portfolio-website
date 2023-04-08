@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingPage from "../views/landingPage.vue";
 import Portfolio from "../views/portfolioSite.vue";
+import HomeBlog from "../views/blog/home-blog.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/portfolio",
     name: "portfolio",
     component: Portfolio
+  },
+  {
+    path: "/home-blog",
+    name: "home-blog",
+    component: HomeBlog
   },
 ];
 

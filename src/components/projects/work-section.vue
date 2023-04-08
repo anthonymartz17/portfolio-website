@@ -20,7 +20,13 @@ export default {
 					thumbnail_main: "project1.jpeg",
 					thumbnail_sec: "project1.jpeg",
 					thumbnail_third: "project1.jpeg",
-					technologies: ["vue", "js", "html5", "css3", "sass"],
+					technologies: [
+						{ icon: "vue", size: "100" },
+						{ icon: "javascript", size: "70" },
+						{ icon: "html5", size: "70" },
+						{ icon: "css3", size: "70" },
+						{ icon: "sass", size: "100" },
+					],
 				},
 				{
 					id: 2,
@@ -33,7 +39,13 @@ export default {
 					thumbnail_main: "project2.jpeg",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
-					technologies: ["vue", "js", "html5", "css3", "sass"],
+					technologies: [
+						{ icon: "vue", size: "100" },
+						{ icon: "javascript", size: "70" },
+						{ icon: "html5", size: "70" },
+						{ icon: "css3", size: "70" },
+						{ icon: "sass", size: "100" },
+					],
 				},
 				{
 					id: 3,
@@ -46,7 +58,13 @@ export default {
 					thumbnail_main: "project3.jpeg",
 					thumbnail_sec: "project3.jpeg",
 					thumbnail_third: "project3.jpeg",
-					technologies: ["vue", "js", "html5", "css3", "sass"],
+					technologies: [
+						{ icon: "vue", size: "100" },
+						{ icon: "javascript", size: "70" },
+						{ icon: "html5", size: "70" },
+						{ icon: "css3", size: "70" },
+						{ icon: "sass", size: "100" },
+					],
 				},
 			],
 		};
@@ -54,7 +72,7 @@ export default {
 	methods: {
 		toggleShowMore(projectClicked) {
 			this.showMore = !this.showMore;
-		
+
 			this.projectClicked = projectClicked;
 		},
 	},
@@ -80,10 +98,11 @@ export default {
 						consequuntur?
 					</p>
 					<BaseButton
-					@click.native="toggleShowMore(project)"
+						@click.native="toggleShowMore(project)"
 						text="See more"
-						icon="fa-solid fa-eye"
-						:iconAccent="true"
+						icon="see"
+						color="accent"
+						size="30"
 						id="toggleProject"
 					/>
 				</div>
@@ -100,7 +119,12 @@ export default {
 					<h4>watch</h4>
 					<p>me discuss tech implementation in my projects</p>
 					<div class="card-link">
-						<a class="resetLink card-link-link" href="">@martz_code</a>
+						<a
+							class="resetLink card-link-link"
+							href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
+							target="blank"
+							>@martz_code</a
+						>
 						<font-awesome-icon
 							icon="fa-solid fa-angle-right"
 							class="angle-right"
@@ -111,7 +135,13 @@ export default {
 					<h4>Read</h4>
 					<p>articles about my work and my learning from them.</p>
 					<div class="card-link">
-						<a class="resetLink card-link-link" href="">Check it out</a>
+						<router-link
+							:to="{ name: 'home-blog' }"
+							class="resetLink card-link-link"
+						>
+							Check it out
+						</router-link>
+
 						<font-awesome-icon
 							icon="fa-solid fa-angle-right"
 							class="angle-right"

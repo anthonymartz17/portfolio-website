@@ -1,50 +1,43 @@
 <script>
 import MartzIcon from "../components/icons/martz-icons.vue";
 export default {
-	component: {
-		MartzIcon,
-	},
+	components: { MartzIcon },
 	data() {
 		return {
 			title: "Skills",
 			skillId: "vue",
 			skillsName: [
-				{ id: "vue", name: "vue.js", icon: "V" },
-				{ id: "javascript", name: "javaScript", icon: "JS" },
-				{ id: "css3", name: "css3", icon: "css" },
-				{ id: "html5", name: "html5", icon: "html" },
-				{ id: "sass", name: "sass", icon: "sass" },
+				{ id: "vue", name: "vue.js", icon: "V", size:"90"},
+				{ id: "javascript", name: "javaScript", icon: "JS", size:"79" },
+				{ id: "css3", name: "css3", icon: "css" , size:"79" },
+				{ id: "html5", name: "html5", icon: "html" , size:"79"},
+				{ id: "sass", name: "sass", icon: "sass" , size:"100" },
 			],
 			skillsDescriptions: [
 				{
 					id: "vue",
 					description:
 						"Vue Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-					icon: "V",
 				},
 				{
-					id: "js",
+					id: "javascript",
 					description:
 						"javascript Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-					icon: "JS",
 				},
 				{
-					id: "css",
+					id: "css3",
 					description:
 						"Css Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-					icon: "css",
 				},
 				{
-					id: "html",
+					id: "html5",
 					description:
 						"Html Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-					icon: "html",
 				},
 				{
 					id: "sass",
 					description:
 						"Sass Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-					icon: "sass",
 				},
 			],
 		};
@@ -70,16 +63,22 @@ export default {
 		<h2 class="sections-title-global">{{ title }}</h2>
 		<div class="skills-icons-container">
 			<div
-			class="skill-icon"
-			v-for="icon in skillsName"
-			:key="icon.id"
-			@click="switchSkillId(icon.id)"
+				class="skill-icon"
+				v-for="icon in skillsName"
+				:key="icon.id"
+				@click="switchSkillId(icon.id)"
 			>
-			<MartzIcon :icon="icon.id" color="white" size="70" :class="{ accent: icon.id == skillId }"/>
-			
-			<div :class="['icon', ]">
-				</div>
-				<p>{{ icon.name }}</p>
+			<!-- added additional div to align icons to the bottom and from there control individual size of icons -->
+			<div class="icon">
+				<MartzIcon
+					:icon="icon.id"
+					:color="skillId == icon.id ? 'accent' : 'white'"
+					:size="icon.size"
+				/>
+				
+				
+			</div>
+			<p>{{ icon.name }}</p>
 				<!-- <div  v-if="icon.id == skillId">{{scrollPosition}}</div> -->
 			</div>
 		</div>
@@ -104,7 +103,9 @@ export default {
 	margin-bottom: 1.5em;
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
 	flex-wrap: wrap;
+	column-gap: .5em;
 	row-gap: 2.5em;
 }
 .skill-icon {
@@ -116,9 +117,13 @@ export default {
 }
 .icon {
 	// aspect-ratio: 1/1;
-	border: 1px solid;
+	// border: 1px solid;
 	height: 6em;
 	width: 6em;
 	margin-bottom: 0.5em;
+	display: flex;
+	justify-content: center;
+	align-items: end;
+	
 }
 </style>

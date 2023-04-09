@@ -1,12 +1,12 @@
 <script>
 import BaseButton from "./baseButton.vue";
 import basebutton from "./baseButton.vue";
+import MartzIcon from "../components/icons/martz-icons.vue";
 import { required, email } from "vuelidate/lib/validators";
 import emailjs from "emailjs-com";
 
 export default {
-	
-	components: { BaseButton, basebutton },
+	components: { BaseButton, basebutton, MartzIcon },
 	data() {
 		return {
 			title: "Hire me",
@@ -78,7 +78,6 @@ export default {
 		},
 	},
 };
-
 </script>
 <template>
 	<div class="hireme-container">
@@ -87,7 +86,7 @@ export default {
 				<h2 class="sections-title-global">
 					{{ title }}
 				</h2>
-				<font-awesome-icon icon="fa-solid fa-handshake" class="icon" />
+				<MartzIcon icon="handshake" size="30"/>
 			</div>
 			<p class="text-small contact-text">
 				For any questions, feel free to contact me through any of the methods

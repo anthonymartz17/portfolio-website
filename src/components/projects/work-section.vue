@@ -1,8 +1,9 @@
 <script>
 import BaseButton from "../baseButton.vue";
 import ProjectDetail from "./project-details.vue";
+import MartzIcon from "../icons/martz-icons.vue";
 export default {
-	components: { BaseButton, ProjectDetail },
+	components: { BaseButton, ProjectDetail, MartzIcon },
 	data() {
 		return {
 			title: "Work",
@@ -116,22 +117,31 @@ export default {
 
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
-					<h4>watch</h4>
-					<p>me discuss tech implementation in my projects</p>
-					<div class="card-link">
-						<a
-							class="resetLink card-link-link"
-							href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
-							target="blank"
-							>@martz_code</a
-						>
-						<font-awesome-icon
-							icon="fa-solid fa-angle-right"
-							class="angle-right"
-						/>
+					<MartzIcon
+						class="card-bg-icon"
+						icon="youtubetv"
+						size="190"
+						color="white"
+					/>
+					<div class="card-title">
+						<h4>watch</h4>
+						<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
+					</div>
+					<div class="card-body">
+						<p>me discuss tech implementation in my projects</p>
+						<div class="card-link">
+							<a
+								class="resetLink card-link-link"
+								href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
+								target="blank"
+								>@martz_code</a
+							>
+							<MartzIcon icon="angleRight" size="20" color="accent" />
+						</div>
 					</div>
 				</div>
 				<div class="card-blog project-cards">
+					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
 					<h4>Read</h4>
 					<p>articles about my work and my learning from them.</p>
 					<div class="card-link">
@@ -142,10 +152,7 @@ export default {
 							Check it out
 						</router-link>
 
-						<font-awesome-icon
-							icon="fa-solid fa-angle-right"
-							class="angle-right"
-						/>
+						<MartzIcon icon="angleRight" size="20" color="accent" />
 					</div>
 				</div>
 			</div>
@@ -205,11 +212,6 @@ export default {
 }
 .project-cards {
 	padding: 0.5em;
-	&:nth-child(1) {
-		border-bottom: 1px solid $white;
-		padding-bottom: 3em;
-		margin-bottom: 3em;
-	}
 
 	h4 {
 		font: $font-title-mb;
@@ -219,6 +221,22 @@ export default {
 		font: $font-thin-text-mb;
 		margin-block: 0.5em;
 	}
+}
+.cards-youtube {
+	position: relative;
+	border-bottom: 1px solid $white;
+	padding-bottom: 5em;
+	margin-bottom: 2em;
+}
+.card-blog {
+	position: relative;
+}
+.card-bg-icon {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	// z-index: 1;
+	opacity: 0.05;
 }
 .card-link {
 	display: flex;
@@ -231,6 +249,13 @@ export default {
 		border-bottom: 1px solid $white;
 	}
 }
+// .card-title{
+// 	display: flex;
+// 	gap: 1em;
+// .card-body{
+// 	background: green;
+// 	z-index: 2;
+// }
 .angle-right {
 	color: $accent;
 	font-size: 1.3em;

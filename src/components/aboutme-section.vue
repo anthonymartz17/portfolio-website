@@ -1,11 +1,21 @@
 <script>
+import MartzIcon from "../components/icons/martz-icons.vue";
 export default {
+	components: {
+		MartzIcon,
+	},
 	data() {
 		return {
 			title: "About me",
 			description:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam deleniti quam excepturi laboriosam similique repudiandae earum sunt odit nisi illum! Voluptate provident veritatis iste eveniet distinctio quis vero reiciendis dolorem.",
-			hobbiesIcons: ["ebook", "gym", "meditation", "cooking", "salsa"],
+			hobbiesIcons: [
+				"audioBook",
+				"workout",
+				"meditation",
+				"cooking",
+				"salsaDance",
+			],
 		};
 	},
 	props: ["scrollPosition"],
@@ -28,7 +38,12 @@ export default {
 		</div>
 
 		<div class="hobbies-icons-container">
-			<div class="icon" v-for="icon in hobbiesIcons" :key="icon"></div>
+			<MartzIcon
+				class="icon"
+				:icon="icon"
+				v-for="icon in hobbiesIcons"
+				:key="icon"
+			/>
 		</div>
 	</div>
 </template>
@@ -39,7 +54,7 @@ export default {
 }
 .aboutme-container {
 	padding: 1.5em;
-	padding-bottom: 5em;
+	padding-bottom: 4em;
 	background: $bg-2;
 	color: $white;
 	position: relative;
@@ -69,9 +84,10 @@ export default {
 }
 .icon {
 	// aspect-ratio: 1/1;
-	border: 1px solid;
-	height: 6em;
-	width: 6em;
+	// border: 1px solid;
+	height: 5em;
+	width: 5em;
 	margin-bottom: 0.5em;
+	opacity: 0.2;
 }
 </style>

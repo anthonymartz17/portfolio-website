@@ -8,17 +8,18 @@ export default {
 	data() {
 		return {
 			isMenueVisible: false,
-			
 		};
 	},
 	props: ["scrollPosition"],
 	methods: {
-		emitScrollToEvent(section) {
-			this.isMenueVisible = false;
-			this.$emit("fireScrollTo", section);
-		},
-		toggleMobileMenue() {
-			this.isMenueVisible = !this.isMenueVisible;
+		toggleMobileMenue(id) {
+			if (id) {
+				this.isMenueVisible = !this.isMenueVisible;
+			} else {
+				return;
+			}
+
+			// this.isMenueVisible = !this.isMenueVisible;
 			// document.body.classList.toggle("disableScroll")
 			if (this.isMenueVisible) {
 				document.documentElement.classList.add("disableScroll");
@@ -26,38 +27,48 @@ export default {
 				document.documentElement.classList.remove("disableScroll");
 			}
 		},
+
+		emitScrollToEvent(section) {
+			console.log("fired emit");
+			// this.isMenueVisible = false;
+			this.$emit("fireScrollTo", section);
+		},
 	},
-	computed:{
-	
-	}
+	computed: {},
 };
 </script>
 <template>
-	<div :class="['header-container',{'header-bg-2': scrollPosition >= 550 }]">
+	<div :class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]">
 		<div :class="['header-container-logo', { clickable: isMenueVisible }]">
 			MARTZ
 		</div>
 		<div class="header-nav-menue">
 			<font-awesome-icon
+			  id="menue-icon"
+				class="menue-icon"
 				icon="fa-solid fa-bars"
 				size="2x"
-				@click="toggleMobileMenue"
+				@click="toggleMobileMenue($event.target.id)"
 			/>
 		</div>
-		<div class="navmenue-wrapper">
+		<div
+			id="nav-menue-wrapper"
+			class="navmenue-wrapper"
+			@click="toggleMobileMenue($event.target.id)"
+		>
 			<NavMenueMobile
 				@scrollToEvent="emitScrollToEvent"
+				@fireToggleMobileMenue="toggleMobileMenue()"
 				v-if="isMenueVisible"
-				@fireToggleMobileMenue="toggleMobileMenue"
 			/>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.disableScroll{
- overflow: hidden !important;
- position: fixed !important;
+.disableScroll {
+	overflow: hidden !important;
+	position: fixed !important;
 }
 
 .header-container {

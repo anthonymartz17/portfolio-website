@@ -82,12 +82,11 @@ export default {
 <template>
 	<div class="hireme-container">
 		<form class="contact-form" ref="form" @submit.prevent="sendMsg">
-			<div class="title-icon">
-				<h2 class="sections-title-global">
-					{{ title }}
-				</h2>
-				<MartzIcon icon="handshake" size="30"/>
-			</div>
+			<h2 class="sections-title-global hireme-title">
+				{{ title }}
+				<MartzIcon icon="handshake" size="30" />
+			</h2>
+			
 			<p class="text-small contact-text">
 				For any questions, feel free to contact me through any of the methods
 				bellow.
@@ -101,12 +100,12 @@ export default {
 					name="name"
 					autocomplete="off"
 					:class="['input-field', { invalid: isSubmitted && $v.name.$error }]"
-				/>
-				<p v-if="isSubmitted && !$v.name.required" class="text-small">
-					Please enter a name
-				</p>
-			</div>
-			<div class="field">
+					/>
+					<p v-if="isSubmitted && !$v.name.required" class="text-small">
+						Please enter a name
+					</p>
+				</div>
+				<div class="field">
 				<label for="email">Email</label>
 				<input
 					v-model="email"
@@ -115,15 +114,15 @@ export default {
 					id="email"
 					autocomplete="off"
 					:class="['input-field', { invalid: isSubmitted && $v.email.$error }]"
-				/>
-				<div v-if="isSubmitted && $v.email.$error">
-					<p v-if="isSubmitted && !$v.email.required" class="text-small error">
-						Please enter an email
-					</p>
-					<p
+					/>
+					<div v-if="isSubmitted && $v.email.$error">
+						<p v-if="isSubmitted && !$v.email.required" class="text-small error">
+							Please enter an email
+						</p>
+						<p
 						v-else-if="isSubmitted && !$v.email.email"
 						class="text-small error"
-					>
+						>
 						Please enter a valid email
 					</p>
 				</div>
@@ -131,9 +130,9 @@ export default {
 			<div class="field">
 				<label for="email">Message</label>
 				<textarea
-					v-model="message"
-					name="message"
-					id="email"
+				v-model="message"
+				name="message"
+				id="email"
 					cols="30"
 					rows="7"
 					:class="[
@@ -147,14 +146,15 @@ export default {
 			</div>
 			<div class="btn-container">
 				<BaseButton
-					icon="fa-solid fa-paper-plane"
-					text="Send it"
-					:iconAccent="true"
+				icon="sendit"
+				text="Send it"
+				size="30"
 				/>
+		
 				<font-awesome-icon
-					icon="fa-solid fa-message"
-					class="msg-bubble"
-					size="2x"
+				icon="fa-solid fa-message"
+				class="msg-bubble"
+				size="2x"
 				/>
 			</div>
 		</form>
@@ -231,9 +231,16 @@ export default {
 .contact-text {
 	margin-bottom: 1em;
 }
+.hireme-title{
+	display: flex;
+	align-items: center;
+	gap: .3em;
+}
+
 .title-icon {
 	display: flex;
 	align-items: baseline;
+	background: red;
 }
 .icon {
 	color: rgba($white, 0.3);

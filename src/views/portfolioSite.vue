@@ -20,6 +20,7 @@ export default {
 		return {
 			scrollPosition: 0,
 			isScrollingUp: false,
+			isMenueOpen:null,
 			secctionsScrollPosition: [
 				{
 					section: "home",
@@ -37,6 +38,9 @@ export default {
 		window.removeEventListener("scroll", this.updateScrollPosition);
 	},
 	methods: {
+		setIsMenueOpen(isMenueOpen) {
+			this.isMenueOpen = isMenueOpen
+		},
 		scrollTo(section) {
 			this.$refs[section].scrollIntoView({ behavior: "smooth"  });
 		},
@@ -56,11 +60,12 @@ export default {
 };
 </script>
 <template>
-	<div class="portfolio-container">
+	<div :class="{'portfolio-container':isMenueOpen}">
 	
 		<header class="header">
 			<Header
 				@fireScrollTo="scrollTo"
+				@fireSetIsMenueOpen="setIsMenueOpen($event)"
 				:scrollPosition="scrollPosition"
 				:class="{ 'fixed-header': isScrollingUp }"
 			/>
@@ -96,6 +101,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.portfolio-container{
+	position: fixed;
+}
 
 .fixed-header {
 	position: fixed;

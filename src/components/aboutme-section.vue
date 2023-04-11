@@ -53,7 +53,7 @@ export default {
 	background: $accent;
 }
 .aboutme-container {
-	padding: 1.5em;
+	padding:0  1.5em;
 	padding-bottom: 4em;
 	background: $bg-2;
 	color: $white;
@@ -78,7 +78,7 @@ export default {
 .hobbies-icons-container {
 	margin-bottom: 1.5em;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	flex-wrap: wrap;
 	row-gap: 1.5em;
 }

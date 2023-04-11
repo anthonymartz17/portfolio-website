@@ -9,16 +9,12 @@ export default {
 	data() {
 		return {
 			navLinks: [
-				{ icon: "home", name: "Home", active: true },
-				{
-					icon: "mywork",
-					name: "Work",
-					active: false,
-				},
-				{ icon: "skills", name: "Skills" },
-				{ icon: "about", name: "About" },
-				{ icon: "blog", name: "Blogs" },
-				{ icon: "handshake", name: "Hire Me", accent: true },
+				{ id: "Home", icon: "home", name: "Home", active: true },
+				{ id: "Work", icon: "mywork", name: "Work", active: false },
+				{ id: "Skills", icon: "skills", name: "Skills" },
+				{ id: "About", icon: "about", name: "About" },
+				{ icon: "blog", name: "Blogs", route: "home-blog" },
+				{ id: "Hire Me", icon: "handshake", name: "Hire Me", accent: true },
 			],
 		};
 	},
@@ -28,7 +24,8 @@ export default {
 			this.$emit("fireToggleMobileMenue");
 		},
 		emitScrollToEvent(section) {
-			this.$emit("scrollToEvent", section);
+			if (section) this.$emit("scrollToEvent", section);
+			else return;
 		},
 	},
 };
@@ -46,16 +43,27 @@ export default {
 			<p id="close">Close</p>
 		</div>
 		<ul class="nav-container-links">
-			<li
-				:id="link.name"
-				@click="emitScrollToEvent(link.name)"
-				:class="['nav-container-link', { accent: link.accent }]"
-				v-for="link in navLinks"
-				:key="link.name"
-			>
-				<MartzIcon :icon="link.icon" size="20" />
-				<span>{{ link.name }}</span>
-			</li>
+			<template v-for="link in navLinks">
+				<li
+					v-if="!link.route"
+					:id="link.id"
+					@click="emitScrollToEvent(link.id)"
+					:class="['nav-container-link', { accent: link.accent }]"
+					:key="link.name"
+				>
+					<MartzIcon :icon="link.icon" size="20" :id="link.id" />
+					<span :id="link.id">{{ link.name }}</span>
+				</li>
+				<router-link
+					:to="{ name: link.route }"
+					v-if="link.route"
+					:key="link.name"
+					class="nav-container-link"
+				>
+					<MartzIcon :icon="link.icon" size="20" />
+					<span>{{ link.name }}</span>
+				</router-link>
+			</template>
 		</ul>
 		<div class="footer">
 			<SocialMedia />
@@ -65,9 +73,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-* {
-	border: 1px solid;
-}
 .accent {
 	text-transform: uppercase;
 	font-weight: 600;
@@ -115,7 +120,6 @@ export default {
 		color: $accent;
 	}
 	&-links {
-		background: red;
 		padding: 0;
 		display: flex;
 		flex-direction: column;
@@ -128,7 +132,9 @@ export default {
 	}
 	&-link {
 		list-style: none;
+		text-decoration: none;
 		display: flex;
+		color: $white;
 
 		span {
 			margin-left: 1em;

@@ -15,6 +15,7 @@ export default {
 		toggleMobileMenue(id) {
 			if (id) {
 				this.isMenueVisible = !this.isMenueVisible;
+				this.$emit("fireSetIsMenueOpen",this.isMenueVisible )
 			} else {
 				return;
 			}
@@ -29,8 +30,7 @@ export default {
 		},
 
 		emitScrollToEvent(section) {
-			console.log("fired emit");
-			// this.isMenueVisible = false;
+		    console.log('fired in header')
 			this.$emit("fireScrollTo", section);
 		},
 	},

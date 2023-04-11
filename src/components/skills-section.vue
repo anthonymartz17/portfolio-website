@@ -97,7 +97,7 @@ export default {
 	background: $bg-2;
 	color: $white;
 	position: relative;
-	height: 100vh;
+	padding-bottom: 5em;
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;

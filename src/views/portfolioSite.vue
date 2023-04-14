@@ -6,6 +6,7 @@ import Skills from "../components/skills-section.vue";
 import Aboutme from "../components/aboutme-section.vue";
 import Hireme from "../components/hireme-section.vue";
 import Footer from "../components/the-footer.vue";
+import { eventBus } from "../main";
 export default {
 	components: {
 		Home,
@@ -20,7 +21,8 @@ export default {
 		return {
 			scrollPosition: 0,
 			isScrollingUp: false,
-			isMenueOpen:null,
+			isMenueVisible: false,
+			showMore:false,
 			secctionsScrollPosition: [
 				{
 					section: "home",
@@ -38,11 +40,18 @@ export default {
 		window.removeEventListener("scroll", this.updateScrollPosition);
 	},
 	methods: {
-		setIsMenueOpen(isMenueOpen) {
-			this.isMenueOpen = isMenueOpen
+		toggleMobileMenue() {
+			this.isMenueVisible = !this.isMenueVisible;
+			if (this.isMenueVisible) document.body.classList.add("mobile-menu-open");
+			else document.body.classList.remove("mobile-menu-open");
+		},
+		toggleShowMore(showMore) {
+			this.showMore = showMore
+			if (this.showMore) document.body.classList.add("mobile-menu-open");
+			else document.body.classList.remove("mobile-menu-open");
 		},
 		scrollTo(section) {
-			this.$refs[section].scrollIntoView({ behavior: "smooth"  });
+			this.$refs[section].scrollIntoView({block: 'start', behavior: "smooth" });
 		},
 		updateScrollPosition() {
 			this.scrollPosition = window.pageYOffset;
@@ -60,19 +69,18 @@ export default {
 };
 </script>
 <template>
-	<div :class="{'portfolio-container':isMenueOpen}">
-	
-		<header class="header">
+	<div class="test">
+		<header v-if="!showMore" :class="{ 'fixed-header': isScrollingUp }">
 			<Header
-				@fireScrollTo="scrollTo"
-				@fireSetIsMenueOpen="setIsMenueOpen($event)"
+				@emitToggleMenue="toggleMobileMenue"
+				:isMenueVisible="isMenueVisible"
+				@scrollToEvent="scrollTo($event)"
 				:scrollPosition="scrollPosition"
-				:class="{ 'fixed-header': isScrollingUp }"
 			/>
 		</header>
 		<main>
 			<section ref="Home"><Home @scrollToEvent="scrollTo($event)" /></section>
-			<section ref="Work"><Work /></section>
+			<section ref="Work"><Work @emitToggleShowMore="toggleShowMore($event)" /></section>
 			<section ref="Skills"><Skills /></section>
 			<section ref="About"><Aboutme /></section>
 			<section ref="Hire Me"><Hireme /></section>
@@ -100,24 +108,14 @@ export default {
 				<font-awesome-icon icon="fa-solid fa-message" /> -->
 </template>
 
-<style lang="scss" scoped>
-.portfolio-container{
-	position: fixed;
+<style lang="scss">
+body.mobile-menu-open {
+	overflow: hidden;
 }
 
 .fixed-header {
 	position: fixed;
 	width: 100%;
-}
-
-.background-icon {
-	position: fixed;
-	pointer-events: none;
-	top: 150px;
-	left: 20%;
-	right: 20%;
-	font: $font-xl-mb;
-	color: rgba($white, 0.05);
-	font-size: 5em;
+	z-index: 100;
 }
 </style>

@@ -161,16 +161,17 @@ export default {
 	margin-bottom: 0.5em;
 }
 .video-secondary-container {
-	min-height: 60%;
 	display: flex;
 	gap: 0.5em;
-	height: 50%;
+	height:40%;
 }
 .video-sec {
+	border: 1px solid white;
+	flex: 1;
 	img {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		// object-fit: cover;
 	}
 }
 

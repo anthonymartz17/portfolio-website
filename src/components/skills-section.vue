@@ -93,11 +93,11 @@ export default {
 	background: $accent;
 }
 .skills-container {
-	padding: 1.5em;
+	padding:6em 1.5em 10em 1.5em ;
+	padding-bottom: 10em;
 	background: $bg-2;
 	color: $white;
 	position: relative;
-	padding-bottom: 5em;
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;

@@ -6,35 +6,14 @@ export default {
 		NavMenueMobile,
 	},
 	data() {
-		return {
-			isMenueVisible: false,
-		};
+		return {};
 	},
-	props: ["scrollPosition"],
+	props: ["scrollPosition", "isMenueVisible"],
 	methods: {
-		toggleMobileMenue(id) {
-			if (id) {
-				this.isMenueVisible = !this.isMenueVisible;
-				this.$emit("fireSetIsMenueOpen",this.isMenueVisible )
-			} else {
-				return;
-			}
-
-			// this.isMenueVisible = !this.isMenueVisible;
-			// document.body.classList.toggle("disableScroll")
-			if (this.isMenueVisible) {
-				document.documentElement.classList.add("disableScroll");
-			} else {
-				document.documentElement.classList.remove("disableScroll");
-			}
-		},
-
-		emitScrollToEvent(section) {
-		    console.log('fired in header')
-			this.$emit("fireScrollTo", section);
+		createEmitToggleMenue() {
+			this.$emit("emitToggleMenue");
 		},
 	},
-	computed: {},
 };
 </script>
 <template>
@@ -44,23 +23,15 @@ export default {
 		</div>
 		<div class="header-nav-menue">
 			<font-awesome-icon
-			  id="menue-icon"
+				id="menue-icon"
 				class="menue-icon"
 				icon="fa-solid fa-bars"
 				size="2x"
-				@click="toggleMobileMenue($event.target.id)"
+				@click="createEmitToggleMenue()"
 			/>
 		</div>
-		<div
-			id="nav-menue-wrapper"
-			class="navmenue-wrapper"
-			@click="toggleMobileMenue($event.target.id)"
-		>
-			<NavMenueMobile
-				@scrollToEvent="emitScrollToEvent"
-				@fireToggleMobileMenue="toggleMobileMenue()"
-				v-if="isMenueVisible"
-			/>
+		<div id="nav-menue-wrapper" class="navmenue-wrapper" @click.self="createEmitToggleMenue()">
+			<NavMenueMobile v-if="isMenueVisible" v-on="$listeners" />
 		</div>
 	</div>
 </template>

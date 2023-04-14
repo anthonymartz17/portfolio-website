@@ -1,6 +1,7 @@
 <script>
 import SocialMedia from "./socialMedia.vue";
 import MartzIcon from "../components/icons/martz-icons.vue";
+
 export default {
 	components: {
 		SocialMedia,
@@ -8,6 +9,7 @@ export default {
 	},
 	data() {
 		return {
+			section: "",
 			navLinks: [
 				{ id: "Home", icon: "home", name: "Home", active: true },
 				{ id: "Work", icon: "mywork", name: "Work", active: false },
@@ -19,13 +21,16 @@ export default {
 		};
 	},
 	emit: ["scrollTo"],
+	beforeDestroy() {
+		if(this.section)
+		this.$emit("scrollToEvent", this.section);
+	},
 	methods: {
-		fireToggleMobileMenue() {
-			this.$emit("fireToggleMobileMenue");
+		emitCloseEvent() {
+			this.$emit("emitToggleMenue");
 		},
-		emitScrollToEvent(section) {
-			if (section) this.$emit("scrollToEvent", section);
-			else return;
+		setSection(section) {
+			this.section = section;
 		},
 	},
 };
@@ -34,7 +39,11 @@ export default {
 <template>
 	<!-- <div class="menu-wrapper"> -->
 	<div class="nav-container">
-		<div class="nav-container-header" id="close-header">
+		<div
+			class="nav-container-header"
+			id="close-header"
+			@click="emitCloseEvent"
+		>
 			<font-awesome-icon
 				id="close-icon"
 				icon="fa-solid fa-angle-left"
@@ -45,9 +54,9 @@ export default {
 		<ul class="nav-container-links">
 			<template v-for="link in navLinks">
 				<li
+					@click="emitCloseEvent(); setSection(link.id)"
 					v-if="!link.route"
 					:id="link.id"
-					@click="emitScrollToEvent(link.id)"
 					:class="['nav-container-link', { accent: link.accent }]"
 					:key="link.name"
 				>

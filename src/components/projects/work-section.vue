@@ -70,11 +70,12 @@ export default {
 			],
 		};
 	},
+
 	methods: {
 		toggleShowMore(projectClicked) {
 			this.showMore = !this.showMore;
-
 			this.projectClicked = projectClicked;
+			this.$emit("emitToggleShowMore", this.showMore);
 		},
 	},
 };
@@ -116,30 +117,32 @@ export default {
 			</div>
 
 			<div class="project-cards-container">
-				<div class="cards-youtube project-cards">
-					<MartzIcon
-						class="card-bg-icon"
-						icon="youtubetv"
-						size="190"
-						color="white"
-					/>
-					<div class="card-title">
-						<h4>watch</h4>
-						<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
-					</div>
-					<div class="card-body">
-						<p>me discuss tech implementation in my projects</p>
-						<div class="card-link">
-							<a
-								class="resetLink card-link-link"
-								href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
-								target="blank"
-								>@martz_code</a
-							>
-							<MartzIcon icon="angleRight" size="20" color="accent" />
+				<!-- <div class="cards-youtube project-cards"> -->
+					<a
+						class="resetLink test cards-youtube project-cards"
+						href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
+						target="blank"
+					>
+						<MartzIcon
+							class="card-bg-icon"
+							icon="youtubetv"
+							size="190"
+							color="white"
+						/>
+						<div class="card-title">
+							<h4>watch</h4>
+							<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
 						</div>
-					</div>
-				</div>
+						<div class="card-body">
+							<p>me discuss tech implementation in my projects</p>
+							<div class="card-link">
+								@martz_code
+
+								<MartzIcon icon="angleRight" size="20" color="accent" />
+							</div>
+						</div>
+					</a>
+				<!-- </div> -->
 				<div class="card-blog project-cards">
 					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
 					<h4>Read</h4>
@@ -161,17 +164,16 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.test{
+	display: block;
+// background: red !important;
+
+}
 .projects-container {
 	min-height: 100vh;
 	padding: 4em 1.5em;
 	background: $bg-2;
 	color: $white;
-}
-.projects-title {
-	// font: $font-title-mb;
-}
-
-.project-list {
 }
 
 .projects-project {
@@ -242,9 +244,12 @@ export default {
 	display: flex;
 	align-items: center;
 	gap: 1em;
+	text-align: end;
 	justify-content: flex-end;
 
+
 	&-link {
+		
 		padding-bottom: 0.1em;
 		border-bottom: 1px solid $white;
 	}

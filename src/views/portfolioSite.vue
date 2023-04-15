@@ -6,7 +6,6 @@ import Skills from "../components/skills-section.vue";
 import Aboutme from "../components/aboutme-section.vue";
 import Hireme from "../components/hireme-section.vue";
 import Footer from "../components/the-footer.vue";
-import { eventBus } from "../main";
 export default {
 	components: {
 		Home,
@@ -22,7 +21,7 @@ export default {
 			scrollPosition: 0,
 			isScrollingUp: false,
 			isMenueVisible: false,
-			showMore:false,
+			showMore: false,
 			secctionsScrollPosition: [
 				{
 					section: "home",
@@ -46,12 +45,15 @@ export default {
 			else document.body.classList.remove("mobile-menu-open");
 		},
 		toggleShowMore(showMore) {
-			this.showMore = showMore
+			this.showMore = showMore;
 			if (this.showMore) document.body.classList.add("mobile-menu-open");
 			else document.body.classList.remove("mobile-menu-open");
 		},
 		scrollTo(section) {
-			this.$refs[section].scrollIntoView({block: 'start', behavior: "smooth" });
+			this.$refs[section].scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			});
 		},
 		updateScrollPosition() {
 			this.scrollPosition = window.pageYOffset;
@@ -70,8 +72,9 @@ export default {
 </script>
 <template>
 	<div class="test">
-		<header v-if="!showMore" :class="{ 'fixed-header': isScrollingUp }">
+		<header :class="{ 'fixed-header': isScrollingUp }">
 			<Header
+				v-if="!showMore"
 				@emitToggleMenue="toggleMobileMenue"
 				:isMenueVisible="isMenueVisible"
 				@scrollToEvent="scrollTo($event)"
@@ -80,7 +83,9 @@ export default {
 		</header>
 		<main>
 			<section ref="Home"><Home @scrollToEvent="scrollTo($event)" /></section>
-			<section ref="Work"><Work @emitToggleShowMore="toggleShowMore($event)" /></section>
+			<section ref="Work">
+				<Work @emitToggleShowMore="toggleShowMore($event)" />
+			</section>
 			<section ref="Skills"><Skills /></section>
 			<section ref="About"><Aboutme /></section>
 			<section ref="Hire Me"><Hireme /></section>

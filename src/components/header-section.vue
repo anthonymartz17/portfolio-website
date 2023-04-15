@@ -1,9 +1,11 @@
 <script>
 import NavMenueMobile from "./navMenueMobile.vue";
+import DesktopMenue from "./desktopMenue.vue";
 
 export default {
 	components: {
 		NavMenueMobile,
+		DesktopMenue,
 	},
 	data() {
 		return {};
@@ -33,6 +35,9 @@ export default {
 		<div id="nav-menue-wrapper" class="navmenue-wrapper" @click.self="createEmitToggleMenue()">
 			<NavMenueMobile v-if="isMenueVisible" v-on="$listeners" />
 		</div>
+		<div class="desk-menue-wrapper">
+			<DesktopMenue v-on="$listeners"/>
+		</div>
 	</div>
 </template>
 
@@ -40,6 +45,12 @@ export default {
 .disableScroll {
 	overflow: hidden !important;
 	position: fixed !important;
+}
+.desk-menue-wrapper{
+	display: none;
+	@include breakpoint(desktop){
+		display: block;
+	}
 }
 
 .header-container {
@@ -51,9 +62,11 @@ export default {
 	justify-content: space-between;
 	align-items: flex-end;
 	height: 10vh;
-	// border-bottom: 1px solid rgba($white, 0.1);
 	z-index: 20;
 
+	@include breakpoint(desktop){
+		padding: 0.8em 4em;
+	}
 	&-logo {
 		font: $font-text-mb;
 	}
@@ -74,5 +87,11 @@ export default {
 }
 .header-bg-2 {
 	background: $bg-2;
+}
+
+.header-nav-menue{
+	@include breakpoint(desktop){
+		display: none;
+	}
 }
 </style>

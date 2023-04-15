@@ -30,6 +30,7 @@ export default {
 		border-right: 1px solid rgba($white, 0.8);
 		right: 0;
 	}
+
 }
 .btn-icon {
 	display: flex;
@@ -53,6 +54,8 @@ export default {
 	width: 60%;
 	// margin-bottom: 0.3em;
 	// gap: 1em;
-
+	@include breakpoint(tablet) {
+			font: $font-btn-tb;
+		}
 }
 </style>

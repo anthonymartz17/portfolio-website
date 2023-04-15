@@ -117,32 +117,32 @@ export default {
 			</div>
 
 			<div class="project-cards-container">
-				<!-- <div class="cards-youtube project-cards"> -->
-					<a
-						class="resetLink test cards-youtube project-cards"
-						href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
-						target="blank"
-					>
-						<MartzIcon
-							class="card-bg-icon"
-							icon="youtubetv"
-							size="190"
-							color="white"
-						/>
-						<div class="card-title">
-							<h4>watch</h4>
-							<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
-						</div>
-						<div class="card-body">
-							<p>me discuss tech implementation in my projects</p>
-							<div class="card-link">
-								@martz_code
+				<div class="cards-youtube project-cards">
+					<MartzIcon
+						class="card-bg-icon"
+						icon="youtubetv"
+						size="190"
+						color="white"
+					/>
+					<div class="card-title">
+						<h4>watch</h4>
+						<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
+					</div>
+					<div class="card-body">
+						<p>me discuss tech implementation in my projects</p>
+						<div class="card-link">
+							<a
+								class="resetLink card-link-link"
+								href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
+								target="blank"
+							>
+								<span> @martz_code</span>
 
 								<MartzIcon icon="angleRight" size="20" color="accent" />
-							</div>
+							</a>
 						</div>
-					</a>
-				<!-- </div> -->
+					</div>
+				</div>
 				<div class="card-blog project-cards">
 					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
 					<h4>Read</h4>
@@ -152,10 +152,9 @@ export default {
 							:to="{ name: 'home-blog' }"
 							class="resetLink card-link-link"
 						>
-							Check it out
+							<span> Check it out </span>
+							<MartzIcon icon="angleRight" size="20" color="accent" />
 						</router-link>
-
-						<MartzIcon icon="angleRight" size="20" color="accent" />
 					</div>
 				</div>
 			</div>
@@ -164,11 +163,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.test{
-	display: block;
-// background: red !important;
-
-}
 .projects-container {
 	min-height: 100vh;
 	padding: 4em 1.5em;
@@ -242,15 +236,16 @@ export default {
 }
 .card-link {
 	display: flex;
-	align-items: center;
-	gap: 1em;
-	text-align: end;
 	justify-content: flex-end;
 
-
 	&-link {
-		
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		gap: 1em;
 		padding-bottom: 0.1em;
+	}
+	span {
 		border-bottom: 1px solid $white;
 	}
 }

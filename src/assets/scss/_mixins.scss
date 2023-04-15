@@ -1,6 +1,6 @@
-@mixin baseButton($white, $accent: $white, $width:10em) {
+@mixin baseButton($white, $accent: $white, $width: 10em) {
 	font: $font-btn-mb;
-  padding: .8em 1em;
+	padding: 0.8em 1em;
 	color: $white;
 	border: 1px solid rgba($white, 0.5);
 	border-radius: 5px;
@@ -8,7 +8,19 @@
 	align-items: center;
 	cursor: pointer;
 	text-decoration: none;
-  width: $width;
-  margin-bottom: 0.3em;
-  gap: .3em;
+	width: $width;
+	margin-bottom: 0.3em;
+	gap: 0.3em;
+}
+
+$breakPoints: (
+	"tablet": 768px,
+	"desktop": 1024px,
+	"lg-device": 1200px,
+);
+
+@mixin breakpoint($size) {
+	@media (min-width: map-get($breakPoints,$size)) {
+		@content;
+	}
 }

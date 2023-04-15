@@ -13,49 +13,133 @@ export default {
 };
 </script>
 <template>
-	<div class="hero-section">
-		<div class="hero-section-headshot">
-			<img src="/img/headshotMobile.png" alt="" />
+	<div class="hero-wrapper">
+		<div class="hero-section">
+			<div class="photo-wrapper">
+				<div class="hero-section-headshot">
+					<img
+						class="headshot"
+						src="/img/headshotMobile.png"
+						alt="head shot photo of developer"
+					/>
+					<img
+						class="fullbody"
+						src="/img/lookingStraight.png"
+						alt="full body photo of developer"
+					/>
+				</div>
+			</div>
+			<div class="hero-section-text-container">
+				<div class="hero-text">
+					<h1 class="hero-section-title">
+						Hi,<br />
+						I'm Antonio Martinez,<br /><span>Front-end </span>developer
+					</h1>
+					<p class="hero-section-text">
+						I care about the responsibilities that I'm trusted with.
+					</p>
+				</div>
+				<div class="btn-container">
+					<BaseButton
+						class="cta"
+						icon="mywork"
+						text="View work"
+						color="accent"
+						size="30"
+						@click.native="emitScrollTo"
+					/>
+				</div>
+			</div>
 		</div>
-		<div class="hero-section-text-container">
-			<h1 class="hero-section-title">
-				Hi,<br />
-				I'm Antonio Martinez,<br /><span>Front-end </span>developer
-			</h1>
-			<p class="hero-section-text">
-				I care about the responsibilities that I'm trusted with.
-			</p>
-			<div></div>
-		</div>
-		<BaseButton
-			icon="mywork"
-			text="View work"
-			color="accent"
-			size="30"
-			@click.native="emitScrollTo"
-		/>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.hero-section {
-	padding: 3em 1.5em;
+.hero-wrapper {
+	padding-top: 1em;
 	background: $bg-1;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
 	height: 90vh;
+	width: 100wh;
+	display: flex;
+	justify-content: center;
+}
+.hero-section {
+	@include breakpoint(tablet) {
+		gap: 1em;
+		height: 90vh;
+	}
+	@include breakpoint(desktop) {
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		// margin-block: 2em;
+		width: 60%;
+	}
 
-	&-headshot {
+	.fullbody {
+		display: none;
+
+		@include breakpoint(desktop) {
+			display: block;
+		}
+	}
+	.photo-wrapper {
 		display: flex;
 		justify-content: center;
-		width: 12em;
-		align-self: center;
+		@include breakpoint(desktop) {
+			order: 2;
+		}
+	}
+	&-headshot {
+		display: flex;
+		justify-self: center;
+
+		width: 60%;
+		margin-bottom: 2em;
+		@include breakpoint(tablet) {
+			width: 50%;
+			display: flex;
+			justify-content: center;
+		}
+		@include breakpoint(desktop) {
+			width: 100%;
+			display: flex;
+			align-self: flex-end;
+			margin: 0;
+		}
+	}
+	.headshot {
+		@include breakpoint(desktop) {
+			display: none;
+		}
+	}
+	.hero-section-text-container {
+		padding-left: 1em;
+		display: grid;
+		justify-content: center;
+		@include breakpoint(desktop) {
+			display: block;
+			align-self: center;
+		}
 	}
 	&-title {
 		color: $white;
 		font: $font-title-mb;
 		margin-bottom: 1em;
+		@include breakpoint(tablet) {
+			font: $font-title-tb;
+			justify-content: center;
+			br:first-child {
+				display: none;
+			}
+		}
+		@include breakpoint(tablet) {
+			font: $font-title-dsk;
+			justify-content: center;
+			br:first-child {
+				display: none;
+			}
+		}
 
 		span {
 			color: $accent;
@@ -65,21 +149,16 @@ export default {
 		color: $white;
 		font: $font-text-mb;
 		margin-bottom: 2em;
-	}
-
-	&-cta {
-		@include baseButton($white);
-		position: relative;
-		z-index: 0;
-		span {
-			display: block;
+		@include breakpoint(tablet) {
+			font: $font-text-tb;
 		}
-		&::after {
-			content: ">>";
-			position: absolute;
-			top: 7px;
-			right: 5px;
-			color: $accent;
+	}
+	.btn-container {
+		@include breakpoint(tablet) {
+			width: 70%;
+		}
+		@include breakpoint(desktop) {
+			width: 70%;
 		}
 	}
 }

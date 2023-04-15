@@ -1,5 +1,9 @@
 <script>
+import MartzIcon from "./icons/martz-icons.vue";
 export default {
+	components: {
+		MartzIcon,
+	},
 	data() {
 		return {
 			receiverEmail: "antonio.fr.martinezc@hotmail.com",
@@ -47,6 +51,10 @@ export default {
 
 	cursor: pointer;
 	.icon {
+		font-size: 1.2em;
+		@include breakpoint(tablet) {
+			font-size: 2em;
+		}
 		transition: 0.3s ease-in-out;
 
 		&:hover {

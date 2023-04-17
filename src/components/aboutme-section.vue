@@ -28,13 +28,15 @@ export default {
 <template>
 	<div class="aboutme-container">
 		<h2 class="sections-title-global">{{ title }}</h2>
-		<div class="aboutme-img">
-			<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
-		</div>
-		<div class="aboutme-description">
-			<p>{{ description }}</p>
-			<br />
-			<p>{{ description }}</p>
+		<div class="about-body">
+			<div class="aboutme-img">
+				<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
+			</div>
+			<div class="aboutme-description">
+				<p>{{ description }}</p>
+				<br />
+				<p>{{ description }}</p>
+			</div>
 		</div>
 
 		<div class="hobbies-icons-container">
@@ -53,11 +55,25 @@ export default {
 	background: $accent;
 }
 .aboutme-container {
-	padding:0  1.5em;
+	padding: 0 1.5em;
 	padding-bottom: 4em;
 	background: $bg-2;
 	color: $white;
 	position: relative;
+}
+.about-body {
+	@include breakpoint(tablet) {
+		// display: flex;
+		// gap: 1em;
+
+		.aboutme-img {
+			flex: 2;
+		}
+		.aboutme-description {
+			flex: 1.5;
+			font: $font-thin-text-tb;
+}
+	}
 }
 .aboutme-description {
 	font: $font-thin-text-mb;

@@ -35,7 +35,11 @@ export default {
 </script>
 <template>
 	<div class="social-media-container">
-		<div v-for="media in mediaContacts" :key="media.name">
+		<div
+			v-for="media in mediaContacts"
+			:key="media.name"
+			class="icon-container"
+		>
 			<a :href="media.url" target="blank">
 				<font-awesome-icon :icon="media.icon" class="icon" />
 			</a>
@@ -48,17 +52,32 @@ export default {
 	margin-bottom: 1em;
 	display: flex;
 	justify-content: space-between;
-
 	cursor: pointer;
+
+	@include breakpoint(lg-device) {
+		width: auto;
+		position: absolute;
+		left: 0;
+		flex-direction: column;
+		gap: 1.5em;
+
+		.icon-container {
+			padding: 0.5em;
+		
+			&:hover .icon {
+				color: $accent;
+			}
+		}
+	}
+
 	.icon {
 		font-size: 1.2em;
-		@include breakpoint(tablet) {
-			font-size: 2em;
-		}
 		transition: 0.3s ease-in-out;
 
-		&:hover {
-			color: $white;
+		@include breakpoint(tablet) {
+			font-size: 1.5em;
+		}
+		@include breakpoint(lg-device) {
 		}
 	}
 	a {

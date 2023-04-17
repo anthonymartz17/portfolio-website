@@ -115,7 +115,9 @@ export default {
 	width: 70%;
 	font: $font-text-mb;
 	border-left: 1px solid rgba($white, 0.3);
-	// backdrop-filter: blur(5px);
+	@include breakpoint(tablet){
+		font: $font-text-tb;
+	}
 
 	&-header {
 		flex: 0.5;

@@ -7,7 +7,7 @@ $accent: #bc5f04;
 $white: #f5f5f5;
 $danger:#EA5455;
 
-// FONTS
+// FONTS mobile
 $font-poppins: "Poppins", sans-serif;
 $font-xl-mb: 800 2rem $font-poppins;
 $font-title-mb: 800 1.728rem $font-poppins;
@@ -26,11 +26,24 @@ $font-title-tb: 800 2.488rem $font-poppins;
 $font-subtitle-mb: 600 1rem $font-poppins;
 $font-btn-tb: 600 1.2rem $font-poppins;
 $font-text-tb: 400 1.2rem $font-poppins;
+$font-thin-text-tb: 200 1.2rem $font-poppins;
+$font-small-mb: 200 0.833rem $font-poppins;
+
+//
+// FONTS laptop
+$font-poppins: "Poppins", sans-serif;
+$font-xxl-dsk: 800 6.192rem $font-poppins;
+$font-xl-dsk: 800 4.3rem $font-poppins;
+$font-title-dsk: 800 2.986rem $font-poppins;
+// $font-title-tb: 800 2.1rem $font-poppins;
+$font-subtitle-mb: 600 1rem $font-poppins;
+$font-btn-lt: 600 1.44rem $font-poppins;
+$font-text-tb: 400 1.2rem $font-poppins;
 $font-thin-text-mb: 200 1rem $font-poppins;
 $font-small-mb: 200 0.833rem $font-poppins;
 
 //
-// FONTS DESKTOP
+// FONTS lg-device
 $font-poppins: "Poppins", sans-serif;
 $font-xxl-dsk: 800 6.192rem $font-poppins;
 $font-xl-dsk: 800 4.3rem $font-poppins;

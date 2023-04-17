@@ -64,6 +64,7 @@ export default {
 	justify-content: center;
 }
 .hero-section {
+	margin-inline: 1em;
 	@include breakpoint(tablet) {
 		gap: 1em;
 		height: 90vh;
@@ -94,18 +95,21 @@ export default {
 		display: flex;
 		justify-self: center;
 
-		width: 60%;
+		width: 50%;
 		margin-bottom: 2em;
 		@include breakpoint(tablet) {
-			width: 50%;
+			width: 60%;
 			display: flex;
 			justify-content: center;
 		}
 		@include breakpoint(desktop) {
-			width: 100%;
+			width: 90%;
 			display: flex;
 			align-self: flex-end;
 			margin: 0;
+		}
+		@include breakpoint(lg-device) {
+			// width: 100%;
 		}
 	}
 	.headshot {
@@ -158,7 +162,6 @@ export default {
 			width: 70%;
 		}
 		@include breakpoint(desktop) {
-			width: 70%;
 		}
 	}
 }

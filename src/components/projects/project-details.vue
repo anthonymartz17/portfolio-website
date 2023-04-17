@@ -57,29 +57,31 @@ export default {
 				</div>
 			</div>
 		</div>
-		<div class="project-about">
-			<h3>About</h3>
-			<div>
-				<p>
-					{{ projectClicked.short_desc }}
-				</p>
-				<br />
-				<p>
-					{{ projectClicked.full_desc }}
-				</p>
+		<div class="desc-container">
+			<div class="project-about">
+				<h3>About</h3>
+				<div>
+					<p>
+						{{ projectClicked.short_desc }}
+					</p>
+					<br />
+					<p>
+						{{ projectClicked.full_desc }}
+					</p>
+				</div>
 			</div>
-		</div>
-		<div class="project-techs">
-			<h3>Technologies</h3>
-			<div class="tech-icons">
-				<MartzIcon
-					class="icon"
-					v-for="icon in projectClicked.technologies"
-					:key="icon.id"
-					:icon="icon.icon"
-					color="white"
-					:size="icon.size"
-				/>
+			<div class="project-techs">
+				<h3>Technologies</h3>
+				<div class="tech-icons">
+					<MartzIcon
+						class="icon"
+						v-for="icon in projectClicked.technologies"
+						:key="icon.id"
+						:icon="icon.icon"
+						color="white"
+						:size="icon.size"
+					/>
+				</div>
 			</div>
 		</div>
 		<div class="project-btn-container">
@@ -124,6 +126,10 @@ export default {
 	font: $font-text-mb;
 	overflow: auto;
 
+	@include breakpoint(tablet) {
+		font: $font-text-tb;
+	}
+
 	.backToProjects {
 		display: flex;
 		justify-content: space-between;
@@ -163,7 +169,7 @@ export default {
 .video-secondary-container {
 	display: flex;
 	gap: 0.5em;
-	height:40%;
+	height: 40%;
 }
 .video-sec {
 	border: 1px solid white;
@@ -174,23 +180,47 @@ export default {
 		// object-fit: cover;
 	}
 }
-
+.desc-container {
+	@include breakpoint(tablet) {
+		display: flex;
+		gap: 2em;
+	}
+}
 .project-about {
 	margin-bottom: 1.5em;
+	@include breakpoint(tablet) {
+		flex: 2;
+		h3 {
+			font: $font-title-tb;
+		}
+	}
 	h3 {
 		font: $font-title-mb;
 		color: rgba($white, 0.3);
+		margin-bottom: 1em;
+		@include breakpoint(tablet) {
+			font: $font-title-tb;
+		}
 	}
 	p {
 		font: $font-thin-text-mb;
+		@include breakpoint(tablet) {
+			font:  $font-thin-text-tb;
+		}
 	}
 }
 .project-techs {
 	margin-bottom: 1.5em;
+	@include breakpoint(tablet) {
+		flex: 1;
+	}
 	h3 {
 		font: $font-title-mb;
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 		color: rgba($white, 0.3);
+		@include breakpoint(tablet) {
+			font: $font-title-tb;
+		}
 	}
 }
 .tech-icons {
@@ -211,10 +241,13 @@ export default {
 	// width: 6em;
 }
 .project-btn-container {
-	margin-bottom: 1.5em;
+	margin-bottom: 3em;
 	display: grid;
 	place-items: center;
 	gap: 1em;
+	@include breakpoint(tablet) {
+		display: flex;
+	}
 }
 .project-btn {
 	width: 80%;

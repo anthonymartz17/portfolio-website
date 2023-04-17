@@ -22,10 +22,10 @@ export default {
 					thumbnail_sec: "project1.jpeg",
 					thumbnail_third: "project1.jpeg",
 					technologies: [
-						{ icon: "vue", size: "100" },
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
 						{ icon: "css3", size: "70" },
+						{ icon: "vue", size: "100" },
 						{ icon: "sass", size: "100" },
 					],
 				},
@@ -41,10 +41,10 @@ export default {
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
 					technologies: [
-						{ icon: "vue", size: "100" },
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
 						{ icon: "css3", size: "70" },
+						{ icon: "vue", size: "100" },
 						{ icon: "sass", size: "100" },
 					],
 				},
@@ -60,10 +60,10 @@ export default {
 					thumbnail_sec: "project3.jpeg",
 					thumbnail_third: "project3.jpeg",
 					technologies: [
-						{ icon: "vue", size: "100" },
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
 						{ icon: "css3", size: "70" },
+						{ icon: "vue", size: "100" },
 						{ icon: "sass", size: "100" },
 					],
 				},
@@ -82,40 +82,43 @@ export default {
 </script>
 
 <template>
-	<div class="projects-container">
-		<h2 class="projects-title sections-title-global">{{ title }}</h2>
-		<div class="projects-list">
-			<div
-				class="projects-project"
-				v-for="project in projects"
-				:key="project.name"
-			>
-				<div class="projects-project-thumb">
-					<img :src="`/img/${project.img}`" alt="" />
+	<div class="project-wrapper">
+		<div class="projects-container">
+			<h2 class="projects-title sections-title-global">{{ title }}</h2>
+			<div class="projects-list">
+				<div
+					class="projects-project"
+					v-for="project in projects"
+					:key="project.name"
+				>
+					<div class="projects-project-thumb">
+						<img :src="`/img/${project.img}`" alt="" />
+					</div>
+					<div class="projects-project-desc">
+						<h3>{{ project.name }}</h3>
+						<p>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
+							consequuntur?
+						</p>
+						<BaseButton
+						class="project-btn"
+							@click.native="toggleShowMore(project)"
+							text="See more"
+							icon="see"
+							color="accent"
+							size="30"
+							id="toggleProject"
+						/>
+					</div>
 				</div>
-				<div class="projects-project-desc">
-					<h3>{{ project.name }}</h3>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
-						consequuntur?
-					</p>
-					<BaseButton
-						@click.native="toggleShowMore(project)"
-						text="See more"
-						icon="see"
-						color="accent"
-						size="30"
-						id="toggleProject"
+				<div v-if="showMore" class="project-detail">
+					<ProjectDetail
+						:projectClicked="projectClicked"
+						@fireToggleShowMore="toggleShowMore(projectClicked)"
 					/>
 				</div>
-			</div>
-			<div v-if="showMore" class="project-detail">
-				<ProjectDetail
-					:projectClicked="projectClicked"
-					@fireToggleShowMore="toggleShowMore(projectClicked)"
-				/>
-			</div>
 
+			</div>
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
 					<MartzIcon
@@ -163,25 +166,34 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.projects-container {
-	min-height: 100vh;
-	padding: 4em 1.5em;
+.project-wrapper {
+	padding: 2em;
 	background: $bg-2;
+}
+.projects-container {
 	color: $white;
 }
-
+.projects-list {
+	@include breakpoint(tablet) {
+		display: grid;
+    grid-template-columns: 1fr 1fr;
+		gap: 1em;
+	}
+}
 .projects-project {
 	margin-bottom: 1.5em;
-	// box-shadow: rgba(252, 252, 252, 0.185) 0px 4px 12px;
+	
 	box-shadow: rgba(236, 236, 236, 0.12) 0px 1px 3px,
 		rgba(230, 227, 227, 0.24) 0px 1px 2px;
+
+	
 }
 
 .projects-project-thumb {
-	// min-height: 8em;
-	// max-height: 10em;
 	height: 14em;
-
+	// @include breakpoint(tablet) {
+	// 	flex: 1;
+	// }
 	img {
 		border-radius: 5px 5px 0 0;
 		width: 100%;
@@ -192,7 +204,11 @@ export default {
 
 .projects-project-desc {
 	background: rgba(255, 255, 255, 0.075);
-	padding: 0.5em;
+	padding: 1.5em .5em;
+	
+	// @include breakpoint(tablet) {
+	// 	flex: 1;
+	// }
 
 	h3 {
 		font: $font-title-mb;
@@ -205,6 +221,10 @@ export default {
 }
 .project-cards-container {
 	margin-block: 6em;
+	@include breakpoint(tablet){
+		display: flex;
+		gap: 4em;
+	}
 }
 .project-cards {
 	padding: 0.5em;
@@ -212,6 +232,7 @@ export default {
 	h4 {
 		font: $font-title-mb;
 		color: rgba($white, 0.4);
+		margin-bottom: 1.5em;
 	}
 	p {
 		font: $font-thin-text-mb;
@@ -223,6 +244,18 @@ export default {
 	border-bottom: 1px solid $white;
 	padding-bottom: 5em;
 	margin-bottom: 2em;
+	@include breakpoint(tablet){
+		border:none;
+
+		// &::after{
+		// 	content: "";
+		// 	position: absolute;
+		// 	right: -35px;
+		// 	top: 15%;
+		// 	height:30% ;
+		// 	border-right: 1px solid rgba($white, 0.4);
+		// }
+	}
 }
 .card-blog {
 	position: relative;
@@ -267,5 +300,8 @@ export default {
 	right: 0;
 	left: 0;
 	z-index: 10;
+}
+.project-btn{
+	width: 100%;
 }
 </style>

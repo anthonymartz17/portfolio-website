@@ -7,11 +7,11 @@ export default {
 			title: "Skills",
 			skillId: "vue",
 			skillsName: [
-				{ id: "vue", name: "vue.js", icon: "V", size:"90"},
-				{ id: "javascript", name: "javaScript", icon: "JS", size:"79" },
-				{ id: "css3", name: "css3", icon: "css" , size:"79" },
-				{ id: "html5", name: "html5", icon: "html" , size:"79"},
-				{ id: "sass", name: "sass", icon: "sass" , size:"100" },
+				{ id: "vue", name: "vue.js", icon: "V", size: "90" },
+				{ id: "javascript", name: "javaScript", icon: "JS", size: "79" },
+				{ id: "css3", name: "css3", icon: "css", size: "79" },
+				{ id: "html5", name: "html5", icon: "html", size: "79" },
+				{ id: "sass", name: "sass", icon: "sass", size: "100" },
 			],
 			skillsDescriptions: [
 				{
@@ -58,32 +58,34 @@ export default {
 </script>
 
 <template>
-	<div class="skills-container">
-		<div class="background-icon">{{ scrollPosition }}</div>
-		<h2 class="sections-title-global">{{ title }}</h2>
-		<div class="skills-icons-container">
-			<div
-				class="skill-icon"
-				v-for="icon in skillsName"
-				:key="icon.id"
-				@click="switchSkillId(icon.id)"
-			>
-			<!-- added additional div to align icons to the bottom and from there control individual size of icons -->
-			<div class="icon">
-				<MartzIcon
-					:icon="icon.id"
-					:color="skillId == icon.id ? 'accent' : 'white'"
-					:size="icon.size"
-				/>
-				
-				
+	<div class="skills-wrapper">
+		<div class="skills-container">
+			<!-- <div class="background-icon">{{ scrollPosition }}</div> -->
+			<h2 class="sections-title-global">{{ title }}</h2>
+			<div class="skills-body">
+				<div class="skills-icons-container">
+					<div
+						class="skill-icon"
+						v-for="icon in skillsName"
+						:key="icon.id"
+						@click="switchSkillId(icon.id)"
+					>
+						<!-- added additional div to align icons to the bottom and from there control individual size of icons -->
+						<div class="icon">
+							<MartzIcon
+								:icon="icon.id"
+								:color="skillId == icon.id ? 'accent' : 'white'"
+								:size="icon.size"
+							/>
+						</div>
+						<p>{{ icon.name }}</p>
+						<!-- <div  v-if="icon.id == skillId">{{scrollPosition}}</div> -->
+					</div>
+				</div>
+				<div class="skill-description-container">
+					<p>{{ skillDescription.description }}</p>
+				</div>
 			</div>
-			<p>{{ icon.name }}</p>
-				<!-- <div  v-if="icon.id == skillId">{{scrollPosition}}</div> -->
-			</div>
-		</div>
-		<div class="skill-description-container">
-			<p>{{ skillDescription.description }}</p>
 		</div>
 	</div>
 </template>
@@ -92,12 +94,31 @@ export default {
 .accent {
 	background: $accent;
 }
-.skills-container {
-	padding:6em 1.5em 10em 1.5em ;
-	padding-bottom: 10em;
+.skills-wrapper {
+	padding: 2em;
 	background: $bg-2;
+	// min-height: 100vh;
+}
+.skills-container {
+	margin-bottom: 4em;
 	color: $white;
 	position: relative;
+}
+.skills-body{
+	@include breakpoint(tablet){
+		display: flex;
+		gap: 2em;
+
+		.skills-icons-container{
+			flex: 1;
+		}
+		.skill-description-container{
+			flex: 1;
+			font: $font-thin-text-tb;
+		}
+
+
+	}
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;
@@ -105,7 +126,7 @@ export default {
 	justify-content: space-evenly;
 	align-items: center;
 	flex-wrap: wrap;
-	column-gap: .5em;
+	column-gap: 0.5em;
 	row-gap: 2.5em;
 }
 .skill-icon {
@@ -124,6 +145,5 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: end;
-	
 }
 </style>

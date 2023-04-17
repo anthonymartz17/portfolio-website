@@ -26,7 +26,7 @@ export default {
 <template>
 	<div class="landing-wrapper">
 		<div class="container">
-			<header>
+			<header class="header">
 				<h1 class="lg-title">Antonio Martinez</h1>
 				<h2 class="l-title">Front-End Dev</h2>
 			</header>
@@ -67,9 +67,8 @@ export default {
 						</a>
 					</template>
 				</div>
+				<SocialMedia class="social-media" />
 			</div>
-
-			<SocialMedia />
 		</div>
 	</div>
 </template>
@@ -85,11 +84,12 @@ export default {
 		display: flex;
 		justify-content: center;
 	}
-	@include breakpoint(desktop) {
+	@include breakpoint(lg-device) {
 		position: relative;
 	}
 }
 .container {
+	position: relative;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -101,22 +101,59 @@ export default {
 	@include breakpoint(tablet) {
 		width: 70%;
 	}
+	@include breakpoint(lg-device) {
+		justify-content: center;
+		
+	}
+}
+.header {
+	flex: 1;
+}
+.landing-body {
+	flex: 4;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1em;
+	@include breakpoint(lg-device) {
+		width: 100%;
+		flex-direction: row;
+		justify-content: center;
+	}
+}
+.links {
+	width: 100%;
+	@include breakpoint(lg-device) {
+		width: 35%;
+		z-index: 10;
+	}
+}
+.social-media {
+	@include breakpoint(lg-device) {
+	}
 }
 .headshot-img {
 	width: 13em;
-
-	.fullbody{
-		display: none;
-	}
 	@include breakpoint(tablet) {
 		width: 15em;
-		order: 2;
 	}
-	@include breakpoint(desktop) {
-		.headshot{
-      display: none;
+	@include breakpoint(lg-device) {
+		width: 15em;
+		position: absolute;
+		right: -10em;
+	
+	}
+
+	.fullbody {
+		display: none;
+	
+	}
+	@include breakpoint(lg-device) {
+		.headshot {
+			display: none;
 		}
-		.fullbody{
+		.fullbody {
 			display: flex;
 		}
 	}
@@ -125,7 +162,7 @@ export default {
 	@include breakpoint(tablet) {
 		font: $font-xl-tb;
 	}
-	@include breakpoint(desktop) {
+	@include breakpoint(lg-device) {
 		font: $font-xxl-dsk;
 	}
 }
@@ -135,29 +172,8 @@ export default {
 	@include breakpoint(tablet) {
 		font: $font-title-tb;
 	}
-	@include breakpoint(desktop) {
+	@include breakpoint(lg-device) {
 		font: $font-xl-dsk;
-	}
-}
-
-.landing-body {
-	width: 80%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1em;
-	@include breakpoint(desktop) {
-		width: 70%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-
-	}
-}
-.links {
-	width: 100%;
-	@include breakpoint(desktop) {
-		width: 35%;
 	}
 }
 
@@ -169,12 +185,13 @@ export default {
 	@include breakpoint(tablet) {
 		font: $font-btn-tb;
 	}
-	@include breakpoint(desktop) {
+	@include breakpoint(lg-device) {
 		width: 100%;
 	}
 
-	.landing-footer {
-		width: 100%;
+	.social-media {
+		position: absolute;
+		top: 0;
 	}
 }
 </style>

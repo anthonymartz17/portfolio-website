@@ -80,112 +80,123 @@ export default {
 };
 </script>
 <template>
-	<div class="hireme-container">
-		<form class="contact-form" ref="form" @submit.prevent="sendMsg">
-			<h2 class="sections-title-global hireme-title">
-				{{ title }}
-				<MartzIcon icon="handshake" size="30" />
-			</h2>
-			
-			<p class="text-small contact-text">
-				For any questions, feel free to contact me through any of the methods
-				bellow.
-			</p>
-			<div class="field">
-				<label for="name">Name</label>
-				<input
-					v-model="name"
-					type="text"
-					id="name"
-					name="name"
-					autocomplete="off"
-					:class="['input-field', { invalid: isSubmitted && $v.name.$error }]"
+	<div class="hireme-wrapper">
+		<div class="hireme-container">
+			<form class="contact-form" ref="form" @submit.prevent="sendMsg">
+				<h2 class="sections-title-global hireme-title">
+					{{ title }}
+					<MartzIcon icon="handshake" size="30" />
+				</h2>
+
+				<p class="text-small contact-text">
+					For any questions, feel free to contact me through any of the methods
+					bellow.
+				</p>
+				<div class="field">
+					<label for="name">Name</label>
+					<input
+						v-model="name"
+						type="text"
+						id="name"
+						name="name"
+						autocomplete="off"
+						:class="['input-field', { invalid: isSubmitted && $v.name.$error }]"
 					/>
 					<p v-if="isSubmitted && !$v.name.required" class="text-small">
 						Please enter a name
 					</p>
 				</div>
 				<div class="field">
-				<label for="email">Email</label>
-				<input
-					v-model="email"
-					name="email"
-					type="email"
-					id="email"
-					autocomplete="off"
-					:class="['input-field', { invalid: isSubmitted && $v.email.$error }]"
+					<label for="email">Email</label>
+					<input
+						v-model="email"
+						name="email"
+						type="email"
+						id="email"
+						autocomplete="off"
+						:class="[
+							'input-field',
+							{ invalid: isSubmitted && $v.email.$error },
+						]"
 					/>
 					<div v-if="isSubmitted && $v.email.$error">
-						<p v-if="isSubmitted && !$v.email.required" class="text-small error">
+						<p
+							v-if="isSubmitted && !$v.email.required"
+							class="text-small error"
+						>
 							Please enter an email
 						</p>
 						<p
-						v-else-if="isSubmitted && !$v.email.email"
-						class="text-small error"
+							v-else-if="isSubmitted && !$v.email.email"
+							class="text-small error"
 						>
-						Please enter a valid email
+							Please enter a valid email
+						</p>
+					</div>
+				</div>
+				<div class="field">
+					<label for="email">Message</label>
+					<textarea
+						v-model="message"
+						name="message"
+						id="email"
+						cols="30"
+						rows="7"
+						:class="[
+							'textarea-field',
+							{ invalid: isSubmitted && $v.message.$error },
+						]"
+					></textarea>
+					<p
+						v-if="isSubmitted && !$v.message.required"
+						class="text-small error"
+					>
+						Please enter a message
 					</p>
 				</div>
-			</div>
-			<div class="field">
-				<label for="email">Message</label>
-				<textarea
-				v-model="message"
-				name="message"
-				id="email"
-					cols="30"
-					rows="7"
-					:class="[
-						'textarea-field',
-						{ invalid: isSubmitted && $v.message.$error },
-					]"
-				></textarea>
-				<p v-if="isSubmitted && !$v.message.required" class="text-small error">
-					Please enter a message
-				</p>
-			</div>
-			<div class="btn-container">
-				<BaseButton
-				icon="sendit"
-				text="Send it"
-				size="30"
-				/>
-		
-				<font-awesome-icon
-				icon="fa-solid fa-message"
-				class="msg-bubble"
-				size="2x"
-				/>
-			</div>
-		</form>
-		<!-- <div class="popUp-container">
-			<div class="chat-box">
-				<div class="profile-img"></div>
-				<div class="header">
-					<p class="text-small">Antonio Martinez</p>
-					<font-awesome-icon icon="fa-solid fa-xmark" class="accent" />
+				<div class="btn-container">
+					<BaseButton icon="sendit" text="Send it" size="30" class="btn-sendit"/>
+
+					<font-awesome-icon
+						icon="fa-solid fa-message"
+						class="msg-bubble"
+						size="2x"
+					/>
 				</div>
-				<p class="msg-body text-small">
-					Hey, I'm available to chat in case of any questions
-				</p>
-				<input type="text" />
+			</form>
+			<!-- <div class="popUp-container">
+				<div class="chat-box">
+					<div class="profile-img"></div>
+					<div class="header">
+						<p class="text-small">Antonio Martinez</p>
+						<font-awesome-icon icon="fa-solid fa-xmark" class="accent" />
+					</div>
+					<p class="msg-body text-small">
+						Hey, I'm available to chat in case of any questions
+					</p>
+					<input type="text" />
+				</div>
+			</div> -->
+			<div class="other-contact">
+				<h2 class="sections-title-global">Other</h2>
+				<ul class="contact-links">
+					<li v-for="media in mediaContacts" :key="media.name">
+						<a :href="media.url" target="blank">
+							<font-awesome-icon :icon="media.icon" class="icon" />
+							<p>{{ media.link_name }}</p>
+						</a>
+					</li>
+				</ul>
 			</div>
-		</div> -->
-		<div class="other-contact">
-			<h2 class="sections-title-global">Other</h2>
-			<ul class="contact-links">
-				<li v-for="media in mediaContacts" :key="media.name">
-					<a :href="media.url" target="blank">
-						<font-awesome-icon :icon="media.icon" class="icon" />
-						<p>{{ media.link_name }}</p>
-					</a>
-				</li>
-			</ul>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+.hireme-wrapper{
+	background: $bg-2;
+	padding: 2em;
+}
 .popUp-container {
 	position: fixed;
 	top: 0;
@@ -225,16 +236,19 @@ export default {
 	color: $accent;
 }
 .hireme-container {
-	background: $bg-2;
-	padding: 3em 1.5em;
+	// @include breakpoint(tablet){
+	// 	display: flex;
+	// 	gap: 2em;
+	// 	align-items: flex-end;
+	// }
 }
 .contact-text {
 	margin-bottom: 1em;
 }
-.hireme-title{
+.hireme-title {
 	display: flex;
 	align-items: center;
-	gap: .3em;
+	gap: 0.3em;
 }
 
 .title-icon {
@@ -271,6 +285,11 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+.btn-sendit{
+	@include breakpoint(tablet){
+		width: 40%;
+	}
 }
 .msg-bubble {
 	color: $accent;

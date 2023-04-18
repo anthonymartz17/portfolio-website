@@ -25,34 +25,63 @@ export default {
 };
 </script>
 <template>
-	<div class="the-footer">
-		<div class="bottom-links">
-			<div class="footer-nav">
-				<ul>
-					<template v-for="link in navLinks">
-						<li class="link-item"  v-if="!link.route" @click="emitScrollToEvent(link.name)" :key="link.name">
-							{{ link.name }}
-						</li>
-						<router-link class="link-item"  v-if="link.route" :to="{name: link.route}" :key="link.name">{{ link.name }}</router-link>
-					</template>
-				</ul>
-			</div>
-			<div class="copyRight">
-				<p>Designed and built by</p>
-				<p>Antonio Martinez</p>
-				<small>© {{ year }}</small>
+	<div class="footer-wrapper">
+		<div class="the-footer">
+			<div class="bottom-links">
+				<div class="footer-nav">
+					<ul>
+						<template v-for="link in navLinks">
+							<li
+								class="link-item"
+								v-if="!link.route"
+								@click="emitScrollToEvent(link.name)"
+								:key="link.name"
+							>
+								{{ link.name }}
+							</li>
+							<router-link
+								class="link-item"
+								v-if="link.route"
+								:to="{ name: link.route }"
+								:key="link.name"
+								>{{ link.name }}</router-link
+							>
+						</template>
+					</ul>
+				</div>
+				<div class="copyRight">
+					<p>Designed and built by</p>
+					<p>Antonio Martinez</p>
+					<small>© {{ year }}</small>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.the-footer {
+.footer-wrapper {
 	background: $bg-2;
-	padding: 1.5em;
+	padding: 2em;
+	@include breakpoint(desktop) {
+		display: flex;
+		justify-content: center;
+	
+	}
+}
+.the-footer {
 	padding-bottom: 3em;
 	color: $white;
-	padding-top: 7em;
+	margin-top: 7em;
+
+	@include breakpoint(tablet) {
+		width: 85%;
+	}
+	@include breakpoint(desktop) {
+		width: 40%;
+		margin-top: 3em;
+		padding-bottom: 0;
+	}
 }
 
 .bottom-links {
@@ -74,7 +103,7 @@ export default {
 	li {
 		list-style: none;
 	}
-	.link-item{
+	.link-item {
 		color: $white;
 		text-decoration: none;
 	}

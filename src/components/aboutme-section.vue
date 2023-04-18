@@ -26,26 +26,29 @@ export default {
 </script>
 
 <template>
-	<div class="aboutme-container">
-		<h2 class="sections-title-global">{{ title }}</h2>
-		<div class="about-body">
-			<div class="aboutme-img">
-				<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
+	<div class="aboutme-wrapper">
+		<div class="aboutme-container">
+			<h2 class="sections-title-global">{{ title }}</h2>
+			<div class="about-body">
+				<div class="aboutme-img">
+					<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
+				</div>
+				<div class="aboutme-description">
+					<div class="parragraph">
+						<p>{{ description }}</p>
+						<br />
+						<p>{{ description }}</p>
+					</div>
+					<div class="hobbies-icons-container">
+						<MartzIcon
+							class="icon"
+							:icon="icon"
+							v-for="icon in hobbiesIcons"
+							:key="icon"
+						/>
+					</div>
+				</div>
 			</div>
-			<div class="aboutme-description">
-				<p>{{ description }}</p>
-				<br />
-				<p>{{ description }}</p>
-			</div>
-		</div>
-
-		<div class="hobbies-icons-container">
-			<MartzIcon
-				class="icon"
-				:icon="icon"
-				v-for="icon in hobbiesIcons"
-				:key="icon"
-			/>
 		</div>
 	</div>
 </template>
@@ -54,25 +57,43 @@ export default {
 .accent {
 	background: $accent;
 }
+.aboutme-wrapper {
+	background: $bg-2;
+	display: flex;
+	justify-content: center;
+}
 .aboutme-container {
 	padding: 0 1.5em;
 	padding-bottom: 4em;
-	background: $bg-2;
 	color: $white;
 	position: relative;
+	@include breakpoint(tablet) {
+		width: 85%;
+	}
+	@include breakpoint(desktop) {
+		width: 70%;
+		max-width: 70%;
+	}
 }
 .about-body {
 	@include breakpoint(tablet) {
-		// display: flex;
-		// gap: 1em;
-
 		.aboutme-img {
 			flex: 2;
 		}
 		.aboutme-description {
 			flex: 1.5;
-			font: $font-thin-text-tb;
-}
+			// font: $font-thin-text-tb;
+			@include breakpoint(desktop) {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+			}
+		}
+	}
+	@include breakpoint(desktop) {
+		display: flex;
+		gap: 1em;
 	}
 }
 .aboutme-description {
@@ -92,17 +113,17 @@ export default {
 	}
 }
 .hobbies-icons-container {
-	margin-bottom: 1.5em;
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
 	flex-wrap: wrap;
-	row-gap: 1.5em;
+	gap: 1em;
 }
 .icon {
 	// aspect-ratio: 1/1;
 	// border: 1px solid;
 	height: 5em;
 	width: 5em;
+	// margin: 5em;
 	margin-bottom: 0.5em;
 	opacity: 0.2;
 }

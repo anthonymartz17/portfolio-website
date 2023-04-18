@@ -74,7 +74,7 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		// margin-block: 2em;
-		width: 60%;
+		width: 70%;
 	}
 
 	.fullbody {

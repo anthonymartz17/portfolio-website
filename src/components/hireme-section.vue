@@ -178,8 +178,8 @@ export default {
 				</div>
 			</div> -->
 			<div class="other-contact">
-				<h2 class="sections-title-global">Other</h2>
 				<ul class="contact-links">
+					<h2 class="sections-title-global">Other</h2>
 					<li v-for="media in mediaContacts" :key="media.name">
 						<a :href="media.url" target="blank">
 							<font-awesome-icon :icon="media.icon" class="icon" />
@@ -196,6 +196,11 @@ export default {
 .hireme-wrapper{
 	background: $bg-2;
 	padding: 2em;
+	@include breakpoint(desktop) {
+		display: flex;
+		justify-content: center;
+	
+	}
 }
 .popUp-container {
 	position: fixed;
@@ -236,11 +241,27 @@ export default {
 	color: $accent;
 }
 .hireme-container {
-	// @include breakpoint(tablet){
-	// 	display: flex;
-	// 	gap: 2em;
-	// 	align-items: flex-end;
-	// }
+	@include breakpoint(tablet){
+		width: 85%;
+	}
+	@include breakpoint(desktop){
+		width:70%;
+		display: flex;
+		gap: 3em;
+		justify-content: space-between;
+
+		.contact-form{
+			flex: 2;
+		}
+		.other-contact{
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: end;
+		}
+		.sections-title-global{
+		}
+	}
 }
 .contact-text {
 	margin-bottom: 1em;
@@ -254,7 +275,6 @@ export default {
 .title-icon {
 	display: flex;
 	align-items: baseline;
-	background: red;
 }
 .icon {
 	color: rgba($white, 0.3);

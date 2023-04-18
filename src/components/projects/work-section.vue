@@ -101,7 +101,7 @@ export default {
 							consequuntur?
 						</p>
 						<BaseButton
-						class="project-btn"
+							class="project-btn"
 							@click.native="toggleShowMore(project)"
 							text="See more"
 							icon="see"
@@ -117,7 +117,6 @@ export default {
 						@fireToggleShowMore="toggleShowMore(projectClicked)"
 					/>
 				</div>
-
 			</div>
 			<div class="project-cards-container">
 				<div class="cards-youtube project-cards">
@@ -169,24 +168,32 @@ export default {
 .project-wrapper {
 	padding: 2em;
 	background: $bg-2;
+	@include breakpoint(desktop) {
+		display: flex;
+		justify-content: center;
+	}
 }
 .projects-container {
 	color: $white;
+	@include breakpoint(desktop) {
+		width: 70%;
+	}
 }
 .projects-list {
 	@include breakpoint(tablet) {
 		display: grid;
-    grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		gap: 1em;
+	}
+	@include breakpoint(desktop) {
+		display: flex;
 	}
 }
 .projects-project {
 	margin-bottom: 1.5em;
-	
+
 	box-shadow: rgba(236, 236, 236, 0.12) 0px 1px 3px,
 		rgba(230, 227, 227, 0.24) 0px 1px 2px;
-
-	
 }
 
 .projects-project-thumb {
@@ -204,8 +211,8 @@ export default {
 
 .projects-project-desc {
 	background: rgba(255, 255, 255, 0.075);
-	padding: 1.5em .5em;
-	
+	padding: 1.5em 0.5em;
+
 	// @include breakpoint(tablet) {
 	// 	flex: 1;
 	// }
@@ -221,9 +228,12 @@ export default {
 }
 .project-cards-container {
 	margin-block: 6em;
-	@include breakpoint(tablet){
+	@include breakpoint(tablet) {
 		display: flex;
 		gap: 4em;
+	}
+	@include breakpoint(desktop) {
+		justify-content: space-around;
 	}
 }
 .project-cards {
@@ -244,17 +254,8 @@ export default {
 	border-bottom: 1px solid $white;
 	padding-bottom: 5em;
 	margin-bottom: 2em;
-	@include breakpoint(tablet){
-		border:none;
-
-		// &::after{
-		// 	content: "";
-		// 	position: absolute;
-		// 	right: -35px;
-		// 	top: 15%;
-		// 	height:30% ;
-		// 	border-right: 1px solid rgba($white, 0.4);
-		// }
+	@include breakpoint(tablet) {
+		border: none;
 	}
 }
 .card-blog {
@@ -301,7 +302,7 @@ export default {
 	left: 0;
 	z-index: 10;
 }
-.project-btn{
+.project-btn {
 	width: 100%;
 }
 </style>

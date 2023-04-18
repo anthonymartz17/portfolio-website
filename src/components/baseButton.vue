@@ -55,7 +55,8 @@ export default {
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
 	transition: all 0.5s;
 	@include breakpoint(tablet) {
-			font: $font-btn-tb;
+			// font: $font-btn-tb;
+			
 		}
 }
 

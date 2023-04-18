@@ -97,33 +97,41 @@ export default {
 .skills-wrapper {
 	padding: 2em;
 	background: $bg-2;
-	// min-height: 100vh;
+	@include breakpoint(desktop) {
+		display: flex;
+		justify-content: center;
+		
+	}
 }
 .skills-container {
 	margin-bottom: 4em;
 	color: $white;
 	position: relative;
+	@include breakpoint(tablet) {
+		width: 85%;
+	}
+	@include breakpoint(desktop) {
+		width: 70%;
+	}
 }
-.skills-body{
-	@include breakpoint(tablet){
+.skills-body {
+	@include breakpoint(tablet) {
 		display: flex;
 		gap: 2em;
 
-		.skills-icons-container{
+		.skills-icons-container {
 			flex: 1;
 		}
-		.skill-description-container{
+		.skill-description-container {
 			flex: 1;
-			font: $font-thin-text-tb;
+			font: $font-text-mb;
 		}
-
-
 	}
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: flex-start;
 	align-items: center;
 	flex-wrap: wrap;
 	column-gap: 0.5em;

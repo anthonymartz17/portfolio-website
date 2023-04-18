@@ -97,11 +97,8 @@ export default {
 .skills-wrapper {
 	padding: 2em;
 	background: $bg-2;
-	@include breakpoint(desktop) {
-		display: flex;
-		justify-content: center;
-		
-	}
+	display: flex;
+	justify-content: center;
 }
 .skills-container {
 	margin-bottom: 4em;

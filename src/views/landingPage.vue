@@ -159,6 +159,7 @@ export default {
 	}
 }
 .lg-title {
+	flex: 1;
 	@include breakpoint(tablet) {
 		font: $font-xl-tb;
 	}

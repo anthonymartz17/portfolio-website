@@ -1,6 +1,6 @@
 <script>
-import SocialMedia from "./socialMedia.vue";
-import MartzIcon from "../components/icons/martz-icons.vue";
+import SocialMedia from "@/components/socialMedia.vue";
+import MartzIcon from "@/components/icons/martz-icons.vue";
 
 export default {
 	components: {
@@ -11,23 +11,24 @@ export default {
 		return {
 			section: "",
 			navLinks: [
-				{ id: "Home", icon: "home", name: "Home", active: true },
-				{ id: "Work", icon: "mywork", name: "Work", active: false },
-				{ id: "Skills", icon: "skills", name: "Skills" },
-				{ id: "About", icon: "about", name: "About" },
+				{ icon: "home", name: "Home", route: "portfolio" },
 				{ icon: "blog", name: "Blogs", route: "home-blog" },
-				{ id: "Hire Me", icon: "handshake", name: "Hire Me", accent: true },
 			],
 		};
 	},
+
 	emit: ["scrollTo"],
 	beforeDestroy() {
-		if (this.section) this.$emit("scrollToEvent", this.section);
-		this.emitCloseEvent()
+		// this.emitCloseEvent()
 	},
 	methods: {
-		emitCloseEvent() {
-			console.log('emiting')
+		emitCloseEvent(route) {
+			if (route != null)
+        if (route != this.$route.name) {
+          console.log('entre aki')
+					this.$emit("emitToggleMenue");
+					this.$router.replace({ name: route });
+				}
 			this.$emit("emitToggleMenue");
 		},
 		setSection(section) {
@@ -40,7 +41,11 @@ export default {
 <template>
 	<!-- <div class="menu-wrapper"> -->
 	<div class="nav-container">
-		<div class="nav-container-header" id="close-header" @click="emitCloseEvent">
+		<div
+			class="nav-container-header"
+			id="close-header"
+			@click="emitCloseEvent(null)"
+		>
 			<font-awesome-icon
 				id="close-icon"
 				icon="fa-solid fa-angle-left"
@@ -49,42 +54,32 @@ export default {
 			<p id="close">Close</p>
 		</div>
 		<ul class="nav-container-links">
-			<template v-for="link in navLinks">
-				<li
-					@click="
-						emitCloseEvent();
-						setSection(link.id);
-					"
-					v-if="!link.route"
-					:id="link.id"
-					:class="['nav-container-link', { accent: link.accent }]"
-					:key="link.name"
-				>
-					<MartzIcon :icon="link.icon" size="20" :id="link.id" />
-					<span :id="link.id">{{ link.name }}</span>
-				</li>
-				<router-link
-					:to="{ name: link.route }"
-					v-if="link.route"
-					:key="link.name"
-					class="nav-container-link route-link"
-				>
-					<MartzIcon :icon="link.icon" size="20" />
-					<span>{{ link.name }}</span>
-				</router-link>
-			</template>
+			<!-- <router-link
+				id="fromRoute"
+				v-for="link in navLinks"
+				@click="emitCloseEvent($event.target.id, link.route)"
+				:key="link.name"
+				class="nav-container-link"
+			> -->
+			<li
+				id="fromRoute"
+				v-for="link in navLinks"
+				@click="emitCloseEvent(link.route)"
+				:key="link.name"
+				class="nav-container-link"
+			>
+				<MartzIcon :icon="link.icon" size="20" />
+				<span>{{ link.name }}</span>
+			</li>
+			<!-- </router-link> -->
 		</ul>
 		<div class="footer">
 			<SocialMedia />
 		</div>
 	</div>
-	<!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
-.route-link{
-	background: green;
-}
 .accent {
 	text-transform: uppercase;
 	font-weight: 600;
@@ -98,14 +93,6 @@ export default {
 		color: $accent;
 	}
 }
-// .menu-wrapper {
-// 	position: absolute;
-// 	top: 0;
-// 	right: 0;
-// 	height: 100vh;
-// 	width: 100wh;
-// 	z-index: 10;
-// }
 
 .nav-container {
 	padding: 1em 1em;

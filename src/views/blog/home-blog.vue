@@ -10,6 +10,7 @@ export default {
 	},
 	methods: {
 		toggleMobileMenue() {
+			console.log('testing firing from menu no supposed to')
 			this.isMenueOpen = !this.isMenueOpen;
 			console.log(this.isMenueOpen);
 			if (this.isMenueOpen) document.body.classList.add("mobile-menu-open");

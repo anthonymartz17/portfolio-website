@@ -90,17 +90,22 @@ export default {
 					class="projects-project"
 					v-for="project in projects"
 					:key="project.name"
+					@click="toggleShowMore(project)"
 				>
 					<div class="projects-project-thumb">
 						<img :src="`/img/${project.img}`" alt="" />
 					</div>
 					<div class="projects-project-desc">
 						<h3>{{ project.name }}</h3>
-						<p>
+						<p class="text-description">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
 							consequuntur?
 						</p>
-						<BaseButton
+						<div class="see-more">
+							<p class="text-p">See more</p>
+							<MartzIcon icon="angleRight" :size="15" color="accent" />
+						</div>
+						<!-- <BaseButton
 							class="project-btn"
 							@click.native="toggleShowMore(project)"
 							text="See more"
@@ -108,7 +113,7 @@ export default {
 							color="accent"
 							size="30"
 							id="toggleProject"
-						/>
+						/> -->
 					</div>
 				</div>
 				<div v-if="showMore" class="project-detail">
@@ -166,7 +171,7 @@ export default {
 
 <style lang="scss" scoped>
 .project-wrapper {
-	padding: 2em;
+	padding: 2em 1em;
 	background: $bg-2;
 	@include breakpoint(desktop) {
 		display: flex;
@@ -212,19 +217,25 @@ export default {
 .projects-project-desc {
 	background: rgba(255, 255, 255, 0.075);
 	padding: 1.5em 0.5em;
+	font: $font-thin-text-mb;
 
-	// @include breakpoint(tablet) {
-	// 	flex: 1;
-	// }
+
 
 	h3 {
-		font: $font-title-mb;
+		font: $font-subtitle-mb;
 		color: rgba($white, 0.4);
 	}
-	p {
-		font: $font-thin-text-mb;
-		margin-bottom: 0.5em;
+
+	.text-description{
+		margin-bottom: 2em;
 	}
+	
+}
+.see-more {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	margin-bottom: 1.5em;
 }
 .project-cards-container {
 	margin-block: 6em;

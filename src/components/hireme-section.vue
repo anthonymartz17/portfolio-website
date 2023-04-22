@@ -195,7 +195,7 @@ export default {
 <style lang="scss" scoped>
 .hireme-wrapper{
 	background: $bg-2;
-	padding: 2em;
+	padding: 2em 1em;
 	@include breakpoint(desktop) {
 		display: flex;
 		justify-content: center;
@@ -287,7 +287,7 @@ export default {
 	label {
 		display: block;
 		color: $white;
-		font: $font-subtitle-mb;
+		font: $font-text-mb;
 	}
 }
 .input-field {

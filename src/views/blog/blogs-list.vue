@@ -45,17 +45,20 @@ export default {
 
 <template>
 	<div class="home-blogs-main-container">
-		<div class="sections-title-global"><h2>Blogs</h2></div>
+		<div class="blog-list-title"><h2>Blogs</h2></div>
 		<div class="blog-list-body">
-			<div v-for="blog in blogs" :key="blog.id">
-				<router-link class="blog-card" :to="{name:'blog-details',query:{id:blog.id}}" >
+			<div v-for="blog in blogs" :key="blog.id" class="blog-container">
+				<router-link
+					class="blog-card"
+					:to="{ name: 'blog-details', query: { id: blog.id } }"
+				>
 					<div class="blog-img-container">
 						<img :src="`/img/${blog.img}`" alt="" />
 					</div>
 					<div class="card-desc">
-						<h3 class="card-title">{{ blog.title }}</h3>
+						<h4 class="card-title">{{ blog.title }}</h4>
 
-						<p class="text-p">Posted on: {{ blog.datePosted }}</p>
+						<p class="text-thin">Posted on: {{ blog.datePosted }}</p>
 						<div class="btn-container">
 							<p class="text-p">VIEW POST</p>
 							<MartzIcon icon="angleRight" size="18" color="accent" />
@@ -68,18 +71,25 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.blog-card {
+.blog-container {
 	margin-bottom: 2em;
-	min-height: 50vh;
-	background: rgba(255, 255, 255, 0.075);
+	height: 60vh;
+}
+.blog-list-title{
+	font: $font-title-mb;
+	color: rgba($white, 0.5);
+	margin-bottom: 1em;
+}
+.blog-card {
+	height: 50%;
 	border-radius: 5px;
 	box-shadow: rgba(236, 236, 236, 0.12) 0px 1px 3px;
+	text-decoration: none;
 }
 .blog-img-container {
 	border-radius: 5px;
-	width: 100%;
-	height: 70%;
-	margin-bottom: 1em;
+	height: 60%;
+
 
 	img {
 		border-top-right-radius: 5px;
@@ -92,6 +102,7 @@ export default {
 
 .card-desc {
 	padding: 1em 0.5em;
+	background: rgba(255, 255, 255, 0.075);
 }
 .btn-container {
 	display: flex;

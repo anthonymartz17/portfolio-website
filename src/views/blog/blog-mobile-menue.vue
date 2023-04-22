@@ -18,18 +18,19 @@ export default {
 	},
 
 	emit: ["scrollTo"],
-	beforeDestroy() {
-		// this.emitCloseEvent()
-	},
+
 	methods: {
 		emitCloseEvent(route) {
-			if (route != null)
-        if (route != this.$route.name) {
-          console.log('entre aki')
+			if (route != null) {
+				if (route != this.$route.name) {
 					this.$emit("emitToggleMenue");
 					this.$router.replace({ name: route });
+				} else {
+					this.$emit("emitToggleMenue");
 				}
-			this.$emit("emitToggleMenue");
+			} else {
+				this.$emit("emitToggleMenue");
+			}
 		},
 		setSection(section) {
 			this.section = section;

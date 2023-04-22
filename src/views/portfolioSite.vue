@@ -38,6 +38,10 @@ export default {
 	destroyed() {
 		window.removeEventListener("scroll", this.updateScrollPosition);
 	},
+	
+	beforeDestroy() {
+		this.toggleMobileMenue()
+	},
 	methods: {
 		toggleMobileMenue() {
 			this.isMenueVisible = !this.isMenueVisible;

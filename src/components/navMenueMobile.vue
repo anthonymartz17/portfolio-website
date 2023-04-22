@@ -23,11 +23,9 @@ export default {
 	emit: ["scrollTo"],
 	beforeDestroy() {
 		if (this.section) this.$emit("scrollToEvent", this.section);
-		this.emitCloseEvent()
 	},
 	methods: {
 		emitCloseEvent() {
-			console.log('emiting')
 			this.$emit("emitToggleMenue");
 		},
 		setSection(section) {
@@ -40,7 +38,7 @@ export default {
 <template>
 	<!-- <div class="menu-wrapper"> -->
 	<div class="nav-container">
-		<div class="nav-container-header" id="close-header" @click="emitCloseEvent">
+		<div class="nav-container-header" id="close-header" @click="emitCloseEvent()">
 			<font-awesome-icon
 				id="close-icon"
 				icon="fa-solid fa-angle-left"
@@ -82,9 +80,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.route-link{
-	background: green;
-}
+
 .accent {
 	text-transform: uppercase;
 	font-weight: 600;

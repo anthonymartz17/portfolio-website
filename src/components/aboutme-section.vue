@@ -61,9 +61,9 @@ export default {
 	background: $bg-2;
 	display: flex;
 	justify-content: center;
+	padding: 0 1em;
 }
 .aboutme-container {
-	padding: 0 1.5em;
 	padding-bottom: 4em;
 	color: $white;
 	position: relative;

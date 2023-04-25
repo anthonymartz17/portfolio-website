@@ -1,8 +1,10 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
 import BlogNavMenue from "./blog-mobile-menue.vue";
+import BlogHomeNavMenue from "./blog-desktop-menu.vue";
+import BlogFooter from "./blog-footer.vue";
 export default {
-	components: { MartzIcon, BlogNavMenue },
+	components: { MartzIcon, BlogHomeNavMenue, BlogFooter ,BlogNavMenue},
 	data() {
 		return {
 			isMenueOpen: false,
@@ -10,7 +12,7 @@ export default {
 	},
 	methods: {
 		toggleMobileMenue() {
-			console.log('testing firing from menu no supposed to')
+			console.log("testing firing from menu no supposed to");
 			this.isMenueOpen = !this.isMenueOpen;
 			console.log(this.isMenueOpen);
 			if (this.isMenueOpen) document.body.classList.add("mobile-menu-open");
@@ -21,34 +23,47 @@ export default {
 </script>
 <template>
 	<div class="home-blogs-wrapper">
-		<nav>
-			<div
-				class="blog-nav-container"
-				v-if="isMenueOpen"
-				@click.self="toggleMobileMenue"
-			>
-				<BlogNavMenue @emitToggleMenue="toggleMobileMenue" />
-			</div>
-		</nav>
 		<div class="home-blogs-container">
-			<header>
-				<div class="home-blogs-header">
-					<!-- :class="['header-container-logo', { clickable: isMenueVisible }]" -->
-					<div>MARTZ</div>
-					<div class="header-nav-menue" @click="toggleMobileMenue">
-						<font-awesome-icon
-							id="menue-icon"
-							class="menue-icon"
-							icon="fa-solid fa-bars"
-							size="2x"
-						/>
-					</div>
+			<nav>
+				<div
+					class="blog-nav-container"
+					v-if="isMenueOpen"
+					@click.self="toggleMobileMenue"
+				>
+					<BlogNavMenue @emitToggleMenue="toggleMobileMenue" />
 				</div>
-			</header>
+			</nav>
+			<div class="home-blogs-container">
+				<header>
+					<div class="home-blog-header-wrapper">
+						<div class="home-blogs-header">
+							<!-- :class="['header-container-logo', { clickable: isMenueVisible }]" -->
+							<div class="logo">MARTZ</div>
+							<div class="header-nav-menue" @click="toggleMobileMenue">
+								<font-awesome-icon
+									id="menue-icon"
+									class="menue-icon"
+									icon="fa-solid fa-bars"
+									size="2x"
+								/>
+							</div>
+							<BlogHomeNavMenue
+								@emitToggleMenue="toggleMobileMenue"
+								class="desktop-menu"
+							/>
+						</div>
+					</div>
+				</header>
 
-			<main>
-				<router-view class="home-blogs-main-wrapper"/>
-			</main>
+				<main>
+					<div class="main-wrapper">
+						<router-view class="routerView" />
+					</div>
+				</main>
+			</div>
+			<div class="blog-footer-wrapper">
+				<BlogFooter class="the-footer" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -61,14 +76,24 @@ body.mobile-menu-open {
 	background: $bg-2;
 	min-height: 100vh;
 	color: $white;
-	padding-bottom: 3em;
 }
 .home-blogs-main-wrapper {
 	margin: 1em;
 }
+
+.home-blog-header-wrapper {
+	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.075);
+}
+.blog-footer-wrapper {
+	min-height: 25em;
+	// padding-block: 1em;
+}
+// .the-footer{
+// 	width: ;
+// }
 .home-blogs-header {
 	position: relative;
-	background: $bg-2;
+	// background: $bg-2;
 	padding: 0.8em 1.5em;
 	color: $white;
 	display: flex;
@@ -92,12 +117,49 @@ body.mobile-menu-open {
 	z-index: 10;
 	backdrop-filter: blur(5px);
 }
+.main-wrapper {
+	display: flex;
+	justify-content: center;
+	padding-top: 3em;
+}
+.routerView{
+	margin-inline: 1em;
+}
 
 .home-blogs-wrapper {
 	@include breakpoint(tablet) {
+		.routerView {
+			width: 95%;
+		}
 	}
 
 	@include breakpoint(desktop) {
+		.desktop-menu {
+			flex: 2;
+			display: flex;
+			justify-content: flex-end;
+		}
+		.header-nav-menue {
+			display: none;
+		}
+		.main-wrapper {
+			display: flex;
+			justify-content: center;
+		}
+		.routerView {
+			width: 50%;
+		}
+		.home-blog-header-wrapper {
+			display: flex;
+			justify-content: center;
+		}
+		.home-blogs-header {
+			width: 80%;
+			display: flex;
+		}
+		.logo {
+			flex: 1;
+		}
 	}
 }
 </style>

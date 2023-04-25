@@ -81,6 +81,14 @@ export default {
 		width: 40%;
 		margin-top: 3em;
 		padding-bottom: 0;
+		.link-item  {
+		font-size: 1.2em;
+	}
+
+	// .copyRight{
+	// 	text-align: start;
+	// }
+
 	}
 }
 

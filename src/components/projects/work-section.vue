@@ -202,7 +202,7 @@ export default {
 }
 
 .projects-project-thumb {
-	height: 14em;
+	height: 16em;
 	// @include breakpoint(tablet) {
 	// 	flex: 1;
 	// }

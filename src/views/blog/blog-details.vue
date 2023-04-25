@@ -87,12 +87,10 @@ export default {
 	margin-bottom: 3em;
 
 	@include breakpoint(tablet) {
-		// font: $font-text-tb;
-		width: 85%;
+
 	}
 	@include breakpoint(desktop) {
-		margin-block: 2em;
-		width: 70%;
+	
 	}
 }
 

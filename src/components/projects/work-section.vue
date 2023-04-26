@@ -173,39 +173,20 @@ export default {
 .project-wrapper {
 	padding: 2em 1em;
 	background: $bg-2;
-	@include breakpoint(desktop) {
-		display: flex;
-		justify-content: center;
-	}
+	display: flex;
+	justify-content: center;
 }
 .projects-container {
 	color: $white;
-	@include breakpoint(desktop) {
-		width: 70%;
-	}
 }
-.projects-list {
-	@include breakpoint(tablet) {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1em;
-	}
-	@include breakpoint(desktop) {
-		display: flex;
-	}
-}
+
 .projects-project {
 	margin-bottom: 1.5em;
-
-	box-shadow: rgba(236, 236, 236, 0.12) 0px 1px 3px,
-		rgba(230, 227, 227, 0.24) 0px 1px 2px;
+	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 }
 
 .projects-project-thumb {
 	height: 16em;
-	// @include breakpoint(tablet) {
-	// 	flex: 1;
-	// }
 	img {
 		border-radius: 5px 5px 0 0;
 		width: 100%;
@@ -219,17 +200,14 @@ export default {
 	padding: 1.5em 0.5em;
 	font: $font-thin-text-mb;
 
-
-
 	h3 {
 		font: $font-subtitle-mb;
 		color: rgba($white, 0.4);
 	}
 
-	.text-description{
+	.text-description {
 		margin-bottom: 2em;
 	}
-	
 }
 .see-more {
 	display: flex;
@@ -239,13 +217,6 @@ export default {
 }
 .project-cards-container {
 	margin-block: 6em;
-	@include breakpoint(tablet) {
-		display: flex;
-		gap: 4em;
-	}
-	@include breakpoint(desktop) {
-		justify-content: space-around;
-	}
 }
 .project-cards {
 	padding: 0.5em;
@@ -265,9 +236,7 @@ export default {
 	border-bottom: 1px solid $white;
 	padding-bottom: 5em;
 	margin-bottom: 2em;
-	@include breakpoint(tablet) {
-		border: none;
-	}
+	
 }
 .card-blog {
 	position: relative;
@@ -294,13 +263,6 @@ export default {
 		border-bottom: 1px solid $white;
 	}
 }
-// .card-title{
-// 	display: flex;
-// 	gap: 1em;
-// .card-body{
-// 	background: green;
-// 	z-index: 2;
-// }
 .angle-right {
 	color: $accent;
 	font-size: 1.3em;
@@ -315,5 +277,42 @@ export default {
 }
 .project-btn {
 	width: 100%;
+}
+
+.project-wrapper {
+	@include breakpoint(tablet) {
+		.project-cards-container {
+			display: flex;
+			gap: 4em;
+		}
+		.projects-list {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1em;
+		}
+		.cards-youtube {
+			border: none;
+		}
+	}
+	@include breakpoint(desktop) {
+		.projects-container {
+			width: 70%;
+		}
+		.project-cards-container {
+			justify-content: space-around;
+		}
+		.projects-list {
+			display: flex;
+		}
+		.projects-project {
+			transition: 250ms ease-in-out;
+			cursor: pointer;
+
+			&:hover {
+				transform: scale(1.02);
+				box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
+			}
+		}
+	}
 }
 </style>

@@ -123,7 +123,7 @@ body.mobile-menu-open {
 	padding-top: 3em;
 }
 .routerView{
-	margin-inline: 1em;
+	margin: 0 1em 5em 1em;
 }
 
 .home-blogs-wrapper {
@@ -147,7 +147,7 @@ body.mobile-menu-open {
 			justify-content: center;
 		}
 		.routerView {
-			width: 50%;
+			width: 60%;
 		}
 		.home-blog-header-wrapper {
 			display: flex;

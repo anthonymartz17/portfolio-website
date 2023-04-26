@@ -54,6 +54,7 @@ export default {
 }
 
 .header-container {
+	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.075);
 	position: relative;
 	background: $bg-1;
 	padding: 0.8em 1.5em;

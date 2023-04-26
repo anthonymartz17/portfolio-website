@@ -1,5 +1,9 @@
 <script>
+import SocialMedia from "../components/socialMedia.vue";
 export default {
+	components: {
+		SocialMedia,
+	},
 	data() {
 		return {
 			navLinks: [
@@ -27,33 +31,36 @@ export default {
 <template>
 	<div class="footer-wrapper">
 		<div class="the-footer">
-			<div class="bottom-links">
-				<div class="footer-nav">
-					<ul>
-						<template v-for="link in navLinks">
-							<li
-								class="link-item"
-								v-if="!link.route"
-								@click="emitScrollToEvent(link.name)"
-								:key="link.name"
-							>
-								{{ link.name }}
-							</li>
-							<router-link
-								class="link-item"
-								v-if="link.route"
-								:to="{ name: link.route }"
-								:key="link.name"
-								>{{ link.name }}</router-link
-							>
-						</template>
-					</ul>
-				</div>
-				<div class="copyRight">
-					<p>Designed and built by</p>
-					<p>Antonio Martinez</p>
-					<small>© {{ year }}</small>
-				</div>
+			<div class="logo-socialMedia">
+				<div class="logo">MARTZ</div>
+				<SocialMedia class="media" />
+			</div>
+
+			<div class="footer-nav">
+				<ul>
+					<template v-for="link in navLinks">
+						<li
+							class="link-item"
+							v-if="!link.route"
+							@click="emitScrollToEvent(link.name)"
+							:key="link.name"
+						>
+							{{ link.name }}
+						</li>
+						<router-link
+							class="link-item"
+							v-if="link.route"
+							:to="{ name: link.route }"
+							:key="link.name"
+							>{{ link.name }}</router-link
+						>
+					</template>
+				</ul>
+			</div>
+			<div class="copyRight">
+				<p>Designed and built by</p>
+				<p>Antonio Martinez</p>
+				<small>© {{ year }}</small>
 			</div>
 		</div>
 	</div>
@@ -61,18 +68,16 @@ export default {
 
 <style lang="scss" scoped>
 .footer-wrapper {
-	background: $bg-2;
-	padding: 2em;
-	@include breakpoint(desktop) {
-		display: flex;
-		justify-content: center;
-	
-	}
+	background: rgba(255, 255, 255, 0.075);
+	padding-inline:1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 50vh;
 }
 .the-footer {
-	padding-bottom: 3em;
+	flex: 1;
 	color: $white;
-	margin-top: 7em;
 
 	@include breakpoint(tablet) {
 		width: 85%;
@@ -81,21 +86,12 @@ export default {
 		width: 40%;
 		margin-top: 3em;
 		padding-bottom: 0;
-		.link-item  {
-		font-size: 1.2em;
-	}
-
-	// .copyRight{
-	// 	text-align: start;
-	// }
-
+		.link-item {
+			font-size: 1.2em;
+		}
 	}
 }
 
-.bottom-links {
-	border-top: 1px solid rgba($white, 0.3);
-	padding-block: 1em;
-}
 .footer-nav {
 	font: $font-small-mb;
 
@@ -115,6 +111,19 @@ export default {
 		color: $white;
 		text-decoration: none;
 	}
+}
+.logo-socialMedia{
+	width: 80%;
+	background: red;
+}
+.logo {
+	text-align: center;
+	margin-bottom: 3em;
+}
+.media {
+	width: 100%;
+	font-size: 1.2em;
+	margin-bottom: 1.5em;
 }
 .copyRight {
 	font: $font-small-mb;

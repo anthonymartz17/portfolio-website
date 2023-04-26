@@ -11,7 +11,7 @@ export default {
 				{ id: "javascript", name: "javaScript", icon: "JS", size: "79" },
 				{ id: "css3", name: "css3", icon: "css", size: "79" },
 				{ id: "html5", name: "html5", icon: "html", size: "79" },
-				{ id: "sass", name: "sass", icon: "sass", size: "100" },
+				// { id: "sass", name: "sass", icon: "sass", size: "100" },
 			],
 			skillsDescriptions: [
 				{
@@ -34,11 +34,11 @@ export default {
 					description:
 						"Html Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
 				},
-				{
-					id: "sass",
-					description:
-						"Sass Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-				},
+				// {
+				// 	id: "sass",
+				// 	description:
+				// 		"Sass Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
+				// },
 			],
 		};
 	},
@@ -78,12 +78,12 @@ export default {
 								:size="icon.size"
 							/>
 						</div>
-						<p>{{ icon.name }}</p>
+						<p class="icon-name">{{ icon.name }}</p>
 						<!-- <div  v-if="icon.id == skillId">{{scrollPosition}}</div> -->
 					</div>
 				</div>
 				<div class="skill-description-container">
-					<p>{{ skillDescription.description }}</p>
+					<p class="text-p">{{ skillDescription.description }}</p>
 				</div>
 			</div>
 		</div>
@@ -95,7 +95,7 @@ export default {
 	background: $accent;
 }
 .skills-wrapper {
-	padding: 2em;
+	padding: 2em 1em;
 	background: $bg-2;
 	display: flex;
 	justify-content: center;
@@ -104,17 +104,36 @@ export default {
 	margin-bottom: 4em;
 	color: $white;
 	position: relative;
-	@include breakpoint(tablet) {
-		width: 85%;
-	}
-	@include breakpoint(desktop) {
-		width: 70%;
-	}
 }
-.skills-body {
+
+.skill-icon {
+	display: grid;
+	place-items: center;
+}
+.skills-icons-container {
+	margin-bottom: 1.5em;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	row-gap: 2.5em;
+}
+.icon-name {
+	text-align: center;
+	font: $font-text-mb;
+}
+.icon {
+	height: 6em;
+	width: 6em;
+	margin-bottom: 0.5em;
+	display: flex;
+	justify-content: center;
+	align-items: end;
+}
+
+.skills-wrapper {
 	@include breakpoint(tablet) {
-		display: flex;
-		gap: 2em;
+		.skills-container {
+			width: 85%;
+		}
 
 		.skills-icons-container {
 			flex: 1;
@@ -124,31 +143,14 @@ export default {
 			font: $font-text-mb;
 		}
 	}
-}
-.skills-icons-container {
-	margin-bottom: 1.5em;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	flex-wrap: wrap;
-	column-gap: 0.5em;
-	row-gap: 2.5em;
-}
-.skill-icon {
-	// z-index: 2;
-	p {
-		text-align: center;
-		font: $font-text-mb;
+	@include breakpoint(desktop) {
+		.skills-container {
+			width: 70%;
+			margin-bottom: 10em;
+		}
+		.skills-body {
+			display: flex;
+		}
 	}
-}
-.icon {
-	// aspect-ratio: 1/1;
-	// border: 1px solid;
-	height: 6em;
-	width: 6em;
-	margin-bottom: 0.5em;
-	display: flex;
-	justify-content: center;
-	align-items: end;
 }
 </style>

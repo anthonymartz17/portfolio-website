@@ -39,13 +39,16 @@ export default {
 						<br />
 						<p>{{ description }}</p>
 					</div>
-					<div class="hobbies-icons-container">
-						<MartzIcon
-							class="icon"
-							:icon="icon"
-							v-for="icon in hobbiesIcons"
-							:key="icon"
-						/>
+					<div>
+						<h5 class="other-hobbies">Other hobbies:</h5>
+						<div class="hobbies-icons-container">
+							<MartzIcon
+								class="icon"
+								:icon="icon"
+								v-for="icon in hobbiesIcons"
+								:key="icon"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -64,39 +67,20 @@ export default {
 	padding: 0 1em;
 }
 .aboutme-container {
-	padding-bottom: 4em;
+	margin-bottom: 5em;
 	color: $white;
 	position: relative;
-	@include breakpoint(tablet) {
-		width: 85%;
-	}
-	@include breakpoint(desktop) {
-		width: 70%;
-		max-width: 70%;
-	}
 }
-.about-body {
-	@include breakpoint(tablet) {
-		.aboutme-img {
-			flex: 2;
-		}
-		.aboutme-description {
-			flex: 1.5;
-			// font: $font-thin-text-tb;
-			@include breakpoint(desktop) {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-
-			}
-		}
-	}
-	@include breakpoint(desktop) {
-		display: flex;
-		gap: 1em;
-	}
+.parragraph {
+	margin-bottom: 2em;
+}
+.other-hobbies {
+	font: $font-subtitle-mb;
+	color: rgba($white, 0.4);
+	margin-bottom: 1em;
 }
 .aboutme-description {
+	flex: 1.5;
 	font: $font-thin-text-mb;
 	margin-bottom: 1em;
 }
@@ -114,17 +98,44 @@ export default {
 }
 .hobbies-icons-container {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-around;
 	flex-wrap: wrap;
 	gap: 1em;
 }
 .icon {
-	// aspect-ratio: 1/1;
-	// border: 1px solid;
 	height: 5em;
 	width: 5em;
-	// margin: 5em;
 	margin-bottom: 0.5em;
 	opacity: 0.2;
+}
+
+.aboutme-wrapper {
+	@include breakpoint(tablet) {
+		.aboutme-container {
+			width: 85%;
+			margin-bottom: 10em;
+		}
+		.aboutme-img {
+			flex: 2;
+		}
+	}
+	@include breakpoint(desktop) {
+		.aboutme-container {
+			width: 70%;
+			max-width: 70%;
+		}
+		.about-body {
+			display: flex;
+			gap: 1em;
+		}
+		.aboutme-description {
+			display: flex;
+			flex-direction: column;
+		}
+		.icon {
+			height: 4em;
+			width: 4em;
+		}
+	}
 }
 </style>

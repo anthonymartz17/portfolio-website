@@ -64,27 +64,20 @@ export default {
 	justify-content: center;
 }
 .hero-section {
-	margin-inline: 1em;
-	@include breakpoint(tablet) {
-		gap: 1em;
-		height: 90vh;
-	}
-	@include breakpoint(desktop) {
-		height: 100%;
-		display: flex;
-		justify-content: space-between;
-		// margin-block: 2em;
-		width: 70%;
-	}
+	display: grid;
+	align-items: center;
+	margin: 2em 1em;
+
 
 	.fullbody {
 		display: none;
-
+ 
 		@include breakpoint(desktop) {
 			display: block;
 		}
 	}
 	.photo-wrapper {
+		// border: 1px solid;
 		display: flex;
 		justify-content: center;
 		@include breakpoint(desktop) {
@@ -96,7 +89,7 @@ export default {
 		justify-self: center;
 
 		width: 50%;
-		margin-bottom: 2em;
+		// margin-bottom: 2em;
 		@include breakpoint(tablet) {
 			width: 60%;
 			display: flex;
@@ -162,6 +155,18 @@ export default {
 			width: 70%;
 		}
 		@include breakpoint(desktop) {
+		}
+	}
+}
+.hero-wrapper {
+	@include breakpoint(tablet) {
+	}
+	@include breakpoint(desktop) {
+		.hero-section {
+			height: 100%;
+			display: flex;
+			justify-content: space-between;
+			width: 70%;
 		}
 	}
 }

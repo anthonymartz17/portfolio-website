@@ -196,9 +196,9 @@ export default {
 .hireme-wrapper{
 	background: $bg-2;
 	padding: 2em 1em;
+	display: flex;
+	justify-content: center;
 	@include breakpoint(desktop) {
-		display: flex;
-		justify-content: center;
 	
 	}
 }

@@ -69,7 +69,6 @@ export default {
 	justify-content: center;
 	align-items: center;
 	padding: 1em;
-	// height: 80vh;
 	background: rgba(255, 255, 255, 0.075);
 }
 .nav-container-link {

@@ -38,9 +38,10 @@ export default {
 	destroyed() {
 		window.removeEventListener("scroll", this.updateScrollPosition);
 	},
-	
+
 	beforeDestroy() {
-		this.toggleMobileMenue()
+		this.isMenueVisible = false;
+		document.body.classList.remove("mobile-menu-open");
 	},
 	methods: {
 		toggleMobileMenue() {
@@ -75,7 +76,7 @@ export default {
 };
 </script>
 <template>
-	<div class="test">
+	<div class="app-wrapper">
 		<header :class="{ 'fixed-header': isScrollingUp }">
 			<Header
 				v-if="!showMore"
@@ -96,25 +97,6 @@ export default {
 		</main>
 		<footer><Footer @scrollToEvent="scrollTo($event)" /></footer>
 	</div>
-
-	<!-- <font-awesome-icon icon="fa-brands fa-youtube" />
-				<font-awesome-icon icon="fa-brands fa-blogger" />
-				<font-awesome-icon icon="fa-solid fa-handshake" />
-				<font-awesome-icon icon="fa-solid fa-hands-holding" />
-				<font-awesome-icon icon="fa-regular fa-lightbulb" />
-				<font-awesome-icon icon="fa-solid fa-xmark" />
-				<font-awesome-icon icon="fa-regular fa-address-card" />
-				<font-awesome-icon icon="fa-solid fa-circle-info" />
-				<font-awesome-icon icon="fa-solid fa-house" />
-				<font-awesome-icon icon="fa-solid fa-eye" />
-				<font-awesome-icon icon="fa-solid fa-paper-plane" />
-				<font-awesome-icon icon="fa-solid fa-play" />
-				<font-awesome-icon icon="fa-solid fa-tv" />
-				<font-awesome-icon icon="fa-brands fa-readme" />
-				<font-awesome-icon icon="fa-solid fa-angle-left" />
-				<font-awesome-icon icon="fa-brands fa-vuejs" />
-				<font-awesome-icon icon="fa-solid fa-globe" />
-				<font-awesome-icon icon="fa-solid fa-message" /> -->
 </template>
 
 <style lang="scss">
@@ -126,5 +108,8 @@ body.mobile-menu-open {
 	position: fixed;
 	width: 100%;
 	z-index: 100;
+}
+.app-wrapper{
+	background: $bg-2;
 }
 </style>

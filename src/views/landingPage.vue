@@ -74,19 +74,14 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.icon {
-	fill: black;
-}
+// .icon {
+// 	fill: black;
+// }
 .landing-wrapper {
 	height: 100vh;
 	background: $bg-1;
-	@include breakpoint(tablet) {
-		display: flex;
-		justify-content: center;
-	}
-	@include breakpoint(lg-device) {
-		position: relative;
-	}
+	display: flex;
+	justify-content: center;
 }
 .container {
 	position: relative;
@@ -98,13 +93,6 @@ export default {
 	font-family: $font-poppins;
 	color: $white;
 	padding: 1em;
-	@include breakpoint(tablet) {
-		width: 70%;
-	}
-	@include breakpoint(lg-device) {
-		justify-content: center;
-		
-	}
 }
 .header {
 	flex: 1;
@@ -116,66 +104,24 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	gap: 1em;
-	@include breakpoint(lg-device) {
-		width: 100%;
-		flex-direction: row;
-		justify-content: center;
-	}
 }
 .links {
 	width: 100%;
-	@include breakpoint(lg-device) {
-		width: 35%;
-		z-index: 10;
-	}
 }
-.social-media {
-	@include breakpoint(lg-device) {
-	}
-}
+
 .headshot-img {
 	width: 13em;
-	@include breakpoint(tablet) {
-		width: 15em;
-	}
-	@include breakpoint(lg-device) {
-		width: 15em;
-		position: absolute;
-		right: -10em;
-	
-	}
 
 	.fullbody {
 		display: none;
-	
-	}
-	@include breakpoint(lg-device) {
-		.headshot {
-			display: none;
-		}
-		.fullbody {
-			display: flex;
-		}
 	}
 }
 .lg-title {
 	flex: 1;
-	@include breakpoint(tablet) {
-		font: $font-xl-tb;
-	}
-	@include breakpoint(lg-device) {
-		font: $font-xxl-dsk;
-	}
 }
 .l-title {
 	font: $font-title-mb;
 	text-align: center;
-	@include breakpoint(tablet) {
-		font: $font-title-tb;
-	}
-	@include breakpoint(lg-device) {
-		font: $font-xl-dsk;
-	}
 }
 
 .landing-btn {
@@ -183,16 +129,87 @@ export default {
 	margin-bottom: 0.5em;
 	text-decoration: none;
 	width: 100%;
-	@include breakpoint(tablet) {
-		font: $font-btn-tb;
-	}
-	@include breakpoint(lg-device) {
-		width: 100%;
-	}
 
 	.social-media {
 		position: absolute;
 		top: 0;
+	}
+}
+.landing-wrapper {
+	@include breakpoint(tablet) {
+		.container {
+			width: 70%;
+		}
+		.headshot-img {
+			width: 15em;
+		}
+		.lg-title {
+			font: $font-xl-tb;
+		}
+		.l-title {
+			font: $font-title-tb;
+		}
+		.landing-btn {
+			font: $font-btn-tb;
+		}
+	}
+	@include breakpoint(desktop) {
+		position: relative;
+
+		.container {
+			justify-content: center;
+		}
+
+		.landing-body {
+			width: 100%;
+			flex-direction: row;
+			justify-content: center;
+		}
+
+		.links {
+			width: 35%;
+			z-index: 10;
+		}
+
+		.social-media {
+			flex-direction: column;
+			width: auto;
+			position: absolute;
+			left: 0;
+			gap: 1.5em;
+		}
+
+		.icon-container {
+			padding: 0.5em;
+
+			&:hover .icon {
+				color: $accent;
+			}
+		}
+
+		.headshot-img {
+			position: absolute;
+			right: -10em;
+		}
+
+		.headshot {
+			display: none;
+		}
+		.fullbody {
+			display: flex;
+		}
+
+		.lg-title {
+			font: $font-xxl-dsk;
+		}
+
+		.l-title {
+			font: $font-xl-dsk;
+		}
+
+		.landing-btn {
+			width: 100%;
+		}
 	}
 }
 </style>

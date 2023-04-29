@@ -54,21 +54,20 @@ export default {
 	justify-content: space-between;
 	cursor: pointer;
 
-	@include breakpoint(lg-device) {
-		width: auto;
-		position: absolute;
-		left: 0;
-		flex-direction: column;
-		gap: 1.5em;
+	// @include breakpoint(lg-device) {
+	// 	width: auto;
+	// 	position: absolute;
+	// 	left: 0;
+	// 	gap: 1.5em;
 
-		.icon-container {
-			padding: 0.5em;
-		
-			&:hover .icon {
-				color: $accent;
-			}
-		}
-	}
+	// 	.icon-container {
+	// 		padding: 0.5em;
+
+	// 		&:hover .icon {
+	// 			color: $accent;
+	// 		}
+	// 	}
+	// }
 
 	.icon {
 		font-size: 1.2em;
@@ -76,8 +75,6 @@ export default {
 
 		@include breakpoint(tablet) {
 			font-size: 1.5em;
-		}
-		@include breakpoint(lg-device) {
 		}
 	}
 	a {

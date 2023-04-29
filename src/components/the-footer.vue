@@ -69,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 .footer-wrapper {
 	background: rgba(255, 255, 255, 0.075);
-	padding-inline:1em;
+	padding-inline: 1em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -78,18 +78,6 @@ export default {
 .the-footer {
 	flex: 1;
 	color: $white;
-
-	@include breakpoint(tablet) {
-		width: 85%;
-	}
-	@include breakpoint(desktop) {
-		width: 40%;
-		margin-top: 3em;
-		padding-bottom: 0;
-		.link-item {
-			font-size: 1.2em;
-		}
-	}
 }
 
 .footer-nav {
@@ -112,21 +100,62 @@ export default {
 		text-decoration: none;
 	}
 }
-.logo-socialMedia{
-	width: 80%;
-	background: red;
+.logo-socialMedia {
+	display: grid;
+	place-items: center;
 }
 .logo {
 	text-align: center;
 	margin-bottom: 3em;
 }
 .media {
-	width: 100%;
 	font-size: 1.2em;
 	margin-bottom: 1.5em;
 }
 .copyRight {
 	font: $font-small-mb;
 	text-align: center;
+}
+
+.footer-wrapper {
+	@include breakpoint(tablet) {
+		.the-footer {
+			flex: none;
+			width: 85%;
+		}
+		.link-item {
+			font-size: 1.2em;
+			font: $font-text-mb;
+			cursor: pointer;
+		}
+	}
+	@include breakpoint(desktop) {
+		.the-footer {
+			width: 70%;
+			margin-top: 3em;
+			padding-bottom: 0;
+			display: flex;
+			justify-content: space-between;
+			gap: 2em;
+		}
+
+		.footer-nav {
+			flex: 2;
+			display: flex;
+			justify-content: center;
+			ul {
+				width: 60%;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1em 5em;
+			}
+		}
+		.logo-socialMedia {
+			flex: 1;
+		}
+		.copyRight {
+			flex: 1;
+		}
+	}
 }
 </style>

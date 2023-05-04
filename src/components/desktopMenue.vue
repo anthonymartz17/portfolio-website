@@ -22,6 +22,9 @@ export default {
 
 	methods: {
 		emitScrollToEvent(section) {
+			this.navLinks.find((x) => x.active).active = false;
+			this.navLinks.find((x) => x.name == section).active = true;
+
 			if (section) this.$emit("scrollToEvent", section);
 		},
 	},
@@ -62,12 +65,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
 .active {
-	
 	span {
 		color: $accent;
-		border-bottom: 1px solid $white;
+		// border-bottom: 1px solid $white;
 	}
 }
 .accent {
@@ -91,7 +92,6 @@ export default {
 	gap: 2em;
 	// width: 70%;
 	font: $font-text-mb;
-
 
 	&-links {
 		padding: 0;

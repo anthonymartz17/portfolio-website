@@ -12,12 +12,12 @@ export default {
 			projects: [
 				{
 					id: 1,
-					name: "This is project 1",
+					name: "Personal Website",
 					short_desc:
 						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
 					full_desc:
 						"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
-					img: "project1.jpeg",
+					img: "portfolio.png",
 					thumbnail_main: "project1.jpeg",
 					thumbnail_sec: "project1.jpeg",
 					thumbnail_third: "project1.jpeg",
@@ -168,7 +168,7 @@ export default {
 		</div>
 	</div>
 </template>
-
+box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 <style lang="scss" scoped>
 .project-wrapper {
 	padding: 2em 1em;

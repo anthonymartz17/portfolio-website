@@ -36,27 +36,26 @@ export default {
 				<SocialMedia class="media" />
 			</div>
 
-			<div class="footer-nav">
-				<ul>
-					<template v-for="link in navLinks">
-						<li
-							class="link-item"
-							v-if="!link.route"
-							@click="emitScrollToEvent(link.name)"
-							:key="link.name"
-						>
-							{{ link.name }}
-						</li>
-						<router-link
-							class="link-item"
-							v-if="link.route"
-							:to="{ name: link.route }"
-							:key="link.name"
-							>{{ link.name }}</router-link
-						>
-					</template>
-				</ul>
-			</div>
+			<ul class="footer-nav">
+				<template v-for="link in navLinks">
+					<li
+						class="link-item"
+						v-if="!link.route"
+						@click="emitScrollToEvent(link.name)"
+						:key="link.name"
+					>
+						{{ link.name }}
+					</li>
+					<router-link
+						class="link-item"
+						v-if="link.route"
+						:to="{ name: link.route }"
+						:key="link.name"
+						>{{ link.name }}</router-link
+					>
+				</template>
+			</ul>
+
 			<div class="copyRight">
 				<p>Designed and built by</p>
 				<p>Antonio Martinez</p>
@@ -71,7 +70,6 @@ export default {
 	background: rgba(255, 255, 255, 0.075);
 	padding-inline: 1em;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	min-height: 50vh;
 }
@@ -82,16 +80,14 @@ export default {
 
 .footer-nav {
 	font: $font-small-mb;
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+	list-style-type: 0;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 3em;
 
-	ul {
-		margin: 0;
-		padding: 0;
-		text-indent: 0;
-		list-style-type: 0;
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 3em;
-	}
 	li {
 		list-style: none;
 	}
@@ -120,13 +116,30 @@ export default {
 .footer-wrapper {
 	@include breakpoint(tablet) {
 		.the-footer {
-			flex: none;
-			width: 85%;
+			display: grid;
+			grid-template-areas:
+				"logo-media links"
+				"copyright copyright";
+			row-gap: 4em;
 		}
 		.link-item {
 			font-size: 1.2em;
 			font: $font-text-mb;
 			cursor: pointer;
+		}
+		.logo-socialMedia {
+			grid-area: logo-media;
+		}
+
+		.footer-nav {
+			grid-area: links;
+			display: grid;
+			place-items: center;
+			grid-template-columns: 1fr 1fr;
+			gap: 1em;
+		}
+		.copyRight {
+			grid-area: copyright;
 		}
 	}
 	@include breakpoint(desktop) {
@@ -140,15 +153,9 @@ export default {
 		}
 
 		.footer-nav {
-			flex: 2;
-			display: flex;
-			justify-content: center;
-			ul {
-				width: 60%;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 1em 5em;
-			}
+			width: 30%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
 		}
 		.logo-socialMedia {
 			flex: 1;

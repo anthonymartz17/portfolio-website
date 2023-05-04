@@ -99,7 +99,6 @@ export default {
 	width: 70%;
 }
 .copyRight {
-		// justify-self: flex-end;
 		font: $font-small-mb;
 		text-align: center;
 	}
@@ -107,8 +106,23 @@ export default {
 	width: 100%;
 	height: 100%;
 	@include breakpoint(tablet) {
-		.media {
-			width: 50%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 2em;
+		width: 90%;
+		.logo-socialMedia {
+			flex: 1;
+			place-items: start;
+		}
+		.social-media-container {
+			width: 100%;
+		}
+		.nav-container-links {
+			flex: 2;
+			gap: 1em;
+			display: grid;
+			
 		}
 	}
 	@include breakpoint(desktop) {
@@ -125,9 +139,7 @@ export default {
 			width: 100%;
 		}
 		.nav-container-links {
-			flex: 2;
-			flex-direction: column;
-			gap: 1em;
+			place-content: start;
 		}
 		.nav-container-link {
 			margin-bottom: 0;
@@ -151,7 +163,7 @@ export default {
 	.logo {
 		font: $font-title-mb;
 		font-size: 1.2em;
-		margin-bottom: 1em;
+		margin-bottom: 2em;
 		text-align: center;
 	}
 

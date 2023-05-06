@@ -121,8 +121,8 @@ export default {
 	}
 	@include breakpoint(desktop) {
 		.aboutme-container {
-			width: 70%;
-			max-width: 70%;
+			width: 60%;
+			max-width: 60%;
 		}
 		.about-body {
 			display: flex;

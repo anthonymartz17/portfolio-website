@@ -1,8 +1,10 @@
 <script>
 import SocialMedia from "../components/socialMedia.vue";
+import MartzIcon from "../components/icons/martz-icons.vue";
 export default {
 	components: {
 		SocialMedia,
+		MartzIcon,
 	},
 	data() {
 		return {
@@ -30,6 +32,9 @@ export default {
 </script>
 <template>
 	<div class="footer-wrapper">
+		<div class="backhome">
+			<MartzIcon icon="angleUp" size="50" />
+		</div>
 		<div class="the-footer">
 			<div class="logo-socialMedia">
 				<div class="logo">MARTZ</div>
@@ -67,11 +72,28 @@ export default {
 
 <style lang="scss" scoped>
 .footer-wrapper {
+	z-index: 10;
+	position: relative;
 	background: rgba(255, 255, 255, 0.075);
 	padding-inline: 1em;
 	display: flex;
 	align-items: center;
 	min-height: 50vh;
+}
+.backhome{
+	z-index: 1;
+	position: absolute;
+	top: -96px;
+	left: 50%;
+	transform: translate(-50%);
+	background:  rgba(255, 255, 255, 0.075);
+	width: 7em;
+	height: 6em;
+	display: grid;
+	place-items: center;
+	padding-top: 3em;
+	// border-radius: 70px;
+	clip-path: circle(50.4% at 51% 100%);
 }
 .the-footer {
 	flex: 1;

@@ -68,75 +68,28 @@ export default {
 	align-items: center;
 	margin: 2em 1em;
 
-
 	.fullbody {
 		display: none;
- 
-		@include breakpoint(desktop) {
-			display: block;
-		}
 	}
 	.photo-wrapper {
-		// border: 1px solid;
 		display: flex;
 		justify-content: center;
-		@include breakpoint(desktop) {
-			order: 2;
-		}
 	}
 	&-headshot {
 		display: flex;
 		justify-self: center;
-
 		width: 50%;
-		// margin-bottom: 2em;
-		@include breakpoint(tablet) {
-			width: 60%;
-			display: flex;
-			justify-content: center;
-		}
-		@include breakpoint(desktop) {
-			width: 90%;
-			display: flex;
-			align-self: flex-end;
-			margin: 0;
-		}
-		@include breakpoint(lg-device) {
-			// width: 100%;
-		}
 	}
-	.headshot {
-		@include breakpoint(desktop) {
-			display: none;
-		}
-	}
+
 	.hero-section-text-container {
 		padding-left: 1em;
 		display: grid;
 		justify-content: center;
-		@include breakpoint(desktop) {
-			display: block;
-			align-self: center;
-		}
 	}
 	&-title {
 		color: $white;
 		font: $font-title-mb;
 		margin-bottom: 1em;
-		@include breakpoint(tablet) {
-			font: $font-title-tb;
-			justify-content: center;
-			br:first-child {
-				display: none;
-			}
-		}
-		@include breakpoint(tablet) {
-			font: $font-title-dsk;
-			justify-content: center;
-			br:first-child {
-				display: none;
-			}
-		}
 
 		span {
 			color: $accent;
@@ -146,27 +99,55 @@ export default {
 		color: $white;
 		font: $font-text-mb;
 		margin-bottom: 2em;
-		@include breakpoint(tablet) {
-			font: $font-text-tb;
-		}
-	}
-	.btn-container {
-		@include breakpoint(tablet) {
-			width: 70%;
-		}
-		@include breakpoint(desktop) {
-		}
 	}
 }
 .hero-wrapper {
 	@include breakpoint(tablet) {
+		.hero-section-headshot {
+			width: 60%;
+			display: flex;
+			justify-content: center;
+		}
+		.hero-section-title {
+			font: $font-title-dsk;
+			justify-content: center;
+			br:first-child {
+				display: none;
+			}
+		}
+		.hero-section-text {
+			font: $font-text-tb;
+		}
+		.btn-container {
+			width: 70%;
+		}
 	}
 	@include breakpoint(desktop) {
 		.hero-section {
 			height: 100%;
 			display: flex;
 			justify-content: space-between;
-			width: 70%;
+			width: 60%;
+		}
+
+		.fullbody {
+			display: block;
+		}
+		.photo-wrapper {
+			order: 2;
+		}
+		.hero-section-headshot {
+			width: 90%;
+			display: flex;
+			align-self: flex-end;
+			margin: 0;
+		}
+		.headshot {
+			display: none;
+		}
+		.hero-section-text-container {
+			display: block;
+			align-self: center;
 		}
 	}
 }

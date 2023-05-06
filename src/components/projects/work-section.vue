@@ -14,9 +14,26 @@ export default {
 					id: 1,
 					name: "Personal Website",
 					short_desc:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-					full_desc:
-						"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
+						"Dynamic showcase of my skills, work, and passion for web development.",
+					full_desc: [
+						{
+							id: "p1",
+							text: "My portfolio website is a dynamic platform that showcases my work, skills, and passion for web development, aiming to demonstrate my proficiency to potential employers. ",
+						},
+						{
+							id: "p2",
+							text: "Among the technical skills included is the utilization of Vue.js, a JavaScript framework, for constructing the user interface in a component-based programming model. CSS and SASS were skillfully employed to handle the styles, while HTML5 targeted the markup. Page navigation was implemented through a combination of scrolling into view and the use of the Vue router. Additionally, I integrated email functionality into the contact form using the EmailJS library. ",
+						},
+						{
+							id: "p3",
+							text: "During the creation process, I faced the challenge of designing the website, despite not being a web designer. To ensure a professional and fundamentally sound appearance, I delved into the fundamentals of web design, such as visual hierarchy, alignment, proximity, balance, repetition, and typography. Valuable resources like YouTube, freecodecamp, and typescale.com assisted me in gaining a better understanding of these concepts.",
+						},
+						{
+							id: "p4",
+							text: "What I enjoyed the most was the implementation of custom icons. Dissatisfied with the available options in common libraries, I embarked on learning how to style SVGs. Drawing inspiration from the functionality of font awesome icon components, I developed a component that housed all the SVGs. This allowed me to customize the color, size, and specific icons using props. The Canva platform provided a source for the icons I chose, adding a touch of creativity to the design process. Overall, this experience was both enjoyable and rewarding.",
+						},
+					],
+
 					img: "portfolio.png",
 					thumbnail_main: "project1.jpeg",
 					thumbnail_sec: "project1.jpeg",
@@ -97,10 +114,7 @@ export default {
 					</div>
 					<div class="projects-project-desc">
 						<h3>{{ project.name }}</h3>
-						<p class="text-description">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
-							consequuntur?
-						</p>
+						<p class="text-description">{{ project.short_desc }}</p>
 						<div class="see-more">
 							<p class="text-p">See more</p>
 							<MartzIcon icon="angleRight" :size="15" color="accent" />
@@ -170,6 +184,7 @@ export default {
 </template>
 box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 <style lang="scss" scoped>
+
 .project-wrapper {
 	padding: 2em 1em;
 	background: $bg-2;
@@ -183,12 +198,16 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 .projects-project {
 	margin-bottom: 1.5em;
 	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
+	background: rgba(255, 255, 255, 0.075);
+	border: 1px solid rgba($white, 0.1);
+	border-radius: 5px;
 }
 
 .projects-project-thumb {
 	height: 16em;
+	padding: 0.4em;
 	img {
-		border-radius: 5px 5px 0 0;
+		border-radius: 5px;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -196,8 +215,8 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 }
 
 .projects-project-desc {
-	background: rgba(255, 255, 255, 0.075);
-	padding: 1.5em 0.5em;
+	// background: rgba(255, 255, 255, 0.075);
+	padding: 1em 0.5em;
 	font: $font-thin-text-mb;
 
 	h3 {
@@ -206,14 +225,14 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 	}
 
 	.text-description {
-		margin-bottom: 2em;
+		margin-bottom: 1em;
 	}
 }
 .see-more {
 	display: flex;
 	align-items: center;
 	gap: 1em;
-	margin-bottom: 1.5em;
+	margin-bottom: 1em;
 }
 .project-cards-container {
 	margin-block: 6em;
@@ -236,7 +255,6 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 	border-bottom: 1px solid $white;
 	padding-bottom: 5em;
 	margin-bottom: 2em;
-	
 }
 .card-blog {
 	position: relative;
@@ -296,11 +314,12 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 	}
 	@include breakpoint(desktop) {
 		.projects-container {
-			width: 70%;
+			width: 60%;
 		}
 		.project-cards-container {
 			justify-content: space-around;
 		}
+
 		.projects-list {
 			display: flex;
 		}

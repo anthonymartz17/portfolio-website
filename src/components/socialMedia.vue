@@ -54,20 +54,13 @@ export default {
 	justify-content: space-between;
 	cursor: pointer;
 
-	// @include breakpoint(lg-device) {
-	// 	width: auto;
-	// 	position: absolute;
-	// 	left: 0;
-	// 	gap: 1.5em;
-
-	// 	.icon-container {
-	// 		padding: 0.5em;
-
-	// 		&:hover .icon {
-	// 			color: $accent;
-	// 		}
-	// 	}
-	// }
+	@include breakpoint(desktop) {
+		.icon-container {
+			&:hover .icon {
+				color: $accent;
+			}
+		}
+	}
 
 	.icon {
 		font-size: 1.2em;

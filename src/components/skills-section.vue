@@ -145,7 +145,7 @@ export default {
 	}
 	@include breakpoint(desktop) {
 		.skills-container {
-			width: 70%;
+			width: 60%;
 			margin-bottom: 10em;
 		}
 		.skills-body {

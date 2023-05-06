@@ -245,7 +245,7 @@ export default {
 		width: 85%;
 	}
 	@include breakpoint(desktop){
-		width:70%;
+		width:60%;
 		display: flex;
 		gap: 3em;
 		justify-content: space-between;
@@ -259,8 +259,7 @@ export default {
 			flex-direction: column;
 			align-items: end;
 		}
-		.sections-title-global{
-		}
+	
 	}
 }
 .contact-text {

@@ -92,14 +92,16 @@ export default {
 	border-radius: 5px;
 	text-decoration: none;
 	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
+	border: 1px solid rgba($white, 0.1);
+	background: rgba(255, 255, 255, 0.075);
 }
 .blog-img-container {
 	border-radius: 5px;
 	height: 16em;
+	padding: .4em;
 
 	img {
-		border-top-right-radius: 5px;
-		border-top-left-radius: 5px;
+		border-radius: 5px;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -107,8 +109,7 @@ export default {
 }
 
 .card-desc {
-	padding: 2em 0.5em;
-	background: rgba(255, 255, 255, 0.075);
+	padding: 1em 0.5em;
 }
 .btn-container {
 	display: flex;

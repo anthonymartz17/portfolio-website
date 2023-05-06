@@ -82,6 +82,8 @@ export default {
 <style lang="scss" scoped>
 .blog-detail-wrapper {
 	padding-block: 2em;
+	display: flex;
+	justify-content: center;
 }
 .blog-detail-container {
 	margin-bottom: 3em;
@@ -90,7 +92,7 @@ export default {
 
 	}
 	@include breakpoint(desktop) {
-	
+	width: 60%;
 	}
 }
 

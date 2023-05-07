@@ -11,13 +11,13 @@ export default {
 	<button class="basebutton">
 		<span class="btn-text">{{ text }}</span>
 		<div class="btn-icon">
-			<MartzIcon v-bind="$props"/>
+			<MartzIcon class="mainIcon" v-bind="$props" />
+			<MartzIcon class="angleRight" icon="angleRight" :size="25" color="accent"/>
 		</div>
 	</button>
 </template>
 
 <style lang="scss" scoped>
-
 .btn-text {
 	position: relative;
 	padding: 1em;
@@ -30,7 +30,6 @@ export default {
 		border-right: 1px solid rgba($white, 0.8);
 		right: 0;
 	}
-
 }
 .btn-icon {
 	display: flex;
@@ -38,8 +37,8 @@ export default {
 	padding: 0.7em;
 	align-self: center;
 	justify-content: center;
-
 }
+
 .basebutton {
 	position: relative;
 	padding: 0;
@@ -52,40 +51,48 @@ export default {
 	cursor: pointer;
 	text-decoration: none;
 	width: 60%;
-  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+	box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
 	transition: all 0.5s;
 	@include breakpoint(tablet) {
-			// font: $font-btn-tb;
-			
-		}
-}
-
-.basebutton:after {
-	@include breakpoint(desktop) {
-		
-		content: '»';
-		position: absolute;
-		opacity: 0;  
-		top: 4px;
-		right: -5px;
-		transition: 0.5s;
-		color: $accent;
-		font:$font-title-tb;
+		// font: $font-btn-tb;
 	}
 }
 
-.basebutton:hover{
+.angleRight {
+	display: none;
 	@include breakpoint(desktop) {
-  padding-right: 24px;
-  padding-left:8px;
+		display: block;
+		position: absolute;
+		opacity: 0;
+		top: 50%;
+		right: -20px;
+		transform: translate(-50%, -50%);
+		transition: 0.5s;
+		font: $font-title-tb;
+	}
 }
-}
-.basebutton:hover:after {
+.mainIcon {
 	@include breakpoint(desktop) {
-  opacity: 1;
-  right: 10px;
-}
+		transition: 0.3s;
+	}
 }
 
-
+.basebutton:hover {
+	@include breakpoint(desktop) {
+		padding-right: 24px;
+		padding-left: 8px;
+	}
+}
+.basebutton:hover .angleRight {
+	@include breakpoint(desktop) {
+		opacity: 1;
+		right: 10px;
+	}
+}
+.basebutton:hover .mainIcon {
+	@include breakpoint(desktop) {
+		transform: translate(-50%);
+		opacity: 0;
+	}
+}
 </style>

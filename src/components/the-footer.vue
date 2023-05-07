@@ -32,9 +32,6 @@ export default {
 </script>
 <template>
 	<div class="footer-wrapper">
-		<div class="backhome">
-			<MartzIcon icon="angleUp" size="50" />
-		</div>
 		<div class="the-footer">
 			<div class="logo-socialMedia">
 				<div class="logo">MARTZ</div>
@@ -67,37 +64,61 @@ export default {
 				<small>© {{ year }}</small>
 			</div>
 		</div>
+		<div class="backhome" 	@click="emitScrollToEvent('Home')">
+			<MartzIcon class="angleUp" icon="angleUp" size="50" />
+		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+
 .footer-wrapper {
-	z-index: 10;
 	position: relative;
-	background: rgba(255, 255, 255, 0.075);
+	z-index: 2;
+	background: $bg-2-lighter;
+	box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
 	padding-inline: 1em;
 	display: flex;
 	align-items: center;
 	min-height: 50vh;
 }
-.backhome{
-	z-index: 1;
+.backhome {
+	// background: blue;
+	
 	position: absolute;
-	top: -96px;
+	top: -45px;
 	left: 50%;
 	transform: translate(-50%);
-	background:  rgba(255, 255, 255, 0.075);
-	width: 7em;
-	height: 6em;
+	background: $bg-2-lighter;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
 	display: grid;
-	place-items: center;
-	padding-top: 3em;
-	// border-radius: 70px;
-	clip-path: circle(50.4% at 51% 100%);
+	justify-items: center;
+	padding-top: 0.5em;
+	// clip-path: circle(50.4% at 51% 100%);
+
+&::before{
+	content: "";
+  position: absolute;
+	border-radius: 50px 50px 0 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: transparent;
+	box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
+  z-index: 1;
+}
+
+
+
 }
 .the-footer {
 	flex: 1;
+	height: 100%;
 	color: $white;
+	// background: red;
 }
 
 .footer-nav {
@@ -184,6 +205,16 @@ export default {
 		}
 		.copyRight {
 			flex: 1;
+		}
+		.backhome {
+			transition: 250ms ease-in-out;
+			transform-origin: center;
+			cursor: pointer;
+
+			&:hover {
+				transform: translate(-50%) scale(1.05);
+			}
+		
 		}
 	}
 }

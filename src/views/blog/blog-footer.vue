@@ -69,7 +69,8 @@ export default {
 	justify-content: center;
 	align-items: center;
 	padding: 1em;
-	background: rgba(255, 255, 255, 0.075);
+	background: $bg-2-lighter;
+	box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
 }
 .nav-container-link {
 	list-style: none;

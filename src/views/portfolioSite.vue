@@ -16,6 +16,7 @@ export default {
 		Hireme,
 		Footer,
 	},
+
 	data() {
 		return {
 			scrollPosition: 0,
@@ -31,7 +32,13 @@ export default {
 			],
 		};
 	},
-
+	mounted() {
+		this.$aos.init({
+			duration: 800,
+			offset: 200,
+			// disable: "mobile",
+		});
+	},
 	created() {
 		window.addEventListener("scroll", this.updateScrollPosition);
 	},
@@ -109,7 +116,7 @@ body.mobile-menu-open {
 	width: 100%;
 	z-index: 100;
 }
-.app-wrapper{
+.app-wrapper {
 	background: $bg-2;
 }
 </style>

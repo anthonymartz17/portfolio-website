@@ -55,8 +55,10 @@ export default {
 <template>
 	<div class="blog-detail-wrapper">
 		<div class="blog-detail-container">
-			<h2 class="blog-title">{{ blog.title }}</h2>
-			<div class="blog-body">
+			<h2 class="blog-title" data-aos="fade-up" data-aos-duration="800">
+				{{ blog.title }}
+			</h2>
+			<div class="blog-body"  data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
 				<div class="blog-img-container">
 					<img :src="`/img/${blog.img}`" :alt="`img of blog ${blog.title}`" />
 				</div>
@@ -89,10 +91,9 @@ export default {
 	margin-bottom: 3em;
 
 	@include breakpoint(tablet) {
-
 	}
 	@include breakpoint(desktop) {
-	width: 60%;
+		width: 60%;
 	}
 }
 
@@ -114,14 +115,12 @@ export default {
 .blog-description {
 	margin-bottom: 2em;
 }
-.resources-container{
- li{
-
-   margin-bottom: 1em;
- }
-
+.resources-container {
+	li {
+		margin-bottom: 1em;
+	}
 }
-.resource{
-  color: $white;
+.resource {
+	color: $white;
 }
 </style>

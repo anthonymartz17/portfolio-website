@@ -61,8 +61,14 @@ export default {
 	<div class="skills-wrapper">
 		<div class="skills-container">
 			<!-- <div class="background-icon">{{ scrollPosition }}</div> -->
-			<h2 class="sections-title-global">{{ title }}</h2>
-			<div class="skills-body">
+			<h2
+				class="sections-title-global"
+				data-aos="fade-up"
+				data-aos-duration="800"
+			>
+				{{ title }}
+			</h2>
+			<div class="skills-body" data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
 				<div class="skills-icons-container">
 					<div
 						class="skill-icon"

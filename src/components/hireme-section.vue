@@ -81,8 +81,8 @@ export default {
 </script>
 <template>
 	<div class="hireme-wrapper">
-		<div class="hireme-container">
-			<form class="contact-form" ref="form" @submit.prevent="sendMsg">
+		<div class="hireme-container" data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
+			<form class="contact-form" ref="form" @submit.prevent="sendMsg" >
 				<h2 class="sections-title-global hireme-title">
 					{{ title }}
 					<MartzIcon icon="handshake" size="30" />
@@ -155,7 +155,12 @@ export default {
 					</p>
 				</div>
 				<div class="btn-container">
-					<BaseButton icon="sendit" text="Send it" size="30" class="btn-sendit"/>
+					<BaseButton
+						icon="sendit"
+						text="Send it"
+						size="30"
+						class="btn-sendit"
+					/>
 
 					<font-awesome-icon
 						icon="fa-solid fa-message"
@@ -193,13 +198,12 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.hireme-wrapper{
+.hireme-wrapper {
 	background: $bg-2;
 	padding: 2em 1em;
 	display: flex;
 	justify-content: center;
 	@include breakpoint(desktop) {
-	
 	}
 }
 .popUp-container {
@@ -241,25 +245,24 @@ export default {
 	color: $accent;
 }
 .hireme-container {
-	@include breakpoint(tablet){
+	@include breakpoint(tablet) {
 		width: 85%;
 	}
-	@include breakpoint(desktop){
-		width:60%;
+	@include breakpoint(desktop) {
+		width: 60%;
 		display: flex;
 		gap: 3em;
 		justify-content: space-between;
 
-		.contact-form{
+		.contact-form {
 			flex: 2;
 		}
-		.other-contact{
+		.other-contact {
 			flex: 1;
 			display: flex;
 			flex-direction: column;
 			align-items: end;
 		}
-	
 	}
 }
 .contact-text {
@@ -305,8 +308,8 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 }
-.btn-sendit{
-	@include breakpoint(tablet){
+.btn-sendit {
+	@include breakpoint(tablet) {
 		width: 40%;
 	}
 }

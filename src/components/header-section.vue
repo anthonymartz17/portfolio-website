@@ -1,11 +1,12 @@
 <script>
 import NavMenueMobile from "./navMenueMobile.vue";
 import DesktopMenue from "./desktopMenue.vue";
-
+import MartzIcon from "./icons/martz-icons.vue";
 export default {
 	components: {
 		NavMenueMobile,
 		DesktopMenue,
+		MartzIcon,
 	},
 	data() {
 		return {};
@@ -21,7 +22,7 @@ export default {
 <template>
 	<div :class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]">
 		<div :class="['header-container-logo', { clickable: isMenueVisible }]">
-			MARTZ
+			<MartzIcon icon="logo" size="60"/>
 		</div>
 		<div class="header-nav-menue">
 			<font-awesome-icon

@@ -16,7 +16,7 @@ export default {
 	<div class="hero-wrapper">
 		<div class="hero-section">
 			<div class="photo-wrapper">
-				<div class="hero-section-headshot">
+				<div class="hero-section-headshot" data-aos="fade-left" data-aos-duration="800"  :data-aos-delay="250">
 					<img
 						class="headshot"
 						src="/img/headshotMobile.png"
@@ -29,7 +29,7 @@ export default {
 					/>
 				</div>
 			</div>
-			<div class="hero-section-text-container">
+			<div class="hero-section-text-container"  data-aos="fade-up" data-aos-duration="800" >
 				<div class="hero-text">
 					<h1 class="hero-section-title">
 						Hi,<br />

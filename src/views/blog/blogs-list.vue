@@ -45,11 +45,16 @@ export default {
 
 <template>
 	<div class="home-blogs-main-container">
-		<div class="blog-list-title"><h2>Blogs</h2></div>
+		<div class="blog-list-title" data-aos="fade-up" data-aos-duration="800">
+			<h2>Blogs</h2>
+		</div>
 		<div class="blog-list-body">
 			<!-- <divclass="blog-container"> -->
 			<router-link
-				v-for="blog in blogs"
+				data-aos="fade-up"
+				data-aos-duration="800"
+				:data-aos-delay="250 * idx"
+				v-for="(blog, idx) in blogs"
 				:key="blog.id"
 				class="blog-card"
 				:to="{ name: 'blog-details', query: { id: blog.id } }"
@@ -98,7 +103,7 @@ export default {
 .blog-img-container {
 	border-radius: 5px;
 	height: 16em;
-	padding: .4em;
+	padding: 0.4em;
 
 	img {
 		border-radius: 5px;

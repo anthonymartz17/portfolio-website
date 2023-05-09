@@ -4,8 +4,8 @@ import router from "./router";
 import "./assets/scss/reset.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import Vuelidate from 'vuelidate';
-// export const eventBus = new Vue();
+import Vuelidate from "vuelidate";
+import AOSPlugin from "../aos";
 
 import {
 	faBriefcase,
@@ -13,14 +13,14 @@ import {
 	faBars,
 	faHandshake,
 	faCircleInfo,
-  faHouse,
-  faEye,
-  faPaperPlane,
-  faPlay,
-  faTv,
+	faHouse,
+	faEye,
+	faPaperPlane,
+	faPlay,
+	faTv,
 	faAngleLeft,
 	faAngleRight,
-  faGlobe,
+	faGlobe,
 	faMessage,
 	faHandsHoldingCircle,
 	faXmark,
@@ -36,9 +36,9 @@ import {
 	faGithub,
 	faLinkedinIn,
 	faYoutube,
-  faBlogger,
-  faReadme,
-  faVuejs
+	faBlogger,
+	faReadme,
+	faVuejs,
 } from "@fortawesome/free-brands-svg-icons";
 
 /* add icons to the library */
@@ -56,25 +56,26 @@ library.add(
 	faBars,
 	faCircleInfo,
 	faAddressCard,
-  faHouse,
-  faEye,
-  faPaperPlane,
-  faPlay,
-  faTv,
-  faReadme,
-  faAngleLeft,
-  faAngleRight,
-  faVuejs,
-  faGlobe,
+	faHouse,
+	faEye,
+	faPaperPlane,
+	faPlay,
+	faTv,
+	faReadme,
+	faAngleLeft,
+	faAngleRight,
+	faVuejs,
+	faGlobe,
 	faMessage,
 	faHandsHoldingCircle,
 	faXmark
 );
 
 /* add font awesome icon component */
-Vue.component("font-awesome-icon", FontAwesomeIcon,);
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
-Vue.use(Vuelidate)
+Vue.use(Vuelidate);
+Vue.use(AOSPlugin);
 new Vue({
 	router,
 	render: (h) => h(App),

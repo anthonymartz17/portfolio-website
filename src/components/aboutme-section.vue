@@ -28,8 +28,8 @@ export default {
 <template>
 	<div class="aboutme-wrapper">
 		<div class="aboutme-container">
-			<h2 class="sections-title-global">{{ title }}</h2>
-			<div class="about-body">
+			<h2 class="sections-title-global" data-aos="fade-up" data-aos-duration="800">{{ title }}</h2>
+			<div class="about-body"  data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
 				<div class="aboutme-img">
 					<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
 				</div>

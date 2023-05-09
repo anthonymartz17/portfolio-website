@@ -101,11 +101,16 @@ export default {
 <template>
 	<div class="project-wrapper">
 		<div class="projects-container">
-			<h2 class="projects-title sections-title-global">{{ title }}</h2>
+			<h2 data-aos="fade-up" class="projects-title sections-title-global">
+				{{ title }}
+			</h2>
 			<div class="projects-list">
 				<div
+					data-aos="fade-up"
+					data-aos-duration="800"
+					:data-aos-delay="250 * idx"
 					class="projects-project"
-					v-for="project in projects"
+					v-for="(project, idx) in projects"
 					:key="project.name"
 					@click="toggleShowMore(project)"
 				>
@@ -138,7 +143,11 @@ export default {
 				</div>
 			</div>
 			<div class="project-cards-container">
-				<div class="cards-youtube project-cards">
+				<div
+					class="cards-youtube project-cards"
+					data-aos="fade-up"
+					data-aos-duration="800"
+				>
 					<MartzIcon
 						class="card-bg-icon"
 						icon="youtubetv"
@@ -164,7 +173,11 @@ export default {
 						</div>
 					</div>
 				</div>
-				<div class="card-blog project-cards">
+				<div
+					class="card-blog project-cards"
+					data-aos="fade-up"
+					data-aos-duration="800"
+				>
 					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
 					<h4>Read</h4>
 					<p>articles about my work and my learning from them.</p>
@@ -184,7 +197,6 @@ export default {
 </template>
 box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 <style lang="scss" scoped>
-
 .project-wrapper {
 	padding: 2em 1em;
 	background: $bg-2;

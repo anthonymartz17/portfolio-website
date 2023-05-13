@@ -40,12 +40,15 @@ export default {
 			],
 		};
 	},
+	mounted() {
+    AOS.init();
+  },
 };
 </script>
 
 <template>
-	<div class="home-blogs-main-container">
-		<div class="blog-list-title" data-aos="fade-up" data-aos-duration="800">
+	<div class="home-blogs-main-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+		<div class="blog-list-title" >
 			<h2>Blogs</h2>
 		</div>
 		<div class="blog-list-body">

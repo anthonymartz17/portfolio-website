@@ -33,12 +33,12 @@ export default {
 </script>
 
 <template>
-	<div class="blog-footer-wrapper">
-		<div class="footer-container">
+	<div class="blog-footer-wrapper" data-aos="fade-up" data-aos-duration="800">
+		<div class="footer-container" >
 			<div class="logo-socialMedia">
-				<div class="logo-container">
-					<div class="logo">MARTZ</div>
-				</div>
+				<!-- <div class="logo-container">
+					<MartzIcon icon="logo" size="80" />
+				</div> -->
 				<!-- <div class="social-media-container"> -->
 				<SocialMedia class="media" />
 				<!-- </div> -->
@@ -95,14 +95,16 @@ export default {
 	display: grid;
 	place-items: center;
 }
-
+.logo-container {
+	margin-bottom: 2em;
+}
 .media {
 	width: 70%;
 }
 .copyRight {
-		font: $font-small-mb;
-		text-align: center;
-	}
+	font: $font-small-mb;
+	text-align: center;
+}
 .footer-container {
 	width: 100%;
 	height: 100%;
@@ -123,7 +125,6 @@ export default {
 			flex: 2;
 			gap: 1em;
 			display: grid;
-			
 		}
 	}
 	@include breakpoint(desktop) {
@@ -159,14 +160,6 @@ export default {
 		.social-media-container {
 			width: 50%;
 		}
-		
 	}
-	.logo {
-		font: $font-title-mb;
-		font-size: 1.2em;
-		margin-bottom: 2em;
-		text-align: center;
-	}
-
 }
 </style>

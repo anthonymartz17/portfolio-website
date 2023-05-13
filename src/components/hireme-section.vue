@@ -81,94 +81,109 @@ export default {
 </script>
 <template>
 	<div class="hireme-wrapper">
-		<div class="hireme-container" data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
-			<form class="contact-form" ref="form" @submit.prevent="sendMsg" >
-				<h2 class="sections-title-global hireme-title">
+		<div class="hireme-container" :data-aos-delay="250">
+			<div class="form-container">
+				<h2
+					data-aos="fade-up"
+					data-aos-duration="800"
+					class="sections-title-global hireme-title"
+				>
 					{{ title }}
 					<MartzIcon icon="handshake" size="30" />
 				</h2>
-
-				<p class="text-small contact-text">
-					For any questions, feel free to contact me through any of the methods
-					bellow.
-				</p>
-				<div class="field">
-					<label for="name">Name</label>
-					<input
-						v-model="name"
-						type="text"
-						id="name"
-						name="name"
-						autocomplete="off"
-						:class="['input-field', { invalid: isSubmitted && $v.name.$error }]"
-					/>
-					<p v-if="isSubmitted && !$v.name.required" class="text-small">
-						Please enter a name
+				<form
+					data-aos="fade-up"
+					data-aos-duration="800"
+					:data-aos-delay="250"
+					class="contact-form"
+					ref="form"
+					@submit.prevent="sendMsg"
+				>
+					<p class="text-small contact-text">
+						For any questions, feel free to contact me through any of the
+						methods bellow.
 					</p>
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input
-						v-model="email"
-						name="email"
-						type="email"
-						id="email"
-						autocomplete="off"
-						:class="[
-							'input-field',
-							{ invalid: isSubmitted && $v.email.$error },
-						]"
-					/>
-					<div v-if="isSubmitted && $v.email.$error">
-						<p
-							v-if="isSubmitted && !$v.email.required"
-							class="text-small error"
-						>
-							Please enter an email
-						</p>
-						<p
-							v-else-if="isSubmitted && !$v.email.email"
-							class="text-small error"
-						>
-							Please enter a valid email
+					<div class="field">
+						<label for="name">Name</label>
+						<input
+							v-model="name"
+							type="text"
+							id="name"
+							name="name"
+							autocomplete="off"
+							:class="[
+								'input-field',
+								{ invalid: isSubmitted && $v.name.$error },
+							]"
+						/>
+						<p v-if="isSubmitted && !$v.name.required" class="text-small">
+							Please enter a name
 						</p>
 					</div>
-				</div>
-				<div class="field">
-					<label for="email">Message</label>
-					<textarea
-						v-model="message"
-						name="message"
-						id="email"
-						cols="30"
-						rows="7"
-						:class="[
-							'textarea-field',
-							{ invalid: isSubmitted && $v.message.$error },
-						]"
-					></textarea>
-					<p
-						v-if="isSubmitted && !$v.message.required"
-						class="text-small error"
-					>
-						Please enter a message
-					</p>
-				</div>
-				<div class="btn-container">
-					<BaseButton
-						icon="sendit"
-						text="Send it"
-						size="30"
-						class="btn-sendit"
-					/>
+					<div class="field">
+						<label for="email">Email</label>
+						<input
+							v-model="email"
+							name="email"
+							type="email"
+							id="email"
+							autocomplete="off"
+							:class="[
+								'input-field',
+								{ invalid: isSubmitted && $v.email.$error },
+							]"
+						/>
+						<div v-if="isSubmitted && $v.email.$error">
+							<p
+								v-if="isSubmitted && !$v.email.required"
+								class="text-small error"
+							>
+								Please enter an email
+							</p>
+							<p
+								v-else-if="isSubmitted && !$v.email.email"
+								class="text-small error"
+							>
+								Please enter a valid email
+							</p>
+						</div>
+					</div>
+					<div class="field">
+						<label for="email">Message</label>
+						<textarea
+							v-model="message"
+							name="message"
+							id="email"
+							cols="30"
+							rows="7"
+							:class="[
+								'textarea-field',
+								{ invalid: isSubmitted && $v.message.$error },
+							]"
+						></textarea>
+						<p
+							v-if="isSubmitted && !$v.message.required"
+							class="text-small error"
+						>
+							Please enter a message
+						</p>
+					</div>
+					<div class="btn-container">
+						<BaseButton
+							icon="sendit"
+							text="Send it"
+							size="30"
+							class="btn-sendit"
+						/>
 
-					<font-awesome-icon
-						icon="fa-solid fa-message"
-						class="msg-bubble"
-						size="2x"
-					/>
-				</div>
-			</form>
+						<font-awesome-icon
+							icon="fa-solid fa-message"
+							class="msg-bubble"
+							size="2x"
+						/>
+					</div>
+				</form>
+			</div>
 			<!-- <div class="popUp-container">
 				<div class="chat-box">
 					<div class="profile-img"></div>
@@ -183,8 +198,19 @@ export default {
 				</div>
 			</div> -->
 			<div class="other-contact">
-				<ul class="contact-links">
-					<h2 class="sections-title-global">Other</h2>
+				<h2
+					data-aos="fade-up"
+					data-aos-duration="800"
+					class="sections-title-global"
+				>
+					Other
+				</h2>
+				<ul
+					data-aos="fade-up"
+					data-aos-duration="800"
+					:data-aos-delay="250"
+					class="contact-links"
+				>
 					<li v-for="media in mediaContacts" :key="media.name">
 						<a :href="media.url" target="blank">
 							<font-awesome-icon :icon="media.icon" class="icon" />

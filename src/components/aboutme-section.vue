@@ -18,8 +18,10 @@ export default {
 			],
 		};
 	},
+	mounted() {
+    AOS.init();
+  },
 	props: ["scrollPosition"],
-
 	methods: {},
 	computed: {},
 };
@@ -28,8 +30,19 @@ export default {
 <template>
 	<div class="aboutme-wrapper">
 		<div class="aboutme-container">
-			<h2 class="sections-title-global" data-aos="fade-up" data-aos-duration="800">{{ title }}</h2>
-			<div class="about-body"  data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
+			<h2
+				class="sections-title-global"
+				data-aos="fade-up"
+				data-aos-duration="800"
+			>
+				{{ title }}
+			</h2>
+			<div
+				class="about-body"
+				data-aos="fade-up"
+				data-aos-duration="800"
+				:data-aos-delay="250"
+			>
 				<div class="aboutme-img">
 					<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
 				</div>
@@ -40,12 +53,21 @@ export default {
 						<p>{{ description }}</p>
 					</div>
 					<div>
-						<h5 class="other-hobbies">Other hobbies:</h5>
+						<h5
+							data-aos="fade-up"
+							data-aos-duration="800"
+							class="other-hobbies"
+						>
+							Other hobbies:
+						</h5>
 						<div class="hobbies-icons-container">
 							<MartzIcon
 								class="icon"
+								data-aos="fade-up"
+								data-aos-duration="800"
+								:data-aos-delay="idx * 100"
 								:icon="icon"
-								v-for="icon in hobbiesIcons"
+								v-for="(icon, idx) in hobbiesIcons"
 								:key="icon"
 							/>
 						</div>

@@ -31,8 +31,8 @@ export default {
 };
 </script>
 <template>
-	<div class="footer-wrapper">
-		<div class="the-footer">
+	<div class="footer-wrapper" data-aos="fade-up" data-aos-duration="800" >
+		<div class="the-footer" >
 			<div class="logo-socialMedia">
 				<div class="logo">MARTZ</div>
 				<SocialMedia class="media" />
@@ -96,7 +96,6 @@ export default {
 	display: grid;
 	justify-items: center;
 	padding-top: 0.5em;
-	// clip-path: circle(50.4% at 51% 100%);
 
 &::before{
 	content: "";

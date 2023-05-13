@@ -20,58 +20,63 @@ export default {
 };
 </script>
 <template>
-	<div :class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]">
-		<div :class="['header-container-logo', { clickable: isMenueVisible }]">
-			<MartzIcon icon="logo" size="60"/>
-		</div>
-		<div class="header-nav-menue">
-			<font-awesome-icon
-				id="menue-icon"
-				class="menue-icon"
-				icon="fa-solid fa-bars"
-				size="2x"
-				@click="createEmitToggleMenue()"
-			/>
-		</div>
-		<div id="nav-menue-wrapper" class="navmenue-wrapper" @click.self="createEmitToggleMenue()">
-			<NavMenueMobile v-if="isMenueVisible" v-on="$listeners" />
-		</div>
-		<div class="desk-menue-wrapper">
-			<DesktopMenue v-on="$listeners"/>
+	<div class="header-wrapper">
+		<div
+			data-aos="fade-down"
+			data-aos-duration="800"
+			:class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]"
+		>
+			<div :class="['header-container-logo', { clickable: isMenueVisible }]">
+				<MartzIcon class="thelogo" icon="logo" size="60" />
+			</div>
+			<div class="header-nav-menue">
+				<font-awesome-icon
+					id="menue-icon"
+					class="menue-icon"
+					icon="fa-solid fa-bars"
+					size="2x"
+					@click="createEmitToggleMenue()"
+				/>
+			</div>
+			<div
+				id="nav-menue-wrapper"
+				class="navmenue-wrapper"
+				@click.self="createEmitToggleMenue()"
+			>
+				<NavMenueMobile v-if="isMenueVisible" v-on="$listeners" />
+			</div>
+			<div class="desk-menue-wrapper">
+				<DesktopMenue v-on="$listeners" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+.header-wrapper {
+	background: $bg-1;
+}
 .disableScroll {
 	overflow: hidden !important;
 	position: fixed !important;
 }
-.desk-menue-wrapper{
+.desk-menue-wrapper {
 	display: none;
-	@include breakpoint(desktop){
-		display: block;
-	}
+}
+.header-container-logo {
+	cursor: pointer;
 }
 
 .header-container {
 	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.075);
 	position: relative;
-	background: $bg-1;
-	padding: 0.8em 1.5em;
+	padding-inline: 0.8em 1.5em;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
 	height: 10vh;
 	z-index: 20;
-
-	@include breakpoint(desktop){
-		padding: 0.8em 4em;
-	}
-	&-logo {
-		font: $font-text-mb;
-	}
 
 	.clickable {
 		pointer-events: none;
@@ -91,9 +96,23 @@ export default {
 	background: $bg-2;
 }
 
-.header-nav-menue{
-	@include breakpoint(desktop){
-		display: none;
+.header-wrapper {
+	@include breakpoint(desktop) {
+		.desk-menue-wrapper {
+			display: block;
+		}
+		
+			.header-container {
+				padding: 0.8em 4em;
+				align-items: flex-end;
+				
+			}
+			.header-container-logo{
+				align-self: flex-end;
+			}
+			.header-nav-menue {
+				display: none;
+			}
 	}
 }
 </style>

@@ -4,11 +4,18 @@ import BlogNavMenue from "./blog-mobile-menue.vue";
 import BlogHomeNavMenue from "./blog-desktop-menu.vue";
 import BlogFooter from "./blog-footer.vue";
 export default {
-	components: { MartzIcon, BlogHomeNavMenue, BlogFooter ,BlogNavMenue},
+	components: { MartzIcon, BlogHomeNavMenue, BlogFooter, BlogNavMenue },
 	data() {
 		return {
 			isMenueOpen: false,
 		};
+	},
+	mounted() {
+		this.$aos.init({
+			duration: 800,
+			offset: 200,
+			// disable: "mobile",
+		});
 	},
 	methods: {
 		toggleMobileMenue() {
@@ -35,10 +42,16 @@ export default {
 			</nav>
 			<div class="home-blogs-container">
 				<header>
-					<div class="home-blog-header-wrapper">
+					<div
+						class="home-blog-header-wrapper"
+						data-aos="fade-down"
+						data-aos-duration="800"
+					>
 						<div class="home-blogs-header">
 							<!-- :class="['header-container-logo', { clickable: isMenueVisible }]" -->
-							<div class="logo">MARTZ</div>
+							<div class="logo">
+								<MartzIcon icon="logo" size="60" />
+							</div>
 							<div class="header-nav-menue" @click="toggleMobileMenue">
 								<font-awesome-icon
 									id="menue-icon"
@@ -69,6 +82,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.logo{
+}
 body.mobile-menu-open {
 	overflow: hidden;
 }
@@ -93,12 +108,11 @@ body.mobile-menu-open {
 // }
 .home-blogs-header {
 	position: relative;
-	// background: $bg-2;
 	padding: 0.8em 1.5em;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
 	height: 10vh;
 	z-index: 5;
 
@@ -122,7 +136,7 @@ body.mobile-menu-open {
 	justify-content: center;
 	padding-top: 3em;
 }
-.routerView{
+.routerView {
 	margin: 0 1em 5em 1em;
 }
 
@@ -159,6 +173,8 @@ body.mobile-menu-open {
 		}
 		.logo {
 			flex: 1;
+			
+			
 		}
 	}
 }

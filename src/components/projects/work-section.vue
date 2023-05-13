@@ -18,20 +18,17 @@ export default {
 					full_desc: [
 						{
 							id: "p1",
-							text: "My portfolio website is a dynamic platform that showcases my work, skills, and passion for web development, aiming to demonstrate my proficiency to potential employers. ",
+							text: "My portfolio website is a dynamic platform that showcases my work, skills, and passion for web development, aiming to demonstrate my proficiency to potential employers. It utilizes Vue.js for the user interface, CSS/SASS for styling, and HTML5 for markup. Page navigation is handled through scrolling and Vue router and  The contact form integrates email functionality with EmailJS.",
 						},
 						{
 							id: "p2",
-							text: "Among the technical skills included is the utilization of Vue.js, a JavaScript framework, for constructing the user interface in a component-based programming model. CSS and SASS were skillfully employed to handle the styles, while HTML5 targeted the markup. Page navigation was implemented through a combination of scrolling into view and the use of the Vue router. Additionally, I integrated email functionality into the contact form using the EmailJS library. ",
+							text: " As a non-designer, I faced the challenge of creating the design. To ensure a professional and fundamentally sound appearance, I delved into the fundamentals of web design, such as visual hierarchy, alignment, proximity, balance, repetition, and typography. Valuable resources like YouTube, freecodecamp, and typescale.com assisted me in gaining a better understanding of these concepts. ",
 						},
 						{
 							id: "p3",
-							text: "During the creation process, I faced the challenge of designing the website, despite not being a web designer. To ensure a professional and fundamentally sound appearance, I delved into the fundamentals of web design, such as visual hierarchy, alignment, proximity, balance, repetition, and typography. Valuable resources like YouTube, freecodecamp, and typescale.com assisted me in gaining a better understanding of these concepts.",
+							text: "I particularly enjoyed implementing custom icons. Dissatisfied with the available options in common libraries and inspired by font awesome icon components functionality, I figured I could develop a component that could house all the svgs icons, allowing customization through props. The Canva platform provided me with cooler and more creative icons. Overall, the experience was enjoyable and rewarding."
 						},
-						{
-							id: "p4",
-							text: "What I enjoyed the most was the implementation of custom icons. Dissatisfied with the available options in common libraries, I embarked on learning how to style SVGs. Drawing inspiration from the functionality of font awesome icon components, I developed a component that housed all the SVGs. This allowed me to customize the color, size, and specific icons using props. The Canva platform provided a source for the icons I chose, adding a touch of creativity to the design process. Overall, this experience was both enjoyable and rewarding.",
-						},
+				
 					],
 
 					img: "portfolio.png",
@@ -336,7 +333,7 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 			display: flex;
 		}
 		.projects-project {
-			transition: 250ms ease-in-out;
+			transition: .2s ease-in-out;
 			cursor: pointer;
 
 			&:hover {

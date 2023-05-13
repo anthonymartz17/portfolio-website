@@ -37,6 +37,8 @@ export default {
 	<div class="project-detail-wrapper">
 		<div class="project-detail-container">
 			<div
+				data-aos="fade-up"
+				data-aos-duration="800"
 				id="toggleProject"
 				class="backToProjects back-top"
 				@click="fireToggleShowMore()"
@@ -47,79 +49,93 @@ export default {
 				/>
 				<p>Back to project</p>
 			</div>
-
-			<div class="project-videos">
-				<h2 class="project-title">{{ projectClicked.name }}</h2>
-				<div class="videos-container">
-					<div class="video-default">
-						<img
-							:src="`/img/${projectClicked.thumbnail_main}`"
-							alt="thumbnail project 1"
-						/>
-					</div>
-					<div class="video-secondary-container">
-						<div class="video-sec">
-							<img
-								:src="`/img/${projectClicked.thumbnail_sec}`"
-								alt="thumbnail project 2"
-							/>
-						</div>
-						<div class="video-sec">
-							<img
-								:src="`/img/${projectClicked.thumbnail_third}`"
-								alt="thumbnail project 3"
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="desc-container">
-				<div class="project-about">
-					<h3>About</h3>
+			<div class="detail-content">
+				<div class="project-videos">
+					<h2 class="project-title" data-aos="fade-up" data-aos-duration="800">
+						{{ projectClicked.name }}
+					</h2>
 					<div
-						:class="[
-							'paragraph-container',
-							{ readless: !this.readmore && mobile },
-						]"
+						class="videos-container"
+						data-aos="fade-up"
+						data-aos-duration="800"
+						data-aos-delay="250"
 					>
-						<p
-							:class="['paragraph', { 'hide-paragraph': paragraph.hide }]"
-							v-for="paragraph in projectClicked.full_desc"
-							:key="paragraph.id"
-						>
-							{{ paragraph.text }}
-						</p>
-						<p v-show="mobile && !readmore" @click="readMoreAbout" class="readmore-btn">Read more...</p>
+						<div class="video-default">
+							<img
+								:src="`/img/${projectClicked.thumbnail_main}`"
+								alt="thumbnail project 1"
+							/>
+						</div>
+						<div class="video-secondary-container">
+							<div class="video-sec">
+								<img
+									:src="`/img/${projectClicked.thumbnail_sec}`"
+									alt="thumbnail project 2"
+								/>
+							</div>
+							<div class="video-sec">
+								<img
+									:src="`/img/${projectClicked.thumbnail_third}`"
+									alt="thumbnail project 3"
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="project-techs">
-					<h3>Technologies</h3>
-					<div class="tech-icons">
-						<MartzIcon
-							class="icon"
-							v-for="icon in projectClicked.technologies"
-							:key="icon.id"
-							:icon="icon.icon"
-							color="white"
-							:size="icon.size"
+				<div class="desc-container" data-aos="fade-up" data-aos-duration="800">
+					<div class="project-about">
+						<h3>About</h3>
+						<div
+							:class="[
+								'paragraph-container',
+								{ readless: !this.readmore && mobile },
+							]"
+						>
+							<p
+								:class="['paragraph', { 'hide-paragraph': paragraph.hide }]"
+								v-for="paragraph in projectClicked.full_desc"
+								:key="paragraph.id"
+							>
+								{{ paragraph.text }}
+							</p>
+							<p
+								v-show="mobile && !readmore"
+								@click="readMoreAbout"
+								class="readmore-btn"
+							>
+								Read more...
+							</p>
+						</div>
+					</div>
+					<div class="project-techs">
+						<h3>Technologies</h3>
+						<div class="tech-icons">
+							<MartzIcon
+								class="icon"
+								v-for="icon in projectClicked.technologies"
+								:key="icon.id"
+								:icon="icon.icon"
+								color="white"
+								:size="icon.size"
+							/>
+						</div>
+					</div>
+					<div class="project-btn-container">
+						<BaseButton
+							class="project-btn"
+							text="Open Project"
+							color="accent"
+							size="30"
+							icon="web"
+						/>
+						<BaseButton
+							class="project-btn"
+							text="View Code"
+							color="accent"
+							size="30"
+							icon="code"
 						/>
 					</div>
-				</div>
-				<div class="project-btn-container">
-					<BaseButton
-						class="project-btn"
-						text="Open Project"
-						color="accent"
-						size="30"
-						icon="web"
-					/>
-					<BaseButton
-						class="project-btn"
-						text="View Code"
-						color="accent"
-						size="30"
-						icon="code"
-					/>
 				</div>
 			</div>
 
@@ -151,7 +167,7 @@ export default {
 	padding: 1em 1em;
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
+	gap: 2em;
 	font: $font-text-mb;
 }
 
@@ -172,6 +188,7 @@ export default {
 .back-bottom {
 	border-top: 1px solid rgba($white, 0.3);
 	padding-top: 1em;
+	
 }
 
 .project-title {
@@ -182,7 +199,7 @@ export default {
 	margin-bottom: 1em;
 }
 .readless {
-	height: 33em;
+	height: 24em;
 	overflow: hidden;
 }
 // .readmore {
@@ -246,7 +263,7 @@ export default {
 }
 
 .project-about {
-	margin-bottom: 1.5em;
+	margin-bottom: 3em;
 
 	h3 {
 		font: $font-title-mb;
@@ -258,7 +275,7 @@ export default {
 	}
 }
 .project-techs {
-	margin-bottom: 1.5em;
+	margin-bottom: 4em;
 
 	h3 {
 		font: $font-title-mb;
@@ -284,14 +301,13 @@ export default {
 	// height: 6em;
 	// width: 6em;
 }
-.project-btn-container {
-	margin-bottom: 3em;
-	display: grid;
-	place-items: center;
-	gap: 1em;
-}
+
 .project-btn {
-	width: 80%;
+	width: 100%;
+	margin-bottom: 0.8em;
+}
+.project-btn-container {
+	margin-bottom: 5em;
 }
 
 .project-detail-wrapper {
@@ -318,7 +334,9 @@ export default {
 		}
 		.project-btn-container {
 			display: flex;
+			gap: 0.5em;
 		}
+
 		.hide-paragraph {
 			display: block;
 		}
@@ -326,24 +344,21 @@ export default {
 		.readmore {
 			height: 100%;
 		}
+
 	}
 	@include breakpoint(desktop) {
 		.project-detail-container {
 			margin-block: 2em;
 			width: 60%;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			grid-template-rows: 0.1fr 4fr;
+		}
+		.detail-content {
+			display: flex;
 			gap: 1em;
-			grid-template-areas:
-				" backTop backTop"
-				"video  text"
-				"backBottom  .";
 		}
 
 		.back-top {
 			cursor: pointer;
-			grid-area: backTop;
+			align-self: flex-end;
 			margin-bottom: 1em;
 			padding: 0;
 		}
@@ -353,22 +368,23 @@ export default {
 			justify-self: flex-end;
 		}
 		.project-videos {
-			grid-area: video;
+			flex: 1;
 		}
 		.desc-container {
-			grid-area: text;
+			flex: 1;
 		}
 		.back-bottom {
-			grid-area: backBottom;
 			display: none;
+		}
+
+		.project-btn {
+			max-width: 16.8em;
 		}
 
 		.project-title {
 			font-size: 2em;
 		}
-		.desc-container {
-			gap: 2em;
-		}
+		
 		.project-about {
 			h3 {
 				font: $font-title-mb;

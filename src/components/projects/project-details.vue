@@ -1,8 +1,9 @@
 <script>
 import BaseButton from "../baseButton.vue";
 import MartzIcon from "../icons/martz-icons.vue";
+import MainVideo from "./main-video-player.vue";
 export default {
-	components: { BaseButton, MartzIcon },
+	components: { BaseButton, MartzIcon, MainVideo },
 	data() {
 		return {
 			readmore: false,
@@ -28,6 +29,9 @@ export default {
 		},
 		readMoreAbout() {
 			this.readmore = !this.readmore;
+		},
+		openCodeOrProject(link) {
+			window.open(link, "_blank");
 		},
 	},
 };
@@ -61,10 +65,15 @@ export default {
 						data-aos-delay="250"
 					>
 						<div class="video-default">
-							<img
-								:src="`/img/${projectClicked.thumbnail_main}`"
-								alt="thumbnail project 1"
-							/>
+							<iframe
+								width="100%"
+								height="100%"
+								:src="`https://www.youtube.com/embed/${projectClicked.videoId}`"
+								title="YouTube video player"
+								frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen
+							></iframe>
 						</div>
 						<div class="video-secondary-container">
 							<div class="video-sec">
@@ -122,6 +131,7 @@ export default {
 					</div>
 					<div class="project-btn-container">
 						<BaseButton
+							@click.native="openCodeOrProject(projectClicked.siteLink)"
 							class="project-btn"
 							text="Open Project"
 							color="accent"
@@ -129,6 +139,7 @@ export default {
 							icon="web"
 						/>
 						<BaseButton
+							@click.native="openCodeOrProject(projectClicked.codeLink)"
 							class="project-btn"
 							text="View Code"
 							color="accent"
@@ -188,7 +199,6 @@ export default {
 .back-bottom {
 	border-top: 1px solid rgba($white, 0.3);
 	padding-top: 1em;
-	
 }
 
 .project-title {
@@ -202,9 +212,6 @@ export default {
 	height: 24em;
 	overflow: hidden;
 }
-// .readmore {
-// 	height: auto;
-// }
 
 .hide-paragraph {
 	display: none;
@@ -241,11 +248,10 @@ export default {
 }
 
 .video-default {
-	min-height: 60%;
 	flex: 1;
 	border: 1px solid;
-	height: 45%;
 	margin-bottom: 0.5em;
+	height: 13em;
 }
 .video-secondary-container {
 	display: flex;
@@ -312,6 +318,9 @@ export default {
 
 .project-detail-wrapper {
 	@include breakpoint(tablet) {
+		.video-default {
+			height: 19em;
+		}
 		.project-detail-container {
 			width: 85%;
 			// margin-bottom: 60em;
@@ -344,12 +353,11 @@ export default {
 		.readmore {
 			height: 100%;
 		}
-
 	}
 	@include breakpoint(desktop) {
 		.project-detail-container {
 			margin-block: 2em;
-			width: 60%;
+			width: 75%;
 		}
 		.detail-content {
 			display: flex;
@@ -384,7 +392,7 @@ export default {
 		.project-title {
 			font-size: 2em;
 		}
-		
+
 		.project-about {
 			h3 {
 				font: $font-title-mb;

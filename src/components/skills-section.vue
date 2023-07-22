@@ -17,12 +17,12 @@ export default {
 				{
 					id: "vue",
 					description:
-						"Vue Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
+						"I am  proficient in Vue.js development. I have a solid understanding of Vue components and the fundamentals of state management using Vuex. With a passion for creating dynamic and interactive user interfaces, I am very familiar with Vue directives and their role in adding behavior to HTML elements. I have gained practical experience in building single-page applications (SPAs) and utilizing Vue Router for smooth navigation. Through hands-on projects, I have honed my skills in integrating APIs to fetch and display data in Vue.js applications. My enthusiasm for learning and adapting to new technologies drives me to explore Vue CLI for efficient project setup and development. As a detail-oriented and collaborative team player, I am eager to contribute to projects that foster growth and innovation in the Vue.js ecosystem.",
 				},
 				{
 					id: "javascript",
 					description:
-						"javascript Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
+						"As a JavaScript developer, I have a solid understanding of essential JavaScript fundamentals, including variables, data types, operators, loops, conditional statements, functions, and objects. My proficiency in DOM manipulation allows me to create dynamic and interactive web pages. I have practical experience with asynchronous programming, effectively utilizing Promises, async/await, and handling callbacks for smooth API requests. Furthermore, I am well-versed in array methods like map, filter, reduce, and forEach, enabling efficient data manipulation. Closures and their applications in JavaScript are familiar concepts to me, and I am adept at event handling for clicks, input, and form submissions. Additionally, I have practical knowledge of local storage for data storage and an understanding of regular expressions for pattern matching and string manipulation. My grasp of modern JavaScript (ES6+) features, including arrow functions, destructuring assignments, spread operator, and template literals, enables me to write more concise and expressive code. With a passion for continuous learning and improvement, I am eager to contribute and grow as a valuable asset to any development team.",
 				},
 				{
 					id: "css3",
@@ -68,7 +68,12 @@ export default {
 			>
 				{{ title }}
 			</h2>
-			<div class="skills-body" data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
+			<div
+				class="skills-body"
+				data-aos="fade-up"
+				data-aos-duration="800"
+				:data-aos-delay="250"
+			>
 				<div class="skills-icons-container">
 					<div
 						class="skill-icon"

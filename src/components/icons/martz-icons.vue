@@ -11,14 +11,7 @@ export default {
 .accent {
 	fill: $accent;
 }
-// .sm {
-// 	height: 22px;
-// 	width: 22px;
-// }
-// .md {
-// 	height: 30px;
-// 	width: 30px;
-// }
+
 </style>
 
 <template>

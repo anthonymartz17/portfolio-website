@@ -18,9 +18,7 @@ export default {
 			],
 		};
 	},
-	mounted() {
-    AOS.init();
-  },
+
 	props: ["scrollPosition"],
 	methods: {},
 	computed: {},

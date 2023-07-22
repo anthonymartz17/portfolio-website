@@ -13,12 +13,14 @@ export default {
 				{
 					id: 1,
 					name: "Personal Website",
+					siteLink: "",
+					codeLink: "https://github.com/anthonymartz17/portfolio-2023.git",
 					short_desc:
 						"Dynamic showcase of my skills, work, and passion for web development.",
 					full_desc: [
 						{
 							id: "p1",
-							text: "My portfolio website is a dynamic platform that showcases my work, skills, and passion for web development, aiming to demonstrate my proficiency to potential employers. It utilizes Vue.js for the user interface, CSS/SASS for styling, and HTML5 for markup. Page navigation is handled through scrolling and Vue router and  The contact form integrates email functionality with EmailJS.",
+							text: "My personal website is a dynamic platform that showcases my work, skills, and passion for web development, aiming to demonstrate my proficiency to potential employers. It utilizes Vue.js for the user interface, CSS/SASS for styling, and HTML5 for markup. Page navigation is handled through scrolling and Vue router. The contact form integrates email functionality with EmailJS.",
 						},
 						{
 							id: "p2",
@@ -26,12 +28,12 @@ export default {
 						},
 						{
 							id: "p3",
-							text: "I particularly enjoyed implementing custom icons. Dissatisfied with the available options in common libraries and inspired by font awesome icon components functionality, I figured I could develop a component that could house all the svgs icons, allowing customization through props. The Canva platform provided me with cooler and more creative icons. Overall, the experience was enjoyable and rewarding."
+							text: "I particularly enjoyed implementing custom icons. Dissatisfied with the available options in common libraries and inspired by font awesome icon components functionality, I figured I could develop a component that could house all the svgs icons, allowing customization through props. The Canva platform provided me with cooler and more creative icons. Overall, the experience was enjoyable and rewarding.",
 						},
-				
 					],
 
 					img: "portfolio.png",
+					videoId:"d_I8AN4ACo0?si=ZbxRAAGM20vd6kvT",
 					thumbnail_main: "project1.jpeg",
 					thumbnail_sec: "project1.jpeg",
 					thumbnail_third: "project1.jpeg",
@@ -45,13 +47,29 @@ export default {
 				},
 				{
 					id: 2,
-					name: "This is project 2",
+					name: "Vehicles Marketplace",
+					siteLink: "https://vehicles-marketplace.web.app/",
+					codeLink:"https://github.com/anthonymartz17/vehicles-marketplace",
 					short_desc:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-					full_desc:
-						"Project 2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
-					img: "project2.jpeg",
-					thumbnail_main: "project2.jpeg",
+						"Auto dealers showcase inventory; buyers can browse diverse vehicles for purchasing ",
+					full_desc: [
+						{
+							id: "p1",
+							text: "The web app allows buyers to connect  with dealers and facilitate a seamless exploration and browsing of a diverse range of vehicles. Dealers can create accounts and showcase their vehicle inventories, while users can efficiently find their desired vehicles based on various criteria.",
+						},
+						{
+							id: "p2",
+							text: " As a non-designer, I faced the challenge of creating the design. To ensure a professional and fundamentally sound appearance, I delved into the fundamentals of web design, such as visual hierarchy, alignment, proximity, balance, repetition, and typography. Valuable resources like YouTube, freecodecamp, and typescale.com assisted me in gaining a better understanding of these concepts. ",
+						},
+						{
+							id: "p3",
+							text: "I particularly enjoyed implementing custom icons. Dissatisfied with the available options in common libraries and inspired by font awesome icon components functionality, I figured I could develop a component that could house all the svgs icons, allowing customization through props. The Canva platform provided me with cooler and more creative icons. Overall, the experience was enjoyable and rewarding.",
+						},
+					],
+
+					img: "vehicle-marketplace2.png",
+					videoId:"BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					thumbnail_main: "vehicle-marketplace2.png",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
 					technologies: [
@@ -65,6 +83,8 @@ export default {
 				{
 					id: 3,
 					name: "This is project 3",
+					siteLink: "",
+					codeLink: "",
 					short_desc:
 						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
 					full_desc:
@@ -205,6 +225,7 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 }
 
 .projects-project {
+	flex: 1;
 	margin-bottom: 1.5em;
 	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 	background: rgba(255, 255, 255, 0.075);
@@ -323,7 +344,7 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 	}
 	@include breakpoint(desktop) {
 		.projects-container {
-			width: 60%;
+			width: 75%;
 		}
 		.project-cards-container {
 			justify-content: space-around;
@@ -333,7 +354,7 @@ box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 			display: flex;
 		}
 		.projects-project {
-			transition: .2s ease-in-out;
+			transition: 0.2s ease-in-out;
 			cursor: pointer;
 
 			&:hover {

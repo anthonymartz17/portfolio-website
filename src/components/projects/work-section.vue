@@ -212,7 +212,6 @@ export default {
 		</div>
 	</div>
 </template>
-box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 <style lang="scss" scoped>
 .project-wrapper {
 	padding: 2em 1em;

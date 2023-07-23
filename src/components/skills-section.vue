@@ -11,34 +11,184 @@ export default {
 				{ id: "javascript", name: "javaScript", icon: "JS", size: "79" },
 				{ id: "css3", name: "css3", icon: "css", size: "79" },
 				{ id: "html5", name: "html5", icon: "html", size: "79" },
-				// { id: "sass", name: "sass", icon: "sass", size: "100" },
 			],
 			skillsDescriptions: [
 				{
 					id: "vue",
-					description:
-						"I am  proficient in Vue.js development. I have a solid understanding of Vue components and the fundamentals of state management using Vuex. With a passion for creating dynamic and interactive user interfaces, I am very familiar with Vue directives and their role in adding behavior to HTML elements. I have gained practical experience in building single-page applications (SPAs) and utilizing Vue Router for smooth navigation. Through hands-on projects, I have honed my skills in integrating APIs to fetch and display data in Vue.js applications. My enthusiasm for learning and adapting to new technologies drives me to explore Vue CLI for efficient project setup and development. As a detail-oriented and collaborative team player, I am eager to contribute to projects that foster growth and innovation in the Vue.js ecosystem.",
+					concepts: [
+						{
+							concept: "Vue Router",
+							description:
+								"route matching, parameters, nested routes, router-view component, navigation guards, lazy loading, meta fields",
+						},
+						{
+							concept: "Vuex",
+							description:
+								"state, getters, mutations, actions, modules, store, namespaced modules, mapper helpers",
+						},
+
+						{
+							concept: "Components",
+							description:
+								"Reusable and modular building blocks, encapsulate templates, data, methods, and styles to create self-contained units of functionality.",
+						},
+
+						{
+							concept: "Options API",
+							description:
+								"Data, props, methods, computed properties, watchers, lifeCycle hooks, mixins",
+						},
+						{
+							concept: "Composition API",
+							description:
+								"Setup function, reactive, ref, watch, computed, lifeCycles hooks",
+						},
+
+						{
+							concept: "Template Syntax",
+							description: "Directives, interpolation, two-way data binding.",
+						},
+						{
+							concept: "Libraries",
+							description:
+								"vuelidate, vuex, vue CLI, Axios, Bootstrap Vue, Vue Router",
+						},
+					],
 				},
 				{
 					id: "javascript",
-					description:
-						"As a JavaScript developer, I have a solid understanding of essential JavaScript fundamentals, including variables, data types, operators, loops, conditional statements, functions, and objects. My proficiency in DOM manipulation allows me to create dynamic and interactive web pages. I have practical experience with asynchronous programming, effectively utilizing Promises, async/await, and handling callbacks for smooth API requests. Furthermore, I am well-versed in array methods like map, filter, reduce, and forEach, enabling efficient data manipulation. Closures and their applications in JavaScript are familiar concepts to me, and I am adept at event handling for clicks, input, and form submissions. Additionally, I have practical knowledge of local storage for data storage and an understanding of regular expressions for pattern matching and string manipulation. My grasp of modern JavaScript (ES6+) features, including arrow functions, destructuring assignments, spread operator, and template literals, enables me to write more concise and expressive code. With a passion for continuous learning and improvement, I am eager to contribute and grow as a valuable asset to any development team.",
+					concepts: [
+						{
+							concept: "Variables",
+							description: "Var, let, and const.",
+						},
+						{
+							concept: "Data Types",
+							description:
+								"String, Number, Boolean, Undefined, Null, Symbol, Array, Object, Function.",
+						},
+						{
+							concept: "Arrays",
+							description:
+								"forEach, map, filter, reduce, push, splice, includes, join.",
+						},
+						{
+							concept: "Control Flow",
+							description:
+								"if, else, switch, and looping constructs (for, while, do-while).",
+						},
+						{
+							concept: "ES6+ Features",
+							description:
+								"Template literals, array/object destructuring, spread operators, default parameters, and arrow functions.",
+						},
+						{
+							concept: "Classes",
+							description: "Classes and constructor functions.",
+						},
+						{
+							concept: "DOM Manipulation",
+							description:
+								"Selecting Elements, Modifying Content, Attributes, Creating Elements, Appending and Removing Elements, Adding and Removing Classes, Event Handling.",
+						},
+						{
+							concept: "Asynchronous Operations",
+							description:
+								"Callback Functions, Promises, Async/Await, Fetch API, Error Handling, try/catch.",
+						},
+					],
 				},
 				{
 					id: "css3",
-					description:
-						"Css Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
+					concepts: [
+						{
+							concept: "CSS Selectors",
+							description:
+								"Element selectors, class selectors, ID selectors, descendant selectors, etc.",
+						},
+						{
+							concept: "Box Model",
+							description: "Borders, padding, margin, and content.",
+						},
+						{
+							concept: "Layout Techniques",
+							description: "Flexbox and CSS Grid.",
+						},
+						{
+							concept: "Responsive Design",
+							description:
+								"Mobile-first approach, media queries, breakpoints, etc.",
+						},
+						{
+							concept: "CSS Preprocessors",
+							description:
+								"Sass. Variables, nesting, mixins, and other features.",
+						},
+						{
+							concept: "CSS Transitions and Animations",
+							description:
+								"Keyframes, easing functions, transition properties, and other features.",
+						},
+						{
+							concept: "CSS3 Features",
+							description:
+								"Rounded corners, gradients, shadows, transformations, pseudo-classes, etc.",
+						},
+						{
+							concept: "CSS Frameworks",
+							description: "Bootstrap.",
+						},
+					],
 				},
 				{
 					id: "html5",
-					description:
-						"Html Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
+					concepts: [
+						{
+							concept: "HTML Structure",
+							description:
+								"Basic document structure with doctype, html, head, and body elements.",
+						},
+						{
+							concept: "Semantic Elements",
+							description:
+								"Semantic elements like header, nav, main, section, article, footer, etc.",
+						},
+						{
+							concept: "Forms and Input Elements",
+							description:
+								"Input elements like input, textarea, select, label, and form attributes.",
+						},
+						{
+							concept: "Links and Anchors",
+							description: "links with anchor tags and attributes.",
+						},
+						{
+							concept: "Images",
+							description:
+								"Image tags and its attributes like src, alt, width, and height.",
+						},
+
+						{
+							concept: "HTML5 APIs",
+							description:
+								"HTML5 APIs like Geolocation, LocalStorage, and WebSockets.",
+						},
+						{
+							concept: "Accessibility",
+							description: "ARIA and alt attributes for images.",
+						},
+						{
+							concept: "Tables",
+							description:
+								"Table-related elements like tr, th, td, thead, tbody, tfoot, etc.",
+						},
+						{
+							concept: "Multimedia",
+							description:
+								"Embedding multimedia content with audio, video, and iframe elements.",
+						},
+					],
 				},
-				// {
-				// 	id: "sass",
-				// 	description:
-				// 		"Sass Lorem ipsum dolor sit, amet consectetur adipisicing elit Architecto minus voluptas illo deleniti laboriosam unde harum,porro minima non. Vel quod aut velit fugit a laborum iure nonvoluptate ullam",
-				// },
 			],
 		};
 	},
@@ -60,7 +210,6 @@ export default {
 <template>
 	<div class="skills-wrapper">
 		<div class="skills-container">
-			<!-- <div class="background-icon">{{ scrollPosition }}</div> -->
 			<h2
 				class="sections-title-global"
 				data-aos="fade-up"
@@ -94,7 +243,12 @@ export default {
 					</div>
 				</div>
 				<div class="skill-description-container">
-					<p class="text-p">{{ skillDescription.description }}</p>
+					<ul>
+						<li v-for="skill in skillDescription.concepts" :key="skill">
+							<h4>{{ skill.concept }}:</h4>
+							<p>{{ skill.description }}</p>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -115,17 +269,22 @@ export default {
 	margin-bottom: 4em;
 	color: $white;
 	position: relative;
+	width: 100%;
 }
 
 .skill-icon {
 	display: grid;
 	place-items: center;
+	padding: 1em;
+	// border: 0.5px solid rgba(255, 255, 255, 0.121);
+	cursor: pointer;
+	box-shadow: 0 3px 15px rgba(255, 255, 255, 0.151);
 }
 .skills-icons-container {
 	margin-bottom: 1.5em;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	row-gap: 2.5em;
+	gap: 2em;
 }
 .icon-name {
 	text-align: center;
@@ -139,28 +298,70 @@ export default {
 	justify-content: center;
 	align-items: end;
 }
+.skill-description-container {
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+	li {
+		// display: flex;
+		margin-bottom: 0.5em;
+	}
+
+	h4 {
+		font: $font-text-mb;
+	}
+	p {
+		font: $font-thin-text-mb;
+	}
+}
 
 .skills-wrapper {
 	@include breakpoint(tablet) {
 		.skills-container {
 			width: 85%;
 		}
-
 		.skills-icons-container {
-			flex: 1;
+			display: flex;
+			padding: 0;
+			justify-content: space-around;
 		}
 		.skill-description-container {
-			flex: 1;
-			font: $font-text-mb;
+			li {
+				display: flex;
+				margin-bottom: 1em;
+			}
+			h4 {
+				flex: 1;
+			}
+			p {
+				flex: 2;
+			}
 		}
 	}
 	@include breakpoint(desktop) {
 		.skills-container {
-			width: 60%;
+			width: 75%;
 			margin-bottom: 10em;
 		}
 		.skills-body {
 			display: flex;
+			gap: 1em;
+		}
+		.skills-icons-container {
+			display: grid;
+			flex: 1;
+			max-height: 15em;
+		}
+
+		.skill-description-container {
+			flex: 1;
+		}
+		.skill-icon {
+			transition: all 250ms ease-in-out;
+			&:hover {
+				box-shadow: rgba(255, 255, 255, 0.2) 0px 8px 40px;
+			}
 		}
 	}
 }

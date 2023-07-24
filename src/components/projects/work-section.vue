@@ -33,7 +33,7 @@ export default {
 					],
 
 					img: "portfolio.png",
-					videoId:"d_I8AN4ACo0?si=ZbxRAAGM20vd6kvT",
+					videoId: "d_I8AN4ACo0?si=ZbxRAAGM20vd6kvT",
 					thumbnail_main: "project1.jpeg",
 					thumbnail_sec: "project1.jpeg",
 					thumbnail_third: "project1.jpeg",
@@ -49,26 +49,26 @@ export default {
 					id: 2,
 					name: "Vehicles Marketplace",
 					siteLink: "https://vehicles-marketplace.web.app/",
-					codeLink:"https://github.com/anthonymartz17/vehicles-marketplace",
+					codeLink: "https://github.com/anthonymartz17/vehicles-marketplace",
 					short_desc:
-						"Auto dealers showcase inventory; buyers can browse diverse vehicles for purchasing ",
+						"Auto dealers showcase of inventory; buyers can browse diverse vehicles for purchasing ",
 					full_desc: [
 						{
 							id: "p1",
-							text: "The web app allows buyers to connect  with dealers and facilitate a seamless exploration and browsing of a diverse range of vehicles. Dealers can create accounts and showcase their vehicle inventories, while users can efficiently find their desired vehicles based on various criteria.",
+							text: "The web app allows dealers to register and create accounts, enabling them to showcase, manage, and update their vehicle inventories. Buyers can seamlessly explore and filter a diverse range of vehicles, efficiently finding their desired cars based on various criteria. The project was built in Vue.js, providing a reactive and component-based approach. Vuex was implemented to enable centralized state management and predictable data flow. Additionally, Vuelidate simplified form validation. Smooth page navigation is facilitated by using Vue Router. Sass was implemented to handle the styles and responsiveness of the app, ensuring a consistent experience across various screen sizes. Also, the app leverages the power of Firebase for hosting, authentication, and database management. With its very intuitive interface, the web app ensures a seamless user experience for both buyers and sellers.",
 						},
 						{
 							id: "p2",
-							text: " As a non-designer, I faced the challenge of creating the design. To ensure a professional and fundamentally sound appearance, I delved into the fundamentals of web design, such as visual hierarchy, alignment, proximity, balance, repetition, and typography. Valuable resources like YouTube, freecodecamp, and typescale.com assisted me in gaining a better understanding of these concepts. ",
+							text: "In the app's development, updating specific vehicle listing images presented my biggest challenge due to data distribution between Firebase Storage and Firebase Database. To overcome this, I ingeniously utilized UUIDs to create unique IDs for each image, concatenating them with the listing ID to ensure vehicle listing association. In Firebase Database, I maintained an array of relative path references for efficient image tracking. During editing, I categorized images into recently added (those without a listing ID yet), existing ones, and deleted ones. This facilitated the removal, retention, and addition of images in Firebase Storage.",
 						},
 						{
 							id: "p3",
-							text: "I particularly enjoyed implementing custom icons. Dissatisfied with the available options in common libraries and inspired by font awesome icon components functionality, I figured I could develop a component that could house all the svgs icons, allowing customization through props. The Canva platform provided me with cooler and more creative icons. Overall, the experience was enjoyable and rewarding.",
+							text: "",
 						},
 					],
 
 					img: "vehicle-marketplace2.png",
-					videoId:"BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					videoId: "BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
 					thumbnail_main: "vehicle-marketplace2.png",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
@@ -80,27 +80,27 @@ export default {
 						{ icon: "sass", size: "100" },
 					],
 				},
-				{
-					id: 3,
-					name: "This is project 3",
-					siteLink: "",
-					codeLink: "",
-					short_desc:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-					full_desc:
-						"Project 3 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
-					img: "project3.jpeg",
-					thumbnail_main: "project3.jpeg",
-					thumbnail_sec: "project3.jpeg",
-					thumbnail_third: "project3.jpeg",
-					technologies: [
-						{ icon: "javascript", size: "70" },
-						{ icon: "html5", size: "70" },
-						{ icon: "css3", size: "70" },
-						{ icon: "vue", size: "100" },
-						{ icon: "sass", size: "100" },
-					],
-				},
+				// {
+				// 	id: 3,
+				// 	name: "This is project 3",
+				// 	siteLink: "",
+				// 	codeLink: "",
+				// 	short_desc:
+				// 		"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
+				// 	full_desc:
+				// 		"Project 3 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
+				// 	img: "project3.jpeg",
+				// 	thumbnail_main: "project3.jpeg",
+				// 	thumbnail_sec: "project3.jpeg",
+				// 	thumbnail_third: "project3.jpeg",
+				// 	technologies: [
+				// 		{ icon: "javascript", size: "70" },
+				// 		{ icon: "html5", size: "70" },
+				// 		{ icon: "css3", size: "70" },
+				// 		{ icon: "vue", size: "100" },
+				// 		{ icon: "sass", size: "100" },
+				// 	],
+				// }
 			],
 		};
 	},
@@ -224,7 +224,6 @@ export default {
 }
 
 .projects-project {
-	flex: 1;
 	margin-bottom: 1.5em;
 	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.151);
 	background: rgba(255, 255, 255, 0.075);
@@ -350,7 +349,8 @@ export default {
 		}
 
 		.projects-list {
-			display: flex;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
 		}
 		.projects-project {
 			transition: 0.2s ease-in-out;

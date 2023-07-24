@@ -7,8 +7,16 @@ export default {
 	data() {
 		return {
 			title: "About me",
-			description:
-				"I'm a passionate coder, dedicated father of two amazing girls, and an avid adventure seeker. When I'm not immersed in lines of code, I'm out exploring the world, seeking new thrills and experiences to share with my family. Another one of my cherished hobbies is photography; I find joy in capturing the beauty of moments and nature through my lens. This website is a reflection of my journey as both a developer and a family man, and I hope you enjoy exploring my work and interests. Let's connect and embark on exciting new projects together!",
+			description: [
+				{
+					id: "p1",
+					text: "I'm a passionate coder, dedicated father of two amazing girls, and an avid adventure seeker. When I'm not immersed in lines of code, I'm out exploring the world, seeking new thrills and experiences to share with my family.",
+				},
+				{
+					id: "p2",
+					text: "Another one of my cherished hobbies is photography; I find joy in capturing the beauty of moments and nature through my lens. This website is a reflection of my journey as both a developer and a family man, and I hope you enjoy exploring my work and interests. Let's connect and embark on exciting new projects together!",
+				},
+			],
 			hobbiesIcons: [
 				"audioBook",
 				"workout",
@@ -46,7 +54,7 @@ export default {
 				</div>
 				<div class="aboutme-description">
 					<div class="parragraph">
-						<p>{{ description }}</p>
+						<p class="paragraph" v-for="para in description" :key="para.id">{{ para.text }}</p>
 					</div>
 					<div>
 						<h5 class="other-hobbies">Other hobbies:</h5>
@@ -81,8 +89,8 @@ export default {
 	color: $white;
 	position: relative;
 }
-.parragraph {
-	margin-bottom: 2em;
+.paragraph {
+	margin-bottom: 1em;
 }
 .other-hobbies {
 	font: $font-subtitle-mb;
@@ -99,6 +107,7 @@ export default {
 	margin-bottom: 1.5em;
 	height: 50%;
 	width: 100%;
+	box-shadow: 0 3px 20px rgba(255, 255, 255, 0.151);
 
 	img {
 		height: 100%;
@@ -131,8 +140,8 @@ export default {
 	}
 	@include breakpoint(desktop) {
 		.aboutme-container {
-			width: 60%;
-			max-width: 60%;
+			width: 75%;
+			// max-width: 60%;
 		}
 		.about-body {
 			display: flex;

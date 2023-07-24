@@ -2,6 +2,7 @@
 import NavMenueMobile from "./navMenueMobile.vue";
 import DesktopMenue from "./desktopMenue.vue";
 import MartzIcon from "./icons/martz-icons.vue";
+import "animate.css";
 export default {
 	components: {
 		NavMenueMobile,
@@ -38,12 +39,13 @@ export default {
 					@click="createEmitToggleMenue()"
 				/>
 			</div>
-			<div
-				id="nav-menue-wrapper"
-				class="navmenue-wrapper"
-				@click.self="createEmitToggleMenue()"
-			>
-				<NavMenueMobile v-if="isMenueVisible" v-on="$listeners" />
+			<div class="navmenue-wrapper" @click.self="createEmitToggleMenue()">
+				<transition
+					enter-active-class="animate__animated animate__slideInRight animate__faster"
+					leave-active-class="animate__animated animate__slideOutRight animate__faster"
+				>
+					<NavMenueMobile v-if="isMenueVisible" v-on="$listeners" />
+				</transition>
 			</div>
 			<div class="desk-menue-wrapper">
 				<DesktopMenue v-on="$listeners" />
@@ -101,18 +103,17 @@ export default {
 		.desk-menue-wrapper {
 			display: block;
 		}
-		
-			.header-container {
-				padding: 0.8em 4em;
-				align-items: flex-end;
-				
-			}
-			.header-container-logo{
-				align-self: flex-end;
-			}
-			.header-nav-menue {
-				display: none;
-			}
+
+		.header-container {
+			padding: 0.8em 4em;
+			align-items: flex-end;
+		}
+		.header-container-logo {
+			align-self: flex-end;
+		}
+		.header-nav-menue {
+			display: none;
+		}
 	}
 }
 </style>

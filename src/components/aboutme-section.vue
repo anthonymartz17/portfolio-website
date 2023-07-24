@@ -8,7 +8,7 @@ export default {
 		return {
 			title: "About me",
 			description:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam deleniti quam excepturi laboriosam similique repudiandae earum sunt odit nisi illum! Voluptate provident veritatis iste eveniet distinctio quis vero reiciendis dolorem.",
+				"I'm a passionate coder, dedicated father of two amazing girls, and an avid adventure seeker. When I'm not immersed in lines of code, I'm out exploring the world, seeking new thrills and experiences to share with my family. Another one of my cherished hobbies is photography; I find joy in capturing the beauty of moments and nature through my lens. This website is a reflection of my journey as both a developer and a family man, and I hope you enjoy exploring my work and interests. Let's connect and embark on exciting new projects together!",
 			hobbiesIcons: [
 				"audioBook",
 				"workout",
@@ -42,31 +42,21 @@ export default {
 				:data-aos-delay="250"
 			>
 				<div class="aboutme-img">
-					<img src="/img/project2.jpeg" alt="pictures of antonio's hobbies" />
+					<img src="/img/aboutme.png" alt="pictures of antonio's hobbies" />
 				</div>
 				<div class="aboutme-description">
 					<div class="parragraph">
 						<p>{{ description }}</p>
-						<br />
-						<p>{{ description }}</p>
 					</div>
 					<div>
-						<h5
-							data-aos="fade-up"
-							data-aos-duration="800"
-							class="other-hobbies"
-						>
-							Other hobbies:
-						</h5>
+						<h5 class="other-hobbies">Other hobbies:</h5>
 						<div class="hobbies-icons-container">
 							<MartzIcon
 								class="icon"
-								data-aos="fade-up"
-								data-aos-duration="800"
-								:data-aos-delay="idx * 100"
 								:icon="icon"
 								v-for="(icon, idx) in hobbiesIcons"
 								:key="icon"
+								:style="{ 'animation-delay': idx * 0.2 }"
 							/>
 						</div>
 					</div>

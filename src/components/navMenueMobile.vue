@@ -37,6 +37,7 @@ export default {
 
 <template>
 	<!-- <div class="menu-wrapper"> -->
+
 	<div class="nav-container">
 		<div class="nav-container-header" id="close-header" @click="emitCloseEvent()">
 			<font-awesome-icon
@@ -76,6 +77,7 @@ export default {
 			<SocialMedia />
 		</div>
 	</div>
+	
 	<!-- </div> -->
 </template>
 
@@ -114,6 +116,11 @@ export default {
 	width: 70%;
 	font: $font-text-mb;
 	border-left: 1px solid rgba($white, 0.3);
+	
+
+
+
+
 	@include breakpoint(tablet) {
 		font: $font-text-tb;
 	}

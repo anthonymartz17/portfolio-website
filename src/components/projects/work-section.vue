@@ -15,19 +15,19 @@ export default {
 					name: "Personal Website",
 					siteLink: "",
 					codeLink: "https://github.com/anthonymartz17/portfolio-2023.git",
-					short_desc:
+					description_overview:
 						"Dynamic showcase of my skills, work, and passion for web development.",
-					full_desc: [
+					description_complete: [
 						{
-							id: "p1",
+							paragraph_id: "intro",
 							text: "My personal website is a dynamic platform that showcases my work, skills, and passion for web development, aiming to demonstrate my proficiency to potential employers. It utilizes Vue.js for the user interface, CSS/SASS for styling, and HTML5 for markup. Page navigation is handled through scrolling and Vue router. The contact form integrates email functionality with EmailJS.",
 						},
 						{
-							id: "p2",
+							paragraph_id: "design",
 							text: " As a non-designer, I faced the challenge of creating the design. To ensure a professional and fundamentally sound appearance, I delved into the fundamentals of web design, such as visual hierarchy, alignment, proximity, balance, repetition, and typography. Valuable resources like YouTube, freecodecamp, and typescale.com assisted me in gaining a better understanding of these concepts. ",
 						},
 						{
-							id: "p3",
+							paragraph_id: "conclusion",
 							text: "I particularly enjoyed implementing custom icons. Dissatisfied with the available options in common libraries and inspired by font awesome icon components functionality, I figured I could develop a component that could house all the svgs icons, allowing customization through props. The Canva platform provided me with cooler and more creative icons. Overall, the experience was enjoyable and rewarding.",
 						},
 					],
@@ -50,20 +50,24 @@ export default {
 					name: "Vehicles Marketplace",
 					siteLink: "https://vehicles-marketplace.web.app/",
 					codeLink: "https://github.com/anthonymartz17/vehicles-marketplace",
-					short_desc:
+					description_overview:
 						"Auto dealers showcase of inventory; buyers can browse diverse vehicles for purchasing ",
-					full_desc: [
+					description_complete: [
 						{
-							id: "p1",
-							text: "The web app allows dealers to register and create accounts, enabling them to showcase, manage, and update their vehicle inventories. Buyers can seamlessly explore and filter a diverse range of vehicles, efficiently finding their desired cars based on various criteria. The project was built in Vue.js, providing a reactive and component-based approach. Vuex was implemented to enable centralized state management and predictable data flow. Additionally, Vuelidate simplified form validation. Smooth page navigation is facilitated by using Vue Router. Sass was implemented to handle the styles and responsiveness of the app, ensuring a consistent experience across various screen sizes. Also, the app leverages the power of Firebase for hosting, authentication, and database management. With its very intuitive interface, the web app ensures a seamless user experience for both buyers and sellers.",
+							paragraph_id: "intro-overview",
+							text: "The web app allows dealers to register and create accounts, enabling them to showcase, manage, and update their vehicle inventories. Buyers can seamlessly explore and filter a diverse range of vehicles, efficiently finding their desired cars based on various criteria.",
 						},
 						{
-							id: "p2",
-							text: "In the app's development, updating specific vehicle listing images presented my biggest challenge due to data distribution between Firebase Storage and Firebase Database. To overcome this, I ingeniously utilized UUIDs to create unique IDs for each image, concatenating them with the listing ID to ensure vehicle listing association. In Firebase Database, I maintained an array of relative path references for efficient image tracking. During editing, I categorized images into recently added (those without a listing ID yet), existing ones, and deleted ones. This facilitated the removal, retention, and addition of images in Firebase Storage.",
+							paragraph_id: "technologies",
+							text: "The project was built in Vue.js, providing a reactive and component-based approach. Vuex was implemented to enable centralized state management and predictable data flow. Additionally, Vuelidate simplified form validation, and smooth page navigation is facilitated by using Vue Router. Sass was implemented to handle the styles and responsiveness of the app, ensuring a consistent experience across various screen sizes. Moreover, the app leverages the power of Firebase for hosting, authentication, and database management, resulting in a web app with a very intuitive interface that ensures a seamless user experience for both buyers and sellers.",
 						},
 						{
-							id: "p3",
-							text: "",
+							paragraph_id: "challange-in-development",
+							text: "In the app's development, updating specific vehicle listing images presented my biggest challenge. This was due to data distribution between Firebase Storage and Firebase Database. To overcome this, I ingeniously utilized UUIDs to create unique IDs for each image, concatenating them with the listing ID to ensure vehicle listing association. In Firebase Database, I maintained an array of relative path references for efficient image tracking. During editing, I categorized images into recently added ones (those without a listing ID yet), existing ones, and deleted ones. This facilitated the removal, retention, and addition of images in Firebase Storage.",
+						},
+						{
+							paragraph_id: "conclusion",
+							text: "Overall, the journey of building this web app was an incredibly enriching experience for me as a developer. Even though I found myself frustrated at times, the hurdles pushed me to think creatively and find innovative solutions, which ultimately enhanced my problem-solving skills.",
 						},
 					],
 
@@ -80,27 +84,6 @@ export default {
 						{ icon: "sass", size: "100" },
 					],
 				},
-				// {
-				// 	id: 3,
-				// 	name: "This is project 3",
-				// 	siteLink: "",
-				// 	codeLink: "",
-				// 	short_desc:
-				// 		"Lorem ipsum dolor sit amet consectetur adipisicing elit so every si",
-				// 	full_desc:
-				// 		"Project 3 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non.Vel quod aut velit fugit a laborum iure non voluptate ullam? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto minus voluptas illo deleniti laboriosam unde harum, porro minima non. Vel quod aut velit fugit a laborum iure non voluptate ullam?",
-				// 	img: "project3.jpeg",
-				// 	thumbnail_main: "project3.jpeg",
-				// 	thumbnail_sec: "project3.jpeg",
-				// 	thumbnail_third: "project3.jpeg",
-				// 	technologies: [
-				// 		{ icon: "javascript", size: "70" },
-				// 		{ icon: "html5", size: "70" },
-				// 		{ icon: "css3", size: "70" },
-				// 		{ icon: "vue", size: "100" },
-				// 		{ icon: "sass", size: "100" },
-				// 	],
-				// }
 			],
 		};
 	},
@@ -136,7 +119,7 @@ export default {
 					</div>
 					<div class="projects-project-desc">
 						<h3>{{ project.name }}</h3>
-						<p class="text-description">{{ project.short_desc }}</p>
+						<p class="text-description">{{ project.description_overview }}</p>
 						<div class="see-more">
 							<p class="text-p">See more</p>
 							<MartzIcon icon="angleRight" :size="15" color="accent" />

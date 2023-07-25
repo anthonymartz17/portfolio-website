@@ -102,7 +102,7 @@ export default {
 						>
 							<p
 								:class="['paragraph', { 'hide-paragraph': paragraph.hide }]"
-								v-for="paragraph in projectClicked.full_desc"
+								v-for="paragraph in projectClicked.description_complete"
 								:key="paragraph.id"
 							>
 								{{ paragraph.text }}

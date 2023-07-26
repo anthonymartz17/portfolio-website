@@ -124,15 +124,6 @@ export default {
 							<p class="text-p">See more</p>
 							<MartzIcon icon="angleRight" :size="15" color="accent" />
 						</div>
-						<!-- <BaseButton
-							class="project-btn"
-							@click.native="toggleShowMore(project)"
-							text="See more"
-							icon="see"
-							color="accent"
-							size="30"
-							id="toggleProject"
-						/> -->
 					</div>
 				</div>
 				<div v-if="showMore" class="project-detail">

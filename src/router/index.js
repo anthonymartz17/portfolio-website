@@ -1,10 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingPage from "../views/landingPage.vue";
-import Portfolio from "../views/portfolioSite.vue";
-import HomeBlog from "../views/blog/home-blog.vue";
-import BlogsList from "../views/blog/blogs-list.vue";
-import BlogsDetails from "../views/blog/blog-details.vue";
 
 Vue.use(VueRouter);
 
@@ -17,16 +13,28 @@ const routes = [
 	{
 		path: "/portfolio",
 		name: "portfolio",
-		component: Portfolio,
+		component: () => import("../views/portfolioSite.vue"),
 	},
 	{
 		path: "/home-blog",
-    component: HomeBlog,
-    name: "home-blog",
-    children: [
-      {path:'', name: "home-blog", component:BlogsList},
-      {path:'details', name: "blog-details", component:BlogsDetails}
-    ]
+		component: () => import("../views/blog/home-blog.vue"),
+		children: [
+			{
+				path: "",
+				name: "home-blog",
+				component: () => import("../views/blog/blogs-list.vue"),
+			},
+			{
+				path: "details",
+				name: "blog-details",
+				component: () => import("../views/blog/blog-details.vue"),
+			},
+			{
+				path: "create-post",
+				name: "create-post",
+				component: () => import("../views/blog/create-post.vue"),
+			},
+		],
 	},
 ];
 

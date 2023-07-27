@@ -11,7 +11,7 @@ export default {
 					id: 1,
 					datePosted: "04/18/2023",
 					img: "project1.jpeg",
-					title: "Testing blog",
+					title: "Not letting a bug trash talk me",
 					body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?",
 					resources: [
 						{ id: 1, name: "chat gpt", link: "https://chat.openai.com/" },
@@ -81,11 +81,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-// .blog-container {
-// 	min-height: 40vh;
-// 	margin-bottom: 1em;
-// 	border: 1px solid;
-// }
+
 .blog-list-body {
 	display: grid;
 	gap: 1em;

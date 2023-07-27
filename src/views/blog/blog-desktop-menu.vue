@@ -13,6 +13,7 @@ export default {
 			navLinks: [
 				{ icon: "home", name: "HOME", route: "portfolio" },
 				{ icon: "blog", name: "BLOGS", route: "home-blog" },
+				{ icon: "blog", name: "CREATE", route: "create-post" },
 			],
 		};
 	},

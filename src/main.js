@@ -6,6 +6,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
 import AOSPlugin from "../aos";
+// In your App.vue or main CSS file
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css"; // Use 'quill.bubble.css' for the bubble theme
 
 import {
 	faBriefcase,

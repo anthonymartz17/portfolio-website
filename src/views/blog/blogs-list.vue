@@ -1,5 +1,6 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
+
 export default {
 	components: {
 		MartzIcon,
@@ -41,14 +42,19 @@ export default {
 		};
 	},
 	mounted() {
-    AOS.init();
-  },
+		this.$aos.init()
+	},
 };
 </script>
 
 <template>
-	<div class="home-blogs-main-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-		<div class="blog-list-title" >
+	<div
+		class="home-blogs-main-container"
+		data-aos="fade-up"
+		data-aos-duration="800"
+		data-aos-delay="400"
+	>
+		<div class="blog-list-title">
 			<h2>Blogs</h2>
 		</div>
 		<div class="blog-list-body">
@@ -81,7 +87,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
 .blog-list-body {
 	display: grid;
 	gap: 1em;

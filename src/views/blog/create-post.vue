@@ -1,5 +1,8 @@
 <script>
 import { quillEditor } from "vue-quill-editor";
+import { required } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
+import blogPostApi from "@/ApiHelper/blogPostApi";
 
 export default {
 	components: {
@@ -7,8 +10,31 @@ export default {
 	},
 	data() {
 		return {
-			content: "<p>Write your content here...</p>",
+			isSubmitted: false,
+			content: "",
 		};
+	},
+	validations: {
+		content: { required },
+	},
+	methods: {
+		...mapActions("blogPosts", ["createPost"]),
+		async tryCreatePost() {
+			this.$v.$touch;
+			this.isSubmitted = true;
+			if (this.$v.$invalid) {
+				console.log(this.$v.content.$invalid);
+				return;
+			} else {
+				try {
+					const response = await blogPostApi.createPost(this.content);
+					console.log(response, "klk");
+					this.isSubmitted = false;
+				} catch (error) {
+					throw error;
+				}
+			}
+		},
 	},
 };
 </script>
@@ -20,16 +46,25 @@ export default {
 		data-aos-delay="400"
 	>
 		<h2 class="blog-list-title">Create New Post</h2>
-		<div class="richEdit-container">
-			<quill-editor v-model="content"></quill-editor>
-		</div>
+		<form action="" @submit.prevent="tryCreatePost">
+			<div>
+				<quill-editor
+					:class="{ invalid: isSubmitted && $v.content.$invalid }"
+					v-model="content"
+				></quill-editor>
+			</div>
+			<button>Create post</button>
+		</form>
 	</div>
 </template>
 
 <style lang="scss" scoped>
 /* Custom CSS to display images inline */
 ::v-deep .ql-editor {
-  min-height: 400px; /* Adjust the min-height value as needed */
+	min-height: 400px; /* Adjust the min-height value as needed */
+}
+::v-deep .ql-editor.invalid {
+	border: 2px solid $accent !important;
 }
 .blog-list-title {
 	font: $font-title-mb;

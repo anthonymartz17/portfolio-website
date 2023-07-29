@@ -161,7 +161,7 @@ body.mobile-menu-open {
 			justify-content: center;
 		}
 		.routerView {
-			width: 60%;
+			width: 75%;
 		}
 		.home-blog-header-wrapper {
 			display: flex;

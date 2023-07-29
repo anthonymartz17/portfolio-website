@@ -244,7 +244,7 @@ export default {
 				</div>
 				<div class="skill-description-container">
 					<ul>
-						<li v-for="skill in skillDescription.concepts" :key="skill">
+						<li v-for="skill in skillDescription.concepts" :key="skill.concept">
 							<h4>{{ skill.concept }}:</h4>
 							<p>{{ skill.description }}</p>
 						</li>

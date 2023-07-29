@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+// import store from "./store";
 import "./assets/scss/reset.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -83,3 +84,8 @@ new Vue({
 	router,
 	render: (h) => h(App),
 }).$mount("#app");
+
+// new Vue({
+// 	render: (h) => h(App),
+// 	store, // Connect the store to the Vue instance
+// }).$mount("#app");

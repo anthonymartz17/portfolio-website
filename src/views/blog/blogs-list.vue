@@ -1,5 +1,6 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -7,13 +8,14 @@ export default {
 	},
 	data() {
 		return {
+			blogPosts: [],
 			blogs: [
 				{
 					id: 1,
 					datePosted: "04/18/2023",
 					img: "project1.jpeg",
 					title: "Not letting a bug trash talk me",
-					body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?",
+					body: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?`,
 					resources: [
 						{ id: 1, name: "chat gpt", link: "https://chat.openai.com/" },
 						{
@@ -42,7 +44,14 @@ export default {
 		};
 	},
 	mounted() {
-		this.$aos.init()
+		this.$aos.init();
+		// this.setBlogPosts().then((data) => {
+		// 	this.blogPosts = data;
+		// 	console.log(this.blogPosts);
+		// });
+	},
+	methods: {
+		...mapActions("blogPosts", ["setBlogPosts"]),
 	},
 };
 </script>

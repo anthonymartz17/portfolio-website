@@ -1,4 +1,4 @@
-import { db, storage } from "../firebaseConfig"
+import { db, storage } from "../firebaseConfig";
 import {
 	collection,
 	doc,
@@ -7,8 +7,8 @@ import {
 	addDoc,
 	updateDoc,
 	deleteDoc,
-// 	// query,
-// 	// where,
+	// 	// query,
+	// 	// where,
 } from "firebase/firestore";
 // import {
 // 	// ref,
@@ -25,20 +25,22 @@ import { v4 as uuidv4 } from "uuid";
 // const db = getFirestore();
 
 export default {
-	// async getAds(dealerId) {
-	// 	try {
-	// 		const colRef = collection(db, "cars");
-	// 		const q = query(colRef, where("dealerId", "==", dealerId));
-	// 		const snapshot = await getDocs(q);
-	// 		const data = snapshot.docs.map((doc) => ({
-	// 			id: doc.id,
-	// 			...doc.data(),
-	// 		}));
-	// 		return data;
-	// 	} catch (error) {
-	// 		throw error;
-	// 	}
-	// },
+	async getPosts() {
+		try {
+			let data = [];
+			const colRef = collection(db, "blogPosts");
+			const snapshot = await getDocs(colRef);
+			snapshot.docs.forEach((doc) => {
+				data.push({
+					id: doc.id,
+					...doc.data(),
+				});
+			});
+			return data;
+		} catch (error) {
+			throw error;
+		}
+	},
 	async getPostById(postId) {
 		try {
 			const postDocRef = doc(db, "blogPosts", postId);
@@ -59,7 +61,6 @@ export default {
 	},
 	async createPost(postData) {
 		try {
-			console.log(postData, "api");
 			const colRef = collection(db, "blogPosts");
 
 			const response = await addDoc(colRef, postData);
@@ -70,8 +71,8 @@ export default {
 		} catch (error) {
 			throw error;
 		}
-  },
-  async updatePost({ postData, postId }) {
+	},
+	async updatePost({ postData, postId }) {
 		console.log(postId, "elid");
 		try {
 			const postDocRef = doc(db, "blogPosts", postId);
@@ -174,41 +175,40 @@ export default {
 	// 		throw error;
 	// 	}
 	// },
-	
 
-// 	async getDealers() {
-// 		try {
-// 			let dealersData = [];
-// 			const colRef = collection(db, "dealers");
-// 			const snapshot = await getDocs(colRef);
-// 			snapshot.docs.forEach((doc) => {
-// 				dealersData.push({
-// 					id: doc.id,
-// 					...doc.data(),
-// 				});
-// 			});
-// 			return dealersData;
-// 		} catch (error) {
-// 			throw error;
-// 		}
-// 	},
-// 	async getDealerById(dealerId) {
-// 		console.log(dealerId, "el dealer");
-// 		try {
-// 			const dealerDocRef = doc(db, "dealers", dealerId);
-// 			const dealerDocSnapshot = await getDoc(dealerDocRef);
+	// 	async getDealers() {
+	// 		try {
+	// 			let dealersData = [];
+	// 			const colRef = collection(db, "dealers");
+	// 			const snapshot = await getDocs(colRef);
+	// 			snapshot.docs.forEach((doc) => {
+	// 				dealersData.push({
+	// 					id: doc.id,
+	// 					...doc.data(),
+	// 				});
+	// 			});
+	// 			return dealersData;
+	// 		} catch (error) {
+	// 			throw error;
+	// 		}
+	// 	},
+	// 	async getDealerById(dealerId) {
+	// 		console.log(dealerId, "el dealer");
+	// 		try {
+	// 			const dealerDocRef = doc(db, "dealers", dealerId);
+	// 			const dealerDocSnapshot = await getDoc(dealerDocRef);
 
-// 			if (dealerDocSnapshot.exists()) {
-// 				return {
-// 					id: dealerDocSnapshot.id,
-// 					...dealerDocSnapshot.data(),
-// 				};
-// 			} else {
-// 				throw new Error("Dealer not found.");
-// 			}
-// 		} catch (error) {
-// 			throw error;
-// 		}
-// 	},
+	// 			if (dealerDocSnapshot.exists()) {
+	// 				return {
+	// 					id: dealerDocSnapshot.id,
+	// 					...dealerDocSnapshot.data(),
+	// 				};
+	// 			} else {
+	// 				throw new Error("Dealer not found.");
+	// 			}
+	// 		} catch (error) {
+	// 			throw error;
+	// 		}
+	// 	},
 };
 // collection refference

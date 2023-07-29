@@ -1,13 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import blogPosts from "./modules/blog-posts";
+import blogPosts from "./modules/blog-posts";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-	// modules: {
-	// 	blogPosts,
-	// },
+	modules: {
+		blogPosts,
+	},
 	state: {
 		// Your state variables go here
 	},
@@ -16,9 +16,6 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		// Your actions go here
-    createPost(context) {
-      console.log('kkkkkk')
-    }
 	},
 	getters: {
 		// Your getters go here

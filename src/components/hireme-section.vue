@@ -1,12 +1,12 @@
 <script>
 import BaseButton from "./baseButton.vue";
-import basebutton from "./baseButton.vue";
+// import basebutton from "./baseButton.vue";
 import MartzIcon from "../components/icons/martz-icons.vue";
 import { required, email } from "vuelidate/lib/validators";
 import emailjs from "emailjs-com";
 
 export default {
-	components: { BaseButton, basebutton, MartzIcon },
+	components: { BaseButton, MartzIcon },
 	data() {
 		return {
 			title: "Hire me",
@@ -176,11 +176,11 @@ export default {
 							class="btn-sendit"
 						/>
 
-						<font-awesome-icon
+						<!-- <font-awesome-icon
 							icon="fa-solid fa-message"
 							class="msg-bubble"
 							size="2x"
-						/>
+						/> -->
 					</div>
 				</form>
 			</div>

@@ -1,6 +1,7 @@
 <script>
 import MartzIcon from "./icons/martz-icons.vue";
 export default {
+	name: 'BaseButton',
 	components: {
 		MartzIcon,
 	},

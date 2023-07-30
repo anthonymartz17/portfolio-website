@@ -13,9 +13,19 @@ export default {
 			state.blogPosts.push(payload);
 		},
 	},
-	actions: {
+  actions: {
+    async fetchPostById(_, postId) {
+			try {
+				let post = await blogPostApi.getPostById(postId);
+				// let imagesUrl = await apiCarsImages.getImagesById(vehicle.pics);
+				// vehicle.carPicsUrls = imagesUrl;
+				return post;
+			} catch (error) {
+				throw error;
+			}
+		},
 		async setBlogPosts({ commit }) {
-			console.log('fired from state')
+			console.log("fired from state");
 			try {
 				const data = await blogPostApi.getPosts();
 				commit("SET__BLOG_POSTS", data);
@@ -23,10 +33,10 @@ export default {
 				throw error;
 			}
 		},
-		async createPost({ commit }, payload) {
-			console.log(payload, "state");
-			// const createdPost = await blogPostApi.createPost(payload);
-			// commit("CREATE", payload);
+		async createPost(context, payload) {
+      const createdPost = await blogPostApi.createPost(payload);
+   
+			// commit("CREATE", {id:createdPost.id,payload});
 		},
 	},
 	getters: {

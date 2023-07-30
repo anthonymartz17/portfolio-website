@@ -29,7 +29,6 @@ export default {
 			this.$v.$touch;
 			this.isSubmitted = true;
 			if (this.$v.$invalid) {
-				console.log(this.$v);
 				return;
 			} else {
 				try {

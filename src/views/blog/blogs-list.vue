@@ -1,6 +1,6 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -8,7 +8,6 @@ export default {
 	},
 	data() {
 		return {
-			blogPosts: [],
 			blogs: [
 				{
 					id: 1,
@@ -43,15 +42,16 @@ export default {
 			],
 		};
 	},
+
 	mounted() {
 		this.$aos.init();
-		// this.setBlogPosts().then((data) => {
-		// 	this.blogPosts = data;
-		// 	console.log(this.blogPosts);
-		// });
+		this.setBlogPosts();
 	},
 	methods: {
 		...mapActions("blogPosts", ["setBlogPosts"]),
+	},
+	computed: {
+		...mapGetters("blogPosts", ["blogPosts"]),
 	},
 };
 </script>
@@ -72,10 +72,10 @@ export default {
 				data-aos="fade-up"
 				data-aos-duration="800"
 				:data-aos-delay="250 * idx"
-				v-for="(blog, idx) in blogs"
+				v-for="(blog, idx) in blogPosts"
 				:key="blog.id"
 				class="blog-card"
-				:to="{ name: 'blog-details', query: { id: blog.id } }"
+				:to="{ name: 'blog-details', params: { postId: blog.id } }"
 			>
 				<div class="blog-img-container">
 					<img :src="`/img/${blog.img}`" alt="" />

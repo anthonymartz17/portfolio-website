@@ -1,10 +1,9 @@
 import Vue from "vue";
-import Vuex from 'vuex';
 import App from "./App.vue";
-import store from "./store";
 import router from "./router";
+import store from "./store"
 import "./assets/scss/reset.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
+// import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
 import AOSPlugin from "../aos";
@@ -12,81 +11,77 @@ import AOSPlugin from "../aos";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css"; // Use 'quill.bubble.css' for the bubble theme
 
-import {
-	faBriefcase,
-	faHandsHolding,
-	faBars,
-	faHandshake,
-	faCircleInfo,
-	faHouse,
-	faEye,
-	faPaperPlane,
-	faPlay,
-	faTv,
-	faAngleLeft,
-	faAngleRight,
-	faGlobe,
-	faMessage,
-	faHandsHoldingCircle,
-	faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-	faEnvelope,
-	faLightbulb,
-	faAddressCard,
-} from "@fortawesome/free-regular-svg-icons";
-
-import {
-	faInstagram,
-	faGithub,
-	faLinkedinIn,
-	faYoutube,
-	faBlogger,
-	faReadme,
-	faVuejs,
-} from "@fortawesome/free-brands-svg-icons";
-
-/* add icons to the library */
-library.add(
-	faInstagram,
-	faEnvelope,
-	faGithub,
-	faLinkedinIn,
-	faBriefcase,
-	faYoutube,
-	faBlogger,
-	faHandshake,
-	faHandsHolding,
-	faLightbulb,
-	faBars,
-	faCircleInfo,
-	faAddressCard,
-	faHouse,
-	faEye,
-	faPaperPlane,
-	faPlay,
-	faTv,
-	faReadme,
-	faAngleLeft,
-	faAngleRight,
-	faVuejs,
-	faGlobe,
-	faMessage,
-	faHandsHoldingCircle,
-	faXmark
-);
-
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 Vue.use(AOSPlugin);
-new Vue({
+const app = new Vue({
 	router,
+	store,
 	render: (h) => h(App),
 }).$mount("#app");
-Vue.use(Vuex);
-new Vue({
-	store, // Connect the store to the Vue instance
-	render: (h) => h(App),
-}).$mount("#app");
+export default app
+// import {
+// 	faBriefcase,
+// 	faHandsHolding,
+// 	faBars,
+// 	faHandshake,
+// 	faCircleInfo,
+// 	faHouse,
+// 	faEye,
+// 	faPaperPlane,
+// 	faPlay,
+// 	faTv,
+// 	faAngleLeft,
+// 	faAngleRight,
+// 	faGlobe,
+// 	faMessage,
+// 	faHandsHoldingCircle,
+// 	faXmark,
+// } from "@fortawesome/free-solid-svg-icons";
+// import {
+// 	faEnvelope,
+// 	faLightbulb,
+// 	faAddressCard,
+// } from "@fortawesome/free-regular-svg-icons";
+
+// import {
+// 	faInstagram,
+// 	faGithub,
+// 	faLinkedinIn,
+// 	faYoutube,
+// 	faBlogger,
+// 	faReadme,
+// 	faVuejs,
+// } from "@fortawesome/free-brands-svg-icons";
+
+// /* add icons to the library */
+// library.add(
+// 	faInstagram,
+// 	faEnvelope,
+// 	faGithub,
+// 	faLinkedinIn,
+// 	faBriefcase,
+// 	faYoutube,
+// 	faBlogger,
+// 	faHandshake,
+// 	faHandsHolding,
+// 	faLightbulb,
+// 	faBars,
+// 	faCircleInfo,
+// 	faAddressCard,
+// 	faHouse,
+// 	faEye,
+// 	faPaperPlane,
+// 	faPlay,
+// 	faTv,
+// 	faReadme,
+// 	faAngleLeft,
+// 	faAngleRight,
+// 	faVuejs,
+// 	faGlobe,
+// 	faMessage,
+// 	faHandsHoldingCircle,
+// 	faXmark
+// );

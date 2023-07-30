@@ -1,25 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import auth from "./modules/auth";
 import blogPosts from "./modules/blog-posts";
 
 Vue.use(Vuex);
-
-const store = new Vuex.Store({
+export default new Vuex.Store({
 	modules: {
+		auth,
 		blogPosts,
 	},
-	state: {
-		// Your state variables go here
-	},
-	mutations: {
-		// Your mutations go here
-	},
-	actions: {
-		// Your actions go here
-	},
-	getters: {
-		// Your getters go here
-	},
+	state: {},
 });
-
-export default store;

@@ -30,9 +30,9 @@ const routes = [
 				component: () => import("../views/blog/blog-details.vue"),
 			},
 			{
-				path: "create-post",
-				name: "create-post",
-				component: () => import("../views/blog/create-post.vue"),
+				path: "admin-app",
+				name: "admin-app",
+				component: () => import("../views/blog/admin-app.vue"),
 			},
 		],
 	},

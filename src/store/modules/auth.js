@@ -122,6 +122,10 @@ export default {
 				throw error;
 			}
 		},
+		setAlertMsg({ commit }, alertData) {
+			// commit("SET_ALERT_MSG", alertData);
+			console.log(...alertData)
+		},
 	},
 	getters: {
 		isLoggedIn: (state) => !!state.user,

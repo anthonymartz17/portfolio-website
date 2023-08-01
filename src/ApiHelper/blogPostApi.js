@@ -7,16 +7,17 @@ import {
 	addDoc,
 	updateDoc,
 	deleteDoc,
+
 	// 	// query,
 	// 	// where,
 } from "firebase/firestore";
-// import {
-// 	// ref,
-// 	// getDownloadURL,
-// 	// getMetadata,
-// 	// uploadBytes,
-// 	// deleteObject,
-// } from "firebase/storage";
+import {
+	ref,
+	getDownloadURL,
+	getMetadata,
+	uploadBytes,
+	deleteObject,
+} from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 // Create a reference to the storage service
 // const storage = getStorage();
@@ -31,6 +32,7 @@ export default {
 			const colRef = collection(db, "blogPosts");
 			const snapshot = await getDocs(colRef);
 			snapshot.docs.forEach((doc) => {
+				console.log(doc);
 				data.push({
 					id: doc.id,
 					...doc.data(),
@@ -81,7 +83,7 @@ export default {
 			const postDocSnapshot = await getDoc(postDocRef);
 
 			if (postDocSnapshot.exists()) {
-				delete postData.id
+				delete postData.id;
 				await updateDoc(postDocRef, postData);
 				return { id: postDocSnapshot.id, ...postDocSnapshot.data() };
 			} else {
@@ -108,31 +110,21 @@ export default {
 		}
 	},
 
-	// async uploadImages({ vehicleImages, vehicleId }) {
-	// 	try {
-	// 		console.log(vehicleImages, "images api ");
-	// 		// const urlsUploaded = await Promise.all(
-	// 		//uploads each image to firebase storage and returns array with url from each one
-	// 		const imgPathsPromised = vehicleImages.map(async (img) => {
-	// 			//creates unique name id for image
-	// 			const uniqueId = uuidv4();
-	// 			const imageName = `images/cars/${vehicleId}_${uniqueId}.jpg`;
+	async uploadImage({ thumbnail, blogId }) {
+		try {
+			//creates unique name id for image
+			const uniqueId = uuidv4();
+			const imageName = `blogThumbnails/${blogId}_${uniqueId}.jpg`;
 
-	// 			//creates refference unique for image
-	// 			const storageRef = ref(storage, imageName);
-	// 			//uploads image to firebase
-	// 			await uploadBytes(storageRef, img);
-
-	// 			return imageName;
-	// 		});
-	// 		console.log(imgPathsPromised, "promised");
-	// 		const imgPaths = await Promise.all(imgPathsPromised);
-	// 		console.log(imgPaths, "from api");
-	// 		return imgPaths;
-	// 	} catch (error) {
-	// 		throw error;
-	// 	}
-	// },
+			//creates refference unique for image
+			ref(storage, imageName);
+			//uploads image to firebase
+			// const imgPath = await uploadBytes(storageRef, thumbnail);
+			return imageName;
+		} catch (error) {
+			throw error;
+		}
+	},
 
 	// async deleteImages(imagePaths) {
 	// 	try {

@@ -91,6 +91,10 @@ export default {
 					break;
 			}
 		},
+		fitTitle(title) {
+			const words = title.split(" ");
+			return words.length > 15 ? `${words.slice(0, 15).join(' ')}...`: title;
+		},
 	},
 	computed: {
 		...mapGetters("blogPosts", ["blogPosts"]),
@@ -119,12 +123,12 @@ export default {
 				class="blog-card"
 			>
 				<div class="blog-img-container">
-					<img :src="`/img/${blog.img}`" alt="" />
+					<img :src="blog.thumbnail" alt="" />
 				</div>
 				<div class="card-desc">
-					<h4 class="card-title">{{ blog.title }}</h4>
+					<h4 class="card-title">{{ fitTitle(blog.title) }}</h4>
 
-					<p class="text-thin">Posted on: {{ blog.datePosted }}</p>
+					<p class="text-thin">Posted on: {{ blog.date_posted}}</p>
 					<div class="btn-container">
 						<BaseButton
 							@click.native="

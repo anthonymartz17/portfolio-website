@@ -13,7 +13,7 @@ export default {
 			name: "",
 			email: "",
 			message: "",
-			isSubmitted: false,
+			submitted: false,
 			mediaContacts: [
 				{
 					icon: "fa-regular fa-envelope",
@@ -50,7 +50,7 @@ export default {
 
 	methods: {
 		sendMsg() {
-			this.isSubmitted = true;
+			this.submitted = true;
 			this.$v.$touch();
 
 			if (this.$v.$invalid) {
@@ -69,7 +69,7 @@ export default {
 					console.log({ error });
 					alert(error);
 				} finally {
-					this.isSubmitted = false;
+					this.submitted = false;
 					this.name = "";
 					this.email = "";
 					this.message = "";
@@ -111,12 +111,9 @@ export default {
 							id="name"
 							name="name"
 							autocomplete="off"
-							:class="[
-								'input-field',
-								{ invalid: isSubmitted && $v.name.$error },
-							]"
+							:class="['input-field', { invalid: submitted && $v.name.$error }]"
 						/>
-						<p v-if="isSubmitted && !$v.name.required" class="text-small">
+						<p v-if="submitted && !$v.name.required" class="text-small">
 							Please enter a name
 						</p>
 					</div>
@@ -130,18 +127,18 @@ export default {
 							autocomplete="off"
 							:class="[
 								'input-field',
-								{ invalid: isSubmitted && $v.email.$error },
+								{ invalid: submitted && $v.email.$error },
 							]"
 						/>
-						<div v-if="isSubmitted && $v.email.$error">
+						<div v-if="submitted && $v.email.$error">
 							<p
-								v-if="isSubmitted && !$v.email.required"
+								v-if="submitted && !$v.email.required"
 								class="text-small error"
 							>
 								Please enter an email
 							</p>
 							<p
-								v-else-if="isSubmitted && !$v.email.email"
+								v-else-if="submitted && !$v.email.email"
 								class="text-small error"
 							>
 								Please enter a valid email
@@ -158,11 +155,11 @@ export default {
 							rows="7"
 							:class="[
 								'textarea-field',
-								{ invalid: isSubmitted && $v.message.$error },
+								{ invalid: submitted && $v.message.$error },
 							]"
 						></textarea>
 						<p
-							v-if="isSubmitted && !$v.message.required"
+							v-if="submitted && !$v.message.required"
 							class="text-small error"
 						>
 							Please enter a message

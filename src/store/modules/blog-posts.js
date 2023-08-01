@@ -42,8 +42,17 @@ export default {
 				throw error;
 			}
 		},
-		async createPost(context, payload) {
-			const createdPost = await blogPostApi.createPost(payload);
+		async createPost(context, { post, thumbnail }) {
+			//creates timestamp posted date
+			const createdAt = new Date();
+			post.date_posted = createdAt;
+			const createdPost = await blogPostApi.createPost(post);
+			const imgPathRef = await blogPostApi.uploadImage({
+				thumbnail,
+				blogId: createdPost.id,
+			});
+			post.thumbnail = imgPathRef;
+			await blogPostApi.updatePost(post, createdPost.id);
 		},
 		async updatePost({ commit }, blogPost) {
 			const updatePost = await blogPostApi.updatePost(blogPost);

@@ -16,11 +16,18 @@ export default {
 <template>
 	<div>
 		<img
-			v-if="icon == 'writing'"
+			v-if="icon == 'write'"
 			:height="size"
 			:width="size"
-			src="/icons/writing.svg"
-			alt="writing icon"
+			src="/icons/write.svg"
+			alt="write icon"
+		/>
+		<img
+			v-if="icon == 'delete'"
+			:height="size"
+			:width="size"
+			src="/icons/delete.svg"
+			alt="delete icon"
 		/>
 		<svg
 			v-if="icon == 'mywork'"

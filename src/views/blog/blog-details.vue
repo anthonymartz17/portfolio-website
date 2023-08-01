@@ -15,7 +15,6 @@ export default {
 		if (postId) {
 			this.fetchPostById(postId).then((post) => {
 				this.post = post;
-
 			});
 		}
 	},
@@ -28,9 +27,9 @@ export default {
 <template>
 	<div class="blog-detail-wrapper">
 		<div class="blog-detail-container">
-			<h2 class="blog-title" data-aos="fade-up" data-aos-duration="800">
+			<!-- <h2 class="blog-title" data-aos="fade-up" data-aos-duration="800">
 				{{ post.title }}
-			</h2>
+			</h2> -->
 			<div
 				class="blog-body"
 				data-aos="fade-up"
@@ -41,20 +40,6 @@ export default {
 					<img :src="`/img/${post.img}`" :alt="`img of blog ${post.title}`" />
 				</div>
 				<div v-html="post.content"></div>
-				<!-- <div class="blog-description-container">
-					<div class="blog-description">
-						<p class="text-thin">{{ blog.body }}</p>
-					</div>
-					<ul class="resources-container">
-						<li
-							class="text-thin"
-							v-for="resource in blog.resources"
-							:key="resource.id"
-						>
-							<a class="resource" :href="resource.link">{{ resource.link }}</a>
-						</li>
-					</ul>
-				</div> -->
 			</div>
 		</div>
 	</div>

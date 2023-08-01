@@ -1,10 +1,12 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
+import BaseButton from "@/components/baseButton.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
 		MartzIcon,
+		BaseButton,
 	},
 	data() {
 		return {
@@ -40,6 +42,20 @@ export default {
 					],
 				},
 			],
+			blogActions: [
+				{
+					icon: "see",
+					text: "View post",
+					authRequired: false,
+				},
+				{
+					icon: "write",
+					text: "Edit",
+					routerLink: "admin-app",
+					authRequired: true,
+				},
+				{ icon: "delete", text: "Delete", authRequired: true },
+			],
 		};
 	},
 
@@ -48,7 +64,33 @@ export default {
 		this.setBlogPosts();
 	},
 	methods: {
-		...mapActions("blogPosts", ["setBlogPosts"]),
+		...mapActions("blogPosts", ["setBlogPosts", "deletePost"]),
+		...mapActions("auth", ["setAlertMsg"]),
+		postAction(action) {
+			console.log(action);
+			switch (action.text) {
+				case "Edit":
+					this.$router.push({
+						name: "admin-app",
+						query: { postId: action.blogId },
+					});
+					break;
+				case "Delete":
+					this.deletePost(action.blogId);
+					// this.setAlertMsg({
+					// 	type: "warning",
+					// 	title: "Delete",
+					// 	msg: `Are you sure you want to delete post ${action.blogTitle}`,
+					// });
+					break;
+				default:
+					this.$router.push({
+						name: "blog-details",
+						params: { postId: action.blogId },
+					});
+					break;
+			}
+		},
 	},
 	computed: {
 		...mapGetters("blogPosts", ["blogPosts"]),
@@ -68,14 +110,13 @@ export default {
 		</div>
 		<div class="blog-list-body">
 			<!-- <divclass="blog-container"> -->
-			<router-link
+			<div
 				data-aos="fade-up"
 				data-aos-duration="800"
 				:data-aos-delay="250 * idx"
 				v-for="(blog, idx) in blogPosts"
 				:key="blog.id"
 				class="blog-card"
-				:to="{ name: 'blog-details', params: { postId: blog.id } }"
 			>
 				<div class="blog-img-container">
 					<img :src="`/img/${blog.img}`" alt="" />
@@ -85,11 +126,24 @@ export default {
 
 					<p class="text-thin">Posted on: {{ blog.datePosted }}</p>
 					<div class="btn-container">
-						<p class="text-p">VIEW POST</p>
-						<MartzIcon icon="angleRight" size="18" color="accent" />
+						<BaseButton
+							@click.native="
+								postAction({
+									blogId: blog.id,
+									blogTitle: blog.title,
+									...action,
+								})
+							"
+							v-for="action in blogActions"
+							:key="action.icon"
+							:icon="action.icon"
+							:text="action.text"
+							:size="30"
+							class="btn-blogActions"
+						/>
 					</div>
 				</div>
-			</router-link>
+			</div>
 			<!-- </div> -->
 		</div>
 	</div>
@@ -130,10 +184,11 @@ export default {
 	padding: 1em 0.5em;
 }
 .btn-container {
-	display: flex;
-	gap: 1em;
-	align-items: center;
 	margin-block: 1em;
+}
+.btn-blogActions {
+	margin-bottom: 0.5em;
+	width: 100%;
 }
 
 .home-blogs-main-container {
@@ -148,13 +203,6 @@ export default {
 		.blog-list-body {
 			grid-template-columns: 1fr 1fr 1fr;
 			gap: 1em;
-		}
-		.blog-card {
-			transition: 250ms ease-in-out;
-
-			&:hover {
-				transform: scale(1.05);
-			}
 		}
 	}
 }

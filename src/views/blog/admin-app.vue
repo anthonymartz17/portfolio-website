@@ -12,6 +12,7 @@ export default {
 	data() {
 		return {
 			isSubmitted: false,
+			postId: null,
 			blog: {},
 			blogThumbnail: {},
 		};
@@ -23,22 +24,42 @@ export default {
 		},
 		// blogThumbnail: { required },
 	},
+	created() {
+		this.postId = this.$route.query.postId;
+		if (this.postId) {
+			this.fetchPostById(this.postId).then((data) => {
+				this.blog = data;
+			});
+		}
+	},
 	methods: {
-		...mapActions("blogPosts", ["createPost"]),
+		...mapActions("blogPosts", ["fetchPostById", "createPost","updatePost"]),
 		async tryCreatePost() {
 			this.$v.$touch;
 			this.isSubmitted = true;
 			if (this.$v.$invalid) {
 				return;
 			} else {
-				try {
-					const response = await this.createPost(this.blog);
-					this.blog = {};
-					this.blogThumbnail = {};
-
-					this.isSubmitted = false;
-				} catch (error) {
-					throw error;
+				if (this.postId) {
+					try {
+						const response = await this.updatePost(this.blog);
+						this.blog = {};
+						this.blogThumbnail = {};
+						this.isSubmitted = false;
+						this.$router.push({ name: "home-blog" });
+					} catch (error) {
+						throw error;
+					}
+				} else {
+					try {
+						const response = await this.createPost(this.blog);
+						this.blog = {};
+						this.blogThumbnail = {};
+						this.isSubmitted = false;
+						this.$router.push({ name: "home-blog" });
+					} catch (error) {
+						throw error;
+					}
 				}
 			}
 		},
@@ -83,8 +104,8 @@ export default {
 			</div>
 			<div class="btn-container">
 				<BaseButton
-					icon="writing"
-					text="Create Post"
+					icon="write"
+					:text="this.postId ? 'Update Post' : 'Create Post'"
 					size="30"
 					class="custom-btn"
 				/>

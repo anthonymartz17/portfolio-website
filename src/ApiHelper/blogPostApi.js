@@ -36,7 +36,7 @@ export default {
 					...doc.data(),
 				});
 			});
-			console.log(data)
+			console.log(data);
 			return data;
 		} catch (error) {
 			throw error;
@@ -73,14 +73,15 @@ export default {
 			throw error;
 		}
 	},
-	async updatePost({ postData, postId }) {
-		console.log(postId, "elid");
+	async updatePost(postData) {
+		console.log(postData, "elid");
 		try {
-			const postDocRef = doc(db, "blogPosts", postId);
+			const postDocRef = doc(db, "blogPosts", postData.id);
 
 			const postDocSnapshot = await getDoc(postDocRef);
 
 			if (postDocSnapshot.exists()) {
+				delete postData.id
 				await updateDoc(postDocRef, postData);
 				return { id: postDocSnapshot.id, ...postDocSnapshot.data() };
 			} else {

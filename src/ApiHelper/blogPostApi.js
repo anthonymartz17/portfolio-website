@@ -110,16 +110,17 @@ export default {
 		}
 	},
 
-	async uploadImage({ thumbnail, blogId }) {
+	async uploadImage(thumbnail) {
 		try {
 			//creates unique name id for image
 			const uniqueId = uuidv4();
-			const imageName = `blogThumbnails/${blogId}_${uniqueId}.jpg`;
+			const imageName = `blogThumbnails/${uniqueId}.jpg`;
 
 			//creates refference unique for image
-			ref(storage, imageName);
+			const storageRef = ref(storage, imageName);
+
 			//uploads image to firebase
-			// const imgPath = await uploadBytes(storageRef, thumbnail);
+			await uploadBytes(storageRef, thumbnail);
 			return imageName;
 		} catch (error) {
 			throw error;
@@ -140,35 +141,29 @@ export default {
 	// 		throw error;
 	// 	}
 	// },
-	// async getImagesById(imagePaths) {
-	// 	try {
-	// 		const imageDetails = [];
+	async getThumbnail(imagePath) {
+		if (imagePath)
+			try {
+				const imageRef = ref(storage, imagePath);
+				const imageUrl = await getDownloadURL(imageRef);
+				// Get the metadata of the image
+				const metadata = await getMetadata(imageRef);
 
-	// 		for (const imagePath of imagePaths) {
-	// 			const imageRef = ref(storage, imagePath);
-	// 			const imageUrl = await getDownloadURL(imageRef);
-	// 			// Get the metadata of the image
-	// 			const metadata = await getMetadata(imageRef);
+				// Extract the name, type, and size from the metadata
+				const name = metadata.name;
+				const type = metadata.contentType;
+				const size = metadata.size;
 
-	// 			// Extract the name, type, and size from the metadata
-	// 			const name = metadata.name;
-	// 			const type = metadata.contentType;
-	// 			const size = metadata.size;
-
-	// 			// Push the image details to the array
-	// 			imageDetails.push({
-	// 				url: imageUrl,
-	// 				name: name,
-	// 				type: type,
-	// 				size: size,
-	// 			});
-	// 		}
-
-	// 		return imageDetails;
-	// 	} catch (error) {
-	// 		throw error;
-	// 	}
-	// },
+				return {
+					url: imageUrl,
+					name: name,
+					type: type,
+					size: size,
+				};
+			} catch (error) {
+				throw error;
+			}
+	},
 
 	// 	async getDealers() {
 	// 		try {

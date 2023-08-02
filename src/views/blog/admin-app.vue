@@ -51,11 +51,10 @@ export default {
 		...mapActions("blogPosts", ["fetchPostById", "createPost", "updatePost"]),
 		afterComplete(file) {
 			this.blogThumbnail.push(file);
-			console.log(...this.blogThumbnail)
 		},
 		removeImg(file) {
 			this.blogThumbnail.filter((img) => img.dataURL != file.dataURL)
-			console.log(...this.blogThumbnail)
+		
 		},
 		async uploadImgManually() {
 			const thumb = Object.values(this.blogThumbnail);

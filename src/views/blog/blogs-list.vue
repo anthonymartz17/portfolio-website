@@ -93,7 +93,7 @@ export default {
 		},
 		fitTitle(title) {
 			const words = title.split(" ");
-			return words.length > 15 ? `${words.slice(0, 15).join(' ')}...`: title;
+			return words.length > 15 ? `${words.slice(0, 15).join(" ")}...` : title;
 		},
 	},
 	computed: {
@@ -113,47 +113,53 @@ export default {
 			<h2>Blogs</h2>
 		</div>
 		<div class="blog-list-body">
-			<!-- <divclass="blog-container"> -->
-			<div
-				data-aos="fade-up"
-				data-aos-duration="800"
-				:data-aos-delay="250 * idx"
-				v-for="(blog, idx) in blogPosts"
-				:key="blog.id"
-				class="blog-card"
-			>
-				<div class="blog-img-container">
-					<img :src="blog.thumbnail" alt="" />
-				</div>
-				<div class="card-desc">
-					<h4 class="card-title">{{ fitTitle(blog.title) }}</h4>
+			<div v-if="blogPosts.length == 0" class="noBlogs">
+				<p class="text-thin">No blogs have been added</p>
+			</div>
+			<template v-else>
+				<div
+					data-aos="fade-up"
+					data-aos-duration="800"
+					:data-aos-delay="250 * idx"
+					v-for="(blog, idx) in blogPosts"
+					:key="blog.id"
+					class="blog-card"
+				>
+					<div v-if="blog.thumbnail_data" class="blog-img-container">
+						<img :src="blog.thumbnail_data.url" alt="" />
+					</div>
+					<div class="card-desc">
+						<h4 class="card-title">{{ fitTitle(blog.title) }}</h4>
 
-					<p class="text-thin">Posted on: {{ blog.date_posted}}</p>
-					<div class="btn-container">
-						<BaseButton
-							@click.native="
-								postAction({
-									blogId: blog.id,
-									blogTitle: blog.title,
-									...action,
-								})
-							"
-							v-for="action in blogActions"
-							:key="action.icon"
-							:icon="action.icon"
-							:text="action.text"
-							:size="30"
-							class="btn-blogActions"
-						/>
+						<p class="text-thin">Posted on: {{ blog.date_posted }}</p>
+						<div class="btn-container">
+							<BaseButton
+								@click.native="
+									postAction({
+										blogId: blog.id,
+										blogTitle: blog.title,
+										...action,
+									})
+								"
+								v-for="action in blogActions"
+								:key="action.icon"
+								:icon="action.icon"
+								:text="action.text"
+								:size="30"
+								class="btn-blogActions"
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- </div> -->
+			</template>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+.noBlogs {
+	min-height: 30vh;
+}
 .blog-list-body {
 	display: grid;
 	gap: 1em;

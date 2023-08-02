@@ -37,7 +37,7 @@ export default {
 				:data-aos-delay="250"
 			>
 				<div class="blog-img-container">
-					<img :src="`/img/${post.img}`" :alt="`img of blog ${post.title}`" />
+					<!-- <img :src="post.thumbnail_data.url" :alt="`img of blog ${post.title}`" /> -->
 				</div>
 				<div v-html="post.content"></div>
 			</div>

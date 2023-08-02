@@ -37,22 +37,26 @@ export default {
 			console.log("fired from state");
 			try {
 				const data = await blogPostApi.getPosts();
-				commit("SET__BLOG_POSTS", data);
+				const dataWithThumbnailPromises = data.map(async (x) => {
+					const thumbnail_data = await blogPostApi.getThumbnail(
+						x.thumbnail_path_ref
+					);
+					x.thumbnail_data = thumbnail_data;
+					return x;
+				});
+				const dataReady = await Promise.all(dataWithThumbnailPromises);
+				
+				commit("SET__BLOG_POSTS", dataReady);
 			} catch (error) {
 				throw error;
 			}
 		},
 		async createPost(context, { post, thumbnail }) {
-			//creates timestamp posted date
+			const imgPathRef = await blogPostApi.uploadImage(thumbnail);
 			const createdAt = new Date();
 			post.date_posted = createdAt;
-			const createdPost = await blogPostApi.createPost(post);
-			const imgPathRef = await blogPostApi.uploadImage({
-				thumbnail,
-				blogId: createdPost.id,
-			});
-			post.thumbnail = imgPathRef;
-			await blogPostApi.updatePost(post, createdPost.id);
+			post.thumbnail_path_ref = imgPathRef;
+			await blogPostApi.createPost(post);
 		},
 		async updatePost({ commit }, blogPost) {
 			const updatePost = await blogPostApi.updatePost(blogPost);

@@ -1,7 +1,7 @@
 <script>
 import SocialMedia from "@/components/socialMedia.vue";
 import MartzIcon from "@/components/icons/martz-icons.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -36,10 +36,11 @@ export default {
 	},
 
 	computed: {
+		...mapGetters("auth", ["isLoggedIn"]),
 		filteredLinks() {
-			return !this.isLoggedIn === true
+			return this.isLoggedIn
 				? this.navLinks
-				: this.navLinks.filter((x) => x.authRequired === false);
+				: this.navLinks.filter((x) => !x.authRequired);
 		},
 	},
 };

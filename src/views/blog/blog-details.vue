@@ -27,9 +27,6 @@ export default {
 <template>
 	<div class="blog-detail-wrapper">
 		<div class="blog-detail-container">
-			<!-- <h2 class="blog-title" data-aos="fade-up" data-aos-duration="800">
-				{{ post.title }}
-			</h2> -->
 			<div
 				class="blog-body"
 				data-aos="fade-up"
@@ -44,37 +41,26 @@ export default {
 						:alt="`img of blog ${post.title}`"
 					/>
 				</div>
-				<div v-html="post.content"></div>
+				<h2 class="blog-title">
+					{{ post.title }}
+				</h2>
+				<div v-html="post.content" :class="{ 'custom-class': true }"></div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.blog-detail-wrapper {
-	padding-block: 2em;
-	display: flex;
-	justify-content: center;
+.custom-class{
+	font: $font-thin-text-mb;
 }
-.blog-detail-container {
-	margin-bottom: 3em;
-
-	@include breakpoint(tablet) {
-	}
-	@include breakpoint(desktop) {
-		width: 60%;
-	}
-}
-
 .blog-title {
-	font: $font-title-mb;
+	font: $font-subtitle-mb;
 	color: rgba($white, 0.5);
 	margin-bottom: 1em;
 }
 .blog-img-container {
 	margin-bottom: 1em;
-	height: 40vh;
-
 	img {
 		width: 100%;
 		height: 100%;
@@ -91,5 +77,24 @@ export default {
 }
 .resource {
 	color: $white;
+}
+.blog-detail-wrapper {
+	padding-block: 2em;
+	display: flex;
+	justify-content: center;
+
+	@include breakpoint(tablet) {
+	}
+	@include breakpoint(desktop) {
+		.blog-detail-container {
+			width: 75%;
+		}
+		.blog-title {
+			font: $font-title-mb;
+		}
+		.blog-img-container {
+			margin-bottom: 1em;
+		}
+	}
 }
 </style>

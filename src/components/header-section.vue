@@ -28,15 +28,17 @@ export default {
 			:class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]"
 		>
 			<div :class="['header-container-logo', { clickable: isMenueVisible }]">
-				<MartzIcon class="thelogo" icon="logo" size="60" />
+				<router-link to="/">
+					<MartzIcon class="thelogo" icon="logo" size="60" />
+				</router-link>
 			</div>
 			<div class="header-nav-menue">
-				<font-awesome-icon
+				<MartzIcon
 					id="menue-icon"
 					class="menue-icon"
-					icon="fa-solid fa-bars"
-					size="2x"
-					@click="createEmitToggleMenue()"
+					icon="ham-menue"
+					size="30"
+					@click.native="createEmitToggleMenue()"
 				/>
 			</div>
 			<div class="navmenue-wrapper" @click.self="createEmitToggleMenue()">

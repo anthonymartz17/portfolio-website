@@ -1,53 +1,25 @@
 <script>
+import { mapActions } from "vuex";
 // import BaseButton from "../baseButton.vue";
 export default {
 	// components: { BaseButton },
 	data() {
 		return {
-			blog: {},
-			blogs: [
-				{
-					id: 1,
-					datePosted: "04/18/2023",
-					img: "project1.jpeg",
-					title: "Testing blog",
-					body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?",
-					resources: [
-						{ id: 1, name: "chat gpt", link: "https://chat.openai.com/" },
-						{
-							id: 2,
-							name: "youtube",
-							link: "https://www.youtube.com/watch?v=ISv22NNL-aE&t=509s",
-						},
-					],
-				},
-				{
-					id: 2,
-					datePosted: "04/18/2023",
-					img: "project2.jpeg",
-					title: "Another blog testing",
-					body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?",
-					resources: [
-						{ id: 1, name: "chat gpt", link: "https://chat.openai.com/" },
-						{
-							id: 2,
-							name: "youtube",
-							link: "https://www.youtube.com/watch?v=ISv22NNL-aE&t=509s",
-						},
-					],
-				},
-			],
+			post: {},
 		};
 	},
 	props: ["projectClicked"],
 	created() {
-		this.setBlog();
+		const postId = this.$route.params.postId;
+
+		if (postId) {
+			this.fetchPostById(postId).then((post) => {
+				this.post = post;
+			});
+		}
 	},
 	methods: {
-		setBlog() {
-			this.blog = this.blogs.find((x) => x.id == this.$route.query.id);
-			console.log(this.blog);
-		},
+		...mapActions("blogPosts", ["fetchPostById"]),
 	},
 };
 </script>
@@ -55,57 +27,40 @@ export default {
 <template>
 	<div class="blog-detail-wrapper">
 		<div class="blog-detail-container">
-			<h2 class="blog-title" data-aos="fade-up" data-aos-duration="800">
-				{{ blog.title }}
-			</h2>
-			<div class="blog-body"  data-aos="fade-up" data-aos-duration="800" 	:data-aos-delay="250">
+			<div
+				class="blog-body"
+				data-aos="fade-up"
+				data-aos-duration="800"
+				:data-aos-delay="250"
+			>
 				<div class="blog-img-container">
-					<img :src="`/img/${blog.img}`" :alt="`img of blog ${blog.title}`" />
+					<!-- waits till img is ready -->
+					<img
+						v-if="post.thumbnail_data"
+						:src="post.thumbnail_data.dataURL"
+						:alt="`img of blog ${post.title}`"
+					/>
 				</div>
-				<div class="blog-description-container">
-					<div class="blog-description">
-						<p class="text-thin">{{ blog.body }}</p>
-					</div>
-					<ul class="resources-container">
-						<li
-							class="text-thin"
-							v-for="resource in blog.resources"
-							:key="resource.id"
-						>
-							<a class="resource" :href="resource.link">{{ resource.link }}</a>
-						</li>
-					</ul>
-				</div>
+				<h2 class="blog-title">
+					{{ post.title }}
+				</h2>
+				<div v-html="post.content" :class="{ 'custom-class': true }"></div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.blog-detail-wrapper {
-	padding-block: 2em;
-	display: flex;
-	justify-content: center;
+.custom-class{
+	font: $font-thin-text-mb;
 }
-.blog-detail-container {
-	margin-bottom: 3em;
-
-	@include breakpoint(tablet) {
-	}
-	@include breakpoint(desktop) {
-		width: 60%;
-	}
-}
-
 .blog-title {
-	font: $font-title-mb;
+	font: $font-subtitle-mb;
 	color: rgba($white, 0.5);
 	margin-bottom: 1em;
 }
 .blog-img-container {
 	margin-bottom: 1em;
-	height: 40vh;
-
 	img {
 		width: 100%;
 		height: 100%;
@@ -122,5 +77,24 @@ export default {
 }
 .resource {
 	color: $white;
+}
+.blog-detail-wrapper {
+	padding-block: 2em;
+	display: flex;
+	justify-content: center;
+
+	@include breakpoint(tablet) {
+	}
+	@include breakpoint(desktop) {
+		.blog-detail-container {
+			width: 75%;
+		}
+		.blog-title {
+			font: $font-title-mb;
+		}
+		.blog-img-container {
+			margin-bottom: 1em;
+		}
+	}
 }
 </style>

@@ -1,6 +1,7 @@
 <script>
 import SocialMedia from "@/components/socialMedia.vue";
 import MartzIcon from "@/components/icons/martz-icons.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -10,22 +11,36 @@ export default {
 	data() {
 		return {
 			section: "",
-			navLinks: [
-				{ icon: "home", name: "HOME", route: "portfolio" },
-				{ icon: "blog", name: "BLOGS", route: "home-blog" },
-			],
 		};
 	},
 
 	emit: ["scrollTo"],
-
+	props: {
+		navLinks: {
+			type: Array,
+			require: true,
+		},
+	},
 	methods: {
-		replaceRoute(route) {
-			if (route != null) {
-				if (route != this.$route.name) {
-					this.$router.replace({ name: route });
-				}
+		...mapActions("auth", ["signOut"]),
+		async navegateBlog(link) {
+			if (link.name == "LOG OUT") {
+				await this.signOut();
+			} else if (link.route != this.$route.name) {
+				this.$router.push({ name: link.route });
 			}
+		},
+		guardAdminLink(link) {
+			return link.authRequired && this.isLoggedIn === false ? false : true;
+		},
+	},
+
+	computed: {
+		...mapGetters("auth", ["isLoggedIn"]),
+		filteredLinks() {
+			return this.isLoggedIn
+				? this.navLinks
+				: this.navLinks.filter((x) => !x.authRequired);
 		},
 	},
 };
@@ -36,8 +51,8 @@ export default {
 		<ul class="nav-container-links">
 			<li
 				id="fromRoute"
-				v-for="link in navLinks"
-				@click="replaceRoute(link.route)"
+				v-for="link in filteredLinks"
+				@click="navegateBlog(link)"
 				:key="link.name"
 				class="nav-container-link"
 			>

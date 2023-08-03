@@ -9,22 +9,22 @@ export default {
 			receiverEmail: "antonio.fr.martinezc@hotmail.com",
 			mediaContacts: [
 				{
-					icon: "fa-regular fa-envelope",
+					icon: "email",
 					name: "E-mail",
 					url: "mailto:antonio.fr.martinezc@hotmail.com",
 				},
 				{
-					icon: "fa-brands fa-linkedin-in",
+					icon: "linkedin",
 					name: "LinkedIn",
 					url: "https://www.linkedin.com/in/antoniomartinez17/",
 				},
 				{
-					icon: "fa-brands fa-github",
+					icon: "github",
 					name: "Github",
 					url: "https://github.com/anthonymartz17",
 				},
 				{
-					icon: "fa-brands fa-instagram",
+					icon: "instagram",
 					name: "Instagram",
 					url: "https://instagram.com/martz_code?igshid=ZDdkNTZiNTM=",
 				},
@@ -41,7 +41,7 @@ export default {
 			class="icon-container"
 		>
 			<a :href="media.url" target="blank">
-				<font-awesome-icon :icon="media.icon" class="icon" />
+				<MartzIcon :icon="media.icon" :size="30"  class="icon" />
 			</a>
 		</div>
 	</div>

@@ -9,22 +9,22 @@ export default {
 			receiverEmail: "antonio.fr.martinezc@hotmail.com",
 			mediaContacts: [
 				{
-					icon: "fa-regular fa-envelope",
+					icon: "email.svg",
 					name: "E-mail",
 					url: "mailto:antonio.fr.martinezc@hotmail.com",
 				},
 				{
-					icon: "fa-brands fa-linkedin-in",
+					icon: "linkedin.svg",
 					name: "LinkedIn",
 					url: "https://www.linkedin.com/in/antoniomartinez17/",
 				},
 				{
-					icon: "fa-brands fa-github",
+					icon: "github.svg",
 					name: "Github",
 					url: "https://github.com/anthonymartz17",
 				},
 				{
-					icon: "fa-brands fa-instagram",
+					icon: "instagram.svg",
 					name: "Instagram",
 					url: "https://instagram.com/martz_code?igshid=ZDdkNTZiNTM=",
 				},
@@ -40,13 +40,18 @@ export default {
 			:key="media.name"
 			class="icon-container"
 		>
-			<a :href="media.url" target="blank">
-				<font-awesome-icon :icon="media.icon" class="icon" />
-			</a>
+			<div>
+				<img class="icons" :src="`/icons/${media.icon}`" :alt="media.name" />
+			</div>
+			<a :href="media.url" target="blank"> </a>
 		</div>
 	</div>
 </template>
 <style lang="scss" scoped>
+.icons {
+	// height: 100px;
+	// width: 100px;
+}
 .social-media-container {
 	width: 100%;
 	// margin-bottom: 1em;
@@ -61,7 +66,6 @@ export default {
 		@include breakpoint(tablet) {
 			font-size: 1.6em;
 		}
-		
 	}
 	a {
 		color: rgba($white, 0.8);

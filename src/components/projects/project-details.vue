@@ -47,8 +47,9 @@ export default {
 				class="backToProjects back-top"
 				@click="fireToggleShowMore()"
 			>
-				<font-awesome-icon
-					icon="fa-solid fa-angle-left"
+				<MartzIcon
+					icon="angleLeft"
+					size="20"
 					class="backToProjects-arrow"
 				/>
 				<p>Back to project</p>
@@ -155,8 +156,9 @@ export default {
 				class="backToProjects back-bottom"
 				@click="fireToggleShowMore()"
 			>
-				<font-awesome-icon
-					icon="fa-solid fa-angle-left"
+				<MartzIcon
+					icon="angleLeft"
+					size="20"
 					class="backToProjects-arrow"
 				/>
 				<p>Back to project</p>

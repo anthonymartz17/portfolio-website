@@ -16,25 +16,25 @@ export default {
 			submitted: false,
 			mediaContacts: [
 				{
-					icon: "fa-regular fa-envelope",
+					icon: "email",
 					name: "E-mail",
 					url: "mailto:antonio.fr.martinezc@hotmail.com",
 					link_name: "antonio.fr.martinezc@hotmail.com",
 				},
 				{
-					icon: "fa-brands fa-linkedin-in",
+					icon: "linkedin",
 					name: "LinkedIn",
 					url: "https://www.linkedin.com/in/antoniomartinez17/",
 					link_name: "linkedin.com/in/antoniomartinez17",
 				},
 				{
-					icon: "fa-brands fa-github",
+					icon: "github",
 					name: "Github",
 					url: "https://github.com/anthonymartz17",
 					link_name: "@anthonymartz17",
 				},
 				{
-					icon: "fa-brands fa-instagram",
+					icon: "instagram",
 					name: "Instagram",
 					url: "https://instagram.com/martz_code?igshid=ZDdkNTZiNTM=",
 					link_name: "@martz_code",
@@ -66,7 +66,6 @@ export default {
 					);
 					alert("message sent successfully");
 				} catch (error) {
-					console.log({ error });
 					alert(error);
 				} finally {
 					this.submitted = false;
@@ -111,7 +110,7 @@ export default {
 							id="name"
 							name="name"
 							autocomplete="off"
-							:class="['input-field', { invalid: submitted && $v.name.$error }]"
+							:class="['text-thin','input-field', { invalid: submitted && $v.name.$error }]"
 						/>
 						<p v-if="submitted && !$v.name.required" class="text-small">
 							Please enter a name
@@ -126,6 +125,7 @@ export default {
 							id="email"
 							autocomplete="off"
 							:class="[
+								'text-thin',
 								'input-field',
 								{ invalid: submitted && $v.email.$error },
 							]"
@@ -154,6 +154,7 @@ export default {
 							cols="30"
 							rows="7"
 							:class="[
+								'text-thin',
 								'textarea-field',
 								{ invalid: submitted && $v.message.$error },
 							]"
@@ -172,12 +173,6 @@ export default {
 							size="30"
 							class="btn-sendit"
 						/>
-
-						<!-- <font-awesome-icon
-							icon="fa-solid fa-message"
-							class="msg-bubble"
-							size="2x"
-						/> -->
 					</div>
 				</form>
 			</div>
@@ -210,7 +205,7 @@ export default {
 				>
 					<li v-for="media in mediaContacts" :key="media.name">
 						<a :href="media.url" target="blank">
-							<font-awesome-icon :icon="media.icon" class="icon" />
+							<MartzIcon :icon="media.icon" size="20" class="icon" />
 							<p>{{ media.link_name }}</p>
 						</a>
 					</li>
@@ -323,7 +318,8 @@ export default {
 .textarea-field {
 	color: $white;
 	width: 100%;
-	background: rgba($white, 0.5);
+	background: none;
+	padding: .5em;
 	border: 1px solid rgba($white, 0.3);
 }
 .btn-container {
@@ -339,7 +335,7 @@ export default {
 .msg-bubble {
 	color: $accent;
 	&::after {
-		content: "asdfasd";
+		content: "";
 		color: $bg-2;
 		position: absolute;
 		top: 50%;

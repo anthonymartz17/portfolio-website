@@ -72,11 +72,11 @@ export default {
 				case "Edit":
 					this.$router.push({
 						name: "admin-app",
-						query: { postId: action.blogId },
+						query: { postId: action.id },
 					});
 					break;
 				case "Delete":
-					this.deletePost(action.blogId);
+					this.deletePost(action);
 					// this.setAlertMsg({
 					// 	type: "warning",
 					// 	title: "Delete",
@@ -86,18 +86,27 @@ export default {
 				default:
 					this.$router.push({
 						name: "blog-details",
-						params: { postId: action.blogId },
+						params: { postId: action.id },
 					});
 					break;
 			}
 		},
+		guardAdminActions(action) {
+			let show = true;
+			if (action.authRequired && !this.isLoggedIn) {
+				show = false;
+			}
+
+			return show;
+		},
 		fitTitle(title) {
 			const words = title.split(" ");
-			return words.length > 15 ? `${words.slice(0, 15).join(" ")}...` : title;
+			return words.length > 10 ? `${words.slice(0, 10).join(" ")}...` : title;
 		},
 	},
 	computed: {
 		...mapGetters("blogPosts", ["blogPosts"]),
+		...mapGetters("auth", ["isLoggedIn"]),
 	},
 };
 </script>
@@ -126,7 +135,7 @@ export default {
 					class="blog-card"
 				>
 					<div v-if="blog.thumbnail_data" class="blog-img-container">
-						<img :src="blog.thumbnail_data.url" alt="" />
+						<img :src="blog.thumbnail_data.dataURL" alt="blog post thumbnail" />
 					</div>
 					<div class="card-desc">
 						<h4 class="card-title">{{ fitTitle(blog.title) }}</h4>
@@ -134,10 +143,10 @@ export default {
 						<p class="text-thin">Posted on: {{ blog.date_posted }}</p>
 						<div class="btn-container">
 							<BaseButton
+								v-show="guardAdminActions(action)"
 								@click.native="
 									postAction({
-										blogId: blog.id,
-										blogTitle: blog.title,
+										...blog,
 										...action,
 									})
 								"

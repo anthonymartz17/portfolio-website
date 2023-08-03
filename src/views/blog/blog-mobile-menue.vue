@@ -10,15 +10,16 @@ export default {
 	data() {
 		return {
 			section: "",
-			navLinks: [
-				{ icon: "home", name: "Home", route: "portfolio" },
-				{ icon: "blog", name: "Blogs", route: "home-blog" },
-			],
 		};
 	},
 
 	emit: ["scrollTo"],
-
+	props: {
+		navLinks: {
+			type: Array,
+			require: true,
+		},
+	},
 	methods: {
 		emitCloseEvent(route) {
 			if (route != null) {
@@ -47,21 +48,15 @@ export default {
 			id="close-header"
 			@click="emitCloseEvent(null)"
 		>
-			<font-awesome-icon
+			<MartzIcon
 				id="close-icon"
-				icon="fa-solid fa-angle-left"
+				icon="angleLeft"
+				size="20"
 				class="nav-container-arrow"
 			/>
 			<p id="close">Close</p>
 		</div>
 		<ul class="nav-container-links">
-			<!-- <router-link
-				id="fromRoute"
-				v-for="link in navLinks"
-				@click="emitCloseEvent($event.target.id, link.route)"
-				:key="link.name"
-				class="nav-container-link"
-			> -->
 			<li
 				id="fromRoute"
 				v-for="link in navLinks"

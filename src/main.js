@@ -1,18 +1,16 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store"
+import store from "./store";
 import "./assets/scss/reset.css";
 // import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Vuelidate from "vuelidate";
 import AOSPlugin from "../aos";
 // In your App.vue or main CSS file
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css"; // Use 'quill.bubble.css' for the bubble theme
 
-/* add font awesome icon component */
-Vue.component("font-awesome-icon", FontAwesomeIcon);
+
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 Vue.use(AOSPlugin);
@@ -21,7 +19,7 @@ const app = new Vue({
 	store,
 	render: (h) => h(App),
 }).$mount("#app");
-export default app
+export default app;
 // import {
 // 	faBriefcase,
 // 	faHandsHolding,

@@ -32,13 +32,12 @@ export default {
 			const colRef = collection(db, "blogPosts");
 			const snapshot = await getDocs(colRef);
 			snapshot.docs.forEach((doc) => {
-				console.log(doc);
 				data.push({
 					id: doc.id,
 					...doc.data(),
 				});
 			});
-			console.log(data);
+
 			return data;
 		} catch (error) {
 			throw error;
@@ -76,7 +75,6 @@ export default {
 		}
 	},
 	async updatePost(postData) {
-		console.log(postData, "elid");
 		try {
 			const postDocRef = doc(db, "blogPosts", postData.id);
 
@@ -127,20 +125,15 @@ export default {
 		}
 	},
 
-	// async deleteImages(imagePaths) {
-	// 	try {
-	// 		const deletePromises = imagePaths.map(async (imagePath) => {
-	// 			const imageRef = ref(storage, imagePath);
-	// 			await deleteObject(imageRef);
-	// 		});
-
-	// 		await Promise.all(deletePromises);
-
-	// 		return { success: true, message: "Images deleted successfully." };
-	// 	} catch (error) {
-	// 		throw error;
-	// 	}
-	// },
+	async deleteThumbnail(imagePath) {
+		try {
+			const imageRef = ref(storage, imagePath);
+			await deleteObject(imageRef);
+			return { success: true, message: "Images deleted successfully." };
+		} catch (error) {
+			throw error;
+		}
+	},
 	async getThumbnail(imagePath) {
 		if (imagePath)
 			try {
@@ -155,7 +148,7 @@ export default {
 				const size = metadata.size;
 
 				return {
-					url: imageUrl,
+					dataURL: imageUrl,
 					name: name,
 					type: type,
 					size: size,

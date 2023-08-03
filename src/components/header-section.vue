@@ -28,10 +28,11 @@ export default {
 			:class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]"
 		>
 			<div :class="['header-container-logo', { clickable: isMenueVisible }]">
-				<MartzIcon class="thelogo" icon="logo" size="60" />
+				<router-link to="/">
+					<MartzIcon class="thelogo" icon="logo" size="60" />
+				</router-link>
 			</div>
 			<div class="header-nav-menue">
-
 				<MartzIcon
 					id="menue-icon"
 					class="menue-icon"

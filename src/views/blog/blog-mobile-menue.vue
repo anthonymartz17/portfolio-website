@@ -1,6 +1,7 @@
 <script>
 import SocialMedia from "@/components/socialMedia.vue";
 import MartzIcon from "@/components/icons/martz-icons.vue";
+import { mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -37,6 +38,14 @@ export default {
 			this.section = section;
 		},
 	},
+	computed: {
+		...mapGetters("auth", ["isLoggedIn"]),
+		filteredLinks() {
+			return this.isLoggedIn
+				? this.navLinks
+				: this.navLinks.filter((x) => !x.authRequired);
+		},
+	},
 };
 </script>
 
@@ -59,7 +68,7 @@ export default {
 		<ul class="nav-container-links">
 			<li
 				id="fromRoute"
-				v-for="link in navLinks"
+				v-for="link in filteredLinks"
 				@click="emitCloseEvent(link.route)"
 				:key="link.name"
 				class="nav-container-link"

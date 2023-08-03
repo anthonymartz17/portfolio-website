@@ -73,7 +73,9 @@ export default {
 					>
 						<div class="home-blogs-header">
 							<div class="logo">
-								<MartzIcon icon="logo" size="60" />
+								<router-link to="/">
+									<MartzIcon class="thelogo" icon="logo" size="60" />
+								</router-link>
 							</div>
 							<div class="header-nav-menue" @click="toggleMobileMenue">
 								<MartzIcon
@@ -195,6 +197,8 @@ body.mobile-menu-open {
 		}
 		.logo {
 			flex: 1;
+			display: flex;
+			
 		}
 	}
 }

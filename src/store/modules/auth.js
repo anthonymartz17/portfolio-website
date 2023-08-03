@@ -60,7 +60,7 @@ export default {
 
 				clearTimeout(timer);
 				timer = setTimeout(() => {
-					dispatch("signOutUser");
+					dispatch("signOut");
 					//expects timer in miliseconds
 				}, expiresIn * 1000);
 

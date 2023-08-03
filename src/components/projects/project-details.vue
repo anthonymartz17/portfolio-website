@@ -47,10 +47,7 @@ export default {
 				class="backToProjects back-top"
 				@click="fireToggleShowMore()"
 			>
-				<font-awesome-icon
-					icon="fa-solid fa-angle-left"
-					class="backToProjects-arrow"
-				/>
+				<MartzIcon icon="angleLeft" size="20" class="backToProjects-arrow" />
 				<p>Back to project</p>
 			</div>
 			<div class="detail-content">
@@ -65,7 +62,11 @@ export default {
 						data-aos-delay="250"
 					>
 						<div class="video-default">
-							<iframe
+							<img
+								:src="`/img/working-on-video.png`"
+								alt="thumbnail project 2"
+							/>
+							<!-- <iframe
 								width="100%"
 								height="100%"
 								:src="`https://www.youtube.com/embed/${projectClicked.videoId}`"
@@ -73,18 +74,18 @@ export default {
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 								allowfullscreen
-							></iframe>
+							></iframe> -->
 						</div>
 						<div class="video-secondary-container">
 							<div class="video-sec">
 								<img
-									:src="`/img/${projectClicked.thumbnail_sec}`"
+									:src="`/img/working-on-video.png`"
 									alt="thumbnail project 2"
 								/>
 							</div>
 							<div class="video-sec">
 								<img
-									:src="`/img/${projectClicked.thumbnail_third}`"
+									:src="`/img/working-on-video.png`"
 									alt="thumbnail project 3"
 								/>
 							</div>
@@ -155,10 +156,7 @@ export default {
 				class="backToProjects back-bottom"
 				@click="fireToggleShowMore()"
 			>
-				<font-awesome-icon
-					icon="fa-solid fa-angle-left"
-					class="backToProjects-arrow"
-				/>
+				<MartzIcon icon="angleLeft" size="20" class="backToProjects-arrow" />
 				<p>Back to project</p>
 			</div>
 		</div>

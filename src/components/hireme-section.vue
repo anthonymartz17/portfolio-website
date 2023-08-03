@@ -1,40 +1,40 @@
 <script>
 import BaseButton from "./baseButton.vue";
-import basebutton from "./baseButton.vue";
+// import basebutton from "./baseButton.vue";
 import MartzIcon from "../components/icons/martz-icons.vue";
 import { required, email } from "vuelidate/lib/validators";
 import emailjs from "emailjs-com";
 
 export default {
-	components: { BaseButton, basebutton, MartzIcon },
+	components: { BaseButton, MartzIcon },
 	data() {
 		return {
 			title: "Hire me",
 			name: "",
 			email: "",
 			message: "",
-			isSubmitted: false,
+			submitted: false,
 			mediaContacts: [
 				{
-					icon: "fa-regular fa-envelope",
+					icon: "email",
 					name: "E-mail",
 					url: "mailto:antonio.fr.martinezc@hotmail.com",
 					link_name: "antonio.fr.martinezc@hotmail.com",
 				},
 				{
-					icon: "fa-brands fa-linkedin-in",
+					icon: "linkedin",
 					name: "LinkedIn",
 					url: "https://www.linkedin.com/in/antoniomartinez17/",
 					link_name: "linkedin.com/in/antoniomartinez17",
 				},
 				{
-					icon: "fa-brands fa-github",
+					icon: "github",
 					name: "Github",
 					url: "https://github.com/anthonymartz17",
 					link_name: "@anthonymartz17",
 				},
 				{
-					icon: "fa-brands fa-instagram",
+					icon: "instagram",
 					name: "Instagram",
 					url: "https://instagram.com/martz_code?igshid=ZDdkNTZiNTM=",
 					link_name: "@martz_code",
@@ -50,7 +50,7 @@ export default {
 
 	methods: {
 		sendMsg() {
-			this.isSubmitted = true;
+			this.submitted = true;
 			this.$v.$touch();
 
 			if (this.$v.$invalid) {
@@ -66,10 +66,9 @@ export default {
 					);
 					alert("message sent successfully");
 				} catch (error) {
-					console.log({ error });
 					alert(error);
 				} finally {
-					this.isSubmitted = false;
+					this.submitted = false;
 					this.name = "";
 					this.email = "";
 					this.message = "";
@@ -111,12 +110,9 @@ export default {
 							id="name"
 							name="name"
 							autocomplete="off"
-							:class="[
-								'input-field',
-								{ invalid: isSubmitted && $v.name.$error },
-							]"
+							:class="['text-thin','input-field', { invalid: submitted && $v.name.$error }]"
 						/>
-						<p v-if="isSubmitted && !$v.name.required" class="text-small">
+						<p v-if="submitted && !$v.name.required" class="text-small">
 							Please enter a name
 						</p>
 					</div>
@@ -129,19 +125,20 @@ export default {
 							id="email"
 							autocomplete="off"
 							:class="[
+								'text-thin',
 								'input-field',
-								{ invalid: isSubmitted && $v.email.$error },
+								{ invalid: submitted && $v.email.$error },
 							]"
 						/>
-						<div v-if="isSubmitted && $v.email.$error">
+						<div v-if="submitted && $v.email.$error">
 							<p
-								v-if="isSubmitted && !$v.email.required"
+								v-if="submitted && !$v.email.required"
 								class="text-small error"
 							>
 								Please enter an email
 							</p>
 							<p
-								v-else-if="isSubmitted && !$v.email.email"
+								v-else-if="submitted && !$v.email.email"
 								class="text-small error"
 							>
 								Please enter a valid email
@@ -157,12 +154,13 @@ export default {
 							cols="30"
 							rows="7"
 							:class="[
+								'text-thin',
 								'textarea-field',
-								{ invalid: isSubmitted && $v.message.$error },
+								{ invalid: submitted && $v.message.$error },
 							]"
 						></textarea>
 						<p
-							v-if="isSubmitted && !$v.message.required"
+							v-if="submitted && !$v.message.required"
 							class="text-small error"
 						>
 							Please enter a message
@@ -174,12 +172,6 @@ export default {
 							text="Send it"
 							size="30"
 							class="btn-sendit"
-						/>
-
-						<font-awesome-icon
-							icon="fa-solid fa-message"
-							class="msg-bubble"
-							size="2x"
 						/>
 					</div>
 				</form>
@@ -213,7 +205,7 @@ export default {
 				>
 					<li v-for="media in mediaContacts" :key="media.name">
 						<a :href="media.url" target="blank">
-							<font-awesome-icon :icon="media.icon" class="icon" />
+							<MartzIcon :icon="media.icon" size="20" class="icon" />
 							<p>{{ media.link_name }}</p>
 						</a>
 					</li>
@@ -326,7 +318,8 @@ export default {
 .textarea-field {
 	color: $white;
 	width: 100%;
-	background: rgba($white, 0.5);
+	background: none;
+	padding: .5em;
 	border: 1px solid rgba($white, 0.3);
 }
 .btn-container {
@@ -342,7 +335,7 @@ export default {
 .msg-bubble {
 	color: $accent;
 	&::after {
-		content: "asdfasd";
+		content: "";
 		color: $bg-2;
 		position: absolute;
 		top: 50%;

@@ -1,6 +1,7 @@
 <script>
 import SocialMedia from "@/components/socialMedia.vue";
 import MartzIcon from "@/components/icons/martz-icons.vue";
+import { mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -10,15 +11,16 @@ export default {
 	data() {
 		return {
 			section: "",
-			navLinks: [
-				{ icon: "home", name: "Home", route: "portfolio" },
-				{ icon: "blog", name: "Blogs", route: "home-blog" },
-			],
 		};
 	},
 
 	emit: ["scrollTo"],
-
+	props: {
+		navLinks: {
+			type: Array,
+			require: true,
+		},
+	},
 	methods: {
 		emitCloseEvent(route) {
 			if (route != null) {
@@ -36,6 +38,14 @@ export default {
 			this.section = section;
 		},
 	},
+	computed: {
+		...mapGetters("auth", ["isLoggedIn"]),
+		filteredLinks() {
+			return this.isLoggedIn
+				? this.navLinks
+				: this.navLinks.filter((x) => !x.authRequired);
+		},
+	},
 };
 </script>
 
@@ -47,24 +57,18 @@ export default {
 			id="close-header"
 			@click="emitCloseEvent(null)"
 		>
-			<font-awesome-icon
+			<MartzIcon
 				id="close-icon"
-				icon="fa-solid fa-angle-left"
+				icon="angleLeft"
+				size="20"
 				class="nav-container-arrow"
 			/>
 			<p id="close">Close</p>
 		</div>
 		<ul class="nav-container-links">
-			<!-- <router-link
-				id="fromRoute"
-				v-for="link in navLinks"
-				@click="emitCloseEvent($event.target.id, link.route)"
-				:key="link.name"
-				class="nav-container-link"
-			> -->
 			<li
 				id="fromRoute"
-				v-for="link in navLinks"
+				v-for="link in filteredLinks"
 				@click="emitCloseEvent(link.route)"
 				:key="link.name"
 				class="nav-container-link"

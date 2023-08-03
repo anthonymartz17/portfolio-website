@@ -8,6 +8,27 @@ export default {
 	data() {
 		return {
 			isMenueOpen: false,
+			navLinks: [
+				{ icon: "home", name: "HOME", route: "portfolio", authRequired: false },
+				{
+					icon: "blog",
+					name: "BLOGS",
+					route: "home-blog",
+					authRequired: false,
+				},
+				{
+					icon: "blog",
+					name: "CREATE",
+					route: "admin-app",
+					authRequired: true,
+				},
+				{
+					icon: "logOut",
+					name: "LOG OUT",
+					route: "home-blog",
+					authRequired: true,
+				},
+			],
 		};
 	},
 	mounted() {
@@ -37,7 +58,10 @@ export default {
 					v-if="isMenueOpen"
 					@click.self="toggleMobileMenue"
 				>
-					<BlogNavMenue @emitToggleMenue="toggleMobileMenue" />
+					<BlogNavMenue
+						@emitToggleMenue="toggleMobileMenue"
+						:navLinks="navLinks"
+					/>
 				</div>
 			</nav>
 			<div class="home-blogs-container">
@@ -48,19 +72,21 @@ export default {
 						data-aos-duration="800"
 					>
 						<div class="home-blogs-header">
-							<!-- :class="['header-container-logo', { clickable: isMenueVisible }]" -->
 							<div class="logo">
-								<MartzIcon icon="logo" size="60" />
+								<router-link to="/">
+									<MartzIcon class="thelogo" icon="logo" size="60" />
+								</router-link>
 							</div>
 							<div class="header-nav-menue" @click="toggleMobileMenue">
-								<font-awesome-icon
+								<MartzIcon
 									id="menue-icon"
 									class="menue-icon"
-									icon="fa-solid fa-bars"
-									size="2x"
+									:size="30"
+									icon="ham-menue"
 								/>
 							</div>
 							<BlogHomeNavMenue
+								:navLinks="navLinks"
 								@emitToggleMenue="toggleMobileMenue"
 								class="desktop-menu"
 							/>
@@ -82,8 +108,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.logo{
-}
 body.mobile-menu-open {
 	overflow: hidden;
 }
@@ -161,7 +185,7 @@ body.mobile-menu-open {
 			justify-content: center;
 		}
 		.routerView {
-			width: 60%;
+			width: 75%;
 		}
 		.home-blog-header-wrapper {
 			display: flex;
@@ -173,7 +197,7 @@ body.mobile-menu-open {
 		}
 		.logo {
 			flex: 1;
-			
+			display: flex;
 			
 		}
 	}

@@ -40,9 +40,10 @@ export default {
 
 	<div class="nav-container">
 		<div class="nav-container-header" id="close-header" @click="emitCloseEvent()">
-			<font-awesome-icon
+			<MartzIcon
 				id="close-icon"
-				icon="fa-solid fa-angle-left"
+				icon="angleLeft"
+				size="20"
 				class="nav-container-arrow"
 			/>
 			<p id="close">Close</p>

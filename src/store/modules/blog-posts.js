@@ -26,15 +26,16 @@ export default {
 		async fetchPostById(_, postId) {
 			try {
 				let post = await blogPostApi.getPostById(postId);
-				// let imagesUrl = await apiCarsImages.getImagesById(vehicle.pics);
-				// vehicle.carPicsUrls = imagesUrl;
+				const thumbnail_data = await blogPostApi.getThumbnail(
+					post.thumbnail_path_ref
+				);
+				post.thumbnail_data = thumbnail_data;
 				return post;
 			} catch (error) {
 				throw error;
 			}
 		},
 		async setBlogPosts({ commit }) {
-			console.log("fired from state");
 			try {
 				const data = await blogPostApi.getPosts();
 				const dataWithThumbnailPromises = data.map(async (x) => {
@@ -45,7 +46,7 @@ export default {
 					return x;
 				});
 				const dataReady = await Promise.all(dataWithThumbnailPromises);
-				
+
 				commit("SET__BLOG_POSTS", dataReady);
 			} catch (error) {
 				throw error;
@@ -54,17 +55,25 @@ export default {
 		async createPost(context, { post, thumbnail }) {
 			const imgPathRef = await blogPostApi.uploadImage(thumbnail);
 			const createdAt = new Date();
-			post.date_posted = createdAt;
+			post.date_posted = createdAt.toDateString();
 			post.thumbnail_path_ref = imgPathRef;
 			await blogPostApi.createPost(post);
 		},
-		async updatePost({ commit }, blogPost) {
-			const updatePost = await blogPostApi.updatePost(blogPost);
+		async updatePost({ commit }, { post, thumbnail }) {
+			delete post.thumbnail_data;
+			// if is new img delete oldone from storage, upload new one and replace img path in post object with new img path
+			if (!thumbnail.manuallyAdded) {
+				await blogPostApi.deleteThumbnail(post.thumbnail_path_ref);
+				const imgPathRef = await blogPostApi.uploadImage(thumbnail);
+				post.thumbnail_path_ref = imgPathRef;
+			}
+			const updatePost = await blogPostApi.updatePost(post);
 			commit("UPDATE", updatePost);
 		},
-		async deletePost({ commit }, postId) {
-			await blogPostApi.deletePost(postId);
-			commit("DELETE", postId);
+		async deletePost({ commit }, {thumbnail_path_ref,id}) {
+			await blogPostApi.deleteThumbnail(thumbnail_path_ref);
+			await blogPostApi.deletePost(id);
+			commit("DELETE", id);
 		},
 	},
 	getters: {

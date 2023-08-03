@@ -33,23 +33,23 @@ export default {
 		},
 	},
 	actions: {
-		async signUp({ commit }, { email, password }) {
-			try {
-				let response = await createUserWithEmailAndPassword(
-					auth,
-					email,
-					password
-				);
-				const currentUser = response._tokenResponse.email;
-				const token = response._tokenResponse.idToken;
-				const expiresIn = response._tokenResponse.expiresIn;
+		// async signUp({ commit }, { email, password }) {
+		// 	try {
+		// 		let response = await createUserWithEmailAndPassword(
+		// 			auth,
+		// 			email,
+		// 			password
+		// 		);
+		// 		const currentUser = response._tokenResponse.email;
+		// 		const token = response._tokenResponse.idToken;
+		// 		const expiresIn = response._tokenResponse.expiresIn;
 
-				console.log(currentUser, token, expiresIn, "ESTA LOGEADO");
-				return response.user;
-			} catch (error) {
-				throw error;
-			}
-		},
+		// 		console.log(currentUser, token, expiresIn, "ESTA LOGEADO");
+		// 		return response.user;
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// },
 		async signIn({ commit, dispatch }, { email, password }) {
 			try {
 				let response = await signInWithEmailAndPassword(auth, email, password);
@@ -57,10 +57,6 @@ export default {
 				const currentUser = response._tokenResponse.email;
 				const token = response._tokenResponse.idToken;
 				const expiresIn = response._tokenResponse.expiresIn;
-				// const userProfile = await apiProfile.getByAuthId(response.user.uid);
-				// const username = userProfile[0].name;
-				// const dealerId = userProfile[0].id;
-				// const isActive = userProfile[0].active;
 
 				clearTimeout(timer);
 				timer = setTimeout(() => {
@@ -72,7 +68,7 @@ export default {
 					currentUser,
 					token,
 				});
-				localStorage.setItem("admin", JSON.stringify({ currentUser, token }));
+				localStorage.setItem("blog_admin", JSON.stringify({ currentUser, token }));
 
 				return response.user;
 			} catch (error) {
@@ -80,51 +76,51 @@ export default {
 			}
 		},
 		async autoLogIn({ commit }) {
-			const admin = JSON.parse(localStorage.getItem("admin"));
+			const admin = JSON.parse(localStorage.getItem("blog_admin"));
 			if (admin)
 				if (admin.currentUser && admin.token) {
 					commit("SET_USER", admin);
 				}
 		},
-		async signOutUser({ commit }) {
+		async signOut({ commit }) {
 			try {
 				await signOut(auth);
-				localStorage.removeItem("admin");
+				localStorage.removeItem("blog_admin");
 				commit("SET_USER", null);
 				clearTimeout(timer);
 			} catch (error) {
 				throw error;
 			}
 		},
-		async changePassword(_, { currentPassword, newPassword }) {
-			try {
-				const user = auth.currentUser;
+		// async changePassword(_, { currentPassword, newPassword }) {
+		// 	try {
+		// 		const user = auth.currentUser;
 
-				let credential = EmailAuthProvider.credential(
-					user.email,
-					currentPassword
-				);
+		// 		let credential = EmailAuthProvider.credential(
+		// 			user.email,
+		// 			currentPassword
+		// 		);
 
-				// Re-authenticate the user with their current password
-				const test = await reauthenticateWithCredential(user, credential);
-				console.log(test, "test");
+		// 		// Re-authenticate the user with their current password
+		// 		const test = await reauthenticateWithCredential(user, credential);
+		// 		console.log(test, "test");
 
-				// // Change the password
-				await updatePassword(user, newPassword);
-			} catch (error) {
-				throw error;
-			}
-		},
-		async handleForgotPassword(_, email) {
-			try {
-				await sendPasswordResetEmail(auth, email);
-			} catch (error) {
-				throw error;
-			}
-		},
+		// 		// // Change the password
+		// 		await updatePassword(user, newPassword);
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// },
+		// async handleForgotPassword(_, email) {
+		// 	try {
+		// 		await sendPasswordResetEmail(auth, email);
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// },
 		setAlertMsg({ commit }, alertData) {
 			// commit("SET_ALERT_MSG", alertData);
-			console.log(...alertData)
+			console.log(...alertData);
 		},
 	},
 	getters: {

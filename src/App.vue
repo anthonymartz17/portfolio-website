@@ -1,11 +1,8 @@
 	
 	<script>
-	import store from "./store/index"
+	// import store from "./store/index"
 	export default {
-		created() {
-			console.log(store, 'pleaseee');
-			console.log(this.$store, 'kkkkkk');
-	}
+
 	}
 	</script>
 <template>

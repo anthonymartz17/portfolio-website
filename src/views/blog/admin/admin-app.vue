@@ -44,6 +44,7 @@ export default {
 		if (this.postId) {
 			this.fetchPostById(this.postId).then((data) => {
 				this.blog = data;
+				this.uploadImgManually(this.blog.thumbnail_data);
 			});
 		}
 	},
@@ -51,20 +52,17 @@ export default {
 		...mapActions("blogPosts", ["fetchPostById", "createPost", "updatePost"]),
 		afterComplete(file) {
 			this.blogThumbnail.push(file);
+			console.log(this.blogThumbnail);
 		},
 		removeImg(file) {
-			this.blogThumbnail.filter((img) => img.dataURL != file.dataURL)
-		
+			this.blogThumbnail = this.blogThumbnail.filter(
+				(img) => img.dataURL != file.dataURL
+			);
 		},
-		async uploadImgManually() {
-			const thumb = Object.values(this.blogThumbnail);
-			if (thumb.length > 0) {
-				//add images to vuedropzone
-				this.$refs.myVueDropzone.manuallyAddFile(
-					this.blogThumbnail,
-					this.blogThumbnail.dataURL
-				);
-			}
+		async uploadImgManually(img) {
+			//add images to vuedropzone
+			this.$refs.myVueDropzone.manuallyAddFile(img, img.dataURL);
+			console.log(img);
 		},
 		async tryCreatePost() {
 			this.$v.$touch;
@@ -74,9 +72,12 @@ export default {
 			} else {
 				if (this.postId) {
 					try {
-						const response = await this.updatePost(this.blog);
+						await this.updatePost({
+							post: this.blog,
+							thumbnail: this.blogThumbnail[0],
+						});
 						this.blog = {};
-						this.blogThumbnail = {};
+						this.blogThumbnail = [];
 						this.submitted = false;
 						this.$router.push({ name: "home-blog" });
 					} catch (error) {
@@ -114,7 +115,6 @@ export default {
 				<label class="label-field" for="title">Thumbnail</label>
 				<vue2Dropzone
 					@vdropzone-removed-file="removeImg"
-					@vdropzone-mounted="uploadImgManually"
 					@vdropzone-complete="afterComplete"
 					:destroyDropzone="false"
 					ref="myVueDropzone"

@@ -29,6 +29,58 @@ export default {
 			src="/icons/delete.svg"
 			alt="delete icon"
 		/>
+		<img
+			v-if="icon == 'instagram'"
+			:height="size"
+			:width="size"
+			src="/icons/instagram.svg"
+			alt="instagram icon"
+		/>
+		<img
+			v-if="icon == 'email'"
+			:height="size"
+			:width="size"
+			src="/icons/email.svg"
+			alt="email icon"
+		/>
+		<img
+			v-if="icon == 'github'"
+			:height="size"
+			:width="size"
+			src="/icons/github.svg"
+			alt="github icon"
+		/>
+		<img
+			v-if="icon == 'ham-menue'"
+			:height="size"
+			:width="size"
+			src="/icons/ham-menue.svg"
+			alt="ham-menue icon"
+		/>
+		<img
+			v-if="icon == 'linkedin'"
+			:height="size"
+			:width="size"
+			src="/icons/linkedin.svg"
+			alt="linkedin icon"
+		/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 		<svg
 			v-if="icon == 'mywork'"
 			xmlns="http://www.w3.org/2000/svg"

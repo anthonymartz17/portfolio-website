@@ -9,7 +9,12 @@ export default {
 		return {
 			isMenueOpen: false,
 			navLinks: [
-				{ icon: "home", name: "HOME", route: "portfolio", authRequired: false },
+				{
+					icon: "home",
+					name: "HOME",
+					route: "portfolio",
+					authRequired: false,
+				},
 				{
 					icon: "blog",
 					name: "BLOGS",
@@ -17,13 +22,13 @@ export default {
 					authRequired: false,
 				},
 				{
-					icon: "blog",
+					icon: "write",
 					name: "CREATE",
 					route: "admin-app",
 					authRequired: true,
 				},
 				{
-					icon: "logOut",
+					icon: "logout",
 					name: "LOG OUT",
 					route: "home-blog",
 					authRequired: true,
@@ -198,7 +203,6 @@ body.mobile-menu-open {
 		.logo {
 			flex: 1;
 			display: flex;
-			
 		}
 	}
 }

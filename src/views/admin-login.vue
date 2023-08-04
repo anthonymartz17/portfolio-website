@@ -2,10 +2,12 @@
 import { required, email } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
 import BaseButton from "@/components/baseButton.vue";
+import MartzIcon from "@/components/icons/martz-icons.vue";
 
 export default {
 	components: {
 		BaseButton,
+		MartzIcon,
 	},
 	data() {
 		return {
@@ -53,55 +55,77 @@ export default {
 </script>
 <template>
 	<div class="signIn-wrapper">
-		<div
+		<section>
+			<div
 			class="signIn-container"
 			data-aos="fade-up"
 			data-aos-duration="800"
 			data-aos-delay="400"
-		>
-			<h2 class="page-title">Sign In as Administrator</h2>
-			<form action="" @submit.prevent="trySignIn">
-				<div class="field">
-					<label class="label-field" for="email">Email</label>
-					<input
-						v-model="user.email"
-						type="text"
-						id="email"
-						:class="[
-							'text-thin',
-							'input-field',
-							{ invalid: submitted && $v.user.email.$invalid },
-						]"
-					/>
-					<p v-if="submitted && !$v.user.email.required" class="text-small">
-						Please enter email
-					</p>
-					<p v-else-if="submitted && !$v.user.email.email" class="text-small">
-						Please enter a valid email
-					</p>
-				</div>
-				<div class="field">
-					<label class="label-field" for="password">Password</label>
-					<input
-						v-model="user.password"
-						type="text"
-						id="password"
-						:class="[
-							'text-thin',
-							'input-field',
-							{ invalid: submitted && $v.user.password.$invalid },
-						]"
-					/>
-					<p v-if="submitted && !$v.user.password.required" class="text-small">
-						Please enter password
-					</p>
-				</div>
+			>
+			<div>
+				<h2 class="page-title">Sign In as Administrator</h2>
+				<form action="" @submit.prevent="trySignIn">
+						<div class="field">
+							<label class="label-field" for="email">Email</label>
+							<input
+								v-model="user.email"
+								type="text"
+								id="email"
+								:class="[
+									'text-thin',
+									'input-field',
+									{ invalid: submitted && $v.user.email.$invalid },
+								]"
+							/>
+							<p v-if="submitted && !$v.user.email.required" class="text-small">
+								Please enter email
+							</p>
+							<p
+								v-else-if="submitted && !$v.user.email.email"
+								class="text-small"
+							>
+								Please enter a valid email
+							</p>
+						</div>
+						<div class="field">
+							<label class="label-field" for="password">Password</label>
+							<input
+								v-model="user.password"
+								type="text"
+								id="password"
+								:class="[
+									'text-thin',
+									'input-field',
+									{ invalid: submitted && $v.user.password.$invalid },
+								]"
+							/>
+							<p
+								v-if="submitted && !$v.user.password.required"
+								class="text-small"
+							>
+								Please enter password
+							</p>
+						</div>
 
-				<!-- <div class="btn-container"> -->
-				<BaseButton icon="write" text="Sign In" size="30" class="custom-btn" />
-				<!-- </div> -->
-			</form>
-		</div>
+						<!-- <div class="btn-container"> -->
+						<BaseButton
+							icon="login"
+							text="Sign In"
+							size="30"
+							class="custom-btn"
+						/>
+						<!-- </div> -->
+					</form>
+				</div>
+				<div class="logo-container">
+					<router-link to="/">
+						<transition enter-active-class="animate__animated animate__fadeIn">
+							<MartzIcon icon="logo" size="60" />
+						</transition>
+					</router-link>
+				</div>
+			</div>
+		</section>
 	</div>
 </template>
 <style lang="scss" scoped>
@@ -109,12 +133,22 @@ export default {
 .signIn-wrapper {
 	background: $bg-1;
 	display: grid;
-	place-items: 	center;
+	place-items: center;
 	height: 100vh;
 }
 .signIn-container {
 	min-width: 20em;
-	min-height: 80%;
+	min-height: 35em;
+	padding: 1em;
+	box-shadow: 0 3px 20px rgba(255, 255, 255, 0.151);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.logo-container {
+	display: flex;
+	justify-content: center;
 }
 
 .invalid {
@@ -138,7 +172,7 @@ export default {
 .page-title {
 	font: $font-title-mb;
 	color: $white;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
 	font-size: 1.2em;
 }
 
@@ -146,21 +180,16 @@ export default {
 	width: 100%;
 }
 
-// .create-post-container {
-// 	min-height: 25em;
-// 	@include breakpoint(tablet) {
-// 		/* Add tablet-specific styles here if needed */
-// 	}
-// 	@include breakpoint(desktop) {
-// 		/* Add desktop-specific styles here if needed */
-// 		.custom-btn {
-// 			width: 20em;
-// 		}
-// 		.btn-container {
-// 			display: flex;
-// 			justify-content: flex-end;
-// 			margin-block: 1em;
-// 		}
-// 	}
-// }
+.signIn-wrapper {
+	@include breakpoint(tablet) {
+		/* Add tablet-specific styles here if needed */
+	}
+	@include breakpoint(desktop) {
+		/* Add desktop-specific styles here if needed */
+		.signIn-container {
+			min-width: 30em;
+			min-height: 35em;
+		}
+	}
+}
 </style>

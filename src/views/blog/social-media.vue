@@ -40,10 +40,10 @@ export default {
 			:key="media.name"
 			class="icon-container"
 		>
-			<div>
-				<img class="icons" :src="`/icons/${media.icon}`" :alt="media.name" />
-			</div>
-			<a :href="media.url" target="blank"> </a>
+			<MartzIcon :icon="media.icon" size="50" />
+
+			<a :href="media.url" target="blank"> 
+			</a>
 		</div>
 	</div>
 </template>

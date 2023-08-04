@@ -46,6 +46,13 @@ export default {
 				</h2>
 				<div v-html="post.content" :class="{ 'custom-class': true }"></div>
 			</div>
+			<div class="resources-links">
+        <ul>
+					<li v-for="link in post.resources" :key="link">
+						<p>{{ link.name }}</p><a :href="link.link">{{ link.link }}</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </template>

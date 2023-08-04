@@ -68,7 +68,10 @@ export default {
 					currentUser,
 					token,
 				});
-				localStorage.setItem("blog_admin", JSON.stringify({ currentUser, token }));
+				localStorage.setItem(
+					"blog_admin",
+					JSON.stringify({ currentUser, token })
+				);
 
 				return response.user;
 			} catch (error) {
@@ -120,7 +123,6 @@ export default {
 		// },
 		setAlertMsg({ commit }, alertData) {
 			// commit("SET_ALERT_MSG", alertData);
-			console.log(...alertData);
 		},
 	},
 	getters: {

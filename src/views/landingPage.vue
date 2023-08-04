@@ -6,13 +6,19 @@ export default {
 		SocialMedia,
 		BaseButton,
 	},
+	mounted() {
+		this.$aos.init({
+			duration: 800,
+			offset: 200,
+		});
+	},
 	data() {
 		return {
 			links: [
 				{ text: "Portfolio", icon: "portfolio", route: "portfolio" },
-				{ text: "Watch", icon: "youtubetv", secondText: "talk projects" },
+				{ text: "Youtube", icon: "youtubetv", secondText: "talk projects" },
 				{
-					text: "Read",
+					text: "Blogs",
 					icon: "ereading",
 					secondText: "blog about projects",
 					route: "home-blog",
@@ -26,11 +32,20 @@ export default {
 <template>
 	<div class="landing-wrapper">
 		<div class="container">
-			<header class="header">
+			<header
+				class="header"
+				data-aos="fade-up"
+				data-aos-duration="800"
+			>
 				<h1 class="lg-title">Antonio Martinez</h1>
 				<h2 class="l-title">Front-End Dev</h2>
 			</header>
-			<div class="landing-body">
+			<div
+				class="landing-body"
+				data-aos="fade-up"
+				data-aos-duration="800"
+				:data-aos-delay="250"
+			>
 				<div class="headshot-img">
 					<img class="headshot" src="/img/headshotMobile.png" alt="" />
 					<img class="fullbody" src="/img/lookingDown.png" alt="" />

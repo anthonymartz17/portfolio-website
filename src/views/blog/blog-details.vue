@@ -33,6 +33,16 @@ export default {
 				data-aos-duration="800"
 				:data-aos-delay="250"
 			>
+				<h2 class="blog-title">
+					{{ post.title }}
+				</h2>
+				<div class="post-info-container">
+					<div class="post-info text-small">
+						<p>{{ post.author }}</p>
+						<p>{{ post.date_posted }}</p>
+						<p>{{ post.read_time }} min read.</p>
+					</div>
+				</div>
 				<div class="blog-img-container">
 					<!-- waits till img is ready -->
 					<img
@@ -41,15 +51,13 @@ export default {
 						:alt="`img of blog ${post.title}`"
 					/>
 				</div>
-				<h2 class="blog-title">
-					{{ post.title }}
-				</h2>
 				<div v-html="post.content" :class="{ 'custom-class': true }"></div>
 			</div>
 			<div class="resources-links">
-        <ul>
+				<ul>
 					<li v-for="link in post.resources" :key="link">
-						<p>{{ link.name }}</p><a :href="link.link">{{ link.link }}</a>
+						<p>{{ link.name }}</p>
+						<a :href="link.link">{{ link.link }}</a>
 					</li>
 				</ul>
 			</div>
@@ -58,13 +66,28 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.custom-class{
+.custom-class {
 	font: $font-thin-text-mb;
 }
 .blog-title {
 	font: $font-subtitle-mb;
 	color: rgba($white, 0.5);
-	margin-bottom: 1em;
+	margin-bottom: 2em;
+}
+
+.post-info {
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+	margin-bottom: 3em;
+	p {
+		padding-right: 1em;
+		border-right: 1px solid $accent;
+	}
+	& p:last-child {
+		border-right: none;
+	}
 }
 .blog-img-container {
 	margin-bottom: 1em;
@@ -91,6 +114,18 @@ export default {
 	justify-content: center;
 
 	@include breakpoint(tablet) {
+		.blog-title {
+			margin-bottom: 2em;
+		}
+
+		.post-info {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1em;
+			margin-bottom: 4em;
+		
+		}
 	}
 	@include breakpoint(desktop) {
 		.blog-detail-container {

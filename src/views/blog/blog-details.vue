@@ -44,7 +44,6 @@ export default {
 					</div>
 				</div>
 				<div class="blog-img-container">
-					<!-- waits till img is ready -->
 					<img
 						v-if="post.thumbnail_data"
 						:src="post.thumbnail_data.dataURL"
@@ -124,7 +123,9 @@ export default {
 			flex-wrap: wrap;
 			gap: 1em;
 			margin-bottom: 4em;
-		
+		}
+		.blog-img-container {
+			margin-bottom: 3em;
 		}
 	}
 	@include breakpoint(desktop) {
@@ -133,9 +134,6 @@ export default {
 		}
 		.blog-title {
 			font: $font-title-mb;
-		}
-		.blog-img-container {
-			margin-bottom: 1em;
 		}
 	}
 }

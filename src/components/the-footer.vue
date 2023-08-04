@@ -31,32 +31,33 @@ export default {
 };
 </script>
 <template>
-	<div class="footer-wrapper" data-aos="fade-up" data-aos-duration="800" >
-		<div class="the-footer" >
+	<div class="footer-wrapper" data-aos="fade-up" data-aos-duration="800">
+		<div class="the-footer">
 			<div class="logo-socialMedia">
-				<div class="logo">MARTZ</div>
+				<MartzIcon icon="logo" size="80" />
 				<SocialMedia class="media" />
 			</div>
-
-			<ul class="footer-nav">
-				<template v-for="link in navLinks">
-					<li
-						class="link-item"
-						v-if="!link.route"
-						@click="emitScrollToEvent(link.name)"
-						:key="link.name"
-					>
-						{{ link.name }}
-					</li>
-					<router-link
-						class="link-item"
-						v-if="link.route"
-						:to="{ name: link.route }"
-						:key="link.name"
-						>{{ link.name }}</router-link
-					>
-				</template>
-			</ul>
+			<div class="footer-nav-container">
+				<ul class="footer-nav">
+					<template v-for="link in navLinks">
+						<li
+							class="link-item"
+							v-if="!link.route"
+							@click="emitScrollToEvent(link.name)"
+							:key="link.name"
+						>
+							{{ link.name }}
+						</li>
+						<router-link
+							class="link-item"
+							v-if="link.route"
+							:to="{ name: link.route }"
+							:key="link.name"
+							>{{ link.name }}</router-link
+						>
+					</template>
+				</ul>
+			</div>
 
 			<div class="copyRight">
 				<p>Designed and built by</p>
@@ -64,14 +65,13 @@ export default {
 				<small>© {{ year }}</small>
 			</div>
 		</div>
-		<div class="backhome" 	@click="emitScrollToEvent('Home')">
+		<div class="backhome" @click="emitScrollToEvent('Home')">
 			<MartzIcon class="angleUp" icon="angleUp" size="50" />
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-
 .footer-wrapper {
 	position: relative;
 	z-index: 2;
@@ -84,7 +84,7 @@ export default {
 }
 .backhome {
 	// background: blue;
-	
+
 	position: absolute;
 	top: -45px;
 	left: 50%;
@@ -97,21 +97,18 @@ export default {
 	justify-items: center;
 	padding-top: 0.5em;
 
-&::before{
-	content: "";
-  position: absolute;
-	border-radius: 50px 50px 0 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background-color: transparent;
-	box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
-  z-index: 1;
-}
-
-
-
+	&::before {
+		content: "";
+		position: absolute;
+		border-radius: 50px 50px 0 0;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 50%;
+		background-color: transparent;
+		box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
+		z-index: 1;
+	}
 }
 .the-footer {
 	flex: 1;
@@ -141,6 +138,7 @@ export default {
 .logo-socialMedia {
 	display: grid;
 	place-items: center;
+	gap: 2em;
 }
 .logo {
 	text-align: center;
@@ -162,7 +160,9 @@ export default {
 			grid-template-areas:
 				"logo-media links"
 				"copyright copyright";
-			row-gap: 4em;
+			grid-template-columns: 1fr 1fr;
+			row-gap: 2em;
+			justify-content: center;
 		}
 		.link-item {
 			font-size: 1.2em;
@@ -172,9 +172,13 @@ export default {
 		.logo-socialMedia {
 			grid-area: logo-media;
 		}
-
-		.footer-nav {
+		.media {
+			width: 60%;
+		}
+		.footer-nav-container {
 			grid-area: links;
+		}
+		.footer-nav {
 			display: grid;
 			place-items: center;
 			grid-template-columns: 1fr 1fr;
@@ -186,22 +190,21 @@ export default {
 	}
 	@include breakpoint(desktop) {
 		.the-footer {
-			width: 70%;
 			margin-top: 3em;
 			padding-bottom: 0;
-			display: flex;
-			justify-content: space-between;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-areas: "logo-media links copyright";
+			align-items: center;
 			gap: 2em;
 		}
-
+		
 		.footer-nav {
-			width: 30%;
+			// width: 30%;
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 		}
-		.logo-socialMedia {
-			flex: 1;
-		}
+
+		
 		.copyRight {
 			flex: 1;
 		}
@@ -213,7 +216,6 @@ export default {
 			&:hover {
 				transform: translate(-50%) scale(1.05);
 			}
-		
 		}
 	}
 }

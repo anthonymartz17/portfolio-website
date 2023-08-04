@@ -16,7 +16,9 @@ export default {
 		return {
 			submitted: false,
 			postId: null,
-			blog: {},
+			blog: {
+				author: "Antonio Martinez",
+			},
 			blogThumbnail: [],
 			dropzoneOptions: {
 				url: "https://httpbin.org/post",
@@ -33,6 +35,8 @@ export default {
 	validations: {
 		blog: {
 			title: { required },
+			author: { required },
+			read_time: { required },
 			content: { required },
 		},
 		blogThumbnail: {
@@ -111,6 +115,51 @@ export default {
 	>
 		<h2 class="blog-list-title">Create New Post</h2>
 		<form action="" @submit.prevent="tryCreatePost">
+			<div class="field">
+				<label class="label-field" for="title">Author</label>
+				<input
+					v-model.trim="blog.author"
+					type="text"
+					id="author"
+					:class="[
+						'input-field',
+						{ invalid: submitted && $v.blog.author.$invalid },
+					]"
+				/>
+				<p v-if="submitted && !$v.blog.author.required" class="text-small">
+					Please enter a Author
+				</p>
+			</div>
+			<div class="field">
+				<label class="label-field" for="title">Title</label>
+				<input
+					v-model="blog.title"
+					type="text"
+					id="title"
+					:class="[
+						'input-field',
+						{ invalid: submitted && $v.blog.title.$invalid },
+					]"
+				/>
+				<p v-if="submitted && !$v.blog.title.required" class="text-small">
+					Please enter a title
+				</p>
+			</div>
+			<div class="field">
+				<label class="label-field" for="read_time">Read time</label>
+				<input
+					v-model.number.trim="blog.read_time"
+					type="number"
+					id="read_time"
+					:class="[
+						'input-field',
+						{ invalid: submitted && $v.blog.read_time.$invalid },
+					]"
+				/>
+				<p v-if="submitted && !$v.blog.read_time.required" class="text-small">
+					Please enter a Author
+				</p>
+			</div>
 			<div>
 				<label class="label-field" for="title">Thumbnail</label>
 				<vue2Dropzone
@@ -128,27 +177,12 @@ export default {
 					Photos are required.
 				</div>
 			</div>
-			<div class="field">
-				<label class="label-field" for="title">Title</label>
-				<input
-					v-model="blog.title"
-					type="text"
-					id="title"
-					:class="[
-						'input-field',
-						{ invalid: submitted && $v.blog.title.$invalid },
-					]"
-				/>
-				<p v-if="submitted && !$v.blog.title.required" class="text-small">
-					Please enter a title
-				</p>
-			</div>
 
 			<div>
 				<label class="label-field" for="content">Content</label>
 				<quill-editor
 					:class="{ invalid: submitted && $v.blog.content.$invalid }"
-					v-model="blog.content"
+					v-model.trim="blog.content"
 					ref="quillEditor"
 				></quill-editor>
 				<p v-if="submitted && !$v.blog.content.required" class="text-small">

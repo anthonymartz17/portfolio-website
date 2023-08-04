@@ -55,7 +55,9 @@ export default {
 		async createPost(context, { post, thumbnail }) {
 			const imgPathRef = await blogPostApi.uploadImage(thumbnail);
 			const createdAt = new Date();
-			post.date_posted = createdAt.toDateString();
+			const options = { year: "numeric", month: "short", day: "numeric" };
+			const formattedDate = createdAt.toLocaleDateString("en-US", options);
+			post.date_posted = formattedDate;
 			post.thumbnail_path_ref = imgPathRef;
 			await blogPostApi.createPost(post);
 		},
@@ -70,7 +72,7 @@ export default {
 			const updatePost = await blogPostApi.updatePost(post);
 			commit("UPDATE", updatePost);
 		},
-		async deletePost({ commit }, {thumbnail_path_ref,id}) {
+		async deletePost({ commit }, { thumbnail_path_ref, id }) {
 			await blogPostApi.deleteThumbnail(thumbnail_path_ref);
 			await blogPostApi.deletePost(id);
 			commit("DELETE", id);

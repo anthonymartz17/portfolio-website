@@ -97,14 +97,9 @@ export default {
 		color: $accent;
 	}
 }
-// .menu-wrapper {
-// 	position: absolute;
-// 	top: 0;
-// 	right: 0;
-// 	height: 100vh;
-// 	width: 100wh;
-// 	z-index: 10;
-// }
+.nav-container-link{
+	cursor: pointer;
+}
 
 .nav-container {
 	padding: 1em 1em;

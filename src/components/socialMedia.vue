@@ -41,24 +41,25 @@ export default {
 			class="icon-container"
 		>
 			<a :href="media.url" target="blank">
-				<MartzIcon :icon="media.icon" :size="30"  class="icon" />
+				<MartzIcon :icon="media.icon" :size="25"  class="icon" />
 			</a>
 		</div>
 	</div>
 </template>
 <style lang="scss" scoped>
 .social-media-container {
-	width: 65%;
+	width: 85%;
 	margin-bottom: 1em;
 	display: flex;
 	justify-content: space-between;
 	cursor: pointer;
 
 	@include breakpoint(desktop) {
+		.icon{
+			fill: $accent;
+		}
 		.icon-container {
-			&:hover .icon {
-				color: $accent;
-			}
+		
 		}
 	}
 

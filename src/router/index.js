@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingPage from "../views/landingPage.vue";
 import store from "../store/index";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,7 +20,22 @@ const routes = [
 		path: "/@dmin-login",
 		name: "login",
 		component: () => import("../views/admin-login.vue"),
+		beforeEnter: (to, from, next) => {
+			// Check the authentication status or any other condition
+			const isLoggedIn = store.getters["auth/isLoggedIn"];
+		
+
+			// If the user is already logged in,cancel navigation
+			if (isLoggedIn) {
+		
+				// next('/');
+			} else {
+				// If the user is not logged in, allow access to the login page
+				next();
+			}
+		},
 	},
+
 	{
 		path: "/home-blog",
 		component: () => import("../views/blog/home-blog.vue"),
@@ -42,6 +58,11 @@ const routes = [
 			},
 		],
 	},
+	{
+		path: "/:notFound(.*)",
+		name: "404-page",
+		component: () => import("../views/404-page.vue"),
+	},
 ];
 
 const router = new VueRouter({
@@ -58,15 +79,15 @@ router.beforeEach((to, from, next) => {
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
 		if (!isLoggedIn) {
 			// User is not authenticated, redirect to login or appropriate route
-			next({name:"portfolio"});
-			console.log('redirectin to homepage')
+			next({ name: "portfolio" });
+			console.log("redirectin to homepage");
 		} else {
-			console.log('ahouldnt print')
+			console.log("ahouldnt print");
 			// User is authenticated, proceed to the route
 			next();
 		}
 	} else {
-		console.log('is it printing')
+		console.log("is it printing");
 		// If route does not require authentication
 		next();
 	}

@@ -4,11 +4,11 @@ import { mapActions } from "vuex";
 export default {
 	beforeDestroy() {
 		// Attach the 'beforeunload' event listener when the component is about to be destroyed
-		window.removeEventListener("beforeunload", this.signOut);
+		window.removeEventListener("unload", this.signOut);
 	},
 	created() {
 		// Attach the 'beforeunload' event listener when the component is created
-		window.addEventListener("beforeunload", this.signOut);
+		window.addEventListener("unload", this.signOut);
 	},
 	methods: {
 		...mapActions("auth", ["signOut"]),

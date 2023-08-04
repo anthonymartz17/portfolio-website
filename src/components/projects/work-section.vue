@@ -146,11 +146,11 @@ export default {
 						color="white"
 					/>
 					<div class="card-title">
-						<h4>watch</h4>
+						<h4>Youtube</h4>
 						<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
 					</div>
 					<div class="card-body">
-						<p>me discuss tech implementation in my projects</p>
+						<p>Watch me discuss tech implementation in my projects</p>
 						<div class="card-link">
 							<a
 								class="resetLink card-link-link"
@@ -170,8 +170,8 @@ export default {
 					data-aos-duration="800"
 				>
 					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
-					<h4>Read</h4>
-					<p>articles about my work and my learning from them.</p>
+					<h4>Blogs</h4>
+					<p>Discover tech insights, projects, and learning experiences in my blogs.</p>
 					<div class="card-link">
 						<router-link
 							:to="{ name: 'home-blog' }"

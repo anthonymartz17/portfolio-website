@@ -1,7 +1,7 @@
 <script>
 import SocialMedia from "@/components/socialMedia.vue";
 import MartzIcon from "@/components/icons/martz-icons.vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -22,18 +22,19 @@ export default {
 		},
 	},
 	methods: {
-		emitCloseEvent(route) {
-			if (route != null) {
-				if (route != this.$route.name) {
-					this.$emit("emitToggleMenue");
-					this.$router.replace({ name: route });
-				} else {
-					this.$emit("emitToggleMenue");
+		...mapActions("auth", ["signOut"]),
+		async navegateBlog(link) {
+			if (link != null) {
+				if (link.name == "LOG OUT") {
+					await this.signOut();
 				}
-			} else {
-				this.$emit("emitToggleMenue");
+				if (link.route != this.$route.name) {
+					this.$router.push({ name: link.route });
+				}
 			}
+			this.$emit("emitToggleMenue");
 		},
+
 		setSection(section) {
 			this.section = section;
 		},
@@ -55,7 +56,7 @@ export default {
 		<div
 			class="nav-container-header"
 			id="close-header"
-			@click="emitCloseEvent(null)"
+			@click="navegateBlog(null)"
 		>
 			<MartzIcon
 				id="close-icon"
@@ -69,7 +70,7 @@ export default {
 			<li
 				id="fromRoute"
 				v-for="link in filteredLinks"
-				@click="emitCloseEvent(link.route)"
+				@click="navegateBlog(link)"
 				:key="link.name"
 				class="nav-container-link"
 			>
@@ -97,6 +98,9 @@ export default {
 		right: -10px;
 		color: $accent;
 	}
+}
+.nav-container-link {
+	cursor: pointer;
 }
 
 .nav-container {

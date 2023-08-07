@@ -26,7 +26,8 @@ export default {
 		async navegateBlog(link) {
 			if (link.name == "LOG OUT") {
 				await this.signOut();
-			} else if (link.route != this.$route.name) {
+			}
+			if (link.route != this.$route.name) {
 				this.$router.push({ name: link.route });
 			}
 		},

@@ -10,38 +10,6 @@ export default {
 	},
 	data() {
 		return {
-			blogs: [
-				{
-					id: 1,
-					datePosted: "04/18/2023",
-					img: "project1.jpeg",
-					title: "Not letting a bug trash talk me",
-					body: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?`,
-					resources: [
-						{ id: 1, name: "chat gpt", link: "https://chat.openai.com/" },
-						{
-							id: 2,
-							name: "youtube",
-							link: "https://www.youtube.com/watch?v=ISv22NNL-aE&t=509s",
-						},
-					],
-				},
-				{
-					id: 2,
-					datePosted: "04/18/2023",
-					img: "project2.jpeg",
-					title: "Another blog testing",
-					body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam dignissimos animi sunt nostrum velit?",
-					resources: [
-						{ id: 1, name: "chat gpt", link: "https://chat.openai.com/" },
-						{
-							id: 2,
-							name: "youtube",
-							link: "https://www.youtube.com/watch?v=ISv22NNL-aE&t=509s",
-						},
-					],
-				},
-			],
 			blogActions: [
 				{
 					icon: "see",

@@ -8,6 +8,7 @@ export default {
 		return {
 			readmore: false,
 			mobile: false,
+			isProjectLink: true,
 		};
 	},
 	props: ["projectClicked"],
@@ -31,7 +32,11 @@ export default {
 			this.readmore = !this.readmore;
 		},
 		openCodeOrProject(link) {
-			window.open(link, "_blank");
+			if (link) {
+				window.open(link, "_blank");
+			} else {
+				this.isProjectLink = false;
+			}
 		},
 	},
 };
@@ -148,6 +153,7 @@ export default {
 							icon="code"
 						/>
 					</div>
+					<p class="isProjectLink-msg" v-show="!isProjectLink">Project still in development</p>
 				</div>
 			</div>
 
@@ -288,19 +294,17 @@ export default {
 	}
 }
 .tech-icons {
-	margin-bottom: 1.5em;
-	display: flex;
-	justify-content: flex-start;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 	gap: 1em;
 }
 
 .icon {
 	display: grid;
 	place-items: center;
-	opacity: 0.8;
-	width: 23%;
-	aspect-ratio: 1/1;
+	// opacity: 0.8;
+	// width: 23%;
+	// aspect-ratio: 1/1;
 	// border: 1px solid;
 	// height: 6em;
 	// width: 6em;
@@ -311,7 +315,12 @@ export default {
 	margin-bottom: 0.8em;
 }
 .project-btn-container {
-	margin-bottom: 5em;
+	margin-bottom: 2em;
+}
+.isProjectLink-msg{
+	border: 1px solid $accent;
+	padding: .5em;
+	text-align: center;
 }
 
 .project-detail-wrapper {
@@ -337,8 +346,14 @@ export default {
 			}
 		}
 		.tech-icons {
-			flex-wrap: nowrap;
+			margin-top: 1.5em;
+			gap: 1.5em;
+
+			.icon {
+				justify-content: flex-start;
+			}
 		}
+
 		.project-btn-container {
 			display: flex;
 			gap: 0.5em;
@@ -373,6 +388,9 @@ export default {
 			padding-block: 1em;
 			justify-self: flex-end;
 		}
+		.project-btn-container {
+			margin-bottom: 1em;
+		}
 		.project-videos {
 			flex: 1;
 		}
@@ -398,9 +416,8 @@ export default {
 		}
 
 		.tech-icons {
-			flex-wrap: nowrap;
-			font-size: 3em;
-			margin: 0;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
 		}
 	}
 }

@@ -41,8 +41,9 @@ export default {
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
 						{ icon: "css3", size: "70" },
-						{ icon: "vue", size: "100" },
-						{ icon: "sass", size: "100" },
+						{ icon: "vue", size: "80" },
+						{ icon: "sass", size: "80" },
+						{ icon: "firebase", size: "70" },
 					],
 				},
 				{
@@ -80,8 +81,50 @@ export default {
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
 						{ icon: "css3", size: "70" },
-						{ icon: "vue", size: "100" },
-						{ icon: "sass", size: "100" },
+						{ icon: "vue", size: "80" },
+						{ icon: "sass", size: "80" },
+						{ icon: "firebase", size: "80" },
+					],
+				},
+				{
+					id: 3,
+					name: "Winner 23 - The raffle app",
+					siteLink: "",
+					codeLink: "",
+					description_overview:
+						"Users can create profiles and play in various raffles, administrators can manage raffles,users,agencies,etc.",
+					description_complete: [
+						{
+							paragraph_id: "intro-overview",
+							text: "Winner23 is a raffles app that I am currently working on as the front-end developer. It targets users interested in participating in raffles for money, groceries, and home appliances. Users can create and manage their profiles and view their activity on a dashboard.",
+						},
+						{
+							paragraph_id: "learnings",
+							text: "The template-based app presented challenges as I had to navigate through extensive code to adapt it to the company's needs. I created additional features like the landing page, results page, contact form, and login/registration. I learned about modular organization by creating files and folders for authentication, API calls, and state management. Data flows from components to state, then to API files and back to components. Working with environment variables was fascinating. Authentication was handled with AWS, and the backend was built in Node.js by a collaborator full-stack developer.",
+						},
+						{
+							paragraph_id: "technlogies",
+							text:"Front-end technologies included Vue, Vuex, Axios, Bootstrap Vue, and Vue Router. I used developer tools to monitor API calls and network status.Handling user data and the cart was challenging, converting plays into tickets, preparing the data for backend communication during payment. However, my determination and excitement for learning made these and other challenges no more than great opportunities to grow my problem-solving and technical skills."
+						},
+						{
+							paragraph_id: "conclusion",
+							text: "Overall, Winner23 provided valuable experience in front-end development, project organization, and adapting templates. I am proud of delivering a user-friendly app and excited to apply these skills in future projects.",
+						},
+					],
+
+					img: "winner23.png",
+					videoId: "BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					thumbnail_main: "winner23.png",
+					thumbnail_sec: "project2.jpeg",
+					thumbnail_third: "project2.jpeg",
+					technologies: [
+						{ icon: "javascript", size: "70" },
+						{ icon: "html5", size: "70" },
+						{ icon: "css3", size: "70" },
+						{ icon: "vue", size: "80" },
+						{ icon: "sass", size: "80" },
+						{ icon: "aws", size: "80" },
+						{ icon: "bootstrapvue", size: "70" },
 					],
 				},
 			],

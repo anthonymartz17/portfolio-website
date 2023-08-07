@@ -92,6 +92,27 @@ export default {
 			src="/icons/404.svg"
 			alt="page not found icon"
 		/>
+		<img
+			v-if="icon == 'aws'"
+			:height="size"
+			:width="size"
+			src="/icons/aws.svg"
+			alt="page aws icon"
+		/>
+		<img
+			v-if="icon == 'bootstrapvue'"
+			:height="size"
+			:width="size"
+			src="/icons/bootstrapvue.svg"
+			alt="page bootstrapvueicon"
+		/>
+		<img
+			v-if="icon == 'firebase'"
+			:height="size"
+			:width="size"
+			src="/icons/firebase.svg"
+			alt="page firebase icon"
+		/>
 
 		<svg
 			v-if="icon == 'mywork'"

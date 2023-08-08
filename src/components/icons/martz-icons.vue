@@ -113,6 +113,20 @@ export default {
 			src="/icons/firebase.svg"
 			alt="page firebase icon"
 		/>
+		<img
+			v-if="icon == 'resume'"
+			:height="size"
+			:width="size"
+			src="/icons/resume.svg"
+			alt="page resume icon"
+		/>
+		<img
+			v-if="icon == 'download'"
+			:height="size"
+			:width="size"
+			src="/icons/download.svg"
+			alt="page download icon"
+		/>
 
 		<svg
 			v-if="icon == 'mywork'"

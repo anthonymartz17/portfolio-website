@@ -1,10 +1,12 @@
 <script>
 import SocialMedia from "../components/socialMedia.vue";
 import BaseButton from "../components/baseButton.vue";
+import MartzIcons from "@/components/icons/martz-icons.vue";
 export default {
 	components: {
 		SocialMedia,
 		BaseButton,
+		MartzIcons,
 	},
 	mounted() {
 		this.$aos.init({
@@ -32,11 +34,7 @@ export default {
 <template>
 	<div class="landing-wrapper">
 		<div class="container">
-			<header
-				class="header"
-				data-aos="fade-up"
-				data-aos-duration="800"
-			>
+			<header class="header" data-aos="fade-up" data-aos-duration="800">
 				<h1 class="lg-title">Antonio Martinez</h1>
 				<h2 class="l-title">Front-End Dev</h2>
 			</header>
@@ -81,6 +79,12 @@ export default {
 							/>
 						</a>
 					</template>
+					<div class="resumeDownload-container">
+						<router-link class="resumeDownload" :to="{ name: 'resume' }">
+							<span>View Résumé</span>
+							<MartzIcons icon="download" :size="25"
+						/></router-link>
+					</div>
 				</div>
 				<SocialMedia class="social-media" />
 			</div>
@@ -98,6 +102,22 @@ export default {
 	display: flex;
 	justify-content: center;
 }
+.resumeDownload-container{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2em;
+}
+.resumeDownload {
+	border-bottom: 1px solid $accent;
+	font: $font-text-mb;
+	display: inline-block;
+	color: $white;
+	text-decoration: none;
+	display: flex;
+	gap: 1em;
+	justify-content: center;
+	padding: 0.5em;
+}
 .container {
 	position: relative;
 	height: 100%;
@@ -107,17 +127,18 @@ export default {
 	justify-content: space-between;
 	font-family: $font-poppins;
 	color: $white;
-	padding: 1em;
+	// padding: 1em 0em;
 }
 .header {
 	flex: 1;
 }
 .landing-body {
 	flex: 4;
-	width: 80%;
+	width: 90%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 	gap: 1em;
 }
 .links {
@@ -166,6 +187,9 @@ export default {
 		}
 		.landing-btn {
 			font: $font-btn-tb;
+		}
+		.landing-body {
+			width: 80%;
 		}
 	}
 	@include breakpoint(desktop) {

@@ -31,7 +31,7 @@ export default {
 					icon: "github",
 					name: "Github",
 					url: "https://github.com/anthonymartz17",
-					link_name: "@anthonymartz17",
+					link_name: "anthonymartz17",
 				},
 				{
 					icon: "instagram",

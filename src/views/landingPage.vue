@@ -1,6 +1,6 @@
 <script>
 import SocialMedia from "../components/socialMedia.vue";
-import BaseButton from "../components/baseButton.vue";
+import BaseButton from "../components/buttons/baseButton.vue";
 import MartzIcons from "@/components/icons/martz-icons.vue";
 export default {
 	components: {

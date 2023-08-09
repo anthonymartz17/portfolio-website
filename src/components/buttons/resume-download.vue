@@ -7,7 +7,7 @@
 
 <script>
 import pdfjsLib from "pdfjs-dist";
-import BaseButton from "../baseButton.vue"
+import BaseButton from "./baseButton.vue"
 
 export default {
   components:{BaseButton},

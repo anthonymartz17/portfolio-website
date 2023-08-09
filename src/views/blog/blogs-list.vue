@@ -1,6 +1,6 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
-import BaseButton from "@/components/baseButton.vue";
+import BaseButton from "@/components/buttons/baseButton.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {

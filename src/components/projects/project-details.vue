@@ -1,5 +1,5 @@
 <script>
-import BaseButton from "../baseButton.vue";
+import BaseButton from "../buttons/baseButton.vue";
 import MartzIcon from "../icons/martz-icons.vue";
 import MainVideo from "./main-video-player.vue";
 export default {

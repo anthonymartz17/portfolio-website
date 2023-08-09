@@ -93,6 +93,7 @@ export default {
 								v-model="user.password"
 								type="text"
 								id="password"
+								autocomplete="off"
 								:class="[
 									'text-thin',
 									'input-field',

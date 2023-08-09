@@ -35,7 +35,7 @@ export default {
 		...mapActions("blogPosts", ["setBlogPosts", "deletePost"]),
 		...mapActions("auth", ["setAlertMsg"]),
 		postAction(action) {
-			console.log(action);
+		
 			switch (action.text) {
 				case "Edit":
 					this.$router.push({
@@ -75,6 +75,12 @@ export default {
 	computed: {
 		...mapGetters("blogPosts", ["blogPosts"]),
 		...mapGetters("auth", ["isLoggedIn"]),
+
+		blogPostsSorted() {
+			return this.blogPosts.sort(
+				(a, b) => new Date(b.date_posted) - new Date(a.date_posted)
+			);
+		},
 	},
 };
 </script>
@@ -90,7 +96,7 @@ export default {
 			<h2>Blogs</h2>
 		</div>
 		<div class="blog-list-body">
-			<div v-if="blogPosts.length == 0" class="noBlogs">
+			<div v-if="blogPostsSorted.length == 0" class="noBlogs">
 				<p class="text-thin">No blogs have been added</p>
 			</div>
 			<template v-else>
@@ -98,7 +104,7 @@ export default {
 					data-aos="fade-up"
 					data-aos-duration="800"
 					:data-aos-delay="250 * idx"
-					v-for="(blog, idx) in blogPosts"
+					v-for="(blog, idx) in blogPostsSorted"
 					:key="blog.id"
 					class="blog-card"
 				>

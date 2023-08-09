@@ -56,7 +56,7 @@ export default {
 		...mapActions("blogPosts", ["fetchPostById", "createPost", "updatePost"]),
 		afterComplete(file) {
 			this.blogThumbnail.push(file);
-			console.log(this.blogThumbnail);
+		
 		},
 		removeImg(file) {
 			this.blogThumbnail = this.blogThumbnail.filter(
@@ -66,7 +66,7 @@ export default {
 		async uploadImgManually(img) {
 			//add images to vuedropzone
 			this.$refs.myVueDropzone.manuallyAddFile(img, img.dataURL);
-			console.log(img);
+
 		},
 		async tryCreatePost() {
 			this.$v.$touch;

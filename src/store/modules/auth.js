@@ -33,23 +33,7 @@ export default {
 		},
 	},
 	actions: {
-		// async signUp({ commit }, { email, password }) {
-		// 	try {
-		// 		let response = await createUserWithEmailAndPassword(
-		// 			auth,
-		// 			email,
-		// 			password
-		// 		);
-		// 		const currentUser = response._tokenResponse.email;
-		// 		const token = response._tokenResponse.idToken;
-		// 		const expiresIn = response._tokenResponse.expiresIn;
-
-		// 		console.log(currentUser, token, expiresIn, "ESTA LOGEADO");
-		// 		return response.user;
-		// 	} catch (error) {
-		// 		throw error;
-		// 	}
-		// },
+	
 		async signIn({ commit, dispatch }, { email, password }) {
 			try {
 				let response = await signInWithEmailAndPassword(auth, email, password);
@@ -95,32 +79,7 @@ export default {
 				throw error;
 			}
 		},
-		// async changePassword(_, { currentPassword, newPassword }) {
-		// 	try {
-		// 		const user = auth.currentUser;
-
-		// 		let credential = EmailAuthProvider.credential(
-		// 			user.email,
-		// 			currentPassword
-		// 		);
-
-		// 		// Re-authenticate the user with their current password
-		// 		const test = await reauthenticateWithCredential(user, credential);
-		// 		console.log(test, "test");
-
-		// 		// // Change the password
-		// 		await updatePassword(user, newPassword);
-		// 	} catch (error) {
-		// 		throw error;
-		// 	}
-		// },
-		// async handleForgotPassword(_, email) {
-		// 	try {
-		// 		await sendPasswordResetEmail(auth, email);
-		// 	} catch (error) {
-		// 		throw error;
-		// 	}
-		// },
+		
 		setAlertMsg({ commit }, alertData) {
 			// commit("SET_ALERT_MSG", alertData);
 		},

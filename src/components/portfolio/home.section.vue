@@ -1,5 +1,5 @@
 <script>
-import BaseButton from "./buttons/baseButton.vue";
+import BaseButton from "../buttons/baseButton.vue";
 export default {
 	components: {
 		BaseButton,
@@ -14,9 +14,14 @@ export default {
 </script>
 <template>
 	<div class="hero-wrapper">
-		<div class="hero-section" data-aos="fade-up" data-aos-duration="800" :data-aos-delay="350">
+		<div
+			class="hero-section"
+			data-aos="fade-up"
+			data-aos-duration="800"
+			:data-aos-delay="350"
+		>
 			<div class="photo-wrapper">
-				<div class="hero-section-headshot"  >
+				<div class="hero-section-headshot">
 					<img
 						class="headshot"
 						src="/img/headshotMobile.png"
@@ -101,6 +106,10 @@ export default {
 		margin-bottom: 2em;
 	}
 }
+
+.cta {
+	width: 100%;
+}
 .hero-wrapper {
 	@include breakpoint(tablet) {
 		.hero-section-headshot {
@@ -119,7 +128,7 @@ export default {
 			font: $font-text-tb;
 		}
 		.btn-container {
-			width: 70%;
+			width: 50%;
 		}
 	}
 	@include breakpoint(desktop) {

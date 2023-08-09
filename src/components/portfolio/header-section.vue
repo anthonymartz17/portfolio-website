@@ -1,7 +1,7 @@
 <script>
 import NavMenueMobile from "./navMenueMobile.vue";
-import DesktopMenue from "./desktopMenue.vue";
-import MartzIcon from "./icons/martz-icons.vue";
+import DesktopMenue from "../desktopMenue.vue";
+import MartzIcon from "../icons/martz-icons.vue";
 import "animate.css";
 export default {
 	components: {

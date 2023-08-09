@@ -37,13 +37,13 @@ export default {
 		},
 		async setBlogPosts({ commit }) {
 			try {
-				const data = await blogPostApi.getPosts();
-				const dataWithThumbnailPromises = data.map(async (x) => {
-					const thumbnail_data = await blogPostApi.getThumbnail(
-						x.thumbnail_path_ref
+				const dataPosts = await blogPostApi.getPosts();
+				const dataWithThumbnailPromises = dataPosts.map(async (post) => {
+					const thumbnail_img = await blogPostApi.getThumbnail(
+						post.thumbnail_path_ref
 					);
-					x.thumbnail_data = thumbnail_data;
-					return x;
+					post.thumbnail_data = thumbnail_img;
+					return post;
 				});
 				const dataReady = await Promise.all(dataWithThumbnailPromises);
 

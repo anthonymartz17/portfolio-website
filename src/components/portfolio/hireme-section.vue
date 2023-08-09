@@ -1,7 +1,7 @@
 <script>
-import BaseButton from "./buttons/baseButton.vue";
+import BaseButton from "../buttons/baseButton.vue";
 // import basebutton from "./baseButton.vue";
-import MartzIcon from "../components/icons/martz-icons.vue";
+import MartzIcon from "../icons/martz-icons.vue";
 import { required, email } from "vuelidate/lib/validators";
 import emailjs from "emailjs-com";
 

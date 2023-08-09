@@ -1,5 +1,5 @@
 <script>
-import MartzIcon from "@/components/icons/martz-icons.vue";
+import MartzIcon from "../icons/martz-icons.vue";
 export default {
 	components: {
 		MartzIcon,
@@ -48,10 +48,7 @@ export default {
 	</div>
 </template>
 <style lang="scss" scoped>
-.icons {
-	// height: 100px;
-	// width: 100px;
-}
+
 .social-media-container {
 	width: 100%;
 	// margin-bottom: 1em;

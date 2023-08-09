@@ -1,14 +1,6 @@
 import { auth } from "../../firebaseConfig";
 
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	signOut,
-	EmailAuthProvider,
-	reauthenticateWithCredential,
-	updatePassword,
-	sendPasswordResetEmail,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 //global timer for expiration token
 let timer;
@@ -33,7 +25,6 @@ export default {
 		},
 	},
 	actions: {
-	
 		async signIn({ commit, dispatch }, { email, password }) {
 			try {
 				let response = await signInWithEmailAndPassword(auth, email, password);
@@ -79,7 +70,7 @@ export default {
 				throw error;
 			}
 		},
-		
+
 		setAlertMsg({ commit }, alertData) {
 			// commit("SET_ALERT_MSG", alertData);
 		},

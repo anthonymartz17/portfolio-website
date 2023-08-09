@@ -1,5 +1,5 @@
 <script>
-import SocialMedia from "./social-media.vue";
+import SocialMedia from "../socialMedia.vue";
 import MartzIcon from "@/components/icons/martz-icons.vue";
 
 export default {

@@ -1,8 +1,8 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
-import BlogNavMenue from "./blog-mobile-menue.vue";
-import BlogHomeNavMenue from "./blog-desktop-menu.vue";
-import BlogFooter from "./blog-footer.vue";
+import BlogNavMenue from "../components/blog/blog-mobile-menue.vue";
+import BlogHomeNavMenue from "../components/blog/blog-desktop-menu.vue";
+import BlogFooter from "../components/blog/blog-footer.vue";
 export default {
 	components: { MartzIcon, BlogHomeNavMenue, BlogFooter, BlogNavMenue },
 	data() {

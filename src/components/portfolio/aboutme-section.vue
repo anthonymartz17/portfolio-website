@@ -1,5 +1,5 @@
 <script>
-import MartzIcon from "../components/icons/martz-icons.vue";
+import MartzIcon from "../icons/martz-icons.vue";
 export default {
 	components: {
 		MartzIcon,

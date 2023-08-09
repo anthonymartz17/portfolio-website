@@ -1,11 +1,11 @@
 <script>
-import Home from "../components/home.section.vue";
-import Header from "../components/header-section.vue";
-import Work from "../components/projects/work-section.vue";
-import Skills from "../components/skills-section.vue";
-import Aboutme from "../components/aboutme-section.vue";
-import Hireme from "../components/hireme-section.vue";
-import Footer from "../components/the-footer.vue";
+import Home from "../components/portfolio/home.section.vue";
+import Header from "../components/portfolio/header-section.vue";
+import Work from "../components/portfolio/work-section/work-section.vue";
+import Skills from "../components/portfolio/skills-section.vue";
+import Aboutme from "../components/portfolio/aboutme-section.vue";
+import Hireme from "../components/portfolio/hireme-section.vue";
+import Footer from "../components/portfolio/the-footer.vue";
 export default {
 	components: {
 		Home,

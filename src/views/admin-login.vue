@@ -91,7 +91,7 @@ export default {
 							<label class="label-field" for="password">Password</label>
 							<input
 								v-model="user.password"
-								type="text"
+								type="password"
 								id="password"
 								autocomplete="off"
 								:class="[

@@ -5,7 +5,7 @@ export default {
 	components: {
 		MartzIcon,
 	},
-	props: ["text", "icon", "color", "size"],
+	props: ["text", "icon", "color"],
 };
 </script>
 <template>

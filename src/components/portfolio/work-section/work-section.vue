@@ -33,10 +33,8 @@ export default {
 					],
 
 					img: "portfolio.png",
-					videoId: "d_I8AN4ACo0?si=ZbxRAAGM20vd6kvT",
-					thumbnail_main: "project1.jpeg",
-					thumbnail_sec: "project1.jpeg",
-					thumbnail_third: "project1.jpeg",
+					videoId: "64O-8kgwZa0",
+
 					technologies: [
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
@@ -73,7 +71,7 @@ export default {
 					],
 
 					img: "vehicle-marketplace2.png",
-					videoId: "BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					videoId: "",
 					thumbnail_main: "vehicle-marketplace2.png",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
@@ -104,7 +102,7 @@ export default {
 						},
 						{
 							paragraph_id: "technlogies",
-							text:"Front-end technologies included Vue, Vuex, Axios, Bootstrap Vue, and Vue Router. I used developer tools to monitor API calls and network status.Handling user data and the cart was challenging, converting plays into tickets, preparing the data for backend communication during payment. However, my determination and excitement for learning made these and other challenges no more than great opportunities to grow my problem-solving and technical skills."
+							text: "Front-end technologies included Vue, Vuex, Axios, Bootstrap Vue, and Vue Router. I used developer tools to monitor API calls and network status.Handling user data and the cart was challenging, converting plays into tickets, preparing the data for backend communication during payment. However, my determination and excitement for learning made these and other challenges no more than great opportunities to grow my problem-solving and technical skills.",
 						},
 						{
 							paragraph_id: "conclusion",
@@ -113,7 +111,7 @@ export default {
 					],
 
 					img: "winner23.png",
-					videoId: "BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					videoId: "",
 					thumbnail_main: "winner23.png",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
@@ -214,7 +212,10 @@ export default {
 				>
 					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
 					<h4>Blogs</h4>
-					<p>Discover tech insights, projects, and learning experiences in my blogs.</p>
+					<p>
+						Discover tech insights, projects, and learning experiences in my
+						blogs.
+					</p>
 					<div class="card-link">
 						<router-link
 							:to="{ name: 'home-blog' }"

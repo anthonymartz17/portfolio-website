@@ -17,16 +17,12 @@ import {
 	deleteObject,
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-// Create a reference to the storage service
-// const storage = getStorage();
 
-//initialize service
-// const db = getFirestore();
 
 export default {
 	async getPosts() {
 		try {
-			let data = [];
+			const data = [];
 			const colRef = collection(db, "blogPosts");
 			const snapshot = await getDocs(colRef);
 			snapshot.docs.forEach((doc) => {

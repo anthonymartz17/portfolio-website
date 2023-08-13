@@ -36,7 +36,6 @@ export default {
 				clearTimeout(timer);
 				timer = setTimeout(() => {
 					dispatch("signOut");
-					//expects timer in miliseconds
 				}, expiresIn * 1000);
 
 				commit("SET_USER", {
@@ -72,7 +71,7 @@ export default {
 		},
 
 		setAlertMsg({ commit }, alertData) {
-			// commit("SET_ALERT_MSG", alertData);
+			commit("SET_ALERT_MSG", alertData);
 		},
 	},
 	getters: {

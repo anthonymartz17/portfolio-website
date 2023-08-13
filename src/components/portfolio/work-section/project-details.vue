@@ -67,11 +67,8 @@ export default {
 						data-aos-delay="250"
 					>
 						<div class="video-default">
-							<img
-								:src="`/img/working-on-video.png`"
-								alt="thumbnail project 2"
-							/>
-							<!-- <iframe
+							<iframe
+								v-if="projectClicked.videoId"
 								width="100%"
 								height="100%"
 								:src="`https://www.youtube.com/embed/${projectClicked.videoId}`"
@@ -79,9 +76,14 @@ export default {
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 								allowfullscreen
-							></iframe> -->
+							></iframe>
+							<img
+								v-else
+								:src="`/img/working-on-video.png`"
+								alt="thumbnail project 2"
+							/>
 						</div>
-						<div class="video-secondary-container">
+						<!-- <div class="video-secondary-container">
 							<div class="video-sec">
 								<img
 									:src="`/img/working-on-video.png`"
@@ -94,7 +96,7 @@ export default {
 									alt="thumbnail project 3"
 								/>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="desc-container" data-aos="fade-up" data-aos-duration="800">
@@ -153,7 +155,9 @@ export default {
 							icon="code"
 						/>
 					</div>
-					<p class="isProjectLink-msg" v-show="!isProjectLink">Project still in development</p>
+					<p class="isProjectLink-msg" v-show="!isProjectLink">
+						Project still in development
+					</p>
 				</div>
 			</div>
 
@@ -317,9 +321,9 @@ export default {
 .project-btn-container {
 	margin-bottom: 2em;
 }
-.isProjectLink-msg{
+.isProjectLink-msg {
 	border: 1px solid $accent;
-	padding: .5em;
+	padding: 0.5em;
 	text-align: center;
 }
 

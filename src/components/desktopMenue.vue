@@ -6,17 +6,11 @@ export default {
 	components: {
 		MartzIcon,
 	},
-	data() {
-		return {
-			navLinks: [
-				{ id: "Home", icon: "home", name: "Home", active: true },
-				{ id: "Work", icon: "mywork", name: "Work", active: false },
-				{ id: "Skills", icon: "skills", name: "Skills", active: false },
-				{ id: "About", icon: "about", name: "About", active: false },
-				{ icon: "blog", name: "Blogs", route: "home-blog" },
-				{ id: "Hire Me", icon: "handshake", name: "Hire Me", active: false },
-			],
-		};
+	props: {
+		navLinks: {
+			type: Array,
+			required: true,
+		}
 	},
 	emit: ["scrollTo"],
 

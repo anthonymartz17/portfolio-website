@@ -23,45 +23,64 @@ export default [
 		component: () => import("../views/work-project-details.vue"),
 	},
 	{
+		path: "/home-blog",
+		component: () => import("../views/home-blog/home-blog.vue"),
+		children: [
+			{
+				path: "",
+				name: "home-blog",
+				component: () =>
+					import("../views/home-blog/home-blog-children/blogs-list.vue"),
+			},
+			{
+				path: "post-details/:postId",
+				name: "post-details",
+				component: () =>
+					import("../views/home-blog/home-blog-children/post-detail.vue"),
+			},
+		],
+	},
+	{
 		path: "/@dmin-login",
 		name: "login",
-		component: () => import("../views/admin-login.vue"),
+		component: () => import("../views/admin/admin-login.vue"),
 		beforeEnter: (to, from, next) => {
 			// Check the authentication status or any other condition
 			const isLoggedIn = store.getters["auth/isLoggedIn"];
 
 			// If the user is already logged in,cancel navigation
 			if (isLoggedIn) {
-				next({name:"404-page"});
+				next({ name: "404-page" });
 			} else {
 				// If the user is not logged in, allow access to the login page
 				next();
 			}
 		},
 	},
-
 	{
-		path: "/home-blog",
-		component: () => import("../views/home-blog.vue"),
+		path: "/admin-page",
+		component: () => import("../views/admin/admin-page.vue"),
+		meta: { requiresAuth: true },
 		children: [
 			{
 				path: "",
-				name: "home-blog",
-				component: () => import("../views/home-blog-children/blogs-list.vue"),
+				name: "admin-page",
+				component: () => import("../views/admin/admin-children/blogs-list.vue"),
 			},
+			// {
+			// 	path: "post-details/:postId",
+			// 	name: "post-details",
+			// 	component: () =>
+			// 		import("../views/admin/admin-children/blog-details.vue"),
+			// },
 			{
-				path: "details/:postId",
-				name: "blog-details",
-				component: () => import("../views/home-blog-children/blog-details.vue"),
-			},
-			{
-				path: "admin-app",
-				name: "admin-app",
-				component: () => import("../views/home-blog-children/admin-app.vue"),
-				meta: { requiresAuth: true },
+				path: "create-post",
+				name: "create-post",
+				component: () => import("../views/admin/admin-children/create-post"),
 			},
 		],
 	},
+
 	{
 		path: "/:notFound(.*)",
 		name: "404-page",

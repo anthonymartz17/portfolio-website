@@ -44,7 +44,7 @@ export default {
 					});
 					this.user = {};
 					this.submitted = false;
-					this.$router.push({ name: "home-blog" });
+					this.$router.push({ name: "admin-page" });
 				} catch (error) {
 					throw error;
 				}

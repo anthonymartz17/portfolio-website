@@ -1,8 +1,8 @@
 <script>
 import MartzIcon from "@/components/icons/martz-icons.vue";
-import BlogNavMenue from "../components/blog/blog-mobile-menue.vue";
-import BlogHomeNavMenue from "../components/blog/blog-desktop-menu.vue";
-import BlogFooter from "../components/blog/blog-footer.vue";
+import BlogNavMenue from "../../components/blog/blog-mobile-menue.vue";
+import BlogHomeNavMenue from "../../components/blog/blog-desktop-menu.vue";
+import BlogFooter from "../../components/blog/blog-footer.vue";
 export default {
 	components: { MartzIcon, BlogHomeNavMenue, BlogFooter, BlogNavMenue },
 	data() {
@@ -10,28 +10,14 @@ export default {
 			isMenueOpen: false,
 			navLinks: [
 				{
-					icon: "home",
-					name: "HOME",
+					icon: "portfolio",
+					name: "PORTFOLIO",
 					route: "portfolio",
-					authRequired: false,
 				},
 				{
 					icon: "blog",
 					name: "BLOGS",
 					route: "home-blog",
-					authRequired: false,
-				},
-				{
-					icon: "write",
-					name: "CREATE",
-					route: "admin-app",
-					authRequired: true,
-				},
-				{
-					icon: "logout",
-					name: "LOG OUT",
-					route: "home-blog",
-					authRequired: true,
 				},
 			],
 		};
@@ -45,9 +31,8 @@ export default {
 	},
 	methods: {
 		toggleMobileMenue() {
-			
 			this.isMenueOpen = !this.isMenueOpen;
-	
+
 			if (this.isMenueOpen) document.body.classList.add("mobile-menu-open");
 			else document.body.classList.remove("mobile-menu-open");
 		},

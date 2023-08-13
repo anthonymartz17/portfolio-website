@@ -7,18 +7,12 @@ export default {
 		SocialMedia,
 		MartzIcon,
 	},
-	data() {
-		return {
-			section: "",
-			navLinks: [
-				{ id: "Home", icon: "home", name: "Home", active: true },
-				{ id: "Work", icon: "mywork", name: "Work", active: false },
-				{ id: "Skills", icon: "skills", name: "Skills" },
-				{ id: "About", icon: "about", name: "About" },
-				{ icon: "blog", name: "Blogs", route: "home-blog" },
-				{ id: "Hire Me", icon: "handshake", name: "Hire Me", accent: true },
-			],
-		};
+
+	props: {
+		navLinks: {
+			type: Array,
+			required: true,
+		},
 	},
 	emit: ["scrollTo"],
 	beforeDestroy() {
@@ -39,7 +33,11 @@ export default {
 	<!-- <div class="menu-wrapper"> -->
 
 	<div class="nav-container">
-		<div class="nav-container-header" id="close-header" @click="emitCloseEvent()">
+		<div
+			class="nav-container-header"
+			id="close-header"
+			@click="emitCloseEvent()"
+		>
 			<MartzIcon
 				id="close-icon"
 				icon="angleLeft"
@@ -78,12 +76,11 @@ export default {
 			<SocialMedia />
 		</div>
 	</div>
-	
+
 	<!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
-
 .accent {
 	text-transform: uppercase;
 	font-weight: 600;
@@ -97,7 +94,7 @@ export default {
 		color: $accent;
 	}
 }
-.nav-container-link{
+.nav-container-link {
 	cursor: pointer;
 }
 
@@ -112,10 +109,6 @@ export default {
 	width: 70%;
 	font: $font-text-mb;
 	border-left: 1px solid rgba($white, 0.3);
-	
-
-
-
 
 	@include breakpoint(tablet) {
 		font: $font-text-tb;

@@ -18,6 +18,11 @@ export default [
 		component: () => import("../views/resume-page.vue"),
 	},
 	{
+		path: "/work-project-details/:projectId",
+		name: "work-project-details",
+		component: () => import("../views/work-project-details.vue"),
+	},
+	{
 		path: "/@dmin-login",
 		name: "login",
 		component: () => import("../views/admin-login.vue"),

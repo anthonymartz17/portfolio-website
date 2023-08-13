@@ -1,6 +1,6 @@
 <script>
 import BaseButton from "../../buttons/baseButton.vue";
-import ProjectDetail from "./project-details.vue";
+import ProjectDetail from "../../../views/work-project-details.vue";
 import MartzIcon from "../../icons/martz-icons.vue";
 export default {
 	components: { BaseButton, ProjectDetail, MartzIcon },
@@ -33,7 +33,7 @@ export default {
 					],
 
 					img: "portfolio.png",
-					videoId: "d_I8AN4ACo0?si=ZbxRAAGM20vd6kvT",
+					videoId: "64O-8kgwZa0",
 					thumbnail_main: "project1.jpeg",
 					thumbnail_sec: "project1.jpeg",
 					thumbnail_third: "project1.jpeg",
@@ -73,7 +73,7 @@ export default {
 					],
 
 					img: "vehicle-marketplace2.png",
-					videoId: "BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					videoId: "",
 					thumbnail_main: "vehicle-marketplace2.png",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",
@@ -113,7 +113,7 @@ export default {
 					],
 
 					img: "winner23.png",
-					videoId: "BepIvG91GzM?si=DVVx8l3aGLSQMpmG",
+					videoId: "",
 					thumbnail_main: "winner23.png",
 					thumbnail_sec: "project2.jpeg",
 					thumbnail_third: "project2.jpeg",

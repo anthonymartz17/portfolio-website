@@ -1,7 +1,7 @@
 <script>
-import BaseButton from "../../buttons/baseButton.vue";
-import MartzIcon from "../../icons/martz-icons.vue";
-import MainVideo from "./video-player.vue";
+import BaseButton from "../components/buttons/baseButton.vue";
+import MartzIcon from "../components/icons/martz-icons.vue";
+import MainVideo from "../components/portfolio/work-section/video-player.vue";
 export default {
 	components: { BaseButton, MartzIcon, MainVideo },
 	data() {
@@ -67,11 +67,8 @@ export default {
 						data-aos-delay="250"
 					>
 						<div class="video-default">
-							<img
-								:src="`/img/working-on-video.png`"
-								alt="thumbnail project 2"
-							/>
-							<!-- <iframe
+							<iframe
+								v-if="projectClicked.videoId"
 								width="100%"
 								height="100%"
 								:src="`https://www.youtube.com/embed/${projectClicked.videoId}`"
@@ -79,7 +76,12 @@ export default {
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 								allowfullscreen
-							></iframe> -->
+							></iframe>
+							<img
+								v-else
+								:src="`/img/working-on-video.png`"
+								alt="thumbnail project 2"
+							/>
 						</div>
 						<div class="video-secondary-container">
 							<div class="video-sec">
@@ -153,7 +155,9 @@ export default {
 							icon="code"
 						/>
 					</div>
-					<p class="isProjectLink-msg" v-show="!isProjectLink">Project still in development</p>
+					<p class="isProjectLink-msg" v-show="!isProjectLink">
+						Project still in development
+					</p>
 				</div>
 			</div>
 
@@ -317,9 +321,9 @@ export default {
 .project-btn-container {
 	margin-bottom: 2em;
 }
-.isProjectLink-msg{
+.isProjectLink-msg {
 	border: 1px solid $accent;
-	padding: .5em;
+	padding: 0.5em;
 	text-align: center;
 }
 

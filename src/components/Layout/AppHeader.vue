@@ -1,62 +1,122 @@
 <script>
-import NavMenueMobile from "./navMenueMobile.vue";
-import DesktopMenue from "../desktopMenue.vue";
-import MartzIcon from "../icons/martz-icons.vue";
-import BaseButton from "../buttons/baseButton.vue";
+import AppMobileMenue from "@/components/Layout/AppMobileMenue.vue";
+import DesktopMenue from "./AppDesktopMenue.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
 import "animate.css";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
 	components: {
-		NavMenueMobile,
+		AppMobileMenue,
 		DesktopMenue,
 		MartzIcon,
 		BaseButton,
 	},
 	data() {
 		return {
-			navLinks: [
+			isMenueVisible: false,
+			portfolioNavigation: [
 				{ id: "Home", icon: "home", name: "Home", active: true },
 				{ id: "Work", icon: "mywork", name: "Work", active: false },
 				{ id: "Skills", icon: "skills", name: "Skills", active: false },
 				{ id: "About", icon: "about", name: "About", active: false },
-				{ icon: "blog", name: "Blogs", route: "home-blog" },
+				{ icon: "blog", name: "Blogs", route: "PostList" },
 				{ id: "Hire Me", icon: "handshake", name: "Hire Me", active: false },
 				{
 					id: "admin",
 					icon: "login",
 					name: "ADMIN",
-					route: "admin-page",
+					route: "Admin",
 					requireAuth: true,
+				},
+			],
+			blogNavigation: [
+				{
+					icon: "portfolio",
+					name: "Portfolio",
+					route: "Portfolio",
+				},
+				{
+					icon: "blog",
+					name: "Blogs",
+					route: "PostList",
+				},
+			],
+			adminNavigation: [
+				{
+					icon: "home",
+					name: "Portfolio",
+					route: "Portfolio",
+				},
+				{
+					icon: "blog",
+					name: "Manage Blogs",
+					route: "Admin",
+				},
+				{
+					icon: "write",
+					name: "CREATE",
+					route: "Admin",
+				},
+				{
+					icon: "logout",
+					name: "LOG OUT",
+					route: "PostList",
 				},
 			],
 		};
 	},
-	props: ["scrollPosition", "isMenueVisible"],
+	props: ["scrollPosition", "navigationOption"],
 	methods: {
-		createEmitToggleMenue() {
-			this.$emit("emitToggleMenue");
+		// createEmitToggleMenue() {
+		// 	this.$emit("emitToggleMenue");
+		// },
+		toggleMobileMenue() {
+			this.isMenueVisible = !this.isMenueVisible;
+			if (this.isMenueVisible) document.body.classList.add("mobile-menu-open");
+			else document.body.classList.remove("mobile-menu-open");
 		},
 	},
 	computed: {
-		...mapGetters("auth",["isLoggedIn"]),
-		filterNavLinks() {
-			let links;
-			if (this.isLoggedIn) {
-				links = this.navLinks
-			} else {
-				links = this.navLinks.filter(x => !x.requireAuth)
+		...mapGetters("auth", ["isLoggedIn"]),
+		//choose navigation menue to show based on prop "navigationOption"
+		navigationMenue() {
+			let navigation;
+			switch (this.navigationOption) {
+				case "blog":
+					navigation = this.blogNavigation;
+					break;
+				case "admin":
+					navigation = this.adminNavigation;
+					break;
+
+				default:
+					if (this.isLoggedIn) {
+						navigation = this.portfolioNavigation;
+					} else {
+						navigation = this.portfolioNavigation.filter((x) => !x.requireAuth);
+					}
+
+					break;
 			}
-			return links
-		}
-	}
+			return navigation;
+		},
+	},
 };
 </script>
 <template>
 	<div class="header-wrapper">
+		{{ navigationOption }}
 		<div
 			data-aos="fade-down"
 			data-aos-duration="800"
-			:class="['header-container', { 'header-bg-2': scrollPosition >= 550 }]"
+			:class="[
+				'header-container',
+				{
+					'header-bg-2': (navigationOption =
+						'portfolio' && scrollPosition >= 550),
+				},
+			]"
 		>
 			<div :class="['header-container-logo', { clickable: isMenueVisible }]">
 				<router-link to="/">
@@ -70,23 +130,24 @@ export default {
 					class="menue-icon"
 					icon="ham-menue"
 					size="30"
-					@click.native="createEmitToggleMenue()"
+					@click.native="toggleMobileMenue()"
 				/>
 			</div>
-			<div class="navmenue-wrapper" @click.self="createEmitToggleMenue()">
+			<div class="navmenue-wrapper" @click.self="toggleMobileMenue()">
 				<transition
 					enter-active-class="animate__animated animate__slideInRight animate__faster"
 					leave-active-class="animate__animated animate__slideOutRight animate__faster"
 				>
-					<NavMenueMobile
+					<AppMobileMenue
 						v-if="isMenueVisible"
 						v-on="$listeners"
-						:navLinks="filterNavLinks"
+						:navLinks="navigationMenue"
+						@emitToggleMenue="toggleMobileMenue"
 					/>
 				</transition>
 			</div>
 			<div class="desk-menue-wrapper">
-				<DesktopMenue v-on="$listeners" :navLinks="filterNavLinks" />
+				<DesktopMenue v-on="$listeners" :navLinks="navigationMenue" />
 			</div>
 		</div>
 	</div>

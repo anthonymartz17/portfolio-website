@@ -1,25 +1,17 @@
 <script>
-import MartzIcon from "@/components/icons/martz-icons.vue";
-import BlogNavMenue from "../../components/blog/blog-mobile-menue.vue";
-import BlogHomeNavMenue from "../../components/blog/blog-desktop-menu.vue";
-import BlogFooter from "../../components/blog/blog-footer.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import AppHeader from "@/components/Layout/AppHeader.vue";
+import AppFooter from "@/components/Layout/AppFooter.vue";
+
 export default {
-	components: { MartzIcon, BlogHomeNavMenue, BlogFooter, BlogNavMenue },
+	components: {
+		AppHeader,
+		AppFooter,
+		MartzIcon,
+	},
 	data() {
 		return {
 			isMenueOpen: false,
-			navLinks: [
-				{
-					icon: "portfolio",
-					name: "PORTFOLIO",
-					route: "portfolio",
-				},
-				{
-					icon: "blog",
-					name: "BLOGS",
-					route: "home-blog",
-				},
-			],
 		};
 	},
 	mounted() {
@@ -29,60 +21,14 @@ export default {
 			// disable: "mobile",
 		});
 	},
-	methods: {
-		toggleMobileMenue() {
-			this.isMenueOpen = !this.isMenueOpen;
-
-			if (this.isMenueOpen) document.body.classList.add("mobile-menu-open");
-			else document.body.classList.remove("mobile-menu-open");
-		},
-	},
+	methods: {},
 };
 </script>
 <template>
 	<div class="home-blogs-wrapper">
 		<div class="home-blogs-container">
-			<nav>
-				<div
-					class="blog-nav-container"
-					v-if="isMenueOpen"
-					@click.self="toggleMobileMenue"
-				>
-					<BlogNavMenue
-						@emitToggleMenue="toggleMobileMenue"
-						:navLinks="navLinks"
-					/>
-				</div>
-			</nav>
 			<div class="home-blogs-container">
-				<header>
-					<div
-						class="home-blog-header-wrapper"
-						data-aos="fade-down"
-						data-aos-duration="800"
-					>
-						<div class="home-blogs-header">
-							<div class="logo">
-								<router-link to="/">
-									<MartzIcon class="thelogo" icon="logo" size="60" />
-								</router-link>
-							</div>
-							<div class="header-nav-menue" @click="toggleMobileMenue">
-								<MartzIcon
-									id="menue-icon"
-									class="menue-icon"
-									:size="30"
-									icon="ham-menue"
-								/>
-							</div>
-							<BlogHomeNavMenue
-								:navLinks="navLinks"
-								@emitToggleMenue="toggleMobileMenue"
-								class="desktop-menu"
-							/>
-						</div>
-					</div>
-				</header>
+				<AppHeader navigationOption="blog" />
 
 				<main>
 					<div class="main-wrapper">
@@ -90,9 +36,9 @@ export default {
 					</div>
 				</main>
 			</div>
-			<div class="blog-footer-wrapper">
-				<BlogFooter class="the-footer" />
-			</div>
+			<footer>
+				<AppFooter />
+			</footer>
 		</div>
 	</div>
 </template>

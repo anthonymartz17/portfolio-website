@@ -1,56 +1,57 @@
-import LandingPage from "../views/landingPage.vue";
+import LandingPage from "../views/LandingPage.vue";
 import store from "../store/index";
 
 export default [
 	{
 		path: "/",
-		name: "landing page",
+		name: "LandingPage",
 		component: LandingPage,
 	},
 	{
 		path: "/portfolio",
-		name: "portfolio",
-		component: () => import("../views/portfolioSite.vue"),
-	},
-	{
-		path: "/resume",
-		name: "resume",
-		component: () => import("../views/resume-page.vue"),
-	},
-	{
-		path: "/work-project-details/:projectId",
-		name: "work-project-details",
-		component: () => import("../views/work-project-details.vue"),
-	},
-	{
-		path: "/home-blog",
-		component: () => import("../views/home-blog/home-blog.vue"),
+		name: "Portfolio",
+		component: () => import("../views/Portfolio/Index.vue"),
 		children: [
 			{
-				path: "",
-				name: "home-blog",
-				component: () =>
-					import("../views/home-blog/home-blog-children/blogs-list.vue"),
-			},
-			{
-				path: "post-details/:postId",
-				name: "post-details",
-				component: () =>
-					import("../views/home-blog/home-blog-children/post-detail.vue"),
+				path: "projectDetail/:projectId",
+				name: "ProjectDetail",
+				component: () => import("../views/Portfolio/ProjectDetail.vue"),
 			},
 		],
 	},
 	{
-		path: "/@dmin-login",
-		name: "login",
-		component: () => import("../views/admin/admin-login.vue"),
+		path: "/resume",
+		name: "Resume",
+		component: () => import("../views/ResumePage.vue"),
+	},
+
+	{
+		path: "/blogs",
+		component: () => import("../views/Blog/Index.vue"),
+		children: [
+			{
+				path: "",
+				name: "PostList",
+				component: () => import("../views/Blog/PostList.vue"),
+			},
+			{
+				path: "postDetail/:postId",
+				name: "PostDetail",
+				component: () => import("../views/Blog/PostDetail.vue"),
+			},
+		],
+	},
+	{
+		path: "/@dminLogin",
+		name: "Login",
+		component: () => import("../views/Admin/Login.vue"),
 		beforeEnter: (to, from, next) => {
 			// Check the authentication status or any other condition
 			const isLoggedIn = store.getters["auth/isLoggedIn"];
 
 			// If the user is already logged in,cancel navigation
 			if (isLoggedIn) {
-				next({ name: "404-page" });
+				next({ name: "NotFound" });
 			} else {
 				// If the user is not logged in, allow access to the login page
 				next();
@@ -58,32 +59,26 @@ export default [
 		},
 	},
 	{
-		path: "/admin-page",
-		component: () => import("../views/admin/admin-page.vue"),
+		path: "/admin",
+		component: () => import("../views/Admin/Index.vue"),
 		meta: { requiresAuth: true },
 		children: [
 			{
 				path: "",
-				name: "admin-page",
-				component: () => import("../views/admin/admin-children/blogs-list.vue"),
+				name: "Admin",
+				component: () => import("../views/Admin/ManagePost.vue"),
 			},
-			// {
-			// 	path: "post-details/:postId",
-			// 	name: "post-details",
-			// 	component: () =>
-			// 		import("../views/admin/admin-children/blog-details.vue"),
-			// },
 			{
-				path: "create-post",
-				name: "create-post",
-				component: () => import("../views/admin/admin-children/create-post"),
+				path: "createPost",
+				name: "CreatePost",
+				component: () => import("../views/Admin/CreatePost.vue"),
 			},
 		],
 	},
 
 	{
 		path: "/:notFound(.*)",
-		name: "404-page",
-		component: () => import("../views/404-page.vue"),
+		name: "NotFound",
+		component: () => import("../views/NotFoundPage.vue"),
 	},
 ];

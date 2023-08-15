@@ -1,6 +1,6 @@
 <script>
-import SocialMedia from "../socialMedia.vue";
-import MartzIcon from "@/components/icons/martz-icons.vue";
+import SocialMedia from "../SocialMedia.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 
 export default {
 	components: {
@@ -11,8 +11,8 @@ export default {
 		return {
 			section: "",
 			navLinks: [
-				{ icon: "home", name: "Home", route: "portfolio" },
-				{ icon: "blog", name: "Blogs", route: "home-blog" },
+				{ icon: "home", name: "Home", route: "Portfolio" },
+				{ icon: "blog", name: "Blogs", route: "PostList" },
 			],
 			year: new Date().getFullYear(),
 		};

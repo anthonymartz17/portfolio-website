@@ -1,7 +1,7 @@
 <script>
-import SocialMedia from "../components/socialMedia.vue";
-import BaseButton from "../components/buttons/baseButton.vue";
-import MartzIcons from "@/components/icons/martz-icons.vue";
+import SocialMedia from "@/components/SocialMedia.vue";
+import MartzIcons from "@/components/CustomIcons/MartzIcons.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
 export default {
 	components: {
 		SocialMedia,
@@ -17,13 +17,13 @@ export default {
 	data() {
 		return {
 			links: [
-				{ text: "Portfolio", icon: "portfolio", route: "portfolio" },
+				{ text: "Portfolio", icon: "portfolio", route: "Portfolio" },
 				{ text: "Youtube", icon: "youtubetv", secondText: "talk projects" },
 				{
 					text: "Blogs",
 					icon: "ereading",
 					secondText: "blog about projects",
-					route: "home-blog",
+					route: "PostList",
 				},
 			],
 		};
@@ -80,7 +80,7 @@ export default {
 						</a>
 					</template>
 					<div class="resumeDownload-container">
-						<router-link class="resumeDownload" :to="{ name: 'resume' }">
+						<router-link class="resumeDownload" :to="{ name: 'Resume' }">
 							<span>View Résumé</span>
 							<MartzIcons icon="download" :size="25"
 						/></router-link>

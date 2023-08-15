@@ -10,7 +10,7 @@ export default {
 };
 </script>
 <template>
-	<router-link :to="`post-details/${post.id}`" class="blog-card">
+	<router-link :to="`postDetail/${post.id}`" class="blog-card">
 		<div v-if="post.thumbnail_data" class="blog-img-container">
 			<img :src="post.thumbnail_data.dataURL" alt="blog post thumbnail" />
 		</div>

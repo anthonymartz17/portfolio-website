@@ -1,6 +1,7 @@
 <script>
-import SocialMedia from "@/components/socialMedia.vue";
-import MartzIcon from "@/components/icons/martz-icons.vue";
+import SocialMedia from "@/components/SocialMedia.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+
 import { mapActions, mapGetters } from "vuex";
 
 export default {

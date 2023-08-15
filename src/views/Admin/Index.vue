@@ -1,35 +1,17 @@
 <script>
-import MartzIcon from "@/components/icons/martz-icons.vue";
-import BlogNavMenue from "../../components/blog/blog-mobile-menue.vue";
-import BlogHomeNavMenue from "../../components/blog/blog-desktop-menu.vue";
-import BlogFooter from "../../components/blog/blog-footer.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import AppHeader from "@/components/Layout/AppHeader.vue";
+import AppFooter from "@/components/Layout/AppFooter.vue";
 export default {
-	components: { MartzIcon, BlogHomeNavMenue, BlogFooter, BlogNavMenue },
+	components: {
+		AppHeader,
+		AppFooter,
+		MartzIcon,
+	},
+
 	data() {
 		return {
 			isMenueOpen: false,
-			navLinks: [
-				{
-					icon: "home",
-					name: "Portfolio",
-					route: "portfolio",
-				},
-				{
-					icon: "blog",
-					name: "BLOGS",
-					route: "home-blog",
-				},
-				{
-					icon: "write",
-					name: "CREATE",
-					route: "admin-app",
-				},
-				{
-					icon: "logout",
-					name: "LOG OUT",
-					route: "home-blog",
-				},
-			],
 		};
 	},
 	mounted() {
@@ -38,6 +20,10 @@ export default {
 			offset: 200,
 			// disable: "mobile",
 		});
+	},
+	beforeDestroy() {
+		this.isMenueVisible = false;
+		document.body.classList.remove("mobile-menu-open");
 	},
 	methods: {
 		toggleMobileMenue() {
@@ -52,48 +38,8 @@ export default {
 <template>
 	<div class="home-blogs-wrapper">
 		<div class="home-blogs-container">
-			<nav>
-				<div
-					class="blog-nav-container"
-					v-if="isMenueOpen"
-					@click.self="toggleMobileMenue"
-				>
-					<BlogNavMenue
-						@emitToggleMenue="toggleMobileMenue"
-						:navLinks="navLinks"
-					/>
-				</div>
-			</nav>
+			<AppHeader navigationOption="admin" />
 			<div class="home-blogs-container">
-				<header>
-					<div
-						class="home-blog-header-wrapper"
-						data-aos="fade-down"
-						data-aos-duration="800"
-					>
-						<div class="home-blogs-header">
-							<div class="logo">
-								<router-link to="/">
-									<MartzIcon class="thelogo" icon="logo" size="60" />
-								</router-link>
-							</div>
-							<div class="header-nav-menue" @click="toggleMobileMenue">
-								<MartzIcon
-									id="menue-icon"
-									class="menue-icon"
-									:size="30"
-									icon="ham-menue"
-								/>
-							</div>
-							<BlogHomeNavMenue
-								:navLinks="navLinks"
-								@emitToggleMenue="toggleMobileMenue"
-								class="desktop-menu"
-							/>
-						</div>
-					</div>
-				</header>
-
 				<main>
 					<div class="main-wrapper">
 						<router-view class="routerView" />
@@ -101,7 +47,7 @@ export default {
 				</main>
 			</div>
 			<div class="blog-footer-wrapper">
-				<BlogFooter class="the-footer" />
+				<AppFooter class="the-footer" />
 			</div>
 		</div>
 	</div>

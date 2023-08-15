@@ -1,6 +1,6 @@
 <script>
-import SocialMedia from "../socialMedia.vue";
-import MartzIcon from "../icons/martz-icons.vue";
+import SocialMedia from "@/components/SocialMedia.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 
 export default {
 	components: {
@@ -23,20 +23,18 @@ export default {
 			this.$emit("emitToggleMenue");
 		},
 		setSection(section) {
-			this.section = section;
+			if (section) this.section = section;
 		},
 	},
 };
 </script>
 
 <template>
-	<!-- <div class="menu-wrapper"> -->
-
 	<div class="nav-container">
 		<div
 			class="nav-container-header"
 			id="close-header"
-			@click="emitCloseEvent()"
+			@click="emitCloseEvent('from header')"
 		>
 			<MartzIcon
 				id="close-icon"
@@ -47,37 +45,37 @@ export default {
 			<p id="close">Close</p>
 		</div>
 		<ul class="nav-container-links">
-			<template v-for="link in navLinks">
-				<li
-					@click="
-						emitCloseEvent();
-						setSection(link.id);
-					"
-					v-if="!link.route"
-					:id="link.id"
-					:class="['nav-container-link', { accent: link.accent }]"
-					:key="link.name"
-				>
+			<!-- links that do not change the route -->
+			<li
+				:class="['nav-container-link', { accent: link.accent }]"
+				v-for="link in navLinks"
+				:key="link.name"
+				@click="
+					emitCloseEvent();
+					setSection(link.id);
+				"
+			>
+				<div v-if="!link.route" :id="link.id" :key="link.name" class="no-route-link">
 					<MartzIcon :icon="link.icon" size="20" :id="link.id" />
 					<span :id="link.id">{{ link.name }}</span>
-				</li>
+				</div>
+
+				<!-- links that take to a different route -->
 				<router-link
-					:to="{ name: link.route }"
 					v-if="link.route"
+					:to="{ name: link.route }"
 					:key="link.name"
 					class="nav-container-link route-link"
 				>
 					<MartzIcon :icon="link.icon" size="20" />
 					<span>{{ link.name }}</span>
 				</router-link>
-			</template>
+			</li>
 		</ul>
 		<div class="footer">
 			<SocialMedia />
 		</div>
 	</div>
-
-	<!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
@@ -97,6 +95,46 @@ export default {
 .nav-container-link {
 	cursor: pointer;
 }
+.route-link, .no-route-link{
+	display: flex;
+}
+.nav-container-header {
+	flex: 0.5;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	border-bottom: 1px solid rgba($white, 0.3);
+	cursor: pointer;
+}
+.nav-container-arrow {
+	color: $accent;
+}
+.nav-container-links {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 1.6em;
+	color: $white;
+	flex: 8;
+}
+
+.nav-container-link {
+	list-style: none;
+	text-decoration: none;
+	display: flex;
+	color: $white;
+
+	span {
+		margin-left: 1em;
+	}
+}
+.footer {
+	flex: 1;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
 
 .nav-container {
 	padding: 1em 1em;
@@ -113,44 +151,7 @@ export default {
 	@include breakpoint(tablet) {
 		font: $font-text-tb;
 	}
-
-	&-header {
-		flex: 0.5;
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		border-bottom: 1px solid rgba($white, 0.3);
-		cursor: pointer;
-	}
-	&-arrow {
-		color: $accent;
-	}
-	&-links {
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		gap: 1.6em;
-		color: $white;
-	}
-	&-links {
-		flex: 8;
-	}
-	&-link {
-		list-style: none;
-		text-decoration: none;
-		display: flex;
-		color: $white;
-
-		span {
-			margin-left: 1em;
-		}
-	}
-	.footer {
-		flex: 1;
-		display: flex;
-		align-items: flex-end;
-		justify-content: center;
+	@include breakpoint(desktop) {
 	}
 }
 </style>

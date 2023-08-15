@@ -1,7 +1,7 @@
 <script>
-import BaseButton from "../../buttons/baseButton.vue";
-import ProjectDetail from "../../../views/work-project-details.vue";
-import MartzIcon from "../../icons/martz-icons.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
+import ProjectDetail from "@/views/Portfolio/ProjectDetail.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 export default {
 	components: { BaseButton, ProjectDetail, MartzIcon },
 	data() {
@@ -217,7 +217,7 @@ export default {
 					<p>Discover tech insights, projects, and learning experiences in my blogs.</p>
 					<div class="card-link">
 						<router-link
-							:to="{ name: 'home-blog' }"
+							:to="{ name: 'PostList' }"
 							class="resetLink card-link-link"
 						>
 							<span> Check it out </span>

@@ -1,8 +1,8 @@
 <script>
 import { required, email } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
-import BaseButton from "@/components/buttons/baseButton.vue";
-import MartzIcon from "@/components/icons/martz-icons.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 
 export default {
 	components: {
@@ -44,7 +44,7 @@ export default {
 					});
 					this.user = {};
 					this.submitted = false;
-					this.$router.push({ name: "admin-page" });
+					this.$router.push({ name: "Admin" });
 				} catch (error) {
 					throw error;
 				}

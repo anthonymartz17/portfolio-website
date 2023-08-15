@@ -1,5 +1,5 @@
 <script>
-import BaseButton from "../buttons/baseButton.vue";
+import BaseButton from "../Buttons/BaseButton.vue";
 export default {
 	components: {
 		BaseButton,

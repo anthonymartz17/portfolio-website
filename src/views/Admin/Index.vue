@@ -32,13 +32,19 @@ export default {
 			if (this.isMenueOpen) document.body.classList.add("mobile-menu-open");
 			else document.body.classList.remove("mobile-menu-open");
 		},
+		scrollTo() {
+			this.$refs.TheHeader.$refs.header.scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			});
+		},
 	},
 };
 </script>
 <template>
 	<div class="home-blogs-wrapper">
 		<div class="home-blogs-container">
-			<AppHeader navigationOption="admin" />
+			<AppHeader navigationOption="admin" ref="TheHeader"/>
 			<div class="home-blogs-container">
 				<main>
 					<div class="main-wrapper">
@@ -47,7 +53,7 @@ export default {
 				</main>
 			</div>
 			<div class="blog-footer-wrapper">
-				<AppFooter class="the-footer" />
+				<AppFooter @scrollToEvent="scrollTo($event)"  class="the-footer" />
 			</div>
 		</div>
 	</div>

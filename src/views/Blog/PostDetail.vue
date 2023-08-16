@@ -20,13 +20,19 @@ export default {
 	},
 	methods: {
 		...mapActions("blogPosts", ["fetchPostById"]),
+		scrollTo() {
+			this.$refs.TheHeader.$refs.header.scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			});
+		},
 	},
 };
 </script>
 
 <template>
 	<div class="blog-detail-wrapper">
-		<div class="blog-detail-container">
+		<div class="blog-detail-container" ref="postStart">
 			<div
 				class="blog-body"
 				data-aos="fade-up"

@@ -16,12 +16,12 @@ export default {
 		return {
 			isMenueVisible: false,
 			portfolioNavigation: [
-				{ id: "Home", icon: "home", name: "Home", active: true },
-				{ id: "Work", icon: "mywork", name: "Work", active: false },
-				{ id: "Skills", icon: "skills", name: "Skills", active: false },
-				{ id: "About", icon: "about", name: "About", active: false },
+				{ section: "Home", icon: "home", name: "Home", active: true },
+				{ section: "Work", icon: "mywork", name: "Work", active: false },
+				{ section: "Skills", icon: "skills", name: "Skills", active: false },
+				{ section: "About", icon: "about", name: "About", active: false },
 				{ icon: "blog", name: "Blogs", route: "PostList" },
-				{ id: "Hire Me", icon: "handshake", name: "Hire Me", active: false },
+				{ section: "Hire Me", icon: "handshake", name: "Hire Me", active: false },
 				{
 					id: "admin",
 					icon: "login",
@@ -50,14 +50,20 @@ export default {
 				},
 				{
 					icon: "blog",
-					name: "Manage Blogs",
+					name: "Blogs",
 					route: "Admin",
+					subMenue: [
+						{
+							name: "Manage Blogs",
+							route: "Admin",
+						},
+						{
+							name: "Create New",
+							route: "CreatePost",
+						},
+					],
 				},
-				{
-					icon: "write",
-					name: "CREATE",
-					route: "Admin",
-				},
+
 				{
 					icon: "logout",
 					name: "LOG OUT",
@@ -105,19 +111,17 @@ export default {
 };
 </script>
 <template>
-	<div class="header-wrapper">
-		{{ navigationOption }}
-		<div
-			data-aos="fade-down"
-			data-aos-duration="800"
-			:class="[
-				'header-container',
-				{
-					'header-bg-2': (navigationOption =
-						'portfolio' && scrollPosition >= 550),
-				},
-			]"
-		>
+	<div
+	ref="header"
+		:class="[
+			'header-wrapper',
+			{
+				'header-bg-1': scrollPosition <= 550,
+				'header-bg-2': scrollPosition >= 550,
+			},
+		]"
+	>
+		<div data-aos="fade-down" data-aos-duration="800" class="header-container">
 			<div :class="['header-container-logo', { clickable: isMenueVisible }]">
 				<router-link to="/">
 					<MartzIcon class="thelogo" icon="logo" size="60" />
@@ -154,9 +158,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.header-wrapper {
-	background: $bg-1;
-}
 .disableScroll {
 	overflow: hidden !important;
 	position: fixed !important;
@@ -192,6 +193,9 @@ export default {
 	left: 0;
 	z-index: 10;
 	backdrop-filter: blur(5px);
+}
+.header-bg-1 {
+	background: $bg-1;
 }
 .header-bg-2 {
 	background: $bg-2;

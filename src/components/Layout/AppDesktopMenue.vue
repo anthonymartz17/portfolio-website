@@ -50,7 +50,7 @@ export default {
 				{{ link.name }}
 
 				<ul v-if="link.subMenue" class="subMenue-items">
-					<li class="subItem" v-for="subItem in link.subMenue" :key="subItem">
+					<li class="subItem" v-for="subItem in link.subMenue" :key="subItem.name">
 						{{ subItem.name }}
 					</li>
 				</ul>

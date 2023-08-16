@@ -20,6 +20,8 @@ export default {
 			offset: 200,
 			// disable: "mobile",
 		});
+		//in case coming from a route where viewing the footer for example
+		this.scrollTo()
 	},
 	beforeDestroy() {
 		document.body.classList.remove("mobile-menu-open");

@@ -21,14 +21,24 @@ export default {
 			// disable: "mobile",
 		});
 	},
-	methods: {},
+	beforeDestroy() {
+		document.body.classList.remove("mobile-menu-open");
+	},
+	methods: {
+		scrollTo() {
+			this.$refs.TheHeader.$refs.header.scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			});
+		},
+	},
 };
 </script>
 <template>
 	<div class="home-blogs-wrapper">
 		<div class="home-blogs-container">
 			<div class="home-blogs-container">
-				<AppHeader navigationOption="blog" />
+				<AppHeader navigationOption="blog"  ref="TheHeader"/>
 
 				<main>
 					<div class="main-wrapper">
@@ -37,7 +47,7 @@ export default {
 				</main>
 			</div>
 			<footer>
-				<AppFooter />
+				<AppFooter @scrollToEvent="scrollTo($event)" />
 			</footer>
 		</div>
 	</div>

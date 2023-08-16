@@ -22,8 +22,8 @@ export default {
 		emitCloseEvent() {
 			this.$emit("emitToggleMenue");
 		},
-		setSection(section) {
-			if (section) this.section = section;
+		setSection(link) {
+			if (link.section) this.section = link.section;
 		},
 	},
 };
@@ -34,7 +34,7 @@ export default {
 		<div
 			class="nav-container-header"
 			id="close-header"
-			@click="emitCloseEvent('from header')"
+			@click="emitCloseEvent()"
 		>
 			<MartzIcon
 				id="close-icon"
@@ -52,7 +52,7 @@ export default {
 				:key="link.name"
 				@click="
 					emitCloseEvent();
-					setSection(link.id);
+					setSection(link);
 				"
 			>
 				<div v-if="!link.route" :id="link.id" :key="link.name" class="no-route-link">
@@ -97,6 +97,7 @@ export default {
 }
 .route-link, .no-route-link{
 	display: flex;
+	width: 100%;
 }
 .nav-container-header {
 	flex: 0.5;

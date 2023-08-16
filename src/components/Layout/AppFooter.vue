@@ -64,6 +64,7 @@ export default {
 	display: grid;
 	justify-items: center;
 	padding-top: 0.5em;
+	cursor: pointer;
 
 	&::before {
 		content: "";

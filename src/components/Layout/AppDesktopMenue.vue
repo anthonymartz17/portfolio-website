@@ -1,5 +1,4 @@
 <script>
-
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 
 export default {
@@ -10,16 +9,21 @@ export default {
 		navLinks: {
 			type: Array,
 			required: true,
-		}
+		},
 	},
 	emit: ["scrollTo"],
 
 	methods: {
-		emitScrollToEvent(section) {
-			this.navLinks.find((x) => x.active).active = false;
-			this.navLinks.find((x) => x.name == section).active = true;
-
-			if (section) this.$emit("scrollToEvent", section);
+		navigate(link) {
+			if (link.section) {
+				this.navLinks.find((x) => x.active).active = false;
+				this.navLinks.find((x) => x.name == link.section).active = true;
+				this.$emit("scrollToEvent", link.section);
+			}
+			if (link.route) {
+				if (link.route != this.$route.name)
+					this.$router.push({ name: link.route });
+			}
 		},
 	},
 };
@@ -29,30 +33,28 @@ export default {
 	<!-- <div class="menu-wrapper"> -->
 	<div class="nav-container">
 		<ul class="nav-container-links">
-			<template v-for="link in navLinks">
-				<li
-					@click="emitScrollToEvent(link.id)"
-					v-if="!link.route"
-					:id="link.id"
-					:class="[
-						'nav-container-link',
-						{ accent: link.id == 'Hire Me', active: link.active == true },
-					]"
-					:key="link.name"
-				>
-					<!-- <MartzIcon :icon="link.icon" size="20" :id="link.id" /> -->
-					<span :id="link.id">{{ link.name }}</span>
-				</li>
-				<router-link
-					:to="{ name: link.route }"
-					v-if="link.route"
-					:key="link.name"
-					class="nav-container-link"
-				>
-					<!-- <MartzIcon :icon="link.icon" size="20" /> -->
-					<span>{{ link.name }}</span>
-				</router-link>
-			</template>
+			<li
+				class="item"
+				v-for="link in navLinks"
+				:key="link.name"
+				@click="navigate(link)"
+				:class="[
+					'nav-container-link',
+					{
+						accent: link.section == 'Hire Me',
+						active: link.active == true,
+						subMenue: link.subMenue,
+					},
+				]"
+			>
+				{{ link.name }}
+
+				<ul v-if="link.subMenue" class="subMenue-items">
+					<li class="subItem" v-for="subItem in link.subMenue" :key="subItem">
+						{{ subItem.name }}
+					</li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<!-- </div> -->
@@ -60,18 +62,15 @@ export default {
 
 <style lang="scss" scoped>
 .active {
-	span {
-		color: $accent;
-		// border-bottom: 1px solid $white;
-	}
+	color: $accent !important;
 }
 .accent {
 	text-transform: uppercase;
 	font-weight: 600;
-	span {
-		position: relative;
-	}
-	span::after {
+
+	position: relative;
+
+	&::after {
 		content: "|";
 		position: absolute;
 		right: -10px;
@@ -80,39 +79,63 @@ export default {
 }
 
 .nav-container {
-	// padding: 1em 1em;
 	display: flex;
 	justify-content: space-between;
 	gap: 2em;
-	// width: 70%;
 	font: $font-text-mb;
+}
+.nav-container-links {
+	padding: 0;
+	display: flex;
+	gap: 1.6em;
+	color: $white;
+}
+.nav-container-links {
+	flex: 8;
+}
+.nav-container-link {
+	position: relative;
+	list-style: none;
+	text-decoration: none;
+	display: flex;
+	color: $white;
+	cursor: pointer;
+	transition: all 250ms;
+	padding: 0.5em;
+}
+.nav-container-link:hover.item {
+	color: $accent;
+}
+.subMenue::after {
+	content: "⯆";
+}
+.subMenue:hover::after {
+	content: "⯅";
+}
+.subMenue:hover .subMenue-items {
+	display: block;
+}
 
-	&-links {
-		padding: 0;
-		display: flex;
-		// justify-content: flex-start;
-		gap: 1.6em;
-		color: $white;
-	}
-	&-links {
-		flex: 8;
-	}
-	&-link {
-		list-style: none;
-		text-decoration: none;
-		display: flex;
-		color: $white;
-		cursor: pointer;
+.subMenue-items {
+	display: none;
+	position: absolute;
+	bottom: -90px;
+	left: 0;
+	list-style: none;
+	width: 10em;
+	padding: 0;
+	background: green;
 
-		span {
-			margin-left: 1em;
-		}
+	li {
+		padding: 0.5em;
+		width: 100%;
+		margin-bottom: 0.3em;
 	}
-	.footer {
-		flex: 1;
-		display: flex;
-		align-items: flex-end;
-		justify-content: center;
-	}
+}
+.footer {
+	flex: 1;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
 }
 </style>

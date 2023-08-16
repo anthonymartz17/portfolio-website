@@ -85,8 +85,10 @@ export default {
 </script>
 <template>
 	<div class="app-wrapper">
-		<header :class="{ 'fixed-header': isScrollingUp }">
+		<header>
 			<AppHeader
+				ref="theTop"
+				:class="{ 'fixed-header': isScrollingUp }"
 				v-if="!showMore"
 				@scrollToEvent="scrollTo($event)"
 				:scrollPosition="scrollPosition"

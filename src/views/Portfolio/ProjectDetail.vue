@@ -1,5 +1,5 @@
 <script>
-import BaseButton from "../../components/Buttons/BaseButton.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 export default {
 	components: { BaseButton, MartzIcon },

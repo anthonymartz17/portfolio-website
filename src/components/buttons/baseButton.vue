@@ -1,7 +1,8 @@
 <script>
-import MartzIcon from "../icons/martz-icons.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+
 export default {
-	name: 'BaseButton',
+	name: "BaseButton",
 	components: {
 		MartzIcon,
 	},
@@ -13,7 +14,12 @@ export default {
 		<span class="btn-text">{{ text }}</span>
 		<div class="btn-icon">
 			<MartzIcon class="mainIcon" v-bind="$props" />
-			<MartzIcon class="angleRight" icon="angleRight" :size="25" color="accent"/>
+			<MartzIcon
+				class="angleRight"
+				icon="angleRight"
+				:size="25"
+				color="accent"
+			/>
 		</div>
 	</button>
 </template>

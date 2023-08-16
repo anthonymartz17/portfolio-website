@@ -1,20 +1,21 @@
 <script>
-import Home from "../components/portfolio/home.section.vue";
-import Header from "../components/portfolio/header-section.vue";
-import Work from "../components/portfolio/work-section/work-section.vue";
-import Skills from "../components/portfolio/skills-section.vue";
-import Aboutme from "../components/portfolio/aboutme-section.vue";
-import Hireme from "../components/portfolio/hireme-section.vue";
-import Footer from "../components/portfolio/the-footer.vue";
+import Home from "@/components/Portfolio/HomeSection.vue";
+import AppHeader from "@/components/Layout/AppHeader.vue";
+
+import Work from "@/components/Portfolio/WorkSection.vue";
+import Skills from "@/components/Portfolio/SkillsSection.vue";
+import Aboutme from "@/components/Portfolio/AboutSection.vue";
+import Hireme from "@/components/Portfolio/HiremeSection.vue";
+import AppFooter from "@/components/Layout/AppFooter.vue";
 export default {
 	components: {
 		Home,
-		Header,
+		AppHeader,
 		Work,
 		Skills,
 		Aboutme,
 		Hireme,
-		Footer,
+		AppFooter,
 	},
 
 	data() {
@@ -51,11 +52,11 @@ export default {
 		document.body.classList.remove("mobile-menu-open");
 	},
 	methods: {
-		toggleMobileMenue() {
-			this.isMenueVisible = !this.isMenueVisible;
-			if (this.isMenueVisible) document.body.classList.add("mobile-menu-open");
-			else document.body.classList.remove("mobile-menu-open");
-		},
+		// toggleMobileMenue() {
+		// 	this.isMenueVisible = !this.isMenueVisible;
+		// 	if (this.isMenueVisible) document.body.classList.add("mobile-menu-open");
+		// 	else document.body.classList.remove("mobile-menu-open");
+		// },
 		toggleShowMore(showMore) {
 			this.showMore = showMore;
 			if (this.showMore) document.body.classList.add("mobile-menu-open");
@@ -84,13 +85,14 @@ export default {
 </script>
 <template>
 	<div class="app-wrapper">
-		<header :class="{ 'fixed-header': isScrollingUp }">
-			<Header
+		<header>
+			<AppHeader
+				ref="theTop"
+				:class="{ 'fixed-header': isScrollingUp }"
 				v-if="!showMore"
-				@emitToggleMenue="toggleMobileMenue"
-				:isMenueVisible="isMenueVisible"
 				@scrollToEvent="scrollTo($event)"
 				:scrollPosition="scrollPosition"
+				navigationOption="portfolio"
 			/>
 		</header>
 		<main>
@@ -102,7 +104,7 @@ export default {
 			<section ref="About"><Aboutme /></section>
 			<section ref="Hire Me"><Hireme /></section>
 		</main>
-		<footer><Footer @scrollToEvent="scrollTo($event)" /></footer>
+		<footer><AppFooter @scrollToEvent="scrollTo($event)" /></footer>
 	</div>
 </template>
 

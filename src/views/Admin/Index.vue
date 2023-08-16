@@ -1,39 +1,17 @@
 <script>
-import MartzIcon from "@/components/icons/martz-icons.vue";
-import BlogNavMenue from "../components/blog/blog-mobile-menue.vue";
-import BlogHomeNavMenue from "../components/blog/blog-desktop-menu.vue";
-import BlogFooter from "../components/blog/blog-footer.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import AppHeader from "@/components/Layout/AppHeader.vue";
+import AppFooter from "@/components/Layout/AppFooter.vue";
 export default {
-	components: { MartzIcon, BlogHomeNavMenue, BlogFooter, BlogNavMenue },
+	components: {
+		AppHeader,
+		AppFooter,
+		MartzIcon,
+	},
+
 	data() {
 		return {
 			isMenueOpen: false,
-			navLinks: [
-				{
-					icon: "home",
-					name: "HOME",
-					route: "portfolio",
-					authRequired: false,
-				},
-				{
-					icon: "blog",
-					name: "BLOGS",
-					route: "home-blog",
-					authRequired: false,
-				},
-				{
-					icon: "write",
-					name: "CREATE",
-					route: "admin-app",
-					authRequired: true,
-				},
-				{
-					icon: "logout",
-					name: "LOG OUT",
-					route: "home-blog",
-					authRequired: true,
-				},
-			],
 		};
 	},
 	mounted() {
@@ -43,13 +21,22 @@ export default {
 			// disable: "mobile",
 		});
 	},
+	beforeDestroy() {
+		this.isMenueVisible = false;
+		document.body.classList.remove("mobile-menu-open");
+	},
 	methods: {
 		toggleMobileMenue() {
-			
 			this.isMenueOpen = !this.isMenueOpen;
-	
+
 			if (this.isMenueOpen) document.body.classList.add("mobile-menu-open");
 			else document.body.classList.remove("mobile-menu-open");
+		},
+		scrollTo() {
+			this.$refs.TheHeader.$refs.header.scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			});
 		},
 	},
 };
@@ -57,48 +44,8 @@ export default {
 <template>
 	<div class="home-blogs-wrapper">
 		<div class="home-blogs-container">
-			<nav>
-				<div
-					class="blog-nav-container"
-					v-if="isMenueOpen"
-					@click.self="toggleMobileMenue"
-				>
-					<BlogNavMenue
-						@emitToggleMenue="toggleMobileMenue"
-						:navLinks="navLinks"
-					/>
-				</div>
-			</nav>
+			<AppHeader navigationOption="admin" ref="TheHeader"/>
 			<div class="home-blogs-container">
-				<header>
-					<div
-						class="home-blog-header-wrapper"
-						data-aos="fade-down"
-						data-aos-duration="800"
-					>
-						<div class="home-blogs-header">
-							<div class="logo">
-								<router-link to="/">
-									<MartzIcon class="thelogo" icon="logo" size="60" />
-								</router-link>
-							</div>
-							<div class="header-nav-menue" @click="toggleMobileMenue">
-								<MartzIcon
-									id="menue-icon"
-									class="menue-icon"
-									:size="30"
-									icon="ham-menue"
-								/>
-							</div>
-							<BlogHomeNavMenue
-								:navLinks="navLinks"
-								@emitToggleMenue="toggleMobileMenue"
-								class="desktop-menu"
-							/>
-						</div>
-					</div>
-				</header>
-
 				<main>
 					<div class="main-wrapper">
 						<router-view class="routerView" />
@@ -106,7 +53,7 @@ export default {
 				</main>
 			</div>
 			<div class="blog-footer-wrapper">
-				<BlogFooter class="the-footer" />
+				<AppFooter @scrollToEvent="scrollTo($event)"  class="the-footer" />
 			</div>
 		</div>
 	</div>

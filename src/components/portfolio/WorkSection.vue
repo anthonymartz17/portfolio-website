@@ -1,7 +1,7 @@
 <script>
-import BaseButton from "../../buttons/baseButton.vue";
-import ProjectDetail from "./project-details.vue";
-import MartzIcon from "../../icons/martz-icons.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
+import ProjectDetail from "@/views/Portfolio/ProjectDetail.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 export default {
 	components: { BaseButton, ProjectDetail, MartzIcon },
 	data() {
@@ -34,7 +34,13 @@ export default {
 
 					img: "portfolio.png",
 					videoId: "64O-8kgwZa0",
+<<<<<<< HEAD:src/components/portfolio/work-section/work-section.vue
 
+=======
+					thumbnail_main: "project1.jpeg",
+					thumbnail_sec: "project1.jpeg",
+					thumbnail_third: "project1.jpeg",
+>>>>>>> master:src/components/portfolio/WorkSection.vue
 					technologies: [
 						{ icon: "javascript", size: "70" },
 						{ icon: "html5", size: "70" },
@@ -218,7 +224,7 @@ export default {
 					</p>
 					<div class="card-link">
 						<router-link
-							:to="{ name: 'home-blog' }"
+							:to="{ name: 'PostList' }"
 							class="resetLink card-link-link"
 						>
 							<span> Check it out </span>

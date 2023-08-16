@@ -1,7 +1,6 @@
 <script>
-import BaseButton from "../buttons/baseButton.vue";
-// import basebutton from "./baseButton.vue";
-import MartzIcon from "../icons/martz-icons.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 import { required, email } from "vuelidate/lib/validators";
 import emailjs from "emailjs-com";
 
@@ -110,7 +109,11 @@ export default {
 							id="name"
 							name="name"
 							autocomplete="off"
-							:class="['text-thin','input-field', { invalid: submitted && $v.name.$error }]"
+							:class="[
+								'text-thin',
+								'input-field',
+								{ invalid: submitted && $v.name.$error },
+							]"
 						/>
 						<p v-if="submitted && !$v.name.required" class="text-small">
 							Please enter a name
@@ -319,7 +322,7 @@ export default {
 	color: $white;
 	width: 100%;
 	background: none;
-	padding: .5em;
+	padding: 0.5em;
 	border: 1px solid rgba($white, 0.3);
 }
 .btn-container {

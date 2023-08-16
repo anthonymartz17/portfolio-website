@@ -2,7 +2,7 @@
 import { quillEditor } from "vue-quill-editor";
 import { required } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
-import BaseButton from "@/components/buttons/baseButton.vue";
+import BaseButton from "@/components/Buttons/BaseButton.vue";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
@@ -56,7 +56,6 @@ export default {
 		...mapActions("blogPosts", ["fetchPostById", "createPost", "updatePost"]),
 		afterComplete(file) {
 			this.blogThumbnail.push(file);
-		
 		},
 		removeImg(file) {
 			this.blogThumbnail = this.blogThumbnail.filter(
@@ -66,7 +65,6 @@ export default {
 		async uploadImgManually(img) {
 			//add images to vuedropzone
 			this.$refs.myVueDropzone.manuallyAddFile(img, img.dataURL);
-
 		},
 		async tryCreatePost() {
 			this.$v.$touch;
@@ -83,7 +81,7 @@ export default {
 						this.blog = {};
 						this.blogThumbnail = [];
 						this.submitted = false;
-						this.$router.push({ name: "home-blog" });
+						this.$router.push({ name: "PostList" });
 					} catch (error) {
 						throw error;
 					}
@@ -96,7 +94,7 @@ export default {
 						this.blog = {};
 						this.blogThumbnail = [];
 						this.submitted = false;
-						this.$router.push({ name: "home-blog" });
+						this.$router.push({ name: "PostList" });
 					} catch (error) {
 						throw error;
 					}

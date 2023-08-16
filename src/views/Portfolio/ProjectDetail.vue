@@ -1,18 +1,26 @@
 <script>
-import BaseButton from "../../buttons/baseButton.vue";
-import MartzIcon from "../../icons/martz-icons.vue";
-import MainVideo from "./video-player.vue";
+import BaseButton from "../../components/Buttons/BaseButton.vue";
+import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 export default {
-	components: { BaseButton, MartzIcon, MainVideo },
+	components: { BaseButton, MartzIcon },
 	data() {
 		return {
 			readmore: false,
 			mobile: false,
 			isProjectLink: true,
+			projectId: null,
 		};
 	},
 	props: ["projectClicked"],
+
 	created() {
+		this.projectId = this.$route.query.projectId;
+		if (this.projectId) {
+			this.fetchProjectById(this.projectId).then((data) => {
+				this.project = data;
+			});
+		}
+
 		window.addEventListener("resize", this.handleResize);
 		this.handleResize();
 	},

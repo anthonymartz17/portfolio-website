@@ -51,7 +51,7 @@ export default [
 
 			// If the user is already logged in,cancel navigation
 			if (isLoggedIn) {
-				next({ name: "NotFound" });
+				next({name:"Portfolio"});
 			} else {
 				// If the user is not logged in, allow access to the login page
 				next();
@@ -66,12 +66,32 @@ export default [
 			{
 				path: "",
 				name: "Admin",
-				component: () => import("../views/Admin/ManagePost.vue"),
+				component: () => import("../views/Admin/BlogsManagement/ManagePost.vue"),
 			},
 			{
 				path: "createPost",
 				name: "CreatePost",
-				component: () => import("../views/Admin/CreatePost.vue"),
+				component: () => import("../views/Admin/BlogsManagement/CreatePost.vue"),
+			},
+			{
+				path: "postDetail/:postId",
+				name: "ViewPostDetail",
+				component: () => import("../views/Admin/BlogsManagement/ViewPostDetail.vue"),
+			},
+			{
+				path: "createProject",
+				name: "CreateProject",
+				component: () => import("../views/Admin/ProjectsManagement/CreateProject.vue"),
+			},
+			{
+				path: "manageProject",
+				name: "ManageProject",
+				component: () => import("../views/Admin/ProjectsManagement/ManageProject.vue"),
+			},
+			{
+				path: "projectDetail/:projectId",
+				name: "ViewProjectDetail",
+				component: () => import("../views/Admin/ProjectsManagement/ViewProjectDetail.vue"),
 			},
 		],
 	},

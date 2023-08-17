@@ -21,7 +21,12 @@ export default {
 				{ section: "Skills", icon: "skills", name: "Skills", active: false },
 				{ section: "About", icon: "about", name: "About", active: false },
 				{ icon: "blog", name: "Blogs", route: "PostList" },
-				{ section: "Hire Me", icon: "handshake", name: "Hire Me", active: false },
+				{
+					section: "Hire Me",
+					icon: "handshake",
+					name: "Hire Me",
+					active: false,
+				},
 				{
 					id: "admin",
 					icon: "login",
@@ -51,7 +56,6 @@ export default {
 				{
 					icon: "blog",
 					name: "Blogs",
-					route: "Admin",
 					subMenue: [
 						{
 							name: "Manage Blogs",
@@ -63,10 +67,24 @@ export default {
 						},
 					],
 				},
+				{
+					icon: "work",
+					name: "Projects",
+					subMenue: [
+						{
+							name: "Manage Projects",
+							route: "ManageProject",
+						},
+						{
+							name: "Create New",
+							route: "CreateProject",
+						},
+					],
+				},
 
 				{
 					icon: "logout",
-					name: "LOG OUT",
+					name: "Log Out",
 					route: "PostList",
 				},
 			],
@@ -112,7 +130,7 @@ export default {
 </script>
 <template>
 	<div
-	ref="header"
+		ref="header"
 		:class="[
 			'header-wrapper',
 			{

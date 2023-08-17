@@ -34,7 +34,6 @@ export default {
 	<div class="nav-container">
 		<ul class="nav-container-links">
 			<li
-				class="item"
 				v-for="link in navLinks"
 				:key="link.name"
 				@click="navigate(link)"
@@ -47,10 +46,15 @@ export default {
 					},
 				]"
 			>
-				{{ link.name }}
+				<span>{{ link.name }}</span>
 
 				<ul v-if="link.subMenue" class="subMenue-items">
-					<li class="subItem" v-for="subItem in link.subMenue" :key="subItem.name">
+					<li
+						@click.stop="navigate(subItem)"
+						class="subItem"
+						v-for="subItem in link.subMenue"
+						:key="subItem.name"
+					>
 						{{ subItem.name }}
 					</li>
 				</ul>
@@ -101,9 +105,10 @@ export default {
 	color: $white;
 	cursor: pointer;
 	transition: all 250ms;
-	padding: 0.5em;
+  padding: .5em;
+
 }
-.nav-container-link:hover.item {
+.nav-container-link:hover span {
 	color: $accent;
 }
 .subMenue::after {
@@ -119,18 +124,35 @@ export default {
 .subMenue-items {
 	display: none;
 	position: absolute;
-	bottom: -90px;
+	bottom: -113px;
 	left: 0;
 	list-style: none;
-	width: 10em;
+	min-width: 12em;
 	padding: 0;
-	background: green;
-
+	border: 1px solid rgba(255, 255, 255, 0.233);
+	// background: $bg-2;
+	// box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
+	
 	li {
-		padding: 0.5em;
+		position: relative;
+		transition: background-color 0.2s ease-in-out;
+		padding: 1em;
 		width: 100%;
-		margin-bottom: 0.3em;
+		border-block: 1px solid transparent;
 	}
+	li:hover {
+		background: $bg-2-lighter;
+		border-block: 1px solid rgba(255, 255, 255, 0.623);
+	}
+	// li:hover::after{
+	// 	content: "|";
+	// 	position: absolute;
+	// 	right: 20px;
+	// }
+// 	.subMenue-item:hover::after {
+// 	content: "⯅";
+// }
+	
 }
 .footer {
 	flex: 1;

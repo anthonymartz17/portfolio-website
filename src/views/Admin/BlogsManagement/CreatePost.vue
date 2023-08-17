@@ -51,9 +51,11 @@ export default {
 				this.uploadImgManually(this.blog.thumbnail_data);
 			});
 		}
+	
 	},
 	methods: {
 		...mapActions("blogPosts", ["fetchPostById", "createPost", "updatePost"]),
+	
 		afterComplete(file) {
 			this.blogThumbnail.push(file);
 		},

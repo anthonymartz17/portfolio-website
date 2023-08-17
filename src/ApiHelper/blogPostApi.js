@@ -7,7 +7,6 @@ import {
 	addDoc,
 	updateDoc,
 	deleteDoc,
-
 } from "firebase/firestore";
 import {
 	ref,
@@ -89,6 +88,29 @@ export default {
 			throw error;
 		}
 	},
+	async updatePostVisibility({ postId, isPublic }) {
+		try {
+			const postDocRef = doc(db, "blogPosts", postId);
+
+			const postDocSnapshot = await getDoc(postDocRef);
+
+			if (postDocSnapshot.exists()) {
+				await updateDoc(postDocRef, { isPublic: isPublic });
+				const updatedPost = {
+					id: postDocSnapshot.id,
+					...postDocSnapshot.data(),
+				};
+				//updating isPublic to immediately reflect change locally, since data updates after page reload or route change.
+				updatedPost.isPublic = !updatedPost.isPublic;
+				return updatedPost;
+			} else {
+				throw new Error("Post not found.");
+			}
+		} catch (error) {
+			throw error;
+		}
+	},
+
 	async deletePost(postId) {
 		try {
 			const postDocRef = doc(db, "blogPosts", postId);
@@ -155,7 +177,4 @@ export default {
 				throw error;
 			}
 	},
-
-
 };
-

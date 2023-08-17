@@ -14,7 +14,7 @@ export default {
 		// },
 		UPDATE(state, payload) {
 			state.projects.find((x) => {
-				Object.assign(x, payload);
+				if (x.id == payload.id) Object.assign(x, payload);
 			});
 		},
 		DELETE(state, projectId) {
@@ -46,15 +46,20 @@ export default {
 					return project;
 				});
 				const dataReady = await Promise.all(dataWithThumbnailPromises);
-
+          
 				commit("SET__PROJECTS", dataReady);
 			} catch (error) {
 				throw error;
 			}
 		},
-		async createProject(context, { project, thumbnail }) {
-			const imgPathRef = await workProjectsApi.uploadThumbnail(thumbnail);
+		async createProject(context, { project, projectThumbnail }) {
+			const imgPathRef = await workProjectsApi.uploadThumbnail(
+				projectThumbnail
+			);
 			project.thumbnail_path_ref = imgPathRef;
+			//converting into arrays---------
+			project.techs_implemented = project.techs_implemented.split(",");
+			// project.video_ids = project.video_ids.split(',')
 			await workProjectsApi.createPost(project);
 		},
 		async updateProject({ commit }, { project, thumbnail }) {
@@ -68,6 +73,12 @@ export default {
 			const updatedProject = await workProjectsApi.updateProject(project);
 			commit("UPDATE", updatedProject);
 		},
+		async updateProjectVisibility({ commit }, postData) {
+			const updatedPost = await blogPostApi.updateProjectVisibility(postData);
+
+			commit("UPDATE", updatedPost);
+		},
+
 		async deleteProject({ commit }, { thumbnail_path_ref, id }) {
 			await workProjectsApi.deleteThumbnail(thumbnail_path_ref);
 			await workProjectsApi.deleteProject(id);

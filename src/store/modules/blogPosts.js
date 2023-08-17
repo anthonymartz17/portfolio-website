@@ -14,7 +14,7 @@ export default {
 		// },
 		UPDATE(state, payload) {
 			state.blogPosts.find((x) => {
-				Object.assign(x, payload);
+				if (x.id == payload.id) Object.assign(x, payload);
 			});
 		},
 		DELETE(state, postId) {
@@ -76,6 +76,11 @@ export default {
 			await blogPostApi.deleteThumbnail(thumbnail_path_ref);
 			await blogPostApi.deletePost(id);
 			commit("DELETE", id);
+		},
+		async updatePostVisibility({ commit }, postData) {
+			const updatedPost = await blogPostApi.updatePostVisibility(postData);
+
+			commit("UPDATE", updatedPost);
 		},
 	},
 	getters: {

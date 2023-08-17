@@ -134,6 +134,13 @@ export default {
 			src="/icons/portfolio.svg"
 			alt="page portfolio icon"
 		/>
+		<img
+			v-if="icon == 'gear'"
+			:height="size"
+			:width="size"
+			src="/icons/gear.svg"
+			alt="page gear icon"
+		/>
 
 		<svg
 			v-if="icon == 'mywork'"

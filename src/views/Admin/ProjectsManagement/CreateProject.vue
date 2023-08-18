@@ -128,17 +128,14 @@ export default {
 					}
 				} else {
 					try {
-						console.log(this.project)
-						// const response = await this.createProject({
-						// 	project: this.project,
-						// 	projectThumbnail: this.projectThumbnail[0],
-						// 	videoThumbnails: this.videoThumbnails,
-						// });
-						// this.project = {};
-						// this.projectThumbnail = [];
-						// this.videoThumbnails = [];
-						// this.submitted = false;
-						// this.$router.push({ name: "ManageProject" });
+						const response = await this.createProject({
+							project: this.project,
+							projectThumbnail: this.projectThumbnail[0],
+						});
+						this.project = {};
+						this.projectThumbnail = [];
+						this.submitted = false;
+						this.$router.push({ name: "ManageProject" });
 					} catch (error) {
 						throw error;
 					}

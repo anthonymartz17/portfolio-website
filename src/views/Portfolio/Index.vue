@@ -1,7 +1,6 @@
 <script>
 import Home from "@/components/Portfolio/HomeSection.vue";
 import AppHeader from "@/components/Layout/AppHeader.vue";
-
 import Work from "@/components/Portfolio/WorkSection.vue";
 import Skills from "@/components/Portfolio/SkillsSection.vue";
 import Aboutme from "@/components/Portfolio/AboutSection.vue";

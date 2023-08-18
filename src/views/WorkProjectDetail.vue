@@ -1,6 +1,7 @@
 <script>
 import BaseButton from "@/components/Buttons/BaseButton.vue";
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import { mapActions } from "vuex";
 export default {
 	components: { BaseButton, MartzIcon },
 	data() {
@@ -8,28 +9,35 @@ export default {
 			readmore: false,
 			mobile: false,
 			isProjectLink: true,
+			project: {},
+			videoPlayingId: null,
 			projectId: null,
 		};
 	},
-	props: ["projectClicked"],
+	// props: ["projectClicked"],
 
 	created() {
-		this.projectId = this.$route.query.projectId;
+		this.projectId = this.$route.params.projectId;
 		if (this.projectId) {
 			this.fetchProjectById(this.projectId).then((data) => {
 				this.project = data;
+				this.videoPlayingId = this.project.videos[0].id;
 			});
 		}
 
-		window.addEventListener("resize", this.handleResize);
-		this.handleResize();
+		// window.addEventListener("resize", this.handleResize);
+		// this.handleResize();
 	},
-	destroy() {
-		window.removeEventListener("resize", this.handleResize);
-	},
+	// destroy() {
+	// 	window.removeEventListener("resize", this.handleResize);
+	// },
 	methods: {
-		handleResize() {
-			this.mobile = true ? window.innerWidth < 600 : (this.mobile = false);
+		// handleResize() {
+		// 	this.mobile = true ? window.innerWidth < 600 : (this.mobile = false);
+		// },
+		...mapActions("workProjects", ["fetchProjectById"]),
+		changeVideo(videoId) {
+			this.videoPlayingId = `${videoId}?autoplay=1`;
 		},
 		fireToggleShowMore() {
 			//resets projectClicked
@@ -66,7 +74,7 @@ export default {
 			<div class="detail-content">
 				<div class="project-videos">
 					<h2 class="project-title" data-aos="fade-up" data-aos-duration="800">
-						{{ projectClicked.name }}
+						{{ project.name }}
 					</h2>
 					<div
 						class="videos-container"
@@ -76,10 +84,10 @@ export default {
 					>
 						<div class="video-default">
 							<iframe
-								v-if="projectClicked.videoId"
+								v-if="project.videos"
 								width="100%"
 								height="100%"
-								:src="`https://www.youtube.com/embed/${projectClicked.videoId}`"
+								:src="`https://www.youtube.com/embed/${videoPlayingId}`"
 								title="YouTube video player"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -91,63 +99,50 @@ export default {
 								alt="thumbnail project 2"
 							/>
 						</div>
-						<div class="video-secondary-container">
-							<div class="video-sec">
-								<img
-									:src="`/img/working-on-video.png`"
-									alt="thumbnail project 2"
-								/>
-							</div>
-							<div class="video-sec">
-								<img
-									:src="`/img/working-on-video.png`"
-									alt="thumbnail project 3"
-								/>
-							</div>
+						<div>
+							<h3 class="subtitle">More videos</h3>
+							<ol class="videos-list">
+								<li v-for="link in project.videos" :key="link.id">
+									<a href="#" @click="changeVideo(link.id)">{{ link.name }}</a>
+								</li>
+							</ol>
 						</div>
 					</div>
 				</div>
 				<div class="desc-container" data-aos="fade-up" data-aos-duration="800">
 					<div class="project-about">
-						<h3>About</h3>
+						<h3 class="subtitle">About</h3>
 						<div
+							v-html="project.content"
 							:class="[
 								'paragraph-container',
 								{ readless: !this.readmore && mobile },
 							]"
+						></div>
+						<!-- <p
+							v-show="mobile && !readmore"
+							@click="readMoreAbout"
+							class="readmore-btn"
 						>
-							<p
-								:class="['paragraph', { 'hide-paragraph': paragraph.hide }]"
-								v-for="paragraph in projectClicked.description_complete"
-								:key="paragraph.id"
-							>
-								{{ paragraph.text }}
-							</p>
-							<p
-								v-show="mobile && !readmore"
-								@click="readMoreAbout"
-								class="readmore-btn"
-							>
-								Read more...
-							</p>
-						</div>
+							Read more...
+						</p> -->
 					</div>
 					<div class="project-techs">
-						<h3>Technologies</h3>
+						<h3 class="subtitle">Technologies</h3>
 						<div class="tech-icons">
 							<MartzIcon
 								class="icon"
-								v-for="icon in projectClicked.technologies"
-								:key="icon.id"
-								:icon="icon.icon"
+								v-for="icon in project.techs_implemented"
+								:key="icon"
+								:icon="icon"
 								color="white"
-								:size="icon.size"
+								:size="70"
 							/>
 						</div>
 					</div>
 					<div class="project-btn-container">
 						<BaseButton
-							@click.native="openCodeOrProject(projectClicked.siteLink)"
+							@click.native="openCodeOrProject(project.website_link)"
 							class="project-btn"
 							text="Open Project"
 							color="accent"
@@ -155,7 +150,7 @@ export default {
 							icon="web"
 						/>
 						<BaseButton
-							@click.native="openCodeOrProject(projectClicked.codeLink)"
+							@click.native="openCodeOrProject(project.code_link)"
 							class="project-btn"
 							text="View Code"
 							color="accent"
@@ -196,6 +191,7 @@ export default {
 	flex-direction: column;
 	gap: 2em;
 	font: $font-text-mb;
+	color: $white;
 }
 
 .backToProjects {
@@ -259,6 +255,15 @@ export default {
 		object-fit: cover;
 	}
 }
+.videos-list {
+	font: $font-thin-text-mb;
+	padding: 1em;
+
+	a {
+		color: $white;
+		padding: none;
+	}
+}
 .videos-container {
 	height: 50vh;
 }
@@ -287,14 +292,14 @@ export default {
 .project-about {
 	margin-bottom: 3em;
 
-	h3 {
-		font: $font-title-mb;
-		color: rgba($white, 0.3);
-		margin-bottom: 1em;
-	}
 	p {
 		font: $font-thin-text-mb;
 	}
+}
+.subtitle {
+	font: $font-title-mb;
+	color: rgba($white, 0.3);
+	margin-bottom: 1em;
 }
 .project-techs {
 	margin-bottom: 4em;

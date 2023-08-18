@@ -24,6 +24,10 @@ export default {
 	},
 	computed: {
 		...mapGetters("workProjects", ["projects"]),
+		//show only those with published status
+		filteredProjects() {
+			this.projects.filter((x) => x.isPublic);
+		},
 	},
 };
 </script>
@@ -37,7 +41,7 @@ export default {
 			<div class="projects-list">
 				<WorkProjectPreview
 					:project="project"
-					v-for="(project, idx) in projects"
+					v-for="(project, idx) in filteredProjects"
 					:key="project.id"
 					data-aos="fade-up"
 					data-aos-duration="800"

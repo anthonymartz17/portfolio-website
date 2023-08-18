@@ -9,7 +9,7 @@ export default {
 			skillId: "vue",
 			skillsName: [
 				{ id: "vue", name: "vue.js", icon: "V", size: "90" },
-				{ id: "javascript", name: "javaScript", icon: "JS", size: "79" },
+				{ id: "javaScript", name: "javaScript", icon: "JS", size: "79" },
 				{ id: "css3", name: "css3", icon: "css", size: "79" },
 				{ id: "html5", name: "html5", icon: "html", size: "79" },
 			],

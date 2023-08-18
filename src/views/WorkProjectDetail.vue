@@ -6,53 +6,59 @@ export default {
 	components: { BaseButton, MartzIcon },
 	data() {
 		return {
-			readmore: false,
-			mobile: false,
-			isProjectLink: true,
+			alertEmptyLink: "",
 			project: {},
 			videoPlayingId: null,
 			projectId: null,
 		};
 	},
-	// props: ["projectClicked"],
 
 	created() {
+		this.$aos.init({
+			duration: 800,
+			offset: 200,
+		});
+
+		//get id to fetch project to view
 		this.projectId = this.$route.params.projectId;
 		if (this.projectId) {
 			this.fetchProjectById(this.projectId).then((data) => {
 				this.project = data;
+				//sets videoPlayingId which can be changed dynamically in play more section
 				this.videoPlayingId = this.project.videos[0].id;
 			});
 		}
-
-		// window.addEventListener("resize", this.handleResize);
-		// this.handleResize();
 	},
-	// destroy() {
-	// 	window.removeEventListener("resize", this.handleResize);
-	// },
+
 	methods: {
-		// handleResize() {
-		// 	this.mobile = true ? window.innerWidth < 600 : (this.mobile = false);
-		// },
 		...mapActions("workProjects", ["fetchProjectById"]),
+
+		//switches video displaying and autoplays it
 		changeVideo(videoId) {
 			this.videoPlayingId = `${videoId}?autoplay=1`;
 		},
-		fireToggleShowMore() {
-			//resets projectClicked
-			let projectClicked = {};
-			this.$emit("fireToggleShowMore", projectClicked);
-		},
-		readMoreAbout() {
-			this.readmore = !this.readmore;
+		goBack() {
+			window.history.back();
 		},
 		openCodeOrProject(link) {
-			if (link) {
-				window.open(link, "_blank");
+			if (link.link) {
+				window.open(link.link, "_blank");
 			} else {
-				this.isProjectLink = false;
+				this.alertEmptyLink = link.id;
 			}
+		},
+	},
+
+	computed: {
+		alertLinks() {
+			let msg;
+			if (this.alertEmptyLink) {
+				msg =
+					this.alertEmptyLink == "project"
+						? "Project still in development"
+						: "Private soure code, please contact developer";
+			}
+			return msg;
 		},
 	},
 };
@@ -66,66 +72,60 @@ export default {
 				data-aos-duration="800"
 				id="toggleProject"
 				class="backToProjects back-top"
-				@click="fireToggleShowMore()"
+				@click="goBack"
 			>
 				<MartzIcon icon="angleLeft" size="20" class="backToProjects-arrow" />
-				<p>Back to project</p>
+				<p>Back to Projects</p>
 			</div>
 			<div class="detail-content">
-				<div class="project-videos">
-					<h2 class="project-title" data-aos="fade-up" data-aos-duration="800">
+				<div class="video-section">
+					<h2 class="title" data-aos="fade-up" data-aos-duration="800">
 						{{ project.name }}
 					</h2>
 					<div
-						class="videos-container"
+						class="video-player"
 						data-aos="fade-up"
 						data-aos-duration="800"
 						data-aos-delay="250"
 					>
-						<div class="video-default">
-							<iframe
-								v-if="project.videos"
-								width="100%"
-								height="100%"
-								:src="`https://www.youtube.com/embed/${videoPlayingId}`"
-								title="YouTube video player"
-								frameborder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-								allowfullscreen
-							></iframe>
-							<img
-								v-else
-								:src="`/img/working-on-video.png`"
-								alt="thumbnail project 2"
-							/>
-						</div>
-						<div>
-							<h3 class="subtitle">More videos</h3>
-							<ol class="videos-list">
-								<li v-for="link in project.videos" :key="link.id">
-									<a href="#" @click="changeVideo(link.id)">{{ link.name }}</a>
-								</li>
-							</ol>
-						</div>
+						<iframe
+							class="iframe"
+							v-if="project.videos"
+							:src="`https://www.youtube.com/embed/${videoPlayingId}`"
+							title="YouTube video player"
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen
+						></iframe>
+						<img
+							v-else
+							:src="`/img/working-on-video.png`"
+							alt="thumbnail project 2"
+						/>
+					</div>
+
+					<div>
+						<h3 class="subtitle">Play more</h3>
+						<ol class="videos-list">
+							<li
+								v-for="link in project.videos"
+								:key="link.id"
+								@click="changeVideo(link.id)"
+							>
+								<MartzIcon icon="youtubetv" size="20" />
+								<a href="#">{{ link.name }}</a>
+							</li>
+						</ol>
 					</div>
 				</div>
-				<div class="desc-container" data-aos="fade-up" data-aos-duration="800">
+				<article
+					class="article-section"
+					data-aos="fade-up"
+					data-aos-duration="800"
+				>
 					<div class="project-about">
 						<h3 class="subtitle">About</h3>
-						<div
-							v-html="project.content"
-							:class="[
-								'paragraph-container',
-								{ readless: !this.readmore && mobile },
-							]"
-						></div>
-						<!-- <p
-							v-show="mobile && !readmore"
-							@click="readMoreAbout"
-							class="readmore-btn"
-						>
-							Read more...
-						</p> -->
+						<div v-html="project.content" class="paragraph-container"></div>
 					</div>
 					<div class="project-techs">
 						<h3 class="subtitle">Technologies</h3>
@@ -142,7 +142,9 @@ export default {
 					</div>
 					<div class="project-btn-container">
 						<BaseButton
-							@click.native="openCodeOrProject(project.website_link)"
+							@click.native="
+								openCodeOrProject({ id: 'project', link: project.website_link })
+							"
 							class="project-btn"
 							text="Open Project"
 							color="accent"
@@ -150,7 +152,9 @@ export default {
 							icon="web"
 						/>
 						<BaseButton
-							@click.native="openCodeOrProject(project.code_link)"
+							@click.native="
+								openCodeOrProject({ id: 'code', link: project.code_link })
+							"
 							class="project-btn"
 							text="View Code"
 							color="accent"
@@ -158,16 +162,17 @@ export default {
 							icon="code"
 						/>
 					</div>
-					<p class="isProjectLink-msg" v-show="!isProjectLink">
-						Project still in development
+					<p class="alertLink-msg" v-show="alertEmptyLink">
+						{{ alertLinks }}
+						<span @click="alertEmptyLink = ''"> X</span>
 					</p>
-				</div>
+				</article>
 			</div>
 
 			<div
 				id="toggleProject"
 				class="backToProjects back-bottom"
-				@click="fireToggleShowMore()"
+				@click="goBack"
 			>
 				<MartzIcon icon="angleLeft" size="20" class="backToProjects-arrow" />
 				<p>Back to project</p>
@@ -185,18 +190,18 @@ export default {
 	height: 100vh;
 }
 .project-detail-container {
-	margin-bottom: 3em;
-	padding: 1em 1em;
+	padding: 1em;
 	display: flex;
 	flex-direction: column;
-	gap: 2em;
-	font: $font-text-mb;
+	gap: 1em;
 	color: $white;
 }
 
 .backToProjects {
 	display: flex;
 	justify-content: space-between;
+	padding: 0.5em;
+	font: $font-text-mb;
 	align-items: baseline;
 	margin-bottom: 1.5em;
 	&-arrow {
@@ -206,11 +211,9 @@ export default {
 
 .back-top {
 	border-bottom: 1px solid rgba($white, 0.3);
-	padding-bottom: 1em;
 }
 .back-bottom {
 	border-top: 1px solid rgba($white, 0.3);
-	padding-top: 1em;
 }
 
 .project-title {
@@ -225,11 +228,9 @@ export default {
 	overflow: hidden;
 }
 
-.hide-paragraph {
-	display: none;
-}
 .paragraph-container {
 	position: relative;
+	font: $font-thin-text-mb;
 }
 .readmore-btn {
 	position: absolute;
@@ -245,70 +246,73 @@ export default {
 		rgba(25, 26, 25, 1) 32%
 	);
 }
-.project-videos {
-	min-height: 50vh;
-	margin-bottom: 5em;
+.video-section {
+	margin-bottom: 2em;
+	display: flex;
+	flex-direction: column;
 
 	img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
+	.video-player {
+		position: relative;
+		border: 1px solid rgba($white, 0.4);
+		width: 100%;
+		height: 0;
+		padding-bottom: 56.25%;
+		margin-bottom: 2em;
+	}
 }
+.iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 .videos-list {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	max-height: 150px;
+	gap: 1em;
 	font: $font-thin-text-mb;
-	padding: 1em;
+	margin-bottom: 1em;
+	list-style: none;
+	padding: 0;
+	li {
+		display: flex;
+		gap: 0.5em;
+		padding-block: 0.3em;
+	}
 
 	a {
 		color: $white;
-		padding: none;
+		padding: 0;
+		text-decoration: none;
+		border-bottom: 1px solid $accent;
 	}
 }
-.videos-container {
-	height: 50vh;
-}
 
-.video-default {
-	flex: 1;
-	border: 1px solid;
-	margin-bottom: 0.5em;
-	height: 13em;
-}
-.video-secondary-container {
-	display: flex;
-	gap: 0.5em;
-	height: 40%;
-}
 .video-sec {
 	border: 1px solid white;
 	flex: 1;
 	img {
 		width: 100%;
 		height: 100%;
-		// object-fit: cover;
 	}
 }
 
 .project-about {
 	margin-bottom: 3em;
+	font: $font-thin-text-mb;
+}
 
-	p {
-		font: $font-thin-text-mb;
-	}
-}
-.subtitle {
-	font: $font-title-mb;
-	color: rgba($white, 0.3);
-	margin-bottom: 1em;
-}
 .project-techs {
 	margin-bottom: 4em;
-
-	h3 {
-		font: $font-title-mb;
-		margin-bottom: 1em;
-		color: rgba($white, 0.3);
-	}
 }
 .tech-icons {
 	display: grid;
@@ -317,14 +321,9 @@ export default {
 }
 
 .icon {
+	width: 60%;
 	display: grid;
 	place-items: center;
-	// opacity: 0.8;
-	// width: 23%;
-	// aspect-ratio: 1/1;
-	// border: 1px solid;
-	// height: 6em;
-	// width: 6em;
 }
 
 .project-btn {
@@ -334,33 +333,33 @@ export default {
 .project-btn-container {
 	margin-bottom: 2em;
 }
-.isProjectLink-msg {
+.alertLink-msg {
+	position: relative;
 	border: 1px solid $accent;
 	padding: 0.5em;
-	text-align: center;
+	span {
+		cursor: pointer;
+		position: absolute;
+		height: 100%;
+		width: 2em;
+		padding: 0.2em 0.5em;
+		top: 0;
+		right: 0;
+		border-left: 1px solid $accent;
+	}
 }
 
 .project-detail-wrapper {
 	@include breakpoint(tablet) {
-		.video-default {
-			height: 19em;
-		}
 		.project-detail-container {
 			width: 85%;
-			// margin-bottom: 60em;
 		}
 		.project-about {
 			flex: 2;
-			h3 {
-				font: $font-title-tb;
-			}
 		}
 		.project-techs {
 			flex: 1;
 			margin-bottom: 3em;
-			h3 {
-				margin: 0;
-			}
 		}
 		.tech-icons {
 			margin-top: 1.5em;
@@ -375,19 +374,11 @@ export default {
 			display: flex;
 			gap: 0.5em;
 		}
-
-		.hide-paragraph {
-			display: block;
-		}
-
-		.readmore {
-			height: 100%;
-		}
 	}
 	@include breakpoint(desktop) {
 		.project-detail-container {
 			margin-block: 2em;
-			width: 75%;
+			width: 85%;
 		}
 		.detail-content {
 			display: flex;
@@ -401,17 +392,17 @@ export default {
 			padding: 0;
 		}
 		.backToProjects {
-			width: 50%;
-			padding-block: 1em;
+			width: 40%;
 			justify-self: flex-end;
 		}
 		.project-btn-container {
 			margin-bottom: 1em;
 		}
-		.project-videos {
-			flex: 1;
+		.video-section {
+			flex: 1.5;
 		}
-		.desc-container {
+
+		.article-section {
 			flex: 1;
 		}
 		.back-bottom {
@@ -424,12 +415,6 @@ export default {
 
 		.project-title {
 			font-size: 2em;
-		}
-
-		.project-about {
-			h3 {
-				font: $font-title-mb;
-			}
 		}
 
 		.tech-icons {

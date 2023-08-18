@@ -23,9 +23,9 @@ export default {
 	},
 
 	actions: {
-		async fetchProjectById(_, postId) {
+		async fetchProjectById(_, projectId) {
 			try {
-				let project = await workProjectsApi.getPostById(postId);
+				let project = await workProjectsApi.getProjectById(projectId);
 				const thumbnail_data = await workProjectsApi.getThumbnail(
 					project.thumbnail_path_ref
 				);
@@ -35,7 +35,7 @@ export default {
 				throw error;
 			}
 		},
-		async setProjects({ commit }) {
+		async getProjects({ commit }) {
 			try {
 				const projectsData = await workProjectsApi.getProjects();
 				const dataWithThumbnailPromises = projectsData.map(async (project) => {

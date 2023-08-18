@@ -1,103 +1,40 @@
 <script>
-import BaseButton from "@/components/Buttons/BaseButton.vue";
-import WorkProjectPreview from "@/components/Portfolio/WorkProjectPreview.vue";
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
-import { mapActions, mapGetters } from "vuex";
 export default {
-	components: { BaseButton, MartzIcon, WorkProjectPreview },
+	name: "WorkProjectPreview",
+	components: { MartzIcon },
 	data() {
-		return {
-			title: "Work",
-			showMore: false,
-		};
+		return {};
 	},
-	created() {
-		this.getProjects();
-	},
-	methods: {
-		...mapActions("workProjects", ["getProjects"]),
-		toggleShowMore(projectClicked) {
-			this.showMore = !this.showMore;
-			this.projectClicked = projectClicked;
-			// this.$emit("emitToggleShowMore", this.showMore);
+	props: {
+		project: {
+			type: Object,
+			required: true,
 		},
-	},
-	computed: {
-		...mapGetters("workProjects", ["projects"]),
 	},
 };
 </script>
 
 <template>
-	<div class="project-wrapper">
-		<div class="projects-container">
-			<h2 data-aos="fade-up" class="projects-title sections-title-global">
-				{{ title }}
-			</h2>
-			<div class="projects-list">
-				<WorkProjectPreview
-					:project="project"
-					v-for="(project, idx) in projects"
-					:key="project.id"
-					data-aos="fade-up"
-					data-aos-duration="800"
-					:data-aos-delay="250 * idx"
-				/>
-			</div>
-			<div class="project-cards-container">
-				<div
-					class="cards-youtube project-cards"
-					data-aos="fade-up"
-					data-aos-duration="800"
-				>
-					<MartzIcon
-						class="card-bg-icon"
-						icon="youtubetv"
-						size="190"
-						color="white"
-					/>
-					<div class="card-title">
-						<h4>Youtube</h4>
-					</div>
-					<div class="card-body">
-						<p>Watch me discuss tech implementation in my projects</p>
-						<div class="card-link">
-							<a
-								class="resetLink card-link-link"
-								href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
-								target="blank"
-							>
-								<span> @martz_code</span>
-
-								<MartzIcon icon="angleRight" size="20" color="accent" />
-							</a>
-						</div>
-					</div>
-				</div>
-				<div
-					class="card-blog project-cards"
-					data-aos="fade-up"
-					data-aos-duration="800"
-				>
-					<MartzIcon class="card-bg-icon" icon="ereading" size="190" />
-					<h4>Blogs</h4>
-					<p>
-						Discover tech insights, projects, and learning experiences in my
-						blogs.
-					</p>
-					<div class="card-link">
-						<router-link
-							:to="{ name: 'PostList' }"
-							class="resetLink card-link-link"
-						>
-							<span> Check it out </span>
-							<MartzIcon icon="angleRight" size="20" color="accent" />
-						</router-link>
-					</div>
-				</div>
+	<router-link
+		class="projects-project"
+		:to="{ name: 'WorkProjectDetail', params: { projectId: project.id } }"
+	>
+		<div class="projects-project-thumb">
+			<img
+				:src="project.thumbnail_data.dataURL"
+				:alt="`thumbnail of the project ${project.name}`"
+			/>
+		</div>
+		<div class="projects-project-desc">
+			<h3>{{ project.name }}</h3>
+			<p class="text-description">{{ project.preview_description }}</p>
+			<div class="see-more">
+				<p class="text-p">See more</p>
+				<MartzIcon icon="angleRight" :size="15" color="accent" />
 			</div>
 		</div>
-	</div>
+	</router-link>
 </template>
 <style lang="scss" scoped>
 .project-wrapper {
@@ -116,6 +53,8 @@ export default {
 	background: rgba(255, 255, 255, 0.075);
 	border: 1px solid rgba($white, 0.1);
 	border-radius: 5px;
+	text-decoration: none;
+	color: $white;
 }
 
 .projects-project-thumb {

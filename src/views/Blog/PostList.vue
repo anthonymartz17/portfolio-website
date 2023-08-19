@@ -16,10 +16,10 @@ export default {
 
 	mounted() {
 		this.$aos.init();
-		this.setBlogPosts();
+		this.getBlogPosts();
 	},
 	methods: {
-		...mapActions("blogPosts", ["setBlogPosts"]),
+		...mapActions("blogPosts", ["getBlogPosts"]),
 	},
 	computed: {
 		...mapGetters("blogPosts", ["blogPosts"]),

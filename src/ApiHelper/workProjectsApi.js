@@ -84,6 +84,7 @@ export default {
 		}
 	},
 	async updateProjectVisibility({ projectId, isPublic }) {
+		console.log(isPublic,projectId,'api')
 		try {
 			const postDocRef = doc(db, "ProjectPosts", projectId);
 
@@ -107,7 +108,7 @@ export default {
 	},
 	async deleteProject(projectId) {
 		try {
-			const docRef = doc(db, "workProjects", projectId);
+			const docRef = doc(db, "ProjectPosts", projectId);
 
 			const docSnapshot = await getDoc(docRef);
 

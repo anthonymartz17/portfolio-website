@@ -14,7 +14,9 @@ export default {
 		// },
 		UPDATE(state, payload) {
 			state.projects.find((x) => {
-				if (x.id == payload.id) Object.assign(x, payload);
+				if (x.id == payload.id) {
+					Object.assign(x, payload);
+				}
 			});
 		},
 		DELETE(state, projectId) {
@@ -46,7 +48,7 @@ export default {
 					return project;
 				});
 				const dataReady = await Promise.all(dataWithThumbnailPromises);
-          
+
 				commit("SET__PROJECTS", dataReady);
 			} catch (error) {
 				throw error;
@@ -59,6 +61,7 @@ export default {
 			project.thumbnail_path_ref = imgPathRef;
 			//converting into arrays---------
 			project.techs_implemented = project.techs_implemented.split(",");
+			project.isPublic = false;
 			// project.video_ids = project.video_ids.split(',')
 			await workProjectsApi.createPost(project);
 		},
@@ -74,7 +77,9 @@ export default {
 			commit("UPDATE", updatedProject);
 		},
 		async updateProjectVisibility({ commit }, postData) {
-			const updatedPost = await blogPostApi.updateProjectVisibility(postData);
+			const updatedPost = await workProjectsApi.updateProjectVisibility(
+				postData
+			);
 
 			commit("UPDATE", updatedPost);
 		},

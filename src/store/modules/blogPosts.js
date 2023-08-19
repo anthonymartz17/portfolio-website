@@ -35,7 +35,7 @@ export default {
 				throw error;
 			}
 		},
-		async setBlogPosts({ commit }) {
+		async getBlogPosts({ commit }) {
 			try {
 				const dataPosts = await blogPostApi.getPosts();
 				const dataWithThumbnailPromises = dataPosts.map(async (post) => {
@@ -59,6 +59,7 @@ export default {
 			const formattedDate = createdAt.toLocaleDateString("en-US", options);
 			post.date_posted = formattedDate;
 			post.thumbnail_path_ref = imgPathRef;
+			post.isPublic = false;
 			await blogPostApi.createPost(post);
 		},
 		async updatePost({ commit }, { post, thumbnail }) {

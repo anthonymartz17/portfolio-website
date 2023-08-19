@@ -39,10 +39,10 @@ export default {
 
 	mounted() {
 		this.$aos.init();
-		this.setProjects();
+		this.getProjects();
 	},
 	methods: {
-		...mapActions("workProjects", ["setProjects", "updateProjectsVisibility"]),
+		...mapActions("workProjects", ["getProjects", "updateProjectVisibility"]),
 		...mapActions("auth", ["setAlertMsg"]),
 
 		async postAction(action) {
@@ -57,22 +57,22 @@ export default {
 				case "Hide":
 					try {
 						this.loading.isLoading = true;
-						this.loading.postId = action.id;
-						await this.updateProjectsVisibility({
-							postId: action.id,
-							isPublic: !action.isPublic,
+						this.loading.projectId = action.id;
+						await this.updateProjectVisibility({
+							projectId: action.id,
+							isPublic: action.isPublic,
 						});
 					} catch (error) {
 						throw error;
 					} finally {
 						this.loading.isLoading = false;
-						this.loading.postId = null;
+						this.loading.projectId = null;
 					}
 					break;
 				default:
 					this.$router.push({
 						name: action.route,
-						params: { postId: action.id },
+						params: { projectId: action.id },
 					});
 					break;
 			}
@@ -95,13 +95,8 @@ export default {
 	},
 	computed: {
 		...mapGetters("workProjects", ["projects"]),
-		// ...mapGetters("auth", ["isLoggedIn"]),
 
-		projectsSorted() {
-			return this.projects.sort(
-				(a, b) => new Date(b.date_posted) - new Date(a.date_posted)
-			);
-		},
+	
 	},
 };
 </script>
@@ -117,7 +112,7 @@ export default {
 			<h2>Manage Projects</h2>
 		</div>
 		<div class="blog-list-body">
-			<div v-if="projectsSorted.length == 0" class="noBlogs">
+			<div v-if="projects.length == 0" class="noBlogs">
 				<p class="text-thin">No Projects have been added</p>
 			</div>
 			<template v-else>
@@ -125,7 +120,7 @@ export default {
 					data-aos="fade-up"
 					data-aos-duration="800"
 					:data-aos-delay="250 * idx"
-					v-for="(project, idx) in projectsSorted"
+					v-for="(project, idx) in projects"
 					:key="project.id"
 					class="blog-card"
 				>
@@ -144,7 +139,7 @@ export default {
 						<div v-if="project.thumbnail_data" class="blog-img-container">
 							<img
 								:src="project.thumbnail_data.dataURL"
-								alt="blog post thumbnail"
+								alt="project thumbnail"
 							/>
 						</div>
 						<div class="card-desc">

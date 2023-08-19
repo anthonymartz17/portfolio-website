@@ -39,10 +39,10 @@ export default {
 
 	mounted() {
 		this.$aos.init();
-		this.setBlogPosts();
+		this.getBlogPosts();
 	},
 	methods: {
-		...mapActions("blogPosts", ["setBlogPosts", "updatePostVisibility"]),
+		...mapActions("blogPosts", ["getBlogPosts", "updatePostVisibility"]),
 		...mapActions("auth", ["setAlertMsg"]),
 
 		async postAction(action) {
@@ -235,11 +235,11 @@ export default {
 	position: absolute;
 	width: 12%;
 	background: $bg-2;
-	border:1px solid rgba($white, 0.4);
+	border: 1px solid rgba($white, 0.4);
 	border-radius: 0px 5px 0 0;
-  display: flex;
+	display: flex;
 	justify-content: center;
-	padding: .2em;
+	padding: 0.2em;
 	font: $font-text-mb;
 	top: 0;
 	right: 0;

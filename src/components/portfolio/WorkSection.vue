@@ -9,6 +9,7 @@ export default {
 		return {
 			title: "Work",
 			showMore: false,
+		
 		};
 	},
 	created() {
@@ -26,7 +27,8 @@ export default {
 		...mapGetters("workProjects", ["projects"]),
 		//show only those with published status
 		filteredProjects() {
-			this.projects.filter((x) => x.isPublic);
+			return this.projects.filter((x) => x.isPublic);
+		
 		},
 	},
 };

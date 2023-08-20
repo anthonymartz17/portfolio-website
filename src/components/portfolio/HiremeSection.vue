@@ -108,7 +108,6 @@ export default {
 							type="text"
 							id="name"
 							name="name"
-							autocomplete="off"
 							:class="[
 								'text-thin',
 								'input-field',
@@ -126,7 +125,6 @@ export default {
 							name="email"
 							type="email"
 							id="email"
-							autocomplete="off"
 							:class="[
 								'text-thin',
 								'input-field',

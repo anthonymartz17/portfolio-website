@@ -59,18 +59,29 @@ export default {
 				projectThumbnail
 			);
 			project.thumbnail_path_ref = imgPathRef;
-			//converting into arrays---------
-			project.techs_implemented = project.techs_implemented.split(",");
+			//converting into arrays and trimming spaces for all strings---------
+			project.techs_implemented = project.techs_implemented
+				.split(",")
+				.map((x) => x.trim());
 			project.isPublic = false;
 			// project.video_ids = project.video_ids.split(',')
 			await workProjectsApi.createPost(project);
 		},
-		async updateProject({ commit }, { project, thumbnail }) {
+		async updateProject({ commit }, { project, projectThumbnail }) {
 			delete project.thumbnail_data;
-			// if is new img delete oldone from storage, upload new one and replace img path in post object with new img path
-			if (!thumbnail.manuallyAdded) {
+			console.log(project.techs_implemented);
+			//converting into arrays and trimming spaces for all strings---------
+			project.techs_implemented = project.techs_implemented
+				.split(",")
+				.map((x) => x.trim());
+
+			console.log(project.techs_implemented);
+			// if is new img delete old one from storage, upload new one and replace img path in post object with new img path
+			if (!projectThumbnail.manuallyAdded) {
 				await workProjectsApi.deleteThumbnail(project.thumbnail_path_ref);
-				const imgPathRef = await workProjectsApi.uploadThumbnail(thumbnail);
+				const imgPathRef = await workProjectsApi.uploadThumbnail(
+					projectThumbnail
+				);
 				project.thumbnail_path_ref = imgPathRef;
 			}
 			const updatedProject = await workProjectsApi.updateProject(project);

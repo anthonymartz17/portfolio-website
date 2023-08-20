@@ -226,7 +226,7 @@ export default {
 		}
 
 		.header-container {
-			padding: 0.8em 4em;
+			padding-inline: 4em;
 			align-items: flex-end;
 		}
 		.header-container-logo {

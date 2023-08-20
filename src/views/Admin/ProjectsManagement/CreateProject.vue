@@ -39,23 +39,16 @@ export default {
 			preview_description: { required },
 			techs_implemented: { required },
 			content: { required },
-			// video_ids: {
-			// 	requiredIf: (value) => {
-			// 	return this.videoThumbnails.length == value.length
-			// } },
 		},
-		//-------------------------------------other props
-		// code_link: { required },
-		// code_link: { required },
-		// code_link: { required },
-		// website_link: { required },
-		//-------------------------------------
+
 		projectThumbnail: { required },
 	},
 	created() {
 		this.projectId = this.$route.query.projectId;
 		if (this.projectId) {
 			this.fetchProjectById(this.projectId).then((data) => {
+				//make array one string separated by commas
+				data.techs_implemented = data.techs_implemented.join(",");
 				this.project = data;
 				this.uploadThumbnailManually(this.project.thumbnail_data);
 			});
@@ -84,19 +77,13 @@ export default {
 				(img) => img.dataURL != file.dataURL
 			);
 		},
-		async uploadThumbnailManually({ projectThumbnail, videoThumbnails }) {
+		async uploadThumbnailManually(projectThumbnail) {
 			//add images to vuedropzone
+			console.log(projectThumbnail);
 			this.$refs.projectThumbnail.manuallyAddFile(
 				projectThumbnail,
 				projectThumbnail.dataURL
 			);
-			if (videoThumbnails.length > 0)
-				videoThumbnails.forEach((thumbnail) => {
-					this.$refs.videoThumbnails.manuallyAddFile(
-						thumbnail,
-						thumbnail.dataURL
-					);
-				});
 		},
 		addVideoField() {
 			this.project.videos.push({ name: "", id: null });
@@ -108,7 +95,6 @@ export default {
 			this.$v.$touch;
 			this.submitted = true;
 			if (this.$v.$invalid) {
-				console.log(this.$v);
 				return;
 			} else {
 				if (this.projectId) {
@@ -116,7 +102,6 @@ export default {
 						await this.updateProject({
 							project: this.project,
 							projectThumbnail: this.projectThumbnail[0],
-							videoThumbnails: this.videoThumbnails,
 						});
 						this.project = {};
 						this.projectThumbnail = [];

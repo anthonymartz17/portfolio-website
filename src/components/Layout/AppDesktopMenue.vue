@@ -1,5 +1,6 @@
 <script>
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -14,7 +15,11 @@ export default {
 	emit: ["scrollTo"],
 
 	methods: {
-		navigate(link) {
+		...mapActions("auth", ["signOut"]),
+		async navigate(link) {
+			if (link.name == "Log Out") {
+				await this.signOut();
+			}
 			if (link.section) {
 				this.navLinks.find((x) => x.active).active = false;
 				this.navLinks.find((x) => x.name == link.section).active = true;
@@ -103,61 +108,62 @@ export default {
 	text-decoration: none;
 	display: flex;
 	color: $white;
-	cursor: pointer;
-	transition: all 250ms;
-  padding: .5em;
+}
 
-}
-.nav-container-link:hover span {
-	color: $accent;
-}
 .subMenue::after {
 	content: "⯆";
-}
-.subMenue:hover::after {
-	content: "⯅";
-}
-.subMenue:hover .subMenue-items {
-	display: block;
 }
 
 .subMenue-items {
 	display: none;
 	position: absolute;
-	bottom: -113px;
+	bottom: -117px;
 	left: 0;
 	list-style: none;
 	min-width: 12em;
 	padding: 0;
 	border: 1px solid rgba(255, 255, 255, 0.233);
-	// background: $bg-2;
-	// box-shadow: 0 -3px 5px rgba(255, 255, 255, 0.288);
-	
+
 	li {
 		position: relative;
-		transition: background-color 0.2s ease-in-out;
 		padding: 1em;
 		width: 100%;
 		border-block: 1px solid transparent;
 	}
-	li:hover {
-		background: $bg-2-lighter;
-		border-block: 1px solid rgba(255, 255, 255, 0.623);
-	}
-	// li:hover::after{
-	// 	content: "|";
-	// 	position: absolute;
-	// 	right: 20px;
-	// }
-// 	.subMenue-item:hover::after {
-// 	content: "⯅";
-// }
-	
 }
 .footer {
 	flex: 1;
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
+}
+
+@include breakpoint(tablet) {
+}
+@include breakpoint(desktop) {
+	.nav-container-link {
+		display: flex;
+		color: $white;
+		cursor: pointer;
+		transition: all 250ms;
+		padding: 0.5em;
+	}
+	.nav-container-link:hover span {
+		color: $accent;
+	}
+
+	.subMenue:hover .subMenue-items {
+		display: block;
+	}
+
+	.subMenue-items {
+		li {
+			transition: background-color 0.2s ease-in-out;
+		}
+		li:hover {
+			background: $bg-2-lighter;
+			border-block: 1px solid rgba(255, 255, 255, 0.623);
+		}
+	}
 }
 </style>

@@ -13,12 +13,12 @@ export default {
 		};
 	},
 
-	created() {
+	mounted() {
 		this.$aos.init({
 			duration: 800,
 			offset: 200,
 		});
-
+		this.scrollTo();
 		//get id to fetch project to view
 		this.projectId = this.$route.params.projectId;
 		if (this.projectId) {
@@ -32,7 +32,12 @@ export default {
 
 	methods: {
 		...mapActions("workProjects", ["fetchProjectById"]),
-
+		scrollTo() {
+			this.$refs.refProjectContainer.scrollIntoView({
+				block: "start",
+				behavior: "smooth",
+			});
+		},
 		//switches video displaying and autoplays it
 		changeVideo(videoId) {
 			this.videoPlayingId = `${videoId}?autoplay=1`;
@@ -65,13 +70,13 @@ export default {
 </script>
 
 <template>
-	<div class="project-detail-wrapper">
-		<div class="project-detail-container">
+	<div class="project-detail-wrapper" >
+		<div class="project-detail-container" ref="refProjectContainer">
 			<div
+				class="backToProjects"
 				data-aos="fade-up"
 				data-aos-duration="800"
 				id="toggleProject"
-				class="backToProjects back-top"
 				@click="goBack"
 			>
 				<MartzIcon icon="angleLeft" size="20" class="backToProjects-arrow" />
@@ -82,29 +87,25 @@ export default {
 					<h2 class="title" data-aos="fade-up" data-aos-duration="800">
 						{{ project.name }}
 					</h2>
-					<div
-						class="video-player"
-						data-aos="fade-up"
-						data-aos-duration="800"
-						data-aos-delay="250"
-					>
-						<iframe
-							class="iframe"
-							v-if="project.videos"
-							:src="`https://www.youtube.com/embed/${videoPlayingId}`"
-							title="YouTube video player"
-							frameborder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-							allowfullscreen
-						></iframe>
+					<div data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">
+						<div v-if="videoPlayingId" class="video-player">
+							<iframe
+								class="iframe"
+								:src="`https://www.youtube.com/embed/${videoPlayingId}`"
+								title="YouTube video player"
+								frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen
+							></iframe>
+						</div>
 						<img
 							v-else
 							:src="`/img/working-on-video.png`"
-							alt="thumbnail project 2"
+							alt="backup image saying working on video"
 						/>
 					</div>
 
-					<div>
+					<div v-show="videoPlayingId">
 						<h3 class="subtitle">Play more</h3>
 						<ol class="videos-list">
 							<li
@@ -132,8 +133,8 @@ export default {
 						<div class="tech-icons">
 							<MartzIcon
 								class="icon"
-								v-for="icon in project.techs_implemented"
-								:key="icon"
+								v-for="(icon, idx) in project.techs_implemented"
+								:key="idx"
 								:icon="icon"
 								color="white"
 								:size="70"
@@ -169,13 +170,9 @@ export default {
 				</article>
 			</div>
 
-			<div
-				id="toggleProject"
-				class="backToProjects back-bottom"
-				@click="goBack"
-			>
+			<div id="toggleProject" class="backToProjects" @click="goBack">
 				<MartzIcon icon="angleLeft" size="20" class="backToProjects-arrow" />
-				<p>Back to project</p>
+				<p>Back to projects</p>
 			</div>
 		</div>
 	</div>
@@ -183,11 +180,8 @@ export default {
 
 <style lang="scss" scoped>
 .project-detail-wrapper {
-	background: $bg-1;
-	overflow: auto;
 	display: grid;
 	justify-items: center;
-	height: 100vh;
 }
 .project-detail-container {
 	padding: 1em;
@@ -199,21 +193,15 @@ export default {
 
 .backToProjects {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
-	padding: 0.5em;
 	font: $font-text-mb;
-	align-items: baseline;
+	padding-bottom: 0.5em;
 	margin-bottom: 1.5em;
+	border-bottom: 1px solid rgba($white, 0.3);
 	&-arrow {
 		color: $accent;
 	}
-}
-
-.back-top {
-	border-bottom: 1px solid rgba($white, 0.3);
-}
-.back-bottom {
-	border-top: 1px solid rgba($white, 0.3);
 }
 
 .project-title {
@@ -274,10 +262,9 @@ export default {
 }
 
 .videos-list {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	max-height: 150px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
 	gap: 1em;
 	font: $font-thin-text-mb;
 	margin-bottom: 1em;
@@ -316,8 +303,8 @@ export default {
 }
 .tech-icons {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	gap: 1em;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 2em;
 }
 
 .icon {
@@ -352,74 +339,42 @@ export default {
 .project-detail-wrapper {
 	@include breakpoint(tablet) {
 		.project-detail-container {
-			width: 85%;
+			width: 80%;
 		}
-		.project-about {
-			flex: 2;
-		}
-		.project-techs {
-			flex: 1;
-			margin-bottom: 3em;
-		}
-		.tech-icons {
-			margin-top: 1.5em;
-			gap: 1.5em;
-
-			.icon {
-				justify-content: flex-start;
-			}
-		}
-
 		.project-btn-container {
 			display: flex;
-			gap: 0.5em;
+			gap: 2em;
+		}
+		.icon {
+			place-items: start;
 		}
 	}
 	@include breakpoint(desktop) {
 		.project-detail-container {
 			margin-block: 2em;
-			width: 85%;
+			width: 50vw;
 		}
-		.detail-content {
-			display: flex;
-			gap: 1em;
-		}
-
-		.back-top {
-			cursor: pointer;
-			align-self: flex-end;
-			margin-bottom: 1em;
-			padding: 0;
-		}
-		.backToProjects {
-			width: 40%;
-			justify-self: flex-end;
-		}
-		.project-btn-container {
-			margin-bottom: 1em;
-		}
-		.video-section {
-			flex: 1.5;
-		}
-
-		.article-section {
-			flex: 1;
-		}
-		.back-bottom {
-			display: none;
-		}
-
-		.project-btn {
-			max-width: 16.8em;
-		}
-
-		.project-title {
-			font-size: 2em;
-		}
-
-		.tech-icons {
+		.videos-list {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+		.backToProjects {
+			justify-content: flex-end;
+			margin: 0;
+			gap: 1em;
+			cursor: pointer;
+			transition: color 250ms ease-in-out;
+			border-bottom: none;
+			&:hover {
+				color: $accent;
+			}
+		}
+
+		.project-btn-container {
+			justify-content: center;
+		}
+		.project-btn {
+			max-width: 16em;
 		}
 	}
 }

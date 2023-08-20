@@ -20,6 +20,7 @@ export default {
 			offset: 200,
 			// disable: "mobile",
 		});
+		this.scrollTo();
 	},
 	beforeDestroy() {
 		this.isMenueVisible = false;
@@ -44,7 +45,7 @@ export default {
 <template>
 	<div class="home-blogs-wrapper">
 		<div class="home-blogs-container">
-			<AppHeader navigationOption="admin" ref="TheHeader"/>
+			<AppHeader navigationOption="admin" ref="TheHeader" />
 			<div class="home-blogs-container">
 				<main>
 					<div class="main-wrapper">
@@ -53,7 +54,7 @@ export default {
 				</main>
 			</div>
 			<div class="blog-footer-wrapper">
-				<AppFooter @scrollToEvent="scrollTo($event)"  class="the-footer" />
+				<AppFooter @scrollToEvent="scrollTo($event)" class="the-footer" />
 			</div>
 		</div>
 	</div>

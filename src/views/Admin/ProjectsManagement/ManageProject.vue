@@ -50,7 +50,7 @@ export default {
 				case "Edit":
 					this.$router.push({
 						name: action.route,
-						query: { postId: action.id },
+						query: { projectId: action.id },
 					});
 					break;
 				case "Publish":
@@ -60,8 +60,9 @@ export default {
 						this.loading.projectId = action.id;
 						await this.updateProjectVisibility({
 							projectId: action.id,
-							isPublic: action.isPublic,
+							isPublic: !action.isPublic,
 						});
+					
 					} catch (error) {
 						throw error;
 					} finally {

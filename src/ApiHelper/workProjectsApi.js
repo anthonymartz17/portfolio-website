@@ -84,7 +84,7 @@ export default {
 		}
 	},
 	async updateProjectVisibility({ projectId, isPublic }) {
-		console.log(isPublic,projectId,'api')
+		
 		try {
 			const postDocRef = doc(db, "ProjectPosts", projectId);
 

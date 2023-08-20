@@ -1,13 +1,15 @@
 <script>
 import BaseButton from "@/components/Buttons/BaseButton.vue";
-import ProjectDetail from "@/views/Portfolio/ProjectDetail.vue";
+import WorkProjectPreview from "@/components/Portfolio/WorkProjectPreview.vue";
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
-	components: { BaseButton, ProjectDetail, MartzIcon },
+	components: { BaseButton, MartzIcon, WorkProjectPreview },
 	data() {
 		return {
 			title: "Work",
 			showMore: false,
+<<<<<<< HEAD
 			projectClicked: {},
 			projects: [
 				{
@@ -132,14 +134,28 @@ export default {
 					],
 				},
 			],
+=======
+		
+>>>>>>> master
 		};
 	},
-
+	created() {
+		this.getProjects();
+	},
 	methods: {
+		...mapActions("workProjects", ["getProjects"]),
 		toggleShowMore(projectClicked) {
 			this.showMore = !this.showMore;
 			this.projectClicked = projectClicked;
-			this.$emit("emitToggleShowMore", this.showMore);
+			// this.$emit("emitToggleShowMore", this.showMore);
+		},
+	},
+	computed: {
+		...mapGetters("workProjects", ["projects"]),
+		//show only those with published status
+		filteredProjects() {
+			return this.projects.filter((x) => x.isPublic);
+		
 		},
 	},
 };
@@ -152,33 +168,14 @@ export default {
 				{{ title }}
 			</h2>
 			<div class="projects-list">
-				<div
+				<WorkProjectPreview
+					:project="project"
+					v-for="(project, idx) in filteredProjects"
+					:key="project.id"
 					data-aos="fade-up"
 					data-aos-duration="800"
 					:data-aos-delay="250 * idx"
-					class="projects-project"
-					v-for="(project, idx) in projects"
-					:key="project.name"
-					@click="toggleShowMore(project)"
-				>
-					<div class="projects-project-thumb">
-						<img :src="`/img/${project.img}`" alt="" />
-					</div>
-					<div class="projects-project-desc">
-						<h3>{{ project.name }}</h3>
-						<p class="text-description">{{ project.description_overview }}</p>
-						<div class="see-more">
-							<p class="text-p">See more</p>
-							<MartzIcon icon="angleRight" :size="15" color="accent" />
-						</div>
-					</div>
-				</div>
-				<div v-if="showMore" class="project-detail">
-					<ProjectDetail
-						:projectClicked="projectClicked"
-						@fireToggleShowMore="toggleShowMore(projectClicked)"
-					/>
-				</div>
+				/>
 			</div>
 			<div class="project-cards-container">
 				<div
@@ -194,7 +191,6 @@ export default {
 					/>
 					<div class="card-title">
 						<h4>Youtube</h4>
-						<!-- <MartzIcon icon="youtubetv" size="30" color="accent" /> -->
 					</div>
 					<div class="card-body">
 						<p>Watch me discuss tech implementation in my projects</p>

@@ -1,6 +1,7 @@
 <script>
 import SocialMedia from "@/components/SocialMedia.vue";
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -19,10 +20,14 @@ export default {
 		if (this.section) this.$emit("scrollToEvent", this.section);
 	},
 	methods: {
+		...mapActions("auth", ["signOut"]),
 		emitCloseEvent() {
 			this.$emit("emitToggleMenue");
 		},
-		setSection(link) {
+		async navigate(link) {
+			if (link.name == "Log Out") {
+				await this.signOut();
+			}
 			if (link.section) this.section = link.section;
 		},
 	},
@@ -52,10 +57,15 @@ export default {
 				:key="link.name"
 				@click="
 					emitCloseEvent();
-					setSection(link);
+					navigate(link);
 				"
 			>
-				<div v-if="!link.route" :id="link.id" :key="link.name" class="no-route-link">
+				<div
+					v-if="!link.route"
+					:id="link.id"
+					:key="link.name"
+					class="no-route-link"
+				>
 					<MartzIcon :icon="link.icon" size="20" :id="link.id" />
 					<span :id="link.id">{{ link.name }}</span>
 				</div>
@@ -95,7 +105,8 @@ export default {
 .nav-container-link {
 	cursor: pointer;
 }
-.route-link, .no-route-link{
+.route-link,
+.no-route-link {
 	display: flex;
 	width: 100%;
 }

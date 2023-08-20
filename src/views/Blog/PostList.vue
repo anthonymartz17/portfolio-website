@@ -16,18 +16,18 @@ export default {
 
 	mounted() {
 		this.$aos.init();
-		this.setBlogPosts();
+		this.getBlogPosts();
 	},
 	methods: {
-		...mapActions("blogPosts", ["setBlogPosts"]),
+		...mapActions("blogPosts", ["getBlogPosts"]),
 	},
 	computed: {
 		...mapGetters("blogPosts", ["blogPosts"]),
 
 		blogPostsSorted() {
-			return this.blogPosts.sort(
-				(a, b) => new Date(b.date_posted) - new Date(a.date_posted)
-			);
+			return this.blogPosts
+				.filter((x) => x.isPublic)
+				.sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted));
 		},
 	},
 };

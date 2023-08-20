@@ -14,7 +14,7 @@ export default {
 		// },
 		UPDATE(state, payload) {
 			state.blogPosts.find((x) => {
-				Object.assign(x, payload);
+				if (x.id == payload.id) Object.assign(x, payload);
 			});
 		},
 		DELETE(state, postId) {
@@ -35,7 +35,7 @@ export default {
 				throw error;
 			}
 		},
-		async setBlogPosts({ commit }) {
+		async getBlogPosts({ commit }) {
 			try {
 				const dataPosts = await blogPostApi.getPosts();
 				const dataWithThumbnailPromises = dataPosts.map(async (post) => {
@@ -59,6 +59,7 @@ export default {
 			const formattedDate = createdAt.toLocaleDateString("en-US", options);
 			post.date_posted = formattedDate;
 			post.thumbnail_path_ref = imgPathRef;
+			post.isPublic = false;
 			await blogPostApi.createPost(post);
 		},
 		async updatePost({ commit }, { post, thumbnail }) {
@@ -76,6 +77,11 @@ export default {
 			await blogPostApi.deleteThumbnail(thumbnail_path_ref);
 			await blogPostApi.deletePost(id);
 			commit("DELETE", id);
+		},
+		async updatePostVisibility({ commit }, postData) {
+			const updatedPost = await blogPostApi.updatePostVisibility(postData);
+
+			commit("UPDATE", updatedPost);
 		},
 	},
 	getters: {

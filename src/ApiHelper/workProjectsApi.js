@@ -21,7 +21,7 @@ export default {
 	async getProjects() {
 		try {
 			let data = [];
-			const colRef = collection(db, "projects");
+			const colRef = collection(db, "ProjectPosts");
 			const snapshot = await getDocs(colRef);
 			snapshot.docs.forEach((doc) => {
 				data.push({
@@ -37,7 +37,7 @@ export default {
 	},
 	async getProjectById(projectId) {
 		try {
-			const docRef = doc(db, "projects", projectId);
+			const docRef = doc(db, "ProjectPosts", projectId);
 
 			const docSnapshot = await getDoc(docRef);
 
@@ -55,10 +55,10 @@ export default {
 	},
 	async createPost(projectData) {
 		try {
-			const colRef = collection(db, "projects");
+			const colRef = collection(db, "ProjectPosts");
 
 			const response = await addDoc(colRef, projectData);
-
+     console.log(response,'did it created??')
 			return response;
 
 			// return profile
@@ -68,7 +68,7 @@ export default {
 	},
 	async updateProject(projectData) {
 		try {
-			const docRef = doc(db, "projects", projectData.id);
+			const docRef = doc(db, "ProjectPosts", projectData.id);
 
 			const docSnapshot = await getDoc(docRef);
 
@@ -83,9 +83,32 @@ export default {
 			throw error;
 		}
 	},
+	async updateProjectVisibility({ projectId, isPublic }) {
+		
+		try {
+			const postDocRef = doc(db, "ProjectPosts", projectId);
+
+			const postDocSnapshot = await getDoc(postDocRef);
+
+			if (postDocSnapshot.exists()) {
+				await updateDoc(postDocRef, { isPublic: isPublic });
+				const updatedPost = {
+					id: postDocSnapshot.id,
+					...postDocSnapshot.data(),
+				};
+				//updating isPublic to immediately reflect change locally, since data updates after page reload or route change.
+				updatedPost.isPublic = !updatedPost.isPublic;
+				return updatedPost;
+			} else {
+				throw new Error("Post not found.");
+			}
+		} catch (error) {
+			throw error;
+		}
+	},
 	async deleteProject(projectId) {
 		try {
-			const docRef = doc(db, "workProjects", projectId);
+			const docRef = doc(db, "ProjectPosts", projectId);
 
 			const docSnapshot = await getDoc(docRef);
 
@@ -104,14 +127,14 @@ export default {
 		try {
 			//creates unique name id for image
 			const uniqueId = uuidv4();
-			const imageName = `blogThumbnails/${uniqueId}.jpg`;
+			const imagePathRef = `projectThumbnails/${uniqueId}.jpg`;
 
 			//creates refference unique for image
-			const storageRef = ref(storage, imageName);
+			const storageRef = ref(storage, imagePathRef);
 
 			//uploads image to firebase
 			await uploadBytes(storageRef, thumbnail);
-			return imageName;
+			return imagePathRef;
 		} catch (error) {
 			throw error;
 		}

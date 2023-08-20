@@ -1,31 +1,41 @@
-.sections-title-global{
-  font: $font-title-mb;
-  color: $white;
-  margin-bottom:2em;
+.sections-title-global {
+	font: $font-title-mb;
+	color: $white;
+	margin-bottom: 2em;
 }
-.text-thin{
-  font: $font-thin-text-mb;
-  color: $white;
+.text-thin {
+	font: $font-thin-text-mb;
+	color: $white;
 }
-.text-p{
-  font: $font-text-mb;
-  color: $white;
+.text-p {
+	font: $font-text-mb;
+	color: $white;
 }
-.card-title{
-  font: $font-subtitle-mb;
-  color: rgba($white, 0.7);
+.card-title {
+	font: $font-subtitle-mb;
+	color: rgba($white, 0.7);
 }
-.text-small{
-  font: $font-small-mb;
-  color: $white;
+.text-small {
+	font: $font-small-mb;
+	color: $white;
 }
 .lg-title {
 	font: $font-xl-mb;
 	color: rgba($white, 0.3);
 }
-.resetLink{
-text-decoration: none;
-font: $font-thin-text-mb;
-color: $white;
+.resetLink {
+	text-decoration: none;
+	font: $font-thin-text-mb;
+	color: $white;
+}
 
+.title {
+	font:$font-title-mb;
+	color: rgba($white, 0.3);
+	margin-bottom: 1em;
+}
+.subtitle {
+	font: $font-subtitle-mb;
+	color: rgba($white, 0.3);
+	margin-bottom: 1em;
 }

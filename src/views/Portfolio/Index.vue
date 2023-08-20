@@ -1,6 +1,9 @@
 <script>
 import AppHeader from "@/components/Layout/AppHeader.vue";
+<<<<<<< HEAD
 import Home from "@/components/Portfolio/HomeSection.vue";
+=======
+>>>>>>> master
 import Work from "@/components/Portfolio/WorkSection.vue";
 import Skills from "@/components/Portfolio/SkillsSection.vue";
 import Aboutme from "@/components/Portfolio/AboutSection.vue";

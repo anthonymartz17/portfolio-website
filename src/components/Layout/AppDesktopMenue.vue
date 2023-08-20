@@ -1,5 +1,6 @@
 <script>
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -14,7 +15,11 @@ export default {
 	emit: ["scrollTo"],
 
 	methods: {
-		navigate(link) {
+		...mapActions("auth", ["signOut"]),
+		async navigate(link) {
+			if (link.name == "Log Out") {
+				await this.signOut();
+			}
 			if (link.section) {
 				this.navLinks.find((x) => x.active).active = false;
 				this.navLinks.find((x) => x.name == link.section).active = true;
@@ -34,7 +39,6 @@ export default {
 	<div class="nav-container">
 		<ul class="nav-container-links">
 			<li
-				class="item"
 				v-for="link in navLinks"
 				:key="link.name"
 				@click="navigate(link)"
@@ -47,10 +51,15 @@ export default {
 					},
 				]"
 			>
-				{{ link.name }}
+				<span>{{ link.name }}</span>
 
 				<ul v-if="link.subMenue" class="subMenue-items">
-					<li class="subItem" v-for="subItem in link.subMenue" :key="subItem.name">
+					<li
+						@click.stop="navigate(subItem)"
+						class="subItem"
+						v-for="subItem in link.subMenue"
+						:key="subItem.name"
+					>
 						{{ subItem.name }}
 					</li>
 				</ul>
@@ -99,37 +108,27 @@ export default {
 	text-decoration: none;
 	display: flex;
 	color: $white;
-	cursor: pointer;
-	transition: all 250ms;
-	padding: 0.5em;
 }
-.nav-container-link:hover.item {
-	color: $accent;
-}
+
 .subMenue::after {
 	content: "⯆";
-}
-.subMenue:hover::after {
-	content: "⯅";
-}
-.subMenue:hover .subMenue-items {
-	display: block;
 }
 
 .subMenue-items {
 	display: none;
 	position: absolute;
-	bottom: -90px;
+	bottom: -117px;
 	left: 0;
 	list-style: none;
-	width: 10em;
+	min-width: 12em;
 	padding: 0;
-	background: green;
+	border: 1px solid rgba(255, 255, 255, 0.233);
 
 	li {
-		padding: 0.5em;
+		position: relative;
+		padding: 1em;
 		width: 100%;
-		margin-bottom: 0.3em;
+		border-block: 1px solid transparent;
 	}
 }
 .footer {
@@ -137,5 +136,34 @@ export default {
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
+}
+
+@include breakpoint(tablet) {
+}
+@include breakpoint(desktop) {
+	.nav-container-link {
+		display: flex;
+		color: $white;
+		cursor: pointer;
+		transition: all 250ms;
+		padding: 0.5em;
+	}
+	.nav-container-link:hover span {
+		color: $accent;
+	}
+
+	.subMenue:hover .subMenue-items {
+		display: block;
+	}
+
+	.subMenue-items {
+		li {
+			transition: background-color 0.2s ease-in-out;
+		}
+		li:hover {
+			background: $bg-2-lighter;
+			border-block: 1px solid rgba(255, 255, 255, 0.623);
+		}
+	}
 }
 </style>

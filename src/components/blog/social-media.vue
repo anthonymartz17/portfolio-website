@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 
 export default {
@@ -69,4 +69,4 @@ export default {
 		color: rgba($white, 0.8);
 	}
 }
-</style>
+</style> -->

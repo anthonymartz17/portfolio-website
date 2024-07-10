@@ -83,10 +83,14 @@ export default {
 						</a>
 					</template>
 					<div class="resumeDownload-container">
-						<router-link class="resumeDownload" :to="{ name: 'Resume' }">
+						<a class="resumeDownload" href="/resume" target="_blank">
+							<span>View Résumé</span>
+							<MartzIcons icon="download" :size="25" />
+						</a>
+						<!-- <router-link class="resumeDownload" :to="{ name: 'Resume' }">
 							<span>View Résumé</span>
 							<MartzIcons icon="download" :size="25"
-						/></router-link>
+						/></router-link> -->
 					</div>
 				</div>
 				<SocialMedia class="social-media" />

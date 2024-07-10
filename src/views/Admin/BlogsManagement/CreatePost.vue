@@ -2,7 +2,7 @@
 import { quillEditor } from "vue-quill-editor";
 import { required } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
-import BaseButton from "@/components/Buttons/BaseButton.vue";
+import BaseButton from "@/components/buttons/baseButton.vue";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 

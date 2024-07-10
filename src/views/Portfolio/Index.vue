@@ -1,10 +1,10 @@
 <script>
-import Home from "@/components/Portfolio/HomeSection.vue";
+import Home from "@/components/portfolio/HomeSection.vue";
 import AppHeader from "@/components/Layout/AppHeader.vue";
-import Work from "@/components/Portfolio/WorkSection.vue";
-import Skills from "@/components/Portfolio/SkillsSection.vue";
-import Aboutme from "@/components/Portfolio/AboutSection.vue";
-import Hireme from "@/components/Portfolio/HiremeSection.vue";
+import Work from "@/components/portfolio/WorkSection.vue";
+import Skills from "@/components/portfolio/SkillsSection.vue";
+import Aboutme from "@/components/portfolio/AboutSection.vue";
+import Hireme from "@/components/portfolio/HiremeSection.vue";
 import AppFooter from "@/components/Layout/AppFooter.vue";
 export default {
 	components: {

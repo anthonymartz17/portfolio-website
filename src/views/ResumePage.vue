@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import ResumeDownload from "../components/Buttons/ResumeDownloadButton.vue";
+import ResumeDownload from "../components/buttons/ResumeDownloadButton.vue";
 export default {
 	components: { ResumeDownload },
 };

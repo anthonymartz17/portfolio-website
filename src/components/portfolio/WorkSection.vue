@@ -1,6 +1,6 @@
 <script>
-import BaseButton from "@/components/Buttons/BaseButton.vue";
-import WorkProjectPreview from "@/components/Portfolio/WorkProjectPreview.vue";
+import BaseButton from "@/components/buttons/baseButton.vue";
+import WorkProjectPreview from "@/components/portfolio/WorkProjectPreview.vue";
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {

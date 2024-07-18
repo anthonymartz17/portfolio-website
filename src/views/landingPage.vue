@@ -39,7 +39,9 @@ export default {
 		<div class="container">
 			<header class="header" data-aos="fade-up" data-aos-duration="800">
 				<h1 class="lg-title">{{ developerName }}</h1>
-				<h2 class="l-title">{{ developerTitle }}</h2>
+				<h2 class="l-title">
+					{{ developerTitle }}<span class="orange-dot"></span>
+				</h2>
 			</header>
 			<div
 				class="landing-body"
@@ -87,10 +89,6 @@ export default {
 							<span>View Résumé</span>
 							<MartzIcons icon="download" :size="25" />
 						</a>
-						<!-- <router-link class="resumeDownload" :to="{ name: 'Resume' }">
-							<span>View Résumé</span>
-							<MartzIcons icon="download" :size="25"
-						/></router-link> -->
 					</div>
 				</div>
 				<SocialMedia class="social-media" />
@@ -138,6 +136,14 @@ export default {
 }
 .header {
 	flex: 1;
+}
+.orange-dot {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	background: white;
+	border-radius: 50%;
+	background: $accent;
 }
 .landing-body {
 	flex: 4;

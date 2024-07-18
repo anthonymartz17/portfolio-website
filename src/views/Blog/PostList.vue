@@ -50,9 +50,7 @@ export default {
 			</div>
 			<template v-else>
 				<PostPreview
-					data-aos="fade-up"
-					data-aos-duration="800"
-					:data-aos-delay="250 * idx"
+					:data-aos-delay="150 * idx"
 					v-for="(post, idx) in blogPostsSorted"
 					:key="post.id"
 					:post="post"

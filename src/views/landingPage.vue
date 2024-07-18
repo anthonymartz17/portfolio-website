@@ -18,7 +18,7 @@ export default {
 	data() {
 		return {
 			developerName: "Antonio Martinez",
-			developerTitle: "Front-End Dev",
+			developerTitle: "Full-Stack Dev",
 			links: [
 				{ text: "Portfolio", icon: "portfolio", route: "Portfolio" },
 				{ text: "Youtube", icon: "youtubetv", secondText: "talk projects" },

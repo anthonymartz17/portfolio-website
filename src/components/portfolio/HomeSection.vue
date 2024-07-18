@@ -38,7 +38,7 @@ export default {
 				<div class="hero-text">
 					<h1 class="hero-section-title">
 						Hi,<br />
-						I'm Antonio Martinez,<br /><span>Front-end </span>developer
+						I'm Antonio Martinez,<br /><span>Full-Stack</span> developer
 					</h1>
 					<p class="hero-section-text">
 						I care about the responsibilities that I'm trusted with.

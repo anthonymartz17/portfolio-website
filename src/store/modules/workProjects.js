@@ -7,12 +7,11 @@ export default {
 	},
 	mutations: {
 		SET__PROJECTS(state, payload) {
-			state.projects = payload.sort((a, b) => b.id - a.id);
-			console.log(state.projects);
+			state.projects = payload.sort((a, b) => {
+				return new Date(b.created_at) - new Date(a.created_at);
+			});
 		},
-		// CREATE(state, payload) {
-		// 	state.blogPosts.push(payload);
-		// },
+
 		UPDATE(state, payload) {
 			state.projects.find((x) => {
 				if (x.id == payload.id) {

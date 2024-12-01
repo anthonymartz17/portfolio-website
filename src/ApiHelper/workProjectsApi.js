@@ -28,6 +28,9 @@ export default {
 				data.push({
 					id: doc.id,
 					...doc.data(),
+					created_at: doc.data().created_at
+						? doc.data().created_at.toDate()
+						: null,
 				});
 			});
 

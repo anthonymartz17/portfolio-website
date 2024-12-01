@@ -98,10 +98,12 @@ export default {
 								allowfullscreen
 							></iframe>
 						</div>
+
 						<img
-							v-else
-							:src="`/img/winner-23-homepage.png`"
-							alt="backup image saying working on video"
+							v-else-if="project.thumbnail_data"
+							class="project-thumbnail"
+							:src="project.thumbnail_data.dataURL"
+							alt="Project Thumbnail"
 						/>
 					</div>
 
@@ -130,16 +132,12 @@ export default {
 					</div>
 					<div class="project-techs">
 						<h3 class="subtitle">Technologies</h3>
-						<div class="tech-icons">
-							<MartzIcon
-								class="icon"
-								v-for="(icon, idx) in project.techs_implemented"
-								:key="idx"
-								:icon="icon"
-								color="white"
-								:size="70"
-							/>
-						</div>
+						<ul class="tech-icons">
+							<li :key="idx" v-for="(icon, idx) in project.techs_implemented" class="tech-icon">
+								<MartzIcon class="icon" :icon="icon" color="white" :size="70" />
+								<p>{{ icon[0].toUpperCase()+icon.slice(1) }}</p>
+							</li>
+						</ul>
 					</div>
 					<div class="project-btn-container">
 						<BaseButton
@@ -261,6 +259,11 @@ export default {
 	height: 100%;
 }
 
+.project-thumbnail {
+	max-width: 100%;
+	object-fit: cover;
+}
+
 .videos-list {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -305,10 +308,17 @@ export default {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 2em;
+	list-style: none;
+}
+
+.tech-icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .icon {
-	width: 60%;
+	width: fit-content;
 	display: grid;
 	place-items: center;
 }

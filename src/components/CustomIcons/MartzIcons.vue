@@ -16,6 +16,48 @@ export default {
 <template>
 	<div>
 		<img
+			v-if="icon == 'tailwindcss'"
+			:height="size"
+			:width="size"
+			src="/icons/tailwindcss.svg"
+			alt="tailwindcss Icon"
+		/>
+		<img
+			v-if="icon == 'socketio'"
+			:height="size"
+			:width="size"
+			src="/icons/socketio.svg"
+			alt="socketio Icon"
+		/>
+		<img
+			v-if="icon == 'postgresql'"
+			:height="size"
+			:width="size"
+			src="/icons/postgresql.svg"
+			alt="postgresql Icon"
+		/>
+		<img
+			v-if="icon == 'nodejs'"
+			:height="size"
+			:width="size"
+			src="/icons/nodejs.svg"
+			alt="nodejs Icon"
+		/>
+		<img
+			v-if="icon == 'expressjs'"
+			:height="size"
+			:width="size"
+			src="/icons/expressjs.svg"
+			alt="expressjs Icon"
+		/>
+		<img
+			v-if="icon == 'react'"
+			:height="size"
+			:width="size"
+			src="/icons/react.svg"
+			alt="react Icon"
+		/>
+		<img
 			v-if="icon == 'nuxt'"
 			:height="size"
 			:width="size"
@@ -1392,8 +1434,6 @@ export default {
 				/>
 			</g>
 		</svg>
-
-		
 
 		<svg
 			v-else-if="icon == 'logo'"

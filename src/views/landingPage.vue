@@ -21,7 +21,7 @@ export default {
 			developerTitle: "Full-Stack Dev",
 			links: [
 				{ text: "Portfolio", icon: "portfolio", route: "Portfolio" },
-				{ text: "Youtube", icon: "youtubetv", secondText: "talk projects" },
+				//{ text: "Youtube", icon: "youtubetv", secondText: "talk projects" },
 				{
 					text: "Blogs",
 					icon: "ereading",

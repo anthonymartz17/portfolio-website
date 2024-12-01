@@ -5,8 +5,7 @@ export default {
 	state: {
 		blogPosts: [],
 	},
-	
-	
+
 	mutations: {
 		SET__BLOG_POSTS(state, payload) {
 			state.blogPosts = payload;
@@ -67,7 +66,8 @@ export default {
 		async updatePost({ commit }, { post, thumbnail }) {
 			delete post.thumbnail_data;
 			// if is new img delete oldone from storage, upload new one and replace img path in post object with new img path
-			if (!thumbnail.manuallyAdded) {
+
+			if (thumbnail && !thumbnail.manuallyAdded) {
 				await blogPostApi.deleteThumbnail(post.thumbnail_path_ref);
 				const imgPathRef = await blogPostApi.uploadImage(thumbnail);
 				post.thumbnail_path_ref = imgPathRef;

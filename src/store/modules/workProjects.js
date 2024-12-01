@@ -7,11 +7,11 @@ export default {
 	},
 	mutations: {
 		SET__PROJECTS(state, payload) {
-			state.projects = payload;
+			state.projects = payload.sort((a, b) => {
+				return new Date(b.created_at) - new Date(a.created_at);
+			});
 		},
-		// CREATE(state, payload) {
-		// 	state.blogPosts.push(payload);
-		// },
+
 		UPDATE(state, payload) {
 			state.projects.find((x) => {
 				if (x.id == payload.id) {
@@ -31,7 +31,9 @@ export default {
 				const thumbnail_data = await workProjectsApi.getThumbnail(
 					project.thumbnail_path_ref
 				);
+
 				project.thumbnail_data = thumbnail_data;
+
 				return project;
 			} catch (error) {
 				throw error;
@@ -75,7 +77,6 @@ export default {
 				.split(",")
 				.map((x) => x.trim());
 
-			console.log(project.techs_implemented);
 			// if is new img delete old one from storage, upload new one and replace img path in post object with new img path
 			if (!projectThumbnail.manuallyAdded) {
 				await workProjectsApi.deleteThumbnail(project.thumbnail_path_ref);

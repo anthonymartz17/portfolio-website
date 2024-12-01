@@ -6,6 +6,7 @@ export default {
 	data() {
 		return {
 			post: {},
+			isLinkCopied: false,
 		};
 	},
 	props: ["projectClicked"],
@@ -19,13 +20,32 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions("blogPosts", ["fetchPostById"]),
+		...mapActions("blogPosts", ["fetchPostById", "updatePost"]),
 		scrollTo() {
 			this.$refs.TheHeader.$refs.header.scrollIntoView({
 				block: "start",
 				behavior: "smooth",
 			});
 		},
+		getUrl() {
+			const { protocol, host } = window.location;
+			const path = this.$route.fullPath;
+			return `${protocol}//${host}${path}`;
+		},
+		copyToClipboard() {
+			const text = this.getUrl();
+			navigator.clipboard.writeText(text);
+			alert("Link Copied!");
+		},
+
+		// async updateLikes() {
+		// 	try {
+		// 		this.post.likes++;
+		// 		const postUpdatedLikes = await this.updatePost({ post: this.post });
+		// 	} catch (error) {
+		// 		throw error;
+		// 	}
+		// },
 	},
 };
 </script>
@@ -47,6 +67,16 @@ export default {
 						<p>{{ post.author }}</p>
 						<p>{{ post.date_posted }}</p>
 						<p>{{ post.read_time }} min read.</p>
+					</div>
+					<div class="post-likes">
+						<!-- <span @click="updateLikes">
+							<span class="material-symbols-outlined"> thumb_up </span>
+							<span>{{ post.likes }}</span>
+						</span> -->
+						<span @click="copyToClipboard">
+							<span class="material-symbols-outlined"> share</span>
+							<span>Share Link</span>
+						</span>
 					</div>
 				</div>
 				<div class="blog-img-container">
@@ -78,6 +108,22 @@ export default {
 	font: $font-subtitle-mb;
 	color: rgba($white, 0.5);
 	margin-bottom: 2em;
+}
+.post-likes {
+	border-block: 1px solid rgba(128, 128, 128, 0.206);
+	padding-block: 1em;
+	margin-block: 1em;
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	font: $font-thin-text-mb;
+}
+.post-likes span {
+	display: flex;
+	align-items: center;
+	gap: 0.3em;
+	cursor: pointer;
+	min-width: 20px;
 }
 
 .post-info {

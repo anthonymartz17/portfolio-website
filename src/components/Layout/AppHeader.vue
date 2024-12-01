@@ -180,6 +180,7 @@ export default {
 	overflow: hidden !important;
 	position: fixed !important;
 }
+
 .desk-menue-wrapper {
 	display: none;
 }

@@ -9,7 +9,6 @@ export default {
 		return {
 			title: "Work",
 			showMore: false,
-		
 		};
 	},
 	created() {
@@ -28,7 +27,6 @@ export default {
 		//show only those with published status
 		filteredProjects() {
 			return this.projects.filter((x) => x.isPublic);
-		
 		},
 	},
 };

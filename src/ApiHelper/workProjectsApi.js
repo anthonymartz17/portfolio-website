@@ -7,6 +7,7 @@ import {
 	addDoc,
 	updateDoc,
 	deleteDoc,
+	serverTimestamp,
 } from "firebase/firestore";
 import {
 	ref,
@@ -27,6 +28,9 @@ export default {
 				data.push({
 					id: doc.id,
 					...doc.data(),
+					created_at: doc.data().created_at
+						? doc.data().created_at.toDate()
+						: null,
 				});
 			});
 
@@ -57,8 +61,11 @@ export default {
 		try {
 			const colRef = collection(db, "ProjectPosts");
 
-			const response = await addDoc(colRef, projectData);
-     console.log(response,'did it created??')
+			const response = await addDoc(colRef, {
+				...projectData,
+				created_at: serverTimestamp(),
+			});
+
 			return response;
 
 			// return profile
@@ -84,7 +91,6 @@ export default {
 		}
 	},
 	async updateProjectVisibility({ projectId, isPublic }) {
-		
 		try {
 			const postDocRef = doc(db, "ProjectPosts", projectId);
 

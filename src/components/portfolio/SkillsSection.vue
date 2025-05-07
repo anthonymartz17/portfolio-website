@@ -16,7 +16,6 @@ export default {
 					icon: "tailwindcss",
 					size: "90",
 				},
-				{ id: "react", name: "React", icon: "react", size: "90" },
 				{
 					id: "postgresql",
 					name: "PostgreSQL",

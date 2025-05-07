@@ -1,7 +1,7 @@
 <template>
 	<div class="pdf-view">
 		<object
-			data="https://firebasestorage.googleapis.com/v0/b/portfolio-2023-166e2.appspot.com/o/pdfs%2Fantoniomartinez_cv_resume.pdf?alt=media&token=abc73407-4a80-4efd-a37c-682fc1bd8a21"
+			:data="resumeURL"
 			type="application/pdf"
 			width="100%"
 			height="600px"
@@ -18,9 +18,19 @@
 </template>
 
 <script>
+import { methods, mounted } from "vue2-dropzone";
 import ResumeDownload from "../components/buttons/ResumeDownloadButton.vue";
 export default {
 	components: { ResumeDownload },
+	data() {
+		return {
+			resumeURL: "",
+		};
+	},
+
+	mounted() {
+		this.resumeURL = process.env.VUE_APP_RESUME_URL + "&v=" + Date.now(); // to prevent caching
+	},
 };
 </script>
 

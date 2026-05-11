@@ -1,18 +1,24 @@
 <script>
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 import BaseButton from "@/components/buttons/baseButton.vue";
+import ConfirmModal from "@/components/modals/ConfirmModal.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
 		MartzIcon,
 		BaseButton,
+		ConfirmModal,
 	},
 	data() {
 		return {
 			loading: {
 				isLoading: false,
 				postId: null,
+			},
+			deleteModal: {
+				isOpen: false,
+				post: null,
 			},
 			blogActions: [
 				{
@@ -33,6 +39,10 @@ export default {
 					icon: "hide",
 					text: "Hide",
 				},
+				{
+					icon: "delete",
+					text: "Delete",
+				},
 			],
 		};
 	},
@@ -42,7 +52,11 @@ export default {
 		this.getBlogPosts();
 	},
 	methods: {
-		...mapActions("blogPosts", ["getBlogPosts", "updatePostVisibility"]),
+		...mapActions("blogPosts", [
+			"getBlogPosts",
+			"updatePostVisibility",
+			"deletePost",
+		]),
 		...mapActions("auth", ["setAlertMsg"]),
 
 		async postAction(action) {
@@ -69,12 +83,44 @@ export default {
 						this.loading.postId = null;
 					}
 					break;
+				case "Delete":
+					this.openDeleteModal(action);
+					break;
 				default:
 					this.$router.push({
 						name: action.route,
 						params: { postId: action.id },
 					});
 					break;
+			}
+		},
+		openDeleteModal(post) {
+			this.deleteModal.post = post;
+			this.deleteModal.isOpen = true;
+		},
+		closeDeleteModal() {
+			this.deleteModal.isOpen = false;
+			this.deleteModal.post = null;
+		},
+		async confirmDeletePost() {
+			if (!this.deleteModal.post) return;
+
+			const post = this.deleteModal.post;
+			this.deleteModal.isOpen = false;
+
+			try {
+				this.loading.isLoading = true;
+				this.loading.postId = post.id;
+				await this.deletePost({
+					id: post.id,
+					thumbnail_path_ref: post.thumbnail_path_ref,
+				});
+			} catch (error) {
+				throw error;
+			} finally {
+				this.loading.isLoading = false;
+				this.loading.postId = null;
+				this.deleteModal.post = null;
 			}
 		},
 		showHideBtn({ postStatus, icon }) {
@@ -101,6 +147,13 @@ export default {
 			return this.blogPosts.sort(
 				(a, b) => new Date(b.date_posted) - new Date(a.date_posted)
 			);
+		},
+		deleteModalMessage() {
+			if (!this.deleteModal.post) {
+				return "This will permanently delete this blog post and its thumbnail.";
+			}
+
+			return `This will permanently delete "${this.deleteModal.post.title}" and its thumbnail.`;
 		},
 	},
 };
@@ -178,6 +231,16 @@ export default {
 				</div>
 			</template>
 		</div>
+		<ConfirmModal
+			v-model="deleteModal.isOpen"
+			title="Delete blog post?"
+			:message="deleteModalMessage"
+			cancel-text="Cancel"
+			confirm-text="Delete"
+			confirm-label="Permanently delete blog post"
+			@cancel="closeDeleteModal"
+			@confirm="confirmDeletePost"
+		/>
 	</div>
 </template>
 

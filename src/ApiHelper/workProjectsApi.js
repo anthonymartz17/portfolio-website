@@ -1,181 +1,150 @@
-import { db, storage } from "../firebaseConfig";
-import {
-	collection,
-	doc,
-	getDoc,
-	getDocs,
-	addDoc,
-	updateDoc,
-	deleteDoc,
-	serverTimestamp,
-} from "firebase/firestore";
-import {
-	ref,
-	getDownloadURL,
-	getMetadata,
-	uploadBytes,
-	deleteObject,
-} from "firebase/storage";
+import { supabase } from "@/utils/supabase";
 import { v4 as uuidv4 } from "uuid";
+
+const TABLE_NAME = "project_posts";
+const BUCKET_NAME = "project-thumbnails";
+
+function toAppProject(row) {
+	if (!row) return row;
+
+	return {
+		...row,
+		isPublic: row.is_public,
+		created_at: row.created_at ? new Date(row.created_at) : null,
+	};
+}
+
+function toDbProject(projectData) {
+	const payload = { ...projectData };
+
+	if (Object.prototype.hasOwnProperty.call(payload, "isPublic")) {
+		payload.is_public = payload.isPublic;
+		delete payload.isPublic;
+	}
+
+	delete payload.thumbnail_data;
+	return payload;
+}
+
+function getImagePath(file, folderName) {
+	const uniqueId = uuidv4();
+	const extension = file.name && file.name.includes(".")
+		? file.name.split(".").pop()
+		: "jpg";
+
+	return `${folderName}/${uniqueId}.${extension}`;
+}
 
 export default {
 	async getProjects() {
-		try {
-			let data = [];
-			const colRef = collection(db, "ProjectPosts");
-			const snapshot = await getDocs(colRef);
-			snapshot.docs.forEach((doc) => {
-				data.push({
-					id: doc.id,
-					...doc.data(),
-					created_at: doc.data().created_at
-						? doc.data().created_at.toDate()
-						: null,
-				});
-			});
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.select("*")
+			.order("created_at", { ascending: false });
 
-			return data;
-		} catch (error) {
-			throw error;
-		}
+		if (error) throw error;
+
+		return data.map(toAppProject);
 	},
 	async getProjectById(projectId) {
-		try {
-			const docRef = doc(db, "ProjectPosts", projectId);
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.select("*")
+			.eq("id", projectId)
+			.single();
 
-			const docSnapshot = await getDoc(docRef);
+		if (error) throw error;
+		if (!data) throw new Error("Projects not found.");
 
-			if (docSnapshot.exists()) {
-				return {
-					id: docSnapshot.id,
-					...docSnapshot.data(),
-				};
-			} else {
-				throw new Error("Projects not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		return toAppProject(data);
 	},
 	async createPost(projectData) {
-		try {
-			const colRef = collection(db, "ProjectPosts");
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.insert(toDbProject(projectData))
+			.select("*")
+			.single();
 
-			const response = await addDoc(colRef, {
-				...projectData,
-				created_at: serverTimestamp(),
-			});
+		if (error) throw error;
 
-			return response;
-
-			// return profile
-		} catch (error) {
-			throw error;
-		}
+		return toAppProject(data);
 	},
 	async updateProject(projectData) {
-		try {
-			const docRef = doc(db, "ProjectPosts", projectData.id);
+		const { id, ...project } = toDbProject(projectData);
 
-			const docSnapshot = await getDoc(docRef);
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.update(project)
+			.eq("id", id)
+			.select("*")
+			.single();
 
-			if (docSnapshot.exists()) {
-				delete projectData.id;
-				await updateDoc(docRef, projectData);
-				return { id: docSnapshot.id, ...docSnapshot.data() };
-			} else {
-				throw new Error("Post not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		if (error) throw error;
+		if (!data) throw new Error("Post not found.");
+
+		return toAppProject(data);
 	},
 	async updateProjectVisibility({ projectId, isPublic }) {
-		try {
-			const postDocRef = doc(db, "ProjectPosts", projectId);
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.update({ is_public: isPublic })
+			.eq("id", projectId)
+			.select("*")
+			.single();
 
-			const postDocSnapshot = await getDoc(postDocRef);
+		if (error) throw error;
+		if (!data) throw new Error("Post not found.");
 
-			if (postDocSnapshot.exists()) {
-				await updateDoc(postDocRef, { isPublic: isPublic });
-				const updatedPost = {
-					id: postDocSnapshot.id,
-					...postDocSnapshot.data(),
-				};
-				//updating isPublic to immediately reflect change locally, since data updates after page reload or route change.
-				updatedPost.isPublic = !updatedPost.isPublic;
-				return updatedPost;
-			} else {
-				throw new Error("Post not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		return toAppProject(data);
 	},
 	async deleteProject(projectId) {
-		try {
-			const docRef = doc(db, "ProjectPosts", projectId);
+		const { error } = await supabase
+			.from(TABLE_NAME)
+			.delete()
+			.eq("id", projectId);
 
-			const docSnapshot = await getDoc(docRef);
+		if (error) throw error;
 
-			if (docSnapshot.exists()) {
-				await deleteDoc(docRef);
-				return { success: true, message: "post deleted successfully." };
-			} else {
-				throw new Error("Car not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		return { success: true, message: "post deleted successfully." };
 	},
 
 	async uploadThumbnail(thumbnail) {
-		try {
-			//creates unique name id for image
-			const uniqueId = uuidv4();
-			const imagePathRef = `projectThumbnails/${uniqueId}.jpg`;
+		const imagePath = getImagePath(thumbnail, "projectThumbnails");
+		const { error } = await supabase.storage
+			.from(BUCKET_NAME)
+			.upload(imagePath, thumbnail, {
+				contentType: thumbnail.type,
+				upsert: false,
+			});
 
-			//creates refference unique for image
-			const storageRef = ref(storage, imagePathRef);
+		if (error) throw error;
 
-			//uploads image to firebase
-			await uploadBytes(storageRef, thumbnail);
-			return imagePathRef;
-		} catch (error) {
-			throw error;
-		}
+		return imagePath;
 	},
 
 	async deleteThumbnail(imagePath) {
-		try {
-			const imageRef = ref(storage, imagePath);
-			await deleteObject(imageRef);
-			return { success: true, message: "Images deleted successfully." };
-		} catch (error) {
-			throw error;
-		}
+		const { error } = await supabase.storage
+			.from(BUCKET_NAME)
+			.remove([imagePath]);
+
+		if (error) throw error;
+
+		return { success: true, message: "Images deleted successfully." };
 	},
 	async getThumbnail(imagePath) {
-		if (imagePath)
-			try {
-				const imageRef = ref(storage, imagePath);
-				const imageUrl = await getDownloadURL(imageRef);
-				// Get the metadata of the image
-				const metadata = await getMetadata(imageRef);
+		if (!imagePath) return null;
 
-				// Extract the name, type, and size from the metadata
-				const name = metadata.name;
-				const type = metadata.contentType;
-				const size = metadata.size;
+		const { data } = supabase.storage
+			.from(BUCKET_NAME)
+			.getPublicUrl(imagePath);
 
-				return {
-					dataURL: imageUrl,
-					name: name,
-					type: type,
-					size: size,
-				};
-			} catch (error) {
-				throw error;
-			}
+		const name = imagePath.split("/").pop();
+
+		return {
+			dataURL: data.publicUrl,
+			name,
+			type: "image/jpeg",
+			size: 0,
+		};
 	},
 };

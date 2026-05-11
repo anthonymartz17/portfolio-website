@@ -1,9 +1,5 @@
-import { auth } from "../../firebaseConfig";
+import { supabase } from "@/utils/supabase";
 
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-
-//global timer for expiration token
-let timer;
 export default {
 	namespaced: true,
 	state: {
@@ -25,54 +21,52 @@ export default {
 		},
 	},
 	actions: {
-		async signIn({ commit, dispatch }, { email, password }) {
-			try {
-				let response = await signInWithEmailAndPassword(auth, email, password);
+		async signIn({ commit }, { email, password }) {
+			const { data, error } = await supabase.auth.signInWithPassword({
+				email,
+				password,
+			});
 
-				const currentUser = response._tokenResponse.email;
-				const token = response._tokenResponse.idToken;
-				const expiresIn = response._tokenResponse.expiresIn;
+			if (error) throw error;
 
-				clearTimeout(timer);
-				timer = setTimeout(() => {
-					dispatch("signOut");
-					//expects timer in miliseconds
-				}, expiresIn * 1000);
+			const user = {
+				currentUser: data.user.email,
+				token: data.session.access_token,
+			};
 
-				commit("SET_USER", {
-					currentUser,
-					token,
-				});
-				localStorage.setItem(
-					"blog_admin",
-					JSON.stringify({ currentUser, token })
-				);
+			commit("SET_USER", user);
+			localStorage.setItem("blog_admin", JSON.stringify(user));
 
-				return response.user;
-			} catch (error) {
-				throw error;
-			}
+			return data.user;
 		},
 		async autoLogIn({ commit }) {
-			const admin = JSON.parse(localStorage.getItem("blog_admin"));
-			if (admin)
-				if (admin.currentUser && admin.token) {
-					commit("SET_USER", admin);
-				}
-		},
-		async signOut({ commit }) {
-			try {
-				await signOut(auth);
+			const { data, error } = await supabase.auth.getSession();
+
+			if (error || !data.session) {
 				localStorage.removeItem("blog_admin");
 				commit("SET_USER", null);
-				clearTimeout(timer);
-			} catch (error) {
-				throw error;
+				return;
 			}
+
+			const user = {
+				currentUser: data.session.user.email,
+				token: data.session.access_token,
+			};
+
+			commit("SET_USER", user);
+			localStorage.setItem("blog_admin", JSON.stringify(user));
+		},
+		async signOut({ commit }) {
+			const { error } = await supabase.auth.signOut();
+
+			if (error) throw error;
+
+			localStorage.removeItem("blog_admin");
+			commit("SET_USER", null);
 		},
 
-		setAlertMsg({ commit }, alertData) {
-			// commit("SET_ALERT_MSG", alertData);
+		setAlertMsg() {
+			// Kept for the existing admin components that dispatch this action.
 		},
 	},
 	getters: {

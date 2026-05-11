@@ -1,18 +1,24 @@
 <script>
 import MartzIcon from "@/components/CustomIcons/MartzIcons.vue";
 import BaseButton from "@/components/buttons/baseButton.vue";
+import ConfirmModal from "@/components/modals/ConfirmModal.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
 	components: {
 		MartzIcon,
 		BaseButton,
+		ConfirmModal,
 	},
 	data() {
 		return {
 			loading: {
 				isLoading: false,
 				projectId: null,
+			},
+			deleteModal: {
+				isOpen: false,
+				project: null,
 			},
 			projectActions: [
 				{
@@ -33,6 +39,10 @@ export default {
 					icon: "hide",
 					text: "Hide",
 				},
+				{
+					icon: "delete",
+					text: "Delete",
+				},
 			],
 		};
 	},
@@ -42,7 +52,11 @@ export default {
 		this.getProjects();
 	},
 	methods: {
-		...mapActions("workProjects", ["getProjects", "updateProjectVisibility"]),
+		...mapActions("workProjects", [
+			"getProjects",
+			"updateProjectVisibility",
+			"deleteProject",
+		]),
 		...mapActions("auth", ["setAlertMsg"]),
 
 		async postAction(action) {
@@ -70,12 +84,44 @@ export default {
 						this.loading.projectId = null;
 					}
 					break;
+				case "Delete":
+					this.openDeleteModal(action);
+					break;
 				default:
 					this.$router.push({
 						name: action.route,
 						params: { projectId: action.id },
 					});
 					break;
+			}
+		},
+		openDeleteModal(project) {
+			this.deleteModal.project = project;
+			this.deleteModal.isOpen = true;
+		},
+		closeDeleteModal() {
+			this.deleteModal.isOpen = false;
+			this.deleteModal.project = null;
+		},
+		async confirmDeleteProject() {
+			if (!this.deleteModal.project) return;
+
+			const project = this.deleteModal.project;
+			this.deleteModal.isOpen = false;
+
+			try {
+				this.loading.isLoading = true;
+				this.loading.projectId = project.id;
+				await this.deleteProject({
+					id: project.id,
+					thumbnail_path_ref: project.thumbnail_path_ref,
+				});
+			} catch (error) {
+				throw error;
+			} finally {
+				this.loading.isLoading = false;
+				this.loading.projectId = null;
+				this.deleteModal.project = null;
 			}
 		},
 		showHideBtn({ postStatus, icon }) {
@@ -97,7 +143,13 @@ export default {
 	computed: {
 		...mapGetters("workProjects", ["projects"]),
 
-	
+		deleteModalMessage() {
+			if (!this.deleteModal.project) {
+				return "This will permanently delete this project and its thumbnail.";
+			}
+
+			return `This will permanently delete "${this.deleteModal.project.name}" and its thumbnail.`;
+		},
 	},
 };
 </script>
@@ -174,6 +226,16 @@ export default {
 				</div>
 			</template>
 		</div>
+		<ConfirmModal
+			v-model="deleteModal.isOpen"
+			title="Delete project?"
+			:message="deleteModalMessage"
+			cancel-text="Cancel"
+			confirm-text="Delete"
+			confirm-label="Permanently delete project"
+			@cancel="closeDeleteModal"
+			@confirm="confirmDeleteProject"
+		/>
 	</div>
 </template>
 

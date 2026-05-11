@@ -1,180 +1,147 @@
-import { db, storage } from "../firebaseConfig";
-import {
-	collection,
-	doc,
-	getDoc,
-	getDocs,
-	addDoc,
-	updateDoc,
-	deleteDoc,
-} from "firebase/firestore";
-import {
-	ref,
-	getDownloadURL,
-	getMetadata,
-	uploadBytes,
-	deleteObject,
-} from "firebase/storage";
+import { supabase } from "@/utils/supabase";
 import { v4 as uuidv4 } from "uuid";
-// Create a reference to the storage service
-// const storage = getStorage();
 
-//initialize service
-// const db = getFirestore();
+const TABLE_NAME = "blog_posts";
+const BUCKET_NAME = "blog-thumbnails";
+
+function toAppPost(row) {
+	if (!row) return row;
+
+	return {
+		...row,
+		isPublic: row.is_public,
+	};
+}
+
+function toDbPost(postData) {
+	const payload = { ...postData };
+
+	if (Object.prototype.hasOwnProperty.call(payload, "isPublic")) {
+		payload.is_public = payload.isPublic;
+		delete payload.isPublic;
+	}
+
+	delete payload.thumbnail_data;
+	return payload;
+}
+
+function getImagePath(file, folderName) {
+	const uniqueId = uuidv4();
+	const extension = file.name && file.name.includes(".")
+		? file.name.split(".").pop()
+		: "jpg";
+
+	return `${folderName}/${uniqueId}.${extension}`;
+}
 
 export default {
 	async getPosts() {
-		try {
-			let data = [];
-			const colRef = collection(db, "blogPosts");
-			const snapshot = await getDocs(colRef);
-			snapshot.docs.forEach((doc) => {
-				data.push({
-					id: doc.id,
-					...doc.data(),
-				});
-			});
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.select("*")
+			.order("created_at", { ascending: false });
 
-			return data;
-		} catch (error) {
-			throw error;
-		}
+		if (error) throw error;
+
+		return data.map(toAppPost);
 	},
 	async getPostById(postId) {
-		try {
-			const postDocRef = doc(db, "blogPosts", postId);
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.select("*")
+			.eq("id", postId)
+			.single();
 
-			const postDocSnapshot = await getDoc(postDocRef);
+		if (error) throw error;
+		if (!data) throw new Error("Post not found.");
 
-			if (postDocSnapshot.exists()) {
-				return {
-					id: postDocSnapshot.id,
-					...postDocSnapshot.data(),
-				};
-			} else {
-				throw new Error("Post not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		return toAppPost(data);
 	},
 	async createPost(postData) {
-		try {
-			const colRef = collection(db, "blogPosts");
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.insert(toDbPost(postData))
+			.select("*")
+			.single();
 
-			const response = await addDoc(colRef, postData);
+		if (error) throw error;
 
-			return response;
-
-			// return profile
-		} catch (error) {
-			throw error;
-		}
+		return toAppPost(data);
 	},
 	async updatePost(postData) {
-		try {
-			const postDocRef = doc(db, "blogPosts", postData.id);
+		const { id, ...post } = toDbPost(postData);
 
-			const postDocSnapshot = await getDoc(postDocRef);
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.update(post)
+			.eq("id", id)
+			.select("*")
+			.single();
 
-			if (postDocSnapshot.exists()) {
-				delete postData.id;
-				await updateDoc(postDocRef, postData);
-				return { id: postDocSnapshot.id, ...postDocSnapshot.data() };
-			} else {
-				throw new Error("Post not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		if (error) throw error;
+		if (!data) throw new Error("Post not found.");
+
+		return toAppPost(data);
 	},
 	async updatePostVisibility({ postId, isPublic }) {
-		try {
-			const postDocRef = doc(db, "blogPosts", postId);
+		const { data, error } = await supabase
+			.from(TABLE_NAME)
+			.update({ is_public: isPublic })
+			.eq("id", postId)
+			.select("*")
+			.single();
 
-			const postDocSnapshot = await getDoc(postDocRef);
+		if (error) throw error;
+		if (!data) throw new Error("Post not found.");
 
-			if (postDocSnapshot.exists()) {
-				await updateDoc(postDocRef, { isPublic: isPublic });
-				const updatedPost = {
-					id: postDocSnapshot.id,
-					...postDocSnapshot.data(),
-				};
-				//updating isPublic to immediately reflect change locally, since data updates after page reload or route change.
-				updatedPost.isPublic = !updatedPost.isPublic;
-				return updatedPost;
-			} else {
-				throw new Error("Post not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		return toAppPost(data);
 	},
 
 	async deletePost(postId) {
-		try {
-			const postDocRef = doc(db, "blogPosts", postId);
+		const { error } = await supabase.from(TABLE_NAME).delete().eq("id", postId);
 
-			const postDocSnapshot = await getDoc(postDocRef);
+		if (error) throw error;
 
-			if (postDocSnapshot.exists()) {
-				await deleteDoc(postDocRef);
-				return { success: true, message: "post deleted successfully." };
-			} else {
-				throw new Error("Car not found.");
-			}
-		} catch (error) {
-			throw error;
-		}
+		return { success: true, message: "post deleted successfully." };
 	},
 
 	async uploadImage(thumbnail) {
-		try {
-			//creates unique name id for image
-			const uniqueId = uuidv4();
-			const imageName = `blogThumbnails/${uniqueId}.jpg`;
+		const imagePath = getImagePath(thumbnail, "blogThumbnails");
+		const { error } = await supabase.storage
+			.from(BUCKET_NAME)
+			.upload(imagePath, thumbnail, {
+				contentType: thumbnail.type,
+				upsert: false,
+			});
 
-			//creates refference unique for image
-			const storageRef = ref(storage, imageName);
+		if (error) throw error;
 
-			//uploads image to firebase
-			await uploadBytes(storageRef, thumbnail);
-			return imageName;
-		} catch (error) {
-			throw error;
-		}
+		return imagePath;
 	},
 
 	async deleteThumbnail(imagePath) {
-		try {
-			const imageRef = ref(storage, imagePath);
-			await deleteObject(imageRef);
-			return { success: true, message: "Images deleted successfully." };
-		} catch (error) {
-			throw error;
-		}
+		const { error } = await supabase.storage
+			.from(BUCKET_NAME)
+			.remove([imagePath]);
+
+		if (error) throw error;
+
+		return { success: true, message: "Images deleted successfully." };
 	},
 	async getThumbnail(imagePath) {
-		if (imagePath)
-			try {
-				const imageRef = ref(storage, imagePath);
-				const imageUrl = await getDownloadURL(imageRef);
-				// Get the metadata of the image
-				const metadata = await getMetadata(imageRef);
+		if (!imagePath) return null;
 
-				// Extract the name, type, and size from the metadata
-				const name = metadata.name;
-				const type = metadata.contentType;
-				const size = metadata.size;
+		const { data } = supabase.storage
+			.from(BUCKET_NAME)
+			.getPublicUrl(imagePath);
 
-				return {
-					dataURL: imageUrl,
-					name: name,
-					type: type,
-					size: size,
-				};
-			} catch (error) {
-				throw error;
-			}
+		const name = imagePath.split("/").pop();
+
+		return {
+			dataURL: data.publicUrl,
+			name,
+			type: "image/jpeg",
+			size: 0,
+		};
 	},
 };

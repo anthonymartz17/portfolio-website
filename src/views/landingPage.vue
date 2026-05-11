@@ -21,7 +21,6 @@ export default {
 			developerTitle: "Full-Stack Dev",
 			links: [
 				{ text: "Portfolio", icon: "portfolio", route: "Portfolio" },
-				//{ text: "Youtube", icon: "youtubetv", secondText: "talk projects" },
 				{
 					text: "Blogs",
 					icon: "ereading",
@@ -69,20 +68,6 @@ export default {
 							/>
 						</router-link>
 
-						<a
-							v-if="!link.route"
-							:key="link.icon"
-							class="resetLink"
-							href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
-							target="blank"
-						>
-							<BaseButton
-								:text="link.text"
-								:icon="link.icon"
-								:size="30"
-								class="landing-btn"
-							/>
-						</a>
 					</template>
 					<div class="resumeDownload-container">
 						<a class="resumeDownload" href="/resume" target="_blank">

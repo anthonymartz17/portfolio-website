@@ -50,35 +50,6 @@ export default {
 			</div>
 			<div class="project-cards-container">
 				<div
-					class="cards-youtube project-cards"
-					data-aos="fade-up"
-					data-aos-duration="800"
-				>
-					<MartzIcon
-						class="card-bg-icon"
-						icon="youtubetv"
-						size="190"
-						color="white"
-					/>
-					<div class="card-title">
-						<h4>Youtube</h4>
-					</div>
-					<div class="card-body">
-						<p>Watch me discuss tech implementation in my projects</p>
-						<div class="card-link">
-							<a
-								class="resetLink card-link-link"
-								href="https://www.youtube.com/channel/UCVECqgVfRZ4b_XFbp6-MvTQ"
-								target="blank"
-							>
-								<span> @martz_code</span>
-
-								<MartzIcon icon="angleRight" size="20" color="accent" />
-							</a>
-						</div>
-					</div>
-				</div>
-				<div
 					class="card-blog project-cards"
 					data-aos="fade-up"
 					data-aos-duration="800"
@@ -169,12 +140,6 @@ export default {
 		margin-block: 0.5em;
 	}
 }
-.cards-youtube {
-	position: relative;
-	border-bottom: 1px solid $white;
-	padding-bottom: 5em;
-	margin-bottom: 2em;
-}
 .card-blog {
 	position: relative;
 }
@@ -226,9 +191,6 @@ export default {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			gap: 1em;
-		}
-		.cards-youtube {
-			border: none;
 		}
 	}
 	@include breakpoint(desktop) {

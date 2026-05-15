@@ -69,12 +69,12 @@ export default {
 						</router-link>
 
 					</template>
-					<div class="resumeDownload-container">
+					<!-- <div class="resumeDownload-container">
 						<a class="resumeDownload" href="/resume" target="_blank">
 							<span>View Résumé</span>
 							<MartzIcons icon="download" :size="25" />
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<SocialMedia class="social-media" />
 			</div>

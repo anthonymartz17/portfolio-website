@@ -17,11 +17,11 @@ export default [
 		name: "WorkProjectDetail",
 		component: () => import("../views/WorkProjectDetail.vue"),
 	},
-	{
-		path: "/resume",
-		name: "Resume",
-		component: () => import("../views/ResumePage.vue"),
-	},
+	// {
+	// 	path: "/resume",
+	// 	name: "Resume",
+	// 	component: () => import("../views/ResumePage.vue"),
+	// },
 
 	{
 		path: "/blogs",
